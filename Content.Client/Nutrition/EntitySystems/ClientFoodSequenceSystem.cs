@@ -79,7 +79,6 @@ using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.EntitySystems;
 using Robust.Client.GameObjects;
 using Robust.Shared.Prototypes; // Goobstation - anythingburgers
-using Robust.Shared.Utility;
 
 namespace Content.Client.Nutrition.EntitySystems;
 
@@ -168,9 +167,10 @@ public sealed class ClientFoodSequenceSystem : SharedFoodSequenceSystem
             if (start.Comp.InverseLayers)
                 index++;
 
-            _sprite.AddBlankLayer((start.Owner, sprite), index);
-            _sprite.LayerMapSet((start.Owner, sprite), keyCode, index);
-            _sprite.LayerSetSprite((start.Owner, sprite), index, state.Sprite);
+            sprite.AddBlankLayer(index);
+            sprite.LayerMapSet(keyCode, index);
+            sprite.LayerSetSprite(index, state.Sprite);
+            sprite.LayerSetScale(index, state.Scale);
 
             //Offset the layer
             var layerPos = start.Comp.StartPosition;
