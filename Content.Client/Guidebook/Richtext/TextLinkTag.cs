@@ -5,6 +5,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.RichText;
 using Robust.Shared.Input;
 using Robust.Shared.Utility;
+using Content.Client.UserInterface.ControlExtensions;
 
 namespace Content.Client.Guidebook.RichText;
 
@@ -30,7 +31,7 @@ public sealed class TextLinkTag : IMarkupTagHandler
         label.Text = text;
 
         label.MouseFilter = Control.MouseFilterMode.Stop;
-        label.FontColorOverride = Color.CornflowerBlue;
+        label.FontColorOverride = LinkColor;
         label.DefaultCursorShape = Control.CursorShape.Hand;
 
         label.OnMouseEntered += _ => label.FontColorOverride = Color.LightSkyBlue;
