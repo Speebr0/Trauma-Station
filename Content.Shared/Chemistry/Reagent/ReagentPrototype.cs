@@ -269,21 +269,21 @@ namespace Content.Shared.Chemistry.Reagent
         public bool WorksOnTheDead;
 
         /// <summary>
-        /// Should this reagent only work on unconscious entities?
+        /// Shitmed - Should this reagent only work on unconscious entities?
         /// </summary>
         [DataField]
         public bool? WorksOnUnconscious;
 
-        [DataField(serverOnly: true)]
+        [DataField]
         public FrozenDictionary<ProtoId<MetabolismGroupPrototype>, ReagentEffectsEntry>? Metabolisms;
 
-        [DataField(serverOnly: true)]
+        [DataField]
         public Dictionary<ProtoId<ReactiveGroupPrototype>, ReactiveReagentEffectEntry>? ReactiveEffects;
 
         [DataField(serverOnly: true)]
         public List<ITileReaction> TileReactions = new(0);
 
-        [DataField("plantMetabolism", serverOnly: true)]
+        [DataField("plantMetabolism")]
         public List<EntityEffect> PlantMetabolisms = new(0);
 
         [DataField]
