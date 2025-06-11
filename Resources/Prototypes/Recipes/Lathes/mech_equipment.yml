@@ -6,6 +6,7 @@
   categories:
   - Mech
   - Parts
+  - MechEquipment # Goobstation
   completetime: 10
   materials:
     Steel: 500
