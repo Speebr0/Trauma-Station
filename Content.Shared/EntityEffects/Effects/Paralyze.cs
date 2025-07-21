@@ -28,6 +28,9 @@ public sealed partial class Paralyze : EntityEffect
             paralyzeTime *= (double)reagentArgs.Scale;
         }
 
-        args.EntityManager.System<SharedStunSystem>().TryParalyze(args.TargetEntity, TimeSpan.FromSeconds(paralyzeTime), Refresh); // Shitmed - replaced ternary
+        var stunSystem = args.EntityManager.System<SharedStunSystem>();
+        _ = Refresh
+            ? stunSystem.TryUpdateParalyzeDuration(args.TargetEntity, TimeSpan.FromSeconds(paralyzeTime))
+            : stunSystem.TryAddParalyzeDuration(args.TargetEntity, TimeSpan.FromSeconds(paralyzeTime));
     }
 }

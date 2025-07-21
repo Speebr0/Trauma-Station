@@ -68,7 +68,6 @@ using Content.Shared.Alert;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Item;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
@@ -78,7 +77,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Events;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Standing;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.Throwing;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
@@ -90,35 +89,32 @@ using Todo.Remove;
 using Content.Shared.Speech.EntitySystems;
 using Content.Goobstation.Common.Standing; // Goobstation
 using Content.Goobstation.Common.Stunnable; // Goobstation
+using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 
 namespace Content.Shared.Stunnable;
 
 public abstract partial class SharedStunSystem : EntitySystem
 {
-    [Dependency] private readonly IComponentFactory _componentFactory = default!;
-    [Dependency] protected readonly ActionBlockerSystem Blocker = default!;
-    [Dependency] protected readonly AlertsSystem Alerts = default!;
+    public static readonly EntProtoId StunId = "StatusEffectStunned";
+    public static readonly EntProtoId KnockdownId = "StatusEffectKnockdown";
+
     [Dependency] protected readonly IGameTiming GameTiming = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] protected readonly ActionBlockerSystem Blocker = default!;
+    [Dependency] protected readonly AlertsSystem Alerts = default!;
     [Dependency] private readonly EntityWhitelistSystem _entityWhitelist = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeedModifier = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] protected readonly SharedAppearanceSystem Appearance = default!;
     [Dependency] protected readonly SharedDoAfterSystem DoAfter = default!;
     [Dependency] protected readonly SharedStaminaSystem Stamina = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffect = default!;
-    [Dependency] private readonly SharedLayingDownSystem _layingDown = default!; // WD EDIT
-    [Dependency] private readonly SharedContainerSystem _container = default!; // WD EDIT
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly SharedStutteringSystem _stutter = default!; // goob edit
     [Dependency] private readonly SharedJitteringSystem _jitter = default!; // goob edit
 
     public override void Initialize()
     {
-        SubscribeLocalEvent<SlowedDownComponent, ComponentInit>(OnSlowInit);
-        SubscribeLocalEvent<SlowedDownComponent, ComponentShutdown>(OnSlowRemove);
-        SubscribeLocalEvent<SlowedDownComponent, RefreshMovementSpeedModifiersEvent>(OnRefreshMovespeed);
-
         SubscribeLocalEvent<StunnedComponent, ComponentStartup>(UpdateCanMove);
         SubscribeLocalEvent<StunnedComponent, ComponentShutdown>(OnStunShutdown);
 
@@ -137,6 +133,14 @@ public abstract partial class SharedStunSystem : EntitySystem
         SubscribeLocalEvent<StunnedComponent, IsUnequippingAttemptEvent>(OnUnequipAttempt);
         SubscribeLocalEvent<MobStateComponent, MobStateChangedEvent>(OnMobStateChanged);
 
+        // New Status Effect subscriptions
+        SubscribeLocalEvent<StunnedStatusEffectComponent, StatusEffectAppliedEvent>(OnStunEffectApplied);
+        SubscribeLocalEvent<StunnedStatusEffectComponent, StatusEffectRemovedEvent>(OnStunStatusRemoved);
+        SubscribeLocalEvent<StunnedStatusEffectComponent, StatusEffectRelayedEvent<StunEndAttemptEvent>>(OnStunEndAttempt);
+
+        SubscribeLocalEvent<KnockdownStatusEffectComponent, StatusEffectRelayedEvent<StandUpAttemptEvent>>(OnStandUpAttempt);
+
+        // Stun Appearance Data
         InitializeKnockdown();
         InitializeAppearance();
     }
@@ -148,10 +152,6 @@ public abstract partial class SharedStunSystem : EntitySystem
 
     private void OnMobStateChanged(EntityUid uid, MobStateComponent component, MobStateChangedEvent args)
     {
-        if (!TryComp<StatusEffectsComponent>(uid, out var status))
-        {
-            return;
-        }
         switch (args.NewMobState)
         {
             case MobState.Alive:
@@ -160,12 +160,12 @@ public abstract partial class SharedStunSystem : EntitySystem
                 }
             case MobState.Critical:
                 {
-                    _statusEffect.TryRemoveStatusEffect(uid, "Stun");
+                    _status.TryRemoveStatusEffect(uid, StunId);
                     break;
                 }
             case MobState.Dead:
                 {
-                    _statusEffect.TryRemoveStatusEffect(uid, "Stun");
+                    _status.TryRemoveStatusEffect(uid, StunId);
                     break;
                 }
             case MobState.Invalid:
@@ -195,62 +195,78 @@ public abstract partial class SharedStunSystem : EntitySystem
         if (_entityWhitelist.IsBlacklistPass(ent.Comp.Blacklist, args.OtherEntity))
             return;
 
-        if (!TryComp<StatusEffectsComponent>(args.OtherEntity, out var status))
-            return;
-
-        TryStun(args.OtherEntity, ent.Comp.Duration, true, status);
-        TryKnockdown(args.OtherEntity, ent.Comp.Duration, ent.Comp.Refresh, ent.Comp.AutoStand);
-    }
-
-    private void OnSlowInit(EntityUid uid, SlowedDownComponent component, ComponentInit args)
-    {
-        _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
-    }
-
-    private void OnSlowRemove(EntityUid uid, SlowedDownComponent component, ComponentShutdown args)
-    {
-        component.SprintSpeedModifier = 1f;
-        component.WalkSpeedModifier = 1f;
-        _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
+        TryUpdateStunDuration(args.OtherEntity, ent.Comp.Duration);
+        TryKnockdown(args.OtherEntity, ent.Comp.Duration, true, force: true);
     }
 
     // TODO STUN: Make events for different things. (Getting modifiers, attempt events, informative events...)
-
-    /// <summary>
-    ///     Stuns the entity, disallowing it from doing many interactions temporarily.
-    /// </summary>
-    public bool TryStun(EntityUid uid, TimeSpan time, bool refresh, StatusEffectsComponent? status = null)
+    public bool TryAddStunDuration(EntityUid uid, TimeSpan duration)
     {
+        // <Goob>
         var modifierEv = new GetClothingStunModifierEvent(uid);
         RaiseLocalEvent(modifierEv);
         time *= modifierEv.Modifier;
 
         if (time <= TimeSpan.Zero)
             return false;
+        // </Goob>
 
-        if (!Resolve(uid, ref status, false))
+        if (!_status.TryAddStatusEffectDuration(uid, StunId, duration))
             return false;
 
-        if (!_statusEffect.TryAddStatusEffect<StunnedComponent>(uid, "Stun", time, refresh))
+        OnStunnedSuccessfully(uid, duration);
+        return true;
+    }
+
+    public bool TryUpdateStunDuration(EntityUid uid, TimeSpan? duration)
+    {
+        if (!_status.TryUpdateStatusEffectDuration(uid, StunId, duration))
             return false;
 
-        // goob edit
-        _jitter.DoJitter(uid, time, refresh);
-        _stutter.DoStutter(uid, time, refresh);
-        // goob edit end
+        OnStunnedSuccessfully(uid, duration);
+        return true;
+    }
 
-        var ev = new StunnedEvent();
+    private void OnStunnedSuccessfully(EntityUid uid, TimeSpan? duration)
+    {
+        // <Goob>
+        _jitter.DoJitter(uid, duration, refresh);
+        _stutter.DoStutter(uid, duration, refresh);
+        // </Goob>
+
+        var ev = new StunnedEvent(); // todo: rename event or change how it is raised - this event is raised each time duration of stun was externally changed
         RaiseLocalEvent(uid, ref ev);
 
-        _adminLogger.Add(LogType.Stamina, LogImpact.Medium, $"{ToPrettyString(uid):user} stunned for {time.Seconds} seconds");
+        var timeForLogs = duration.HasValue
+            ? duration.Value.Seconds.ToString()
+            : "Infinite";
+        _adminLogger.Add(LogType.Stamina, LogImpact.Medium, $"{ToPrettyString(uid):user} stunned for {timeForLogs} seconds");
+    }
+
+    public bool TryAddKnockdownDuration(EntityUid uid, TimeSpan duration)
+    {
+        if (!_status.TryAddStatusEffectDuration(uid, KnockdownId, duration))
+            return false;
+
+        TryKnockdown(uid, duration, true, force: true);
+
         return true;
+
+    }
+
+    public bool TryUpdateKnockdownDuration(EntityUid uid, TimeSpan? duration)
+    {
+        if (!_status.TryUpdateStatusEffectDuration(uid, KnockdownId, duration))
+            return false;
+
+        return TryKnockdown(uid, duration, true, force: true);
     }
 
     /// <summary>
     ///     Knocks down the entity, making it fall to the ground.
     /// </summary>
     // Shitmed - added behavior
-    public bool TryKnockdown(EntityUid uid, TimeSpan time, bool refresh, DropHeldItemsBehavior behavior, bool autoStand = true, bool drop = true)
+    public bool TryKnockdown(Entity<StandingStateComponent?> entity, TimeSpan? time, DropHeldItemsBehavior behavior, bool refresh, bool autoStand = true, bool drop = true, bool force = false)
     {
         // <Goob>
         var modifierEv = new GetClothingStunModifierEvent(uid);
@@ -262,20 +278,33 @@ public abstract partial class SharedStunSystem : EntitySystem
         // </Goob>
 
         // Can't fall down if you can't actually be downed.
-        if (!HasComp<StandingStateComponent>(uid))
+        if (!Resolve(entity, ref entity.Comp, false))
             return false;
 
-        var evAttempt = new KnockDownAttemptEvent(autoStand, drop);
-        RaiseLocalEvent(uid, ref evAttempt);
-
-        if (evAttempt.Cancelled)
-            return false;
-
-        // Initialize our component with the relevant data we need if we don't have it
-        if (EnsureComp<KnockedDownComponent>(uid, out var component))
+        if (!force)
         {
-            RefreshKnockedMovement((uid, component));
-            CancelKnockdownDoAfter((uid, component));
+            var evAttempt = new KnockDownAttemptEvent(autoStand, drop);
+            RaiseLocalEvent(entity, ref evAttempt);
+
+            if (evAttempt.Cancelled)
+                return false;
+
+            autoStand = evAttempt.AutoStand;
+            drop = evAttempt.Drop;
+        }
+
+        Knockdown(entity!, time, autoStand, drop);
+
+        return true;
+    }
+
+    private void Knockdown(Entity<StandingStateComponent> entity, TimeSpan? time, bool refresh, bool autoStand = true, bool drop = true)
+    {
+        // Initialize our component with the relevant data we need if we don't have it
+        if (EnsureComp<KnockedDownComponent>(entity, out var component))
+        {
+            RefreshKnockedMovement((entity, component));
+            CancelKnockdownDoAfter((entity, component));
         }
         else
         {
@@ -283,144 +312,85 @@ public abstract partial class SharedStunSystem : EntitySystem
             if (drop)
             {
                 var ev = new DropHandItemsEvent();
-                RaiseLocalEvent(uid, ref ev);
+                RaiseLocalEvent(entity, ref ev);
             }
 
             // Only update Autostand value if it's our first time being knocked down...
-            SetAutoStand((uid, component), evAttempt.AutoStand);
+            SetAutoStand((entity, component), autoStand);
         }
 
         var knockedEv = new KnockedDownEvent(time);
-        RaiseLocalEvent(uid, ref knockedEv);
-
-        UpdateKnockdownTime((uid, component), knockedEv.Time, refresh);
-
-        Alerts.ShowAlert(uid, KnockdownAlert, null, (GameTiming.CurTime, component.NextUpdate));
-
-        _adminLogger.Add(LogType.Stamina, LogImpact.Medium, $"{ToPrettyString(uid):user} knocked down for {time.Seconds} seconds");
-
-        return true;
-    }
-
-    /// <summary>
-    ///     Applies knockdown and stun to the entity temporarily.
-    /// </summary>
-    public bool TryParalyze(EntityUid uid, TimeSpan time, bool refresh,
-        StatusEffectsComponent? status = null, bool standOnRemoval = true) // Shitmed Change
-    {
-        if (!Resolve(uid, ref status, false))
-            return false;
-
-        // Shitmed - added behavior
-        return TryKnockdown(uid, time, refresh, DropHeldItemsBehavior.AlwaysDrop) && TryStun(uid, time, refresh, status);
-    }
-
-    /// <summary>
-    ///     Slows down the mob's walking/running speed temporarily
-    /// </summary>
-    public bool TrySlowdown(EntityUid uid, TimeSpan time, bool refresh,
-        float walkSpeedMod = 1f, float sprintSpeedMod = 1f,
-        StatusEffectsComponent? status = null)
-    {
-        if (!Resolve(uid, ref status, false))
-            return false;
-
-        if (time <= TimeSpan.Zero)
-            return false;
-
-        if (_statusEffect.TryAddStatusEffect<SlowedDownComponent>(uid, "SlowedDown", time, refresh, status))
+        RaiseLocalEvent(entity, ref knockedEv);
+        if (time != null)
         {
-            var slowed = Comp<SlowedDownComponent>(uid);
-            // Doesn't make much sense to have the "TrySlowdown" method speed up entities now does it?
-            walkSpeedMod = Math.Clamp(walkSpeedMod, 0f, 1f);
-            sprintSpeedMod = Math.Clamp(sprintSpeedMod, 0f, 1f);
+            UpdateKnockdownTime((entity, component), time.Value, refresh);
+            _adminLogger.Add(LogType.Stamina, LogImpact.Medium, $"{ToPrettyString(entity):user} knocked down for {time.Value.Seconds} seconds");
+        }
+        else
+            _adminLogger.Add(LogType.Stamina, LogImpact.Medium, $"{ToPrettyString(entity):user} knocked down for an indefinite amount of time");
 
-            slowed.WalkSpeedModifier *= walkSpeedMod;
-            slowed.SprintSpeedModifier *= sprintSpeedMod;
+        Alerts.ShowAlert(entity, KnockdownAlert, null, (GameTiming.CurTime, component.NextUpdate));
+    }
 
-            _movementSpeedModifier.RefreshMovementSpeedModifiers(uid);
+    public bool TryAddParalyzeDuration(EntityUid uid, TimeSpan duration)
+    {
+        var knockdown = TryAddKnockdownDuration(uid, duration);
+        var stunned = TryAddStunDuration(uid, duration);
+
+        return knockdown || stunned;
+    }
+
+    public bool TryUpdateParalyzeDuration(EntityUid uid, TimeSpan? duration)
+    {
+        var knockdown = TryUpdateKnockdownDuration(uid, duration);
+        var stunned = TryUpdateStunDuration(uid, duration);
+
+        return knockdown || stunned;
+    }
+
+    public bool TryUnstun(Entity<StunnedComponent?> entity)
+    {
+        if (!Resolve(entity, ref entity.Comp, logMissing: false))
             return true;
-        }
 
-        return false;
+        var ev = new StunEndAttemptEvent();
+        RaiseLocalEvent(entity, ref ev);
+
+        return !ev.Cancelled && RemComp<StunnedComponent>(entity);
     }
 
-    /// <summary>
-    /// Updates the movement speed modifiers of an entity by applying or removing the <see cref="SlowedDownComponent"/>.
-    /// If both walk and run modifiers are approximately 1 (i.e. normal speed) and <see cref="StaminaComponent.StaminaDamage"/> is 0,
-    /// or if the both modifiers are 0, the slowdown component is removed to restore normal movement.
-    /// Otherwise, the slowdown component is created or updated with the provided modifiers,
-    /// and the movement speed is refreshed accordingly.
-    /// </summary>
-    /// <remarks>Goob edit - no slowdown, only jitter</remarks>
-    /// <param name="ent">Entity whose movement speed should be updated.</param>
-    /// <param name="walkSpeedModifier">New walk speed modifier. Default is 1f (normal speed).</param>
-    /// <param name="runSpeedModifier">New run (sprint) speed modifier. Default is 1f (normal speed).</param>
-    public void UpdateStunModifiers(Entity<StaminaComponent?> ent,
-        float walkSpeedModifier = 1f,
-        float runSpeedModifier = 1f,
-        bool visual = true) // Goob edit
+    private void OnStunEffectApplied(Entity<StunnedStatusEffectComponent> entity, ref StatusEffectAppliedEvent args)
     {
-        if (!Resolve(ent, ref ent.Comp))
+        if (GameTiming.ApplyingState)
             return;
 
-        // goob edit - stunmeta
-        // no slowdown because funny
-        // Choose bigger of speed modifiers (usually sprint) and use it to scale Crowd Control effect time
-        var cCFactor = Math.Clamp(1 - Math.Min(walkSpeedModifier, runSpeedModifier), 0, 1);
-        var cCTime = TimeSpan.FromSeconds(10f);
-        if (visual
-            && 0 <= ent.Comp.ActiveDrains.Aggregate((float) 0, (current, modifier) => current + modifier.Value.DrainRate)) // Goob edit // Goob edit 2 - So stamina regenerating effects doesn't cause jittering
-        {
-            _jitter.DoJitter(ent, cCFactor * cCTime, true);
-            _stutter.DoStutter(ent, cCFactor * cCTime, true);
-        }
+        EnsureComp<StunnedComponent>(args.Target);
+    }
 
-        /*
-        if (
-            (MathHelper.CloseTo(walkSpeedModifier, 1f) && MathHelper.CloseTo(runSpeedModifier, 1f) && ent.Comp.StaminaDamage == 0f) ||
-            (walkSpeedModifier == 0f && runSpeedModifier == 0f)
-        )
-        {
-            RemComp<SlowedDownComponent>(ent);
+    private void OnStunStatusRemoved(Entity<StunnedStatusEffectComponent> entity, ref StatusEffectRemovedEvent args)
+    {
+        TryUnstun(args.Target);
+    }
+
+    private void OnStunEndAttempt(Entity<StunnedStatusEffectComponent> entity, ref StatusEffectRelayedEvent<StunEndAttemptEvent> args)
+    {
+        if (args.Args.Cancelled)
             return;
-        }
 
-        EnsureComp<SlowedDownComponent>(ent, out var comp);
-
-        comp.WalkSpeedModifier = walkSpeedModifier;
-
-        comp.SprintSpeedModifier = runSpeedModifier;
-
-        _movementSpeedModifier.RefreshMovementSpeedModifiers(ent);
-        */
-
-        Dirty(ent);
+        var ev = args.Args;
+        ev.Cancelled = true;
+        args.Args = ev;
     }
 
-    /// <summary>
-    /// A convenience overload of <see cref="UpdateStunModifiers(EntityUid, float, float, StaminaComponent?)"/> that sets both
-    /// walk and run speed modifiers to the same value.
-    /// </summary>
-    /// <remarks>Goob edit - no slowdown, only jitter</remarks>
-    /// <param name="ent">Entity whose movement speed should be updated.</param>
-    /// <param name="speedModifier">New walk and run speed modifier. Default is 1f (normal speed).</param>
-    /// <param name="component">
-    /// Optional <see cref="StaminaComponent"/> of the entity.
-    /// </param>
-    public void UpdateStunModifiers(Entity<StaminaComponent?> ent, float speedModifier = 1f, bool visual = true) // Goob edit
+    private void OnStandUpAttempt(Entity<KnockdownStatusEffectComponent> entity, ref StatusEffectRelayedEvent<StandUpAttemptEvent> args)
     {
-        UpdateStunModifiers(ent, speedModifier, speedModifier, visual); // Goob edit
+        if (args.Args.Cancelled)
+            return;
+
+        var ev = args.Args;
+        ev.Cancelled = true;
+        args.Args = ev;
     }
-
-    #region friction and movement listeners
-
-    private void OnRefreshMovespeed(EntityUid ent, SlowedDownComponent comp, RefreshMovementSpeedModifiersEvent args)
-    {
-        args.ModifySpeed(comp.WalkSpeedModifier, comp.SprintSpeedModifier);
-    }
-
-    #endregion
 
     #region Attempt Event Handling
 

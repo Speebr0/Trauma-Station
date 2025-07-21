@@ -43,7 +43,7 @@ using Content.Shared.Database;
 using Content.Shared.Inventory;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
-using Content.Shared.StatusEffect;
+using Content.Shared.StatusEffectNew;
 using Content.Shared.StepTrigger.Systems;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
@@ -53,9 +53,6 @@ using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Events;
-using Robust.Shared.Physics.Systems;
-using Robust.Shared.Utility;
-using Content.Shared.Projectiles;
 
 namespace Content.Shared.Slippery;
 
@@ -67,8 +64,8 @@ public sealed class SlipperySystem : EntitySystem
     [Dependency] private readonly MovementModStatusSystem _movementMod = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedStunSystem _stun = default!;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
-    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SpeedModifierContactsSystem _speedModifier = default!;
@@ -142,7 +139,7 @@ public sealed class SlipperySystem : EntitySystem
     public bool CanSlip(EntityUid uid, EntityUid toSlip) // Goob edit
     {
         return !_container.IsEntityInContainer(uid)
-                && _statusEffects.CanApplyEffect(toSlip, "KnockedDown", raiseEvent: false); // Goob edit
+                && _status.CanAddStatusEffect(toSlip, SharedStunSystem.KnockdownId); // Trauma - replace StunId with KnockdownId
     }
 
     public void TrySlip(EntityUid uid, SlipperyComponent component, EntityUid other, bool requiresContact = true, bool force = false, bool predicted = true) // Goob edit
@@ -187,12 +184,18 @@ public sealed class SlipperySystem : EntitySystem
         // Preventing from playing the slip sound and stunning when you are already knocked down.
         if (!HasComp<KnockedDownComponent>(other))
         {
-            _stun.TryStun(other, component.SlipData.StunTime, true);
+            _stun.TryUpdateStunDuration(other, component.SlipData.StunTime);
             _stamina.TakeStaminaDamage(other, component.StaminaDamage); // Note that this can stamCrit
-            _movementMod.TryFriction(other, component.FrictionStatusTime, true, component.SlipData.SlipFriction, component.SlipData.SlipFriction);
+            _movementMod.TryUpdateFrictionModDuration(
+                other,
+                component.FrictionStatusTime,
+                component.SlipData.SlipFriction,
+                component.SlipData.SlipFriction
+            );
             _audio.PlayPredicted(component.SlipSound, other, other);
         }
-        _stun.TryKnockdown(other, component.SlipData.KnockdownTime, true, true);
+
+        _stun.TryKnockdown(other, component.SlipData.KnockdownTime, true, force: true);
 
         _adminLogger.Add(LogType.Slip, LogImpact.Low, $"{ToPrettyString(other):mob} slipped on collision with {ToPrettyString(uid):entity}");
     }
