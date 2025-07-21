@@ -1,14 +1,9 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Will-Oliver-Br <164823659+Will-Oliver-Br@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
+using Content.Client.UserInterface.Controls;
+using Content.Shared.SmartFridge;
 using Robust.Client.UserInterface;
 using Robust.Shared.Input;
-using Content.Client.UserInterface.Controls;
-using Content.Shared._DV.SmartFridge;
 
-namespace Content.Client._DV.SmartFridge;
+namespace Content.Client.SmartFridge;
 
 public sealed class SmartFridgeBoundUserInterface : BoundUserInterface
 {
@@ -32,6 +27,7 @@ public sealed class SmartFridgeBoundUserInterface : BoundUserInterface
         if (_menu is not {} menu || !EntMan.TryGetComponent(Owner, out SmartFridgeComponent? fridge))
             return;
 
+        menu.SetFlavorText(Loc.GetString(fridge.FlavorText));
         menu.Populate((Owner, fridge));
     }
 
