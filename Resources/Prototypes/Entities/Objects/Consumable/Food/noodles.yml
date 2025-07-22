@@ -27,7 +27,8 @@
   description: Now that's a nice pasta!
   components:
   - type: Item
-    storedRotation: -90
+    shape:
+    - 0,0,1,0
   - type: Sprite
     sprite: Objects/Consumable/Food/noodles.rsi
   - type: SolutionContainerManager
@@ -46,6 +47,8 @@
   id: FoodNoodlesBoiled
   description: A plain dish of noodles, this needs more ingredients.
   components:
+  - type: Item
+    storedOffset: 0,-4
   - type: FlavorProfile
     flavors:
       - pasta
@@ -59,6 +62,8 @@
   id: FoodNoodles
   description: Spaghetti and crushed tomatoes. Just like your abusive father used to make!
   components:
+  - type: Item
+    storedOffset: 0,-4
   - type: FlavorProfile
     flavors:
       - pasta
@@ -76,6 +81,10 @@
   id: FoodNoodlesCopy
   description: You probably shouldn't try this, you always hear people talking about how bad it is...
   components:
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,1,1
   - type: Food
     trash:
     - FoodPlateSmall
@@ -102,6 +111,8 @@
   id: FoodNoodlesMeatball
   description: Now that's a nice-a meatball!
   components:
+  - type: Item
+    storedOffset: 0,-4
   - type: FlavorProfile
     flavors:
       - pasta
@@ -128,6 +139,8 @@
   id: FoodNoodlesSpesslaw
   description: A lawyer's favourite.
   components:
+  - type: Item
+    storedOffset: 0,-4
   - type: FlavorProfile
     flavors:
       - pasta
@@ -176,6 +189,8 @@
   id: FoodNoodlesButter
   description: Noodles covered in savory butter. Simple and slippery, but delicious.
   components:
+  - type: Item
+    storedOffset: 0,-4
   - type: FlavorProfile
     flavors:
       - pasta

@@ -103,7 +103,9 @@
   abstract: true
   components:
   - type: Item
-    storedRotation: -90
+    shape:
+    - 0,0,1,0
+    storedOffset: 0,-3
   - type: Food
     trash:
     - FoodBowlBig
@@ -408,12 +410,12 @@
   - type: SolutionContainerManager
     solutions:
       food:
-        maxVol: 15
+        maxVol: 30 # Trauma - 24 volume from food, was 15
         reagents:
         - ReagentId: Nutriment
           Quantity: 7
         - ReagentId: Vitamin
-          Quantity: 4
+          Quantity: 17
   - type: Tag
     tags:
     - Fruit
@@ -658,6 +660,9 @@
   id: FoodJellyAmanita
   description: It's evil, don't touch it!
   components:
+  - type: Item
+    size: Normal
+    storedOffset: 0,-3
   - type: FlavorProfile
     flavors:
       - mushroom
@@ -1282,6 +1287,11 @@
   id: FoodSoupElectron
   description: A gastronomic curiosity of ethereal origin.
   components:
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,1,1
+    storedOffset: 0,2
   - type: FlavorProfile
     flavors:
       - mushrooms
