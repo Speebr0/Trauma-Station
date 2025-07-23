@@ -104,11 +104,8 @@
 using Content.Server.Actions;
 using Content.Server.Humanoid;
 using Content.Server.Inventory;
-using Content.Server.Mind.Commands;
 using Content.Server.Polymorph.Components;
-using Content.Shared._Goobstation.Wizard.BindSoul;
-using Content.Shared.Actions;
-using Content.Shared.Actions.Components;
+using Content.Shared._Goobstation.Wizard.BindSoul; // Goob
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Coordinates;
@@ -354,10 +351,12 @@ public sealed partial class PolymorphSystem : EntitySystem
 
             proto = entities.Pick(_random);
         }
+        // Goob edit end
         var child = Spawn(proto, _transform.GetMapCoordinates(uid, targetTransformComp), rotation: _transform.GetWorldRotation(uid));
 
+        // Goob - added AllowMovement
+        _mindSystem.MakeSentient(child, configuration.AllowMovement);
         MakeSentientCommand.MakeSentient(child, EntityManager, configuration.AllowMovement);
-        // Goob edit end
 
         // Einstein Engines - Language begin
         // Copy specified components over
