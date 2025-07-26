@@ -288,7 +288,7 @@
       charger_slot: enum.PowerChargerVisualLayers.ItemDisplay
 
 - type: entity
-  parent: BaseItemRecharger
+  parent: [ BaseItemRecharger, BaseWallmount ]
   id: WallWeaponCapacitorRecharger
   name: wall recharger
   components:
@@ -307,7 +307,6 @@
       offset: 0,0.45
       scale: 0.5,0.5
       # WWDP Edit end
-  - type: WallMount
   - type: Charger
     chargeRate: 25
   - type: ItemSlots
