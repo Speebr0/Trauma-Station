@@ -9,12 +9,12 @@ namespace Content.Trauma.Shared.EntityEffects;
 /// Paints the target entity.
 /// Requires <see cref="EntityEffectToolArgs"/> to work and the tool must have <see cref="PaintCanComponent"/>.
 /// </summary>
-public sealed partial class PaintTarget : EntityEffect
+public sealed partial class PaintTarget : EntityEffectBase<PaintTarget>
 {
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
         => Loc.GetString("entity-effect-paint-target-guidebook-text");
 
-    public override void Effect(EntityEffectBaseArgs baseArgs)
+    private void OnPaint(Entity<TransformComponent> ent, ref EntityEffectEvent<PaintTarget> args)
     {
         if (baseArgs is not EntityEffectToolArgs args)
             return;
