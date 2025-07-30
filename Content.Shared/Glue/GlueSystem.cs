@@ -1,28 +1,6 @@
-// SPDX-FileCopyrightText: 2023 Chief-Engineer <119664036+Chief-Engineer@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 ElectroJr <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2023 Emisse <99158783+Emisse@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 brainfood1183 <113240905+brainfood1183@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Cojoke <83733158+Cojoke-dot@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Krunklehorn <42424291+Krunklehorn@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Server.Administration.Logs;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Database;
-using Content.Shared.Glue;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Components;
@@ -34,17 +12,17 @@ using Content.Shared.Verbs;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
-namespace Content.Server.Glue;
+namespace Content.Shared.Glue;
 
-public sealed class GlueSystem : SharedGlueSystem
+public sealed class GlueSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
+    [Dependency] private readonly NameModifierSystem _nameMod = default!;
+    [Dependency] private readonly OpenableSystem _openable = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly IAdminLogManager _adminLogger = default!;
-    [Dependency] private readonly OpenableSystem _openable = default!;
-    [Dependency] private readonly NameModifierSystem _nameMod = default!;
 
     public override void Initialize()
     {
@@ -83,7 +61,7 @@ public sealed class GlueSystem : SharedGlueSystem
             Act = () => TryGlue(entity, target, user),
             IconEntity = GetNetEntity(entity),
             Text = Loc.GetString("glue-verb-text"),
-            Message = Loc.GetString("glue-verb-message")
+            Message = Loc.GetString("glue-verb-message"),
         };
 
         args.Verbs.Add(verb);
@@ -93,26 +71,29 @@ public sealed class GlueSystem : SharedGlueSystem
     {
         // if item is glued then don't apply glue again so it can be removed for reasonable time
         // If glue is applied to an unremoveable item, the component will disappear after the duration.
-        // This effecitvely means any unremoveable item could be removed with a bottle of glue.
+        // This effectively means any unremoveable item could be removed with a bottle of glue.
         if (HasComp<GluedComponent>(target) || !HasComp<ItemComponent>(target) || HasComp<UnremoveableComponent>(target))
         {
-            _popup.PopupEntity(Loc.GetString("glue-failure", ("target", target)), actor, actor, PopupType.Medium);
+            _popup.PopupClient(Loc.GetString("glue-failure", ("target", target)), actor, actor, PopupType.Medium);
             return false;
         }
 
-        if (HasComp<ItemComponent>(target) && _solutionContainer.TryGetSolution(entity.Owner, entity.Comp.Solution, out _, out var solution))
+        if (HasComp<ItemComponent>(target) && _solutionContainer.TryGetSolution(entity.Owner, entity.Comp.Solution, out var solutionEntity, out _))
         {
-            var quantity = solution.RemoveReagent(entity.Comp.Reagent, entity.Comp.ConsumptionUnit);
+            var quantity = _solutionContainer.RemoveReagent(solutionEntity.Value, entity.Comp.Reagent, entity.Comp.ConsumptionUnit);
             if (quantity > 0)
             {
-                EnsureComp<GluedComponent>(target).Duration = quantity.Double() * entity.Comp.DurationPerUnit;
+                _audio.PlayPredicted(entity.Comp.Squeeze, entity.Owner, actor);
+                _popup.PopupClient(Loc.GetString("glue-success", ("target", target)), actor, actor, PopupType.Medium);
                 _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(actor):actor} glued {ToPrettyString(target):subject} with {ToPrettyString(entity.Owner):tool}");
-                _audio.PlayPvs(entity.Comp.Squeeze, entity.Owner);
-                _popup.PopupEntity(Loc.GetString("glue-success", ("target", target)), actor, actor, PopupType.Medium);
+                var gluedComp = EnsureComp<GluedComponent>(target);
+                gluedComp.Duration = quantity.Double() * entity.Comp.DurationPerUnit;
+                Dirty(target, gluedComp);
                 return true;
             }
         }
-        _popup.PopupEntity(Loc.GetString("glue-failure", ("target", target)), actor, actor, PopupType.Medium);
+
+        _popup.PopupClient(Loc.GetString("glue-failure", ("target", target)), actor, actor, PopupType.Medium);
         return false;
     }
 
@@ -140,9 +121,16 @@ public sealed class GlueSystem : SharedGlueSystem
 
     private void OnHandPickUp(Entity<GluedComponent> entity, ref GotEquippedHandEvent args)
     {
+        // When predicting dropping a glued item prediction will reinsert the item into the hand when rerolling the state to a previous one.
+        // So dropping the item would add UnRemoveableComponent on the client without this guard statement.
+        if (_timing.ApplyingState)
+            return;
+
         var comp = EnsureComp<UnremoveableComponent>(entity);
         comp.DeleteOnDrop = false;
         entity.Comp.Until = _timing.CurTime + entity.Comp.Duration;
+        Dirty(entity.Owner, comp);
+        Dirty(entity);
     }
 
     private void OnRefreshNameModifiers(Entity<GluedComponent> entity, ref RefreshNameModifiersEvent args)
