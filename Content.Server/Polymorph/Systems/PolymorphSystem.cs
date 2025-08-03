@@ -172,8 +172,6 @@ public sealed partial class PolymorphSystem : EntitySystem
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly WoundSystem _wound = default!;
 
-    private ISawmill _sawMill = default!; // Goobstation
-
     private const string RevertPolymorphId = "ActionRevertPolymorph";
 
     public override void Initialize()
@@ -189,9 +187,6 @@ public sealed partial class PolymorphSystem : EntitySystem
         SubscribeLocalEvent<PolymorphedEntityComponent, DestructionEventArgs>(OnDestruction);
 
         InitializeMap();
-        InitializeTrigger();
-
-        _sawMill = Logger.GetSawmill("polymorph"); // Goobstation
     }
 
     public override void Update(float frameTime)
@@ -218,8 +213,6 @@ public sealed partial class PolymorphSystem : EntitySystem
                 Revert((uid, comp));
             }
         }
-
-        UpdateTrigger();
     }
 
     private void OnComponentStartup(Entity<PolymorphableComponent> ent, ref ComponentStartup args)
@@ -494,7 +487,7 @@ public sealed partial class PolymorphSystem : EntitySystem
                 }
                 catch (UnknownComponentException e)
                 {
-                    _sawMill.Error(e.Message);
+                    Log.Error(e.Message);
                     continue;
                 }
 

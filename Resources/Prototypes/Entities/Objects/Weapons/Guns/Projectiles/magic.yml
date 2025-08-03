@@ -275,6 +275,7 @@
 
 - type: entity
   id: ProjectilePolyboltBase
+  abstract: true
   parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
@@ -286,8 +287,10 @@
   - type: Projectile
     damage:
       types:
-        Poison: 0 # Goob edit
-  - type: TriggerOnProjectileHit # Goob edit
+        Poison: 0 # Goob edit - was 5
+  - type: TriggerOnProjectileHit # Goob edit - was TriggerOnCollide
+  - type: PolymorphOnTrigger
+    targetUser: true
   - type: Reflective # Goobstation
     reflective: Magic
   - type: Ammo # Goobstation
@@ -313,8 +316,8 @@
     reflective: Magic
   - type: PolymorphOnTrigger
     polymorph: WizardForcedCarp
-  - type: TriggerWhitelist
-    whitelist:
+  - type: WhitelistTriggerCondition
+    userWhitelist:
       components:
       - Body
 
@@ -329,8 +332,8 @@
     reflective: Magic
   - type: PolymorphOnTrigger
     polymorph: WizardForcedMonkey
-  - type: TriggerWhitelist
-    whitelist:
+  - type: WhitelistTriggerCondition
+    userWhitelist:
       components:
       - Body
 
@@ -350,8 +353,8 @@
     reflective: Magic
   - type: PolymorphOnTrigger
     polymorph: WizardWallDoor
-  - type: TriggerWhitelist
-    whitelist:
+  - type: WhitelistTriggerCondition
+    userWhitelist:
       components:
       - Airlock
       - Firelock
@@ -423,8 +426,8 @@
     reflective: Magic
   - type: PolymorphOnTrigger
     polymorph: WizardForcedCluwne
-  - type: TriggerWhitelist
-    whitelist:
+  - type: WhitelistTriggerCondition
+    userWhitelist:
       components:
       - Body
 
@@ -457,7 +460,7 @@
     reflective: Magic
   - type: PolymorphOnTrigger
     polymorph: BreadMorph
-  - type: TriggerWhitelist
-    whitelist:
+  - type: WhitelistTriggerCondition
+    userWhitelist:
       components:
       - Body
