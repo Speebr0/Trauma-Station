@@ -230,11 +230,22 @@
   description: This implant lets the user break out of hand restraints up to three times before ceasing to function anymore.
   categories: [ HideSpawnMenu ]
   components:
-    - type: SubdermalImplant
-      implantAction: ActionActivateFreedomImplant
-      whitelist:
-        components:
-        - Cuffable # useless if you cant be cuffed
+  - type: SubdermalImplant
+    implantAction: ActionActivateFreedomImplant
+    whitelist:
+      components:
+      - Cuffable # useless if you cant be cuffed
+  - type: TriggerOnActivateImplant
+  - type: UncuffOnTrigger
+    targetUser: true
+  - type: EffectOnTrigger # Trauma - entity effect version of goob shitcode
+    targetUser: true
+    effect: !type:ComplexEffect
+      effects:
+      - !type:PullerEffect # stun whoever is pulling you
+        effect: !type:Paralyze
+          paralyzeTime: 5
+      - !type:RemoveSnares # remove any snares
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -293,7 +304,8 @@
   - type: SubdermalImplant
     implantAction: ActionActivateScramImplant
   - type: TriggerOnActivateImplant
-  - type: ScramImplant # Trauma - replaces RandomTeleport
+  - type: ScramOnTrigger
+    targetUser: true
 
 - type: entity
   parent: BaseSubdermalImplant
@@ -302,11 +314,15 @@
   description: This implant lets the user randomly change their appearance and name once.
   categories: [ HideSpawnMenu ]
   components:
-    - type: SubdermalImplant
-      implantAction: ActionActivateDnaScramblerImplant
-      whitelist:
-        components:
-        - HumanoidAppearance # syndies cant turn hamlet into a human
+  - type: SubdermalImplant
+    implantAction: ActionActivateDnaScramblerImplant
+    whitelist:
+      components:
+      - HumanoidAppearance # syndies cant turn hamlet into a human
+  - type: TriggerOnActivateImplant
+  - type: DnaScrambleOnTrigger
+    targetUser: true
+  - type: DeleteOnTrigger
 
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]
