@@ -27,6 +27,8 @@
       - Body
       - MobState
       - MindContainer
+      - PAI # intended to mindswap pAIs and AIs
+      - StationAiCore
     # Goob edit end
     event: !type:MindSwapSpellEvent
       sound: # Goobstation
