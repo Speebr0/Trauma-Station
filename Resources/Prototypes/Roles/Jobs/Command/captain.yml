@@ -183,8 +183,8 @@
   id: CaptainGear
   equipment:
     shoes: ClothingShoesBootsLaceup
-    eyes: ClothingEyesGlassesSunglasses
-    #gloves: ClothingHandsGlovesCaptain - Goobstation, moved to loadouts
+    eyes: ClothingEyesGlassesCommand
+    #gloves: ClothingHandsGlovesCaptain # Goobstation, moved to loadouts
     id: CaptainPDA
     ears: ClothingHeadsetAltCommand
   storage:
