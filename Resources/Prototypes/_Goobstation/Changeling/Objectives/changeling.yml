@@ -101,8 +101,13 @@
   - type: TargetObjective
     title: objective-condition-escape-identity-title
   - type: PickRandomPerson
-    needsOrganic: true # Don't pick IPCs.
-    excludeChangeling: true # if they swap identities its a guarantee fail
+    filters:
+    - !type:BodyMindFilter
+      inverted: true # don't pick these
+      whitelist:
+        components:
+        - Silicon # Don't pick IPCs
+        - Changeling # if they swap identities its a guaranteed fail
 
 - type: entity
   parent: [BaseChangelingSyndicateObjective, BaseStealObjective]
