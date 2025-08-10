@@ -106,7 +106,7 @@ public abstract partial class SharedMartialArtsSystem
         _stun.TryKnockdown(target,
             TimeSpan.FromSeconds(proto.ParalyzeTime * power),
             true,
-            proto.DropHeldItemsBehavior);
+            drop: proto.DropItems);
 
         if (TryComp<PullableComponent>(target, out var pullable))
             _pulling.TryStopPull(target, pullable, ent, true);
@@ -137,7 +137,7 @@ public abstract partial class SharedMartialArtsSystem
         _stun.TryKnockdown(target,
             TimeSpan.FromSeconds(proto.ParalyzeTime * power),
             true,
-            proto.DropHeldItemsBehavior);
+            drop: proto.DropItems);
 
         DoDamage(ent, target, proto.DamageType, proto.ExtraDamage * power, out _);
         _audio.PlayPvs(args.Sound, target);
@@ -183,7 +183,7 @@ public abstract partial class SharedMartialArtsSystem
         _stun.TryKnockdown(target,
             TimeSpan.FromSeconds(proto.ParalyzeTime * power),
             true,
-            proto.DropHeldItemsBehavior);
+            drop: proto.DropItems);
 
         _audio.PlayPvs(args.Sound, target);
         DoDamage(ent, target, proto.DamageType, proto.ExtraDamage * power, out _);
@@ -191,7 +191,7 @@ public abstract partial class SharedMartialArtsSystem
             ent,
             dir.Normalized() * args.ThrowRange * power,
             proto.ThrownSpeed,
-            behavior: proto.DropHeldItemsBehavior);
+            drop: proto.DropItems);
         ComboPopup(ent, target, proto.Name);
         ent.Comp.LastAttacks.Clear();
     }

@@ -30,5 +30,5 @@ public sealed partial class GunRecoilComponent : Component
     public bool RefreshKnockdown = true;
 
     [DataField]
-    public DropHeldItemsBehavior Behavior = DropHeldItemsBehavior.NoDrop;
+    public bool DropItems;
 }

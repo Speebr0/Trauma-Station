@@ -78,7 +78,7 @@ public abstract partial class SharedMartialArtsSystem
         else
         {
             _stamina.TakeStaminaDamage(target, proto.StaminaDamage, applyResistances: true);
-            _stun.TryKnockdown(target, TimeSpan.FromSeconds(proto.ParalyzeTime), true, proto.DropHeldItemsBehavior);
+            _stun.TryKnockdown(target, TimeSpan.FromSeconds(proto.ParalyzeTime), true, drop: proto.DropItems);
             DoDamage(ent, target, proto.DamageType, proto.ExtraDamage, out _);
         }
 

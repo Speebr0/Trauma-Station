@@ -44,12 +44,6 @@ public sealed partial class KnockedDownComponent : Component
     [DataField, AutoNetworkedField]
     public TimeSpan GetUpDoAfter = TimeSpan.FromSeconds(1);
 
-    /// <summary>
-    /// Shitmed - What do to with held items.
-    /// </summary>
-    [DataField]
-    public DropHeldItemsBehavior DropHeldItemsBehavior = DropHeldItemsBehavior.DropIfStanding;
-
     // Shitmed Change: ANNOYING WITH THE GOD DAMN PAIN PROCS.
     [DataField, AutoNetworkedField]
     public bool StandOnRemoval = true;

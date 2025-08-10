@@ -13,5 +13,5 @@ namespace Content.Goobstation.Shared.Knockdown;
 public sealed partial class KnockdownOnCollideComponent : Component
 {
     [DataField]
-    public DropHeldItemsBehavior Behavior = DropHeldItemsBehavior.NoDrop;
+    public bool DropItems = false;
 }

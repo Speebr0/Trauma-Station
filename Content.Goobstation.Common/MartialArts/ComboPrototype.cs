@@ -52,7 +52,7 @@ public sealed partial class ComboPrototype : IPrototype
     /// Should the target drop items on knockdown?
     /// </summary>
     [DataField]
-    public DropHeldItemsBehavior DropHeldItemsBehavior = DropHeldItemsBehavior.DropIfStanding;
+    public bool DropItems = true;
 
     /// <summary>
     /// How much stamina damage should this move do on perform.

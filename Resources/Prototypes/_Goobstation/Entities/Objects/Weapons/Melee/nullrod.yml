@@ -438,7 +438,7 @@
         volume: 3
   - type: KnockdownOnHit
     duration: 0.2
-    dropHeldItemsBehavior: NoDrop
+    dropItems: false
   - type: UseDelay
     delay: 3
   - type: UseDelayBlockKnockdown
