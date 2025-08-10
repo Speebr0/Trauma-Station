@@ -41,7 +41,7 @@
   id: FoodBakedBase
   abstract: true
   components:
-  - type: Food
+  - type: Edible
   - type: Sprite
     sprite: Objects/Consumable/Food/Baked/misc.rsi
   - type: SolutionContainerManager
@@ -62,7 +62,7 @@
   id: FoodBakedMuffin
   description: A delicious and spongy little cake.
   components:
-  - type: Food
+  - type: Edible
     trash:
     - FoodPlateMuffinTin
   - type: Sprite
@@ -665,7 +665,7 @@
     - cotton
   - type: Sprite
     state: chevrechaud-cotton
-  - type: Food
+  - type: Edible
     requiresSpecialDigestion: true
   - type: Tag
     tags:
@@ -683,9 +683,9 @@
           Quantity: 0.5
 
 - type: entity
-  name: brownies
   parent: FoodBakedBase
   id: FoodBakedBrownieBatch
+  name: brownies
   description: A pan of brownies.
   components:
   - type: Item
@@ -739,9 +739,9 @@
     - Slice
 
 - type: entity
-  name: special brownies
   parent: FoodBakedBase
   id: FoodBakedCannabisBrownieBatch
+  name: special brownies
   description: A pan of "special" brownies.
   components:
   - type: Item
@@ -771,9 +771,9 @@
     slice: FoodBakedCannabisBrownie
 
 - type: entity
-  name: special brownie
   parent: FoodBakedBase
   id: FoodBakedCannabisBrownie
+  name: special brownie
   description: A "special" brownie.
   components:
   - type: FlavorProfile
@@ -824,9 +824,9 @@
             Quantity: 1
 
 - type: entity
-  name: croissant
   parent: FoodBakedBase
   id: FoodBakedCroissant
+  name: croissant
   description: Buttery, flaky goodness.
   components:
   - type: Item
@@ -858,9 +858,9 @@
         Blunt: 0 # so the damage stats icon doesn't immediately give away the syndie ones
 
 - type: entity
-  name: cotton croissant
   parent: FoodBakedCroissant
   id: FoodBakedCroissantCotton
+  name: cotton croissant
   description: Buttery, flaky, fibery goodness.
   components:
   - type: Item
@@ -894,10 +894,10 @@
         - ReagentId: Vitamin
           Quantity: 1
 
-- type: entity         
-  name: grilled cheese sandwich
+- type: entity
   parent: FoodBakedBase
   id: FoodBakedGrilledCheeseSandwich
+  name: grilled cheese sandwich
   description: Bread and cheese toasted with butter, perfect for a chilly day in space.
   components:
   - type: Item

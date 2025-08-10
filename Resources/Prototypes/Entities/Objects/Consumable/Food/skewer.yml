@@ -89,9 +89,9 @@
 # Kebabs
 
 - type: entity
-  name: skewer
   parent: BaseItem
   id: FoodKebabSkewer
+  name: skewer
   description: A thin rod of metal used to skewer just about anything and cook it.
   components:
   - type: Item
@@ -140,7 +140,7 @@
     tags:
     - Trash
     - Skewer
-  - type: Food
+  - type: Edible
     trash:
     - FoodKebabSkewer
   - type: SolutionContainerManager

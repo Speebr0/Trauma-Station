@@ -25,9 +25,9 @@
 # Bowls
 
 - type: entity
-  name: bowl
   parent: ReagentContainerBase
   id: FoodBowlBig
+  name: bowl
   description: A simple bowl, used for soups and salads.
   components:
   - type: Item
@@ -96,9 +96,9 @@
         Blunt: 5
 
 - type: entity
-  name: broken bowl
   parent: BaseItem
   id: FoodBowlBigTrash
+  name: broken bowl
   description: A simple bowl, broken and useless.
   components:
   - type: Item
