@@ -2719,6 +2719,7 @@
     speaks: [Penguin]
     understands: [Penguin]
 
+# TODO: Make grenade penguin voice activated like the rest of the stealth items.
 - type: entity
   name: grenade penguin
   parent: [ MobPenguin, MobCombat, BaseSyndicateContraband ]
