@@ -1,33 +1,3 @@
-// SPDX-FileCopyrightText: 2018 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2019 PrPleGoo <PrPleGoo@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2019 PrPleGoo <felix.leeuwen@gmail.com>
-// SPDX-FileCopyrightText: 2020 AJCM-git <60196617+AJCM-git@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 Clyybber <darkmine956@gmail.com>
-// SPDX-FileCopyrightText: 2020 ComicIronic <comicironic@gmail.com>
-// SPDX-FileCopyrightText: 2020 Exp <theexp111@gmail.com>
-// SPDX-FileCopyrightText: 2020 FL-OZ <58238103+FL-OZ@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 FL-OZ <anotherscuffed@gmail.com>
-// SPDX-FileCopyrightText: 2020 GlassEclipse <tsymall5@gmail.com>
-// SPDX-FileCopyrightText: 2020 Memory <58238103+FL-OZ@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 RemberBL <timmermanrembrandt@gmail.com>
-// SPDX-FileCopyrightText: 2020 Víctor Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2020 Víctor Aguilera Puerto <zddm@outlook.es>
-// SPDX-FileCopyrightText: 2020 chairbender <kwhipke1@gmail.com>
-// SPDX-FileCopyrightText: 2021 20kdc <asdd2808@gmail.com>
-// SPDX-FileCopyrightText: 2021 Acruid <shatter66@gmail.com>
-// SPDX-FileCopyrightText: 2021 Alex Evgrashin <aevgrashin@yandex.ru>
-// SPDX-FileCopyrightText: 2021 Alex Evgrashin <evgrashin.adl@gmail.com>
-// SPDX-FileCopyrightText: 2021 ColdAutumnRain <73938872+ColdAutumnRain@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 E F R <602406+Efruit@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Galactic Chimp <GalacticChimpanzee@gmail.com>
-// SPDX-FileCopyrightText: 2021 Jaskanbe <86671825+Jaskanbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Julian Giebel <j.giebel@netrocks.info>
-// SPDX-FileCopyrightText: 2021 Julian Giebel <juliangiebel@live.de>
-// SPDX-FileCopyrightText: 2021 Kara Dinyes <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2021 Leon Friedrich <60421075+leonsfriedrich@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Leon Friedrich <leonsfriedrich@gmail.com>
-// SPDX-FileCopyrightText: 2021 Michael Will <will_m@outlook.de>
 // SPDX-FileCopyrightText: 2021 Paul <ritter.paul1+git@googlemail.com>
 // SPDX-FileCopyrightText: 2021 Paul Ritter <ritter.paul1@googlemail.com>
 // SPDX-FileCopyrightText: 2021 SETh lafuente <cetaciocascarudo@gmail.com>
@@ -131,81 +101,92 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Light.EntitySystems;
+=======
+>>>>>>> fd52f698c7 (Predict PoweredLights (#36541)):Content.Shared/Light/Components/PoweredLightComponent.cs
 using Content.Shared.DeviceLinking;
-using Content.Shared.Light.Components;
+using Content.Shared.Light.EntitySystems;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
+using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
-namespace Content.Server.Light.Components
+namespace Content.Shared.Light.Components
 {
     /// <summary>
     ///     Component that represents a wall light. It has a light bulb that can be replaced when broken.
     /// </summary>
-    [RegisterComponent, Access(typeof(PoweredLightSystem))]
+    [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, AutoGenerateComponentPause, Access(typeof(SharedPoweredLightSystem))]
     public sealed partial class PoweredLightComponent : Component
     {
-        [DataField("burnHandSound")]
+        /*
+         * Stop adding more fields, use components or I will shed you.
+         */
+
+        [DataField]
         public SoundSpecifier BurnHandSound = new SoundPathSpecifier("/Audio/Effects/lightburn.ogg");
 
-        [DataField("turnOnSound")]
+        [DataField]
         public SoundSpecifier TurnOnSound = new SoundPathSpecifier("/Audio/Machines/light_tube_on.ogg");
 
-        [DataField("hasLampOnSpawn", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-        public string? HasLampOnSpawn = null;
+        // Should be using containerfill?
+        [DataField]
+        public EntProtoId? HasLampOnSpawn = null;
 
         [DataField("bulb")]
         public LightBulbType BulbType;
 
-        [DataField("on")]
+        [DataField, AutoNetworkedField]
         public bool On = true;
 
-        [DataField("ignoreGhostsBoo")]
+        [DataField]
         public bool IgnoreGhostsBoo;
 
-        [DataField("ghostBlinkingTime")]
+        [DataField]
         public TimeSpan GhostBlinkingTime = TimeSpan.FromSeconds(10);
 
-        [DataField("ghostBlinkingCooldown")]
+        [DataField]
         public TimeSpan GhostBlinkingCooldown = TimeSpan.FromSeconds(60);
 
         [ViewVariables]
         public ContainerSlot LightBulbContainer = default!;
-        [ViewVariables]
+
+        [AutoNetworkedField]
         public bool CurrentLit;
-        [ViewVariables]
+
+        [DataField, AutoNetworkedField]
         public bool IsBlinking;
-        [ViewVariables]
+
+        [DataField, AutoNetworkedField, AutoPausedField]
         public TimeSpan LastThunk;
-        [ViewVariables]
+
+        [DataField, AutoPausedField]
         public TimeSpan? LastGhostBlink;
 
-        [DataField("onPort", customTypeSerializer: typeof(PrototypeIdSerializer<SinkPortPrototype>))]
-        public string OnPort = "On";
+        [DataField]
+        public ProtoId<SinkPortPrototype> OnPort = "On";
 
-        [DataField("offPort", customTypeSerializer: typeof(PrototypeIdSerializer<SinkPortPrototype>))]
-        public string OffPort = "Off";
+        [DataField]
+        public ProtoId<SinkPortPrototype> OffPort = "Off";
 
-        [DataField("togglePort", customTypeSerializer: typeof(PrototypeIdSerializer<SinkPortPrototype>))]
-        public string TogglePort = "Toggle";
+        [DataField]
+        public ProtoId<SinkPortPrototype> TogglePort = "Toggle";
 
         /// <summary>
         /// How long it takes to eject a bulb from this
         /// </summary>
-        [DataField("ejectBulbDelay")]
+        [DataField]
         public float EjectBulbDelay = 2;
 
         /// <summary>
         /// Shock damage done to a mob that hits the light with an unarmed attack
         /// </summary>
-        [DataField("unarmedHitShock")]
+        [DataField]
         public int UnarmedHitShock = 20;
 
         /// <summary>
         /// Stun duration applied to a mob that hits the light with an unarmed attack
         /// </summary>
-        [DataField("unarmedHitStun")]
+        [DataField]
         public TimeSpan UnarmedHitStun = TimeSpan.FromSeconds(5);
     }
 }

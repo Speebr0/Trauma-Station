@@ -9,12 +9,12 @@
 using Content.Goobstation.Shared.Religion;
 using Content.Server.Database;
 using Content.Server.Ghost;
-using Content.Server.Light.Components;
 using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared.Alert;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Light.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;

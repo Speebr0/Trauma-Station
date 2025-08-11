@@ -55,7 +55,7 @@ using Content.Server.Explosion.EntitySystems;
 using Content.Server.Gravity;
 using Content.Server.Guardian;
 using Content.Server.Humanoid;
-using Content.Server.Light.EntitySystems;
+using Content.Shared.Light.EntitySystems;
 using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Popups;
@@ -134,7 +134,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly EmpSystem _emp = default!;
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
-    [Dependency] private readonly PoweredLightSystem _light = default!;
+    [Dependency] private readonly SharedPoweredLightSystem _light = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly SharedCameraRecoilSystem _recoil = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;

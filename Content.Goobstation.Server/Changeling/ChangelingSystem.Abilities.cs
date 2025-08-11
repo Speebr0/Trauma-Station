@@ -40,7 +40,7 @@ using Content.Goobstation.Server.Changeling.Objectives.Components;
 using Content.Goobstation.Shared.Body.Components;
 using Content.Goobstation.Shared.Changeling.Actions;
 using Content.Goobstation.Shared.Changeling.Components;
-using Content.Server.Light.Components;
+using Content.Shared.Light.Components;
 using Content.Server.Nutrition.Components;
 using Content.Shared._Goobstation.Weapons.AmmoSelector;
 using Content.Shared._Starlight.CollectiveMind;
