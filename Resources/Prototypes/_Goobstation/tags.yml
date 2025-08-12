@@ -145,6 +145,9 @@
   id: CombatMech
 
 - type: Tag
+  id: ContravendUplink
+
+- type: Tag
   id: CorporateOverride
 
 - type: Tag
