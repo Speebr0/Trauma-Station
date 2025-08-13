@@ -111,7 +111,6 @@ using Content.Server.Chat.Managers;
 using Content.Server.Radio.Components;
 using Content.Server.Radio.EntitySystems; // Goob edit
 using Content.Server.Research.Systems; // Goob edit
-using Content.Server.Roles;
 using Content.Server.Station.Systems;
 using Content.Shared._CorvaxNext.Silicons.Borgs.Components; // Corvax-Next-AiRemoteControl
 using Content.Shared.Administration;
@@ -124,11 +123,11 @@ using Content.Shared.Random; // Goob edit
 using Content.Shared.Random.Helpers; // Goob edit
 using Content.Shared.Research.Components; // Goob edit
 using Content.Shared.Roles;
+using Content.Shared.Roles.Components;
 using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
 using Content.Shared.Silicons.StationAi; // Corvax-Next-AiRemoteControl
 using Content.Shared.Tag; // Corvax-Next-AiRemoteControl
-using Content.Shared.Wires;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;

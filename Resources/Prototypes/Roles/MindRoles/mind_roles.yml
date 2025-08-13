@@ -298,3 +298,19 @@
     exclusiveAntag: true
     subtype: role-subtype-zombie
   - type: ZombieRole
+
+# Changeling
+- type: entity
+  abstract: true # Trauma - goidaling isnt cherry picked
+  parent: BaseMindRoleAntag
+  id: MindRoleChangeling
+  name: Changeling Role
+  components:
+  - type: MindRole
+    antagPrototype: Changeling
+    exclusiveAntag: true
+    roleType: SoloAntagonist
+    subtype: role-subtype-changeling
+  - type: ChangelingRole
+  - type: RoleBriefing
+    briefing: changeling-briefing
