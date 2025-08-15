@@ -313,6 +313,8 @@
         - Syndicate
       mindRoles:
       - MindRoleNukeops
+  - type: DynamicRuleCost
+    cost: 200
 
 # Goobstation
 - type: entity
@@ -347,14 +349,17 @@
     giveCodewords: false # It would actually give them a different set of codewords than the regular traitors, anyway
     giveBriefing: false
   - type: AntagSelection
+    agentName: traitor-round-end-agent-name
     selectionTime: PostPlayerSpawn # Goobstation
-    definitions:
+    definitions: # Goobstation
     - prefRoles: [ Traitor ]
-      blacklist: # Goobstation
+      blacklist:
         components:
         - CommandStaff
       mindRoles:
       - MindRoleTraitorReinforcement
+  - type: DynamicRuleCost
+    cost: 100
 
 - type: entity
   parent: BaseTraitorRule
@@ -374,7 +379,7 @@
         - CommandStaff # Goobstation
         - AntagImmune
         - Changeling # Goobstation
-      lateJoinAdditional: true
+      lateJoinAdditional: false
       mindRoles:
       - MindRoleTraitor
 
@@ -406,6 +411,8 @@
       - type: HeadRevolutionary
       mindRoles:
       - MindRoleHeadRevolutionary
+  - type: DynamicRuleCost
+    cost: 200
 
 - type: entity
   id: Sandbox
@@ -436,39 +443,44 @@
 #  - type: AntagLoadProfileRule
 #    speciesOverride: Human
 
-#- type: entity
-#  parent: BaseWizardRule
-#  id: Wizard
-#  components:
-#  - type: GameRule
-#    minPlayers: 10
-#  - type: AntagSelection
-#    agentName: wizard-round-end-name
-#    selectionTime: PrePlayerSpawn
-#    definitions:
-#    - prefRoles: [ Wizard ]
-#      max: 1
-#      playerRatio: 1
-#      spawnerPrototype: SpawnPointGhostWizard
-#      roleLoadout:
-#       - RoleSurvivalExtended
-#      briefing:
-#        text: wizard-role-greeting
-#        color: Turquoise
-#        # TODO: Need Wizard Start sound
-#        #sound: "/Audio/Ambience/Antag/wizard_start.ogg"
-#      startingGear: WizardBlueGear
-#      # TODO: WizardComp as needed
-#      components:
-#      - type: NpcFactionMember
-#        factions:
-#        - Wizard
-#      - type: RandomMetadata
-#        nameSegments:
-#        - names_wizard_first
-#        - names_wizard_last
-#      mindRoles:
-#      - MindRoleWizard
+- type: entity
+  abstract: true # Trauma - chud wizard removed pending rework
+  parent: BaseWizardRule
+  id: Wizard
+  components:
+  - type: GameRule
+    minPlayers: 10
+  - type: AntagSelection
+    agentName: wizard-round-end-name
+    selectionTime: PrePlayerSpawn
+    definitions:
+    - prefRoles: [ Wizard ]
+      max: 1
+      playerRatio: 1
+      spawnerPrototype: SpawnPointGhostWizard
+      roleLoadout:
+       - RoleSurvivalExtended
+      briefing:
+        text: wizard-role-greeting
+        color: Turquoise
+        # TODO: Need Wizard Start sound
+        #sound: "/Audio/Ambience/Antag/wizard_start.ogg"
+      startingGear: WizardBlueGear
+      # TODO: WizardComp as needed
+      components:
+      - type: NpcFactionMember
+        factions:
+        - Wizard
+      - type: RandomMetadata
+        nameSegments:
+        - NamesWizardFirst
+        - NamesWizardLast
+        nameFormat: name-format-wizard
+      mindRoles:
+      - MindRoleWizard
+  - type: DynamicRuleCost
+    cost: 150
+>>>>>>> f23e8c2861 (Multiantag Gamemode (#37783))
 
 - type: entity
   id: Zombie
@@ -507,6 +519,8 @@
       - type: InitialInfected
       mindRoles:
       - MindRoleInitialInfected
+  - type: DynamicRuleCost
+    cost: 200
 
 # This rule makes the chosen players unable to get other antag rules, as a way to prevent metagaming job rolls.
 # Put this before antags assigned to station jobs, but after non-job antags (NukeOps/Wiz).
@@ -536,18 +550,7 @@
       - !type:NestedSelector
         tableId: BasicAntagEventsTable
       - !type:NestedSelector
-        tableId: CargoGiftsTable
-      - !type:NestedSelector
-        tableId: CalmPestEventsTable
-      - !type:NestedSelector
-        tableId: SpicyPestEventsTable
-
-- type: entityTable
-  id: BasicGameRulesTableNoAntag
-  table: !type:AllSelector
-    children:
-      - !type:NestedSelector
-        tableId: BasicCalmEventsTable
+        tableId: ModerateAntagEventsTable
       - !type:NestedSelector
         tableId: CargoGiftsTable
       - !type:NestedSelector
@@ -556,13 +559,19 @@
         tableId: SpicyPestEventsTable
 
 - type: entityTable
-  id: AllGameRulesTable
-  table: !type:AllSelector
+  id: DynamicGameRulesTable
+  table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
     children:
     - !type:NestedSelector
-      tableId: BasicGameRulesTableNoAntag
+      tableId: BasicCalmEventsTable
     - !type:NestedSelector
       tableId: BasicAntagEventsTable
+    - !type:NestedSelector
+      tableId: CargoGiftsTable
+    - !type:NestedSelector
+      tableId: CalmPestEventsTable
+    - !type:NestedSelector
+      tableId: SpicyPestEventsTable
 
 - type: entityTable
   id: SpaceTrafficControlTable
@@ -584,15 +593,12 @@
       tableId: BasicGameRulesTable
 
 - type: entity
-  id: AntagStationEventScheduler
+  id: DynamicStationEventScheduler # this isn't the dynamic mode, but rather the station event scheduler used for dynamic
   parent: BaseGameRule
   components:
   - type: BasicStationEventScheduler
     scheduledGameRules: !type:NestedSelector
-      tableId: BasicAntagEventsTable
-    minMaxEventTiming:
-      min: 600
-      max: 900
+      tableId: DynamicGameRulesTable
 
 - type: entity
   id: RampingStationEventScheduler
