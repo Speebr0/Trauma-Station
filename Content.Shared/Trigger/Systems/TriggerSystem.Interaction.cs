@@ -1,7 +1,8 @@
-﻿using Content.Shared.Examine;
+using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Throwing;
 using Content.Shared.Trigger.Components.Triggers;
 using Content.Shared.Trigger.Components.Effects;
 
@@ -12,9 +13,11 @@ public sealed partial class TriggerSystem
     private void InitializeInteraction()
     {
         SubscribeLocalEvent<TriggerOnExaminedComponent, ExaminedEvent>(OnExamined);
-
         SubscribeLocalEvent<TriggerOnActivateComponent, ActivateInWorldEvent>(OnActivate);
         SubscribeLocalEvent<TriggerOnUseComponent, UseInHandEvent>(OnUse);
+        SubscribeLocalEvent<TriggerOnInteractHandComponent, InteractHandEvent>(OnInteractHand);
+        SubscribeLocalEvent<TriggerOnThrowComponent, ThrowEvent>(OnThrow);
+        SubscribeLocalEvent<TriggerOnThrownComponent, ThrownEvent>(OnThrown);
 
         SubscribeLocalEvent<ItemToggleOnTriggerComponent, TriggerEvent>(HandleItemToggleOnTrigger);
         SubscribeLocalEvent<AnchorOnTriggerComponent, TriggerEvent>(HandleAnchorOnTrigger);
@@ -45,6 +48,25 @@ public sealed partial class TriggerSystem
 
         Trigger(ent.Owner, args.User, ent.Comp.KeyOut);
         args.Handled = true;
+    }
+
+    private void OnInteractHand(Entity<TriggerOnInteractHandComponent> ent, ref InteractHandEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        Trigger(ent.Owner, args.User, ent.Comp.KeyOut);
+        args.Handled = true;
+    }
+
+    private void OnThrow(Entity<TriggerOnThrowComponent> ent, ref ThrowEvent args)
+    {
+        Trigger(ent.Owner, args.Thrown, ent.Comp.KeyOut);
+    }
+
+    private void OnThrown(Entity<TriggerOnThrownComponent> ent, ref ThrownEvent args)
+    {
+        Trigger(ent.Owner, args.User, ent.Comp.KeyOut);
     }
 
     private void HandleItemToggleOnTrigger(Entity<ItemToggleOnTriggerComponent> ent, ref TriggerEvent args)
