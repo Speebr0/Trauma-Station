@@ -70,12 +70,7 @@ public sealed class StandingStateSystem : EntitySystem
         ChangeLayers(entity);
     }
 
-    public bool IsMatchingState(Entity<StandingStateComponent?> entity, bool standing)
-    {
-        return standing != IsDown(entity);
-    }
-
-    public bool IsDown(Entity<StandingStateComponent?> entity)
+    public bool IsDown(EntityUid uid, StandingStateComponent? standingState = null)
     {
         if (!Resolve(entity, ref entity.Comp, false))
             return false;
