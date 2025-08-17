@@ -469,7 +469,6 @@
   - type: Item
     size: Large
 
-
 - type: entity
   name: laser carbine
   parent: [WeaponLaserCarbinePractice, BaseGunWieldable, BaseSecurityContraband]
@@ -800,7 +799,6 @@
     - Sidearm
   - type: PacifismAllowedGun
 
-
 - type: entity
   name: disabler
   parent: [WeaponDisablerPractice, BaseSecurityCommandContraband]
@@ -877,7 +875,6 @@
   - type: StaticPrice
     price: 260
   - type: PacifismAllowedGun
-
 
 - type: entity
   name: taser
