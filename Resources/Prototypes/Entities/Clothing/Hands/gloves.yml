@@ -380,6 +380,7 @@
       - type: BatteryDrainer
       # Goobstation - replaced shock with ninjutsu
       #- type: StunProvider
+      #  cooldown: 10
       #  noPowerPopup: ninja-no-power
       #  whitelist:
       #    components:
