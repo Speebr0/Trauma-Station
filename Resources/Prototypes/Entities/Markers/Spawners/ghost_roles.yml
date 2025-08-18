@@ -203,7 +203,7 @@
     description: ghost-role-information-loneop-description
     rules: ghost-role-information-loneop-rules
     mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
+    - MindRoleLoneops
     requirements: # Goobstation - ghost roles requirements
     - !type:DepartmentTimeRequirement
       department: Security
