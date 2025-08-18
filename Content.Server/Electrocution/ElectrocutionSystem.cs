@@ -478,7 +478,7 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
                 ? _stun.TryUpdateParalyzeDuration(uid, time * ParalyzeTimeMultiplier)
                 : _stun.TryAddParalyzeDuration(uid, time * ParalyzeTimeMultiplier);
         }
-            
+
 
         // TODO: Sparks here.
 
@@ -494,7 +494,7 @@ public sealed class ElectrocutionSystem : SharedElectrocutionSystem
             }
         }
 
-        _stuttering.DoStutter(uid, time * StutteringTimeMultiplier, refresh, statusEffects);
+        _stuttering.DoStutter(uid, time * StutteringTimeMultiplier, refresh);
         _jittering.DoJitter(uid, time * JitterTimeMultiplier, refresh, JitterAmplitude, JitterFrequency, true, statusEffects);
 
         _popup.PopupEntity(Loc.GetString("electrocuted-component-mob-shocked-popup-player"), uid, uid);

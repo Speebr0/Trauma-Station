@@ -221,7 +221,8 @@ public sealed partial class StatusEffectsSystem : EntitySystem
         SetStatusEffectEndTime((effect, effect.Comp), effect.Comp.EndEffectTime.Value + delta);
     }
 
-    private void SetStatusEffectEndTime(Entity<StatusEffectComponent?> ent, TimeSpan? endTime)
+    // Trauma - made public
+    public void SetStatusEffectEndTime(Entity<StatusEffectComponent?> ent, TimeSpan? endTime)
     {
         if (!_effectQuery.Resolve(ent, ref ent.Comp))
             return;
