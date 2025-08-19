@@ -48,6 +48,7 @@ public abstract class SharedFlightSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly SharedFloatingVisualizerSystem _floating = default!;
 
     public override void Initialize()
     {
@@ -68,6 +69,9 @@ public abstract class SharedFlightSystem : EntitySystem
         SubscribeLocalEvent<FlightComponent, DownedEvent>(OnDowned);
         SubscribeLocalEvent<FlightComponent, SleepStateChangedEvent>(OnSleep);
         SubscribeLocalEvent<FlightComponent, AttemptClimbEvent>(OnAttemptClimb);
+        SubscribeLocalEvent<FlightComponent, IsWeightlessEvent>(OnIsWeightless);
+
+        SubscribeLocalEvent<FloatingVisualsComponent, FlightEvent>(OnFloatingFlight);
     }
 
     public override void Update(float frameTime)
@@ -323,6 +327,24 @@ public abstract class SharedFlightSystem : EntitySystem
             return;
 
         args.Cancelled = true;
+    }
+
+    private void OnIsWeightless(Entity<FlightComponent> ent, ref IsWeightlessEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+        args.IsWeightless = ent.Comp.On;
+    }
+
+    private void OnFloatingFlight(Entity<FloatingVisualsComponent> ent, ref FlightEvent args)
+    {
+        ent.Comp.CanFloat = args.IsFlying;
+        if (!args.IsFlying || !args.IsAnimated)
+            return;
+
+        _floating.FloatAnimation(ent, ent.Comp.Offset, ent.Comp.AnimationKey, ent.Comp.AnimationTime);
     }
 
     #endregion
