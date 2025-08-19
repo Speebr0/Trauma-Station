@@ -1,25 +1,27 @@
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
+using Content.Shared.Nutrition.Components;
+using Robust.Shared.GameStates;
 
-namespace Content.Server.Kitchen.Components;
+namespace Content.Shared.Kitchen.Components;
 
 /// <summary>
 ///     Applies to items that are capable of butchering entities, or
 ///     are otherwise sharp for some purpose.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class SharpComponent : Component
 {
-    // TODO just make this a tool type.
-    public HashSet<EntityUid> Butchering = new();
+    /// <summary>
+    /// List of the entities that are currently being butchered.
+    /// </summary>
+    // TODO just make this a tool type. Move SharpSystem to shared.
+    [AutoNetworkedField]
+    public readonly HashSet<EntityUid> Butchering = [];
 
-    [DataField("butcherDelayModifier")]
+    /// <summary>
+    /// Affects butcher delay of the <see cref="ButcherableComponent"/>.
+    /// </summary>
+    [DataField, AutoNetworkedField]
     public float ButcherDelayModifier = 1.0f;
 
     /// <summary>
