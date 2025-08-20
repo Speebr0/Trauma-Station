@@ -37,14 +37,14 @@ public sealed class MindShieldSystem : EntitySystem
     [Dependency] private readonly RoleSystem _roleSystem = default!;
     [Dependency] private readonly MindSystem _mindSystem = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
-    [Dependency] private readonly SharedRevolutionarySystem _revolutionarySystem = default!; // Goobstation
+    [Dependency] private readonly SharedRevolutionarySystem _revolutionary = default!; // Goobstation
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<MindShieldImplantComponent, ImplantImplantedEvent>(OnImplantImplanted);
-        SubscribeLocalEvent<MindShieldImplantComponent, EntGotRemovedFromContainerMessage>(OnImplantDraw);
+        SubscribeLocalEvent<MindShieldImplantComponent, ImplantRemovedEvent>(OnImplantRemoved);
     }
 
     private void OnImplantImplanted(Entity<MindShieldImplantComponent> ent, ref ImplantImplantedEvent ev)
@@ -52,14 +52,12 @@ public sealed class MindShieldSystem : EntitySystem
         if (ev.Implanted == null)
             return;
 
-        EnsureComp<MindShieldComponent>(ev.Implanted.Value);
-        MindShieldRemovalCheck(ev.Implanted.Value, ev.Implant);
+        EnsureComp<MindShieldComponent>(ev.Implanted);
+        MindShieldRemovalCheck(ev.Implanted, ev.Implant);
 
         // GoobStation
-        if (!TryComp<CommandStaffComponent>(ev.Implanted, out var commandComp))
-            return;
-
-        commandComp.Enabled = true;
+        if (TryComp<CommandStaffComponent>(ev.Implanted, out var commandComp))
+            commandComp.Enabled = true;
     }
 
     /// <summary>
@@ -84,14 +82,15 @@ public sealed class MindShieldSystem : EntitySystem
             RemComp<Goobstation.Shared.Mindcontrol.MindcontrolledComponent>(implanted);
     }
 
-    private void OnImplantDraw(Entity<MindShieldImplantComponent> ent, ref EntGotRemovedFromContainerMessage args)
+    private void OnImplantRemoved(Entity<MindShieldImplantComponent> ent, ref ImplantRemovedEvent args)
     {
+        // <Goob>
         _popupSystem.PopupEntity(Loc.GetString("mindshield-implant-effect-removed"), args.Container.Owner, args.Container.Owner);
 
-        if (TryComp<HeadRevolutionaryComponent>(args.Container.Owner, out var headRevComp))
-            _revolutionarySystem.ToggleConvertAbility((args.Container.Owner, headRevComp), true);
+        if (TryComp<HeadRevolutionaryComponent>(args.Implanted, out var headRevComp))
+            _revolutionarySystem.ToggleConvertAbility((args.Implanted, headRevComp), true);
+        // </Goob>
 
-        RemComp<MindShieldComponent>(args.Container.Owner);
+        RemComp<MindShieldComponent>(args.Implanted);
     }
 }
-
