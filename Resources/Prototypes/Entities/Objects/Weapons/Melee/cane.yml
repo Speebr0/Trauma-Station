@@ -31,6 +31,7 @@
     size: Normal
     sprite: Objects/Weapons/Melee/cane.rsi
   - type: Appearance
+  - type: MobilityAid
   - type: MeleeWeapon
     animationRotation: -45 # WWDP
     wideAnimationRotation: 45
@@ -46,7 +47,6 @@
         Blunt: 3
   - type: UseDelay
     delay: 1
-  - type: MovementImpairedCorrection # Goobstation
 
 - type: entity
   name: cane blade
@@ -115,7 +115,6 @@
           tags:
           - CaneBlade
   - type: HideContrabandContent #Goobstation-Contraband detector
-  - type: MovementImpairedCorrection # Goobstation
 
 - type: entity
   id: CaneSheathFilled
