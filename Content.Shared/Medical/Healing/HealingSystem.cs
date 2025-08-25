@@ -532,7 +532,7 @@ public sealed class HealingSystem : EntitySystem
 
         var delay = isNotSelf || healing.Comp.SelfHealPenaltyMultiplier == 0f // Trauma - fix healing toolbox taking 1000 years to use
             ? healing.Comp.Delay
-            : healing.Comp.Delay * GetScaledHealingPenalty(target.Owner, healing.Comp.SelfHealPenaltyMultiplier);
+            : healing.Comp.Delay * GetScaledHealingPenalty(target, healing.Comp.SelfHealPenaltyMultiplier);
 
         // Play sound when starting the healing action
         // Goobstation
@@ -567,7 +567,7 @@ public sealed class HealingSystem : EntitySystem
             return 1;
 
         var percentDamage = (float)(ent.Comp1.TotalDamage / amount);
-        if (TryComp<ConsciousnessComponent>(ent.Owner, out var consciousness))
+        if (TryComp<ConsciousnessComponent>(ent.Owner, out var consciousness)) // Shitmed
             percentDamage *= (float) (consciousness.Threshold / consciousness.Cap - consciousness.Consciousness);
 
         //basically make it scale from 1 to the multiplier.
