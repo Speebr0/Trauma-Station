@@ -172,7 +172,7 @@
   equipment:
     id: QuartermasterPDA
     ears: ClothingHeadsetAltCargo # Goobstation
-    belt: BoxFolderClipboard
+    belt: BoxFolderClipboardThreePapers
     pocket1: AppraisalTool
   storage:
     back:
