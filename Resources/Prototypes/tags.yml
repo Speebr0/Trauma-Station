@@ -1173,6 +1173,9 @@
   id: Medkit
 
 - type: Tag
+  id: MessyDrinkerImmune
+
+- type: Tag
   id: Metal
 
 - type: Tag
