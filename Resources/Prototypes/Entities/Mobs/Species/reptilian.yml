@@ -140,6 +140,8 @@
     - Snout
 #    - HeadTop # WWDP - Because visible horns its cool
     - HeadSide
+    - Tail
+    undergarmentBottom: UndergarmentBottomBoxersReptilian
   - type: Hunger
   - type: Puller
     needsHands: false
