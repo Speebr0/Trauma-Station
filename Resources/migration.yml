@@ -1068,6 +1068,9 @@ FoodDonutJellySlugcat: FoodDonutJellyScurret
 ClothingUniformJumpsuitChiefEngineerNT: ClothingUniformJumpsuitChiefEngineer
 ClothingUniformJumpsuitParamedicNT: ClothingUniformJumpsuitParamedic
 
+# 2025-08-29
+PrefilledSyringe: Syringe
+
 # Trauma - 2025-10-19
 LockerBlueshieldOfficerFilled: null
 DresserBlueshieldOfficerFilled: null
