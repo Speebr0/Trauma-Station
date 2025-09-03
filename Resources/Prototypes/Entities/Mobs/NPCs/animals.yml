@@ -723,8 +723,6 @@
   - type: LanguageKnowledge # Einstein Engines - Languages
     speaks: [Hissing]
     understands: [Hissing]
-  - type: SentienceTarget
-    flavorKind: station-event-random-sentience-flavor-organic
   - type: MeleeWeapon
     soundHit:
       path: /Audio/Effects/bite.ogg
@@ -3360,17 +3358,8 @@
     - Dog
     understands:
     - Dog
-  - type: InteractionPopup
-    interactSuccessString: petting-success-dog
-    interactFailureString: petting-failure-generic
-    interactSuccessSpawn: EffectHearts
-    interactSuccessSound:
-      path: /Audio/Animals/small_dog_bark_happy.ogg
-  - type: Grammar
-    attributes:
-      gender: epicene
-  - type: SentienceTarget
-    flavorKind: station-event-random-sentience-flavor-corgi
+  #- type: ReplacementAccent # Trauma - uses languages instead
+  #  accent: dog
   - type: Tag
     tags:
     - VimPilot
