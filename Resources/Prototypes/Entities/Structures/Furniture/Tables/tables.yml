@@ -117,7 +117,7 @@
         mask:
         - TableMask
         layer:
-        - TableLayer
+        - CounterLayer
         - BulletImpassable #Goobstation
   - type: Damageable
     damageContainer: StructuralInorganic
@@ -247,7 +247,7 @@
 
 - type: entity
   id: TableReinforced
-  parent: TableBase
+  parent: CounterBase
   name: reinforced table
   description: A square piece of metal standing on four metal legs. Extra robust.
   components:
@@ -525,7 +525,7 @@
 
 - type: entity
   id: TableBrass
-  parent: TableBase
+  parent: CounterBase
   name: brass table
   description: A shiny, corrosion resistant brass table. Steampunk!
   components:
@@ -677,7 +677,7 @@
 
 - type: entity
   id: TableStone
-  parent: TableBase
+  parent: CounterBase
   name: stone table
   description: Literally the sturdiest thing you have ever seen.
   components:
@@ -739,6 +739,35 @@
       collection: FootstepCarpet
   - type: CosmicCorruptible # DeltaV - Cosmic Cult
     convertTo: CosmicTable
+
+- type: entity
+  abstract: true # Trauma - xeno station content wasn't cherry picked
+  parent: CounterBase
+  id: TableXeno
+  name: xeno table
+  description: I wouldn't put the silverware on it.
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/Tables/xeno.rsi
+  - type: Icon
+    sprite: Structures/Furniture/Tables/xeno.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: gib
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepFloor
+  - type: Construction
+    graph: Table
+    node: TableXeno
 
 # Fancy tables
 
