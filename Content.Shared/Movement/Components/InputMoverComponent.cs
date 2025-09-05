@@ -88,10 +88,14 @@ namespace Content.Shared.Movement.Components
 
         public const float LerpTime = 1.0f;
 
-        public bool Sprinting => DefaultSprinting
-        ? (HeldMoveButtons & MoveButtons.Walk) != 0x0
-        : (HeldMoveButtons & MoveButtons.Walk) == 0x0;
-        
+        /// <summary>
+        /// Goob - Changed it to check <see cref="DefaultSprinting"/>.
+        /// </summary>
+        public bool Sprinting => ((HeldMoveButtons & MoveButtons.Walk) != 0x0) != DefaultSprinting;
+
+        /// <summary>
+        /// Goob - Default sprinting or walking, based on client settings
+        /// </summary>
         public bool DefaultSprinting = true;
 
         [ViewVariables(VVAccess.ReadWrite)]
@@ -106,6 +110,7 @@ namespace Content.Shared.Movement.Components
         public Angle TargetRelativeRotation;
         public Angle RelativeRotation;
         public TimeSpan LerpTarget;
-        public bool CanMove, DefaultSprinting;
+        public bool CanMove;
+        public bool DefaultSprinting; // Goob
     }
 }

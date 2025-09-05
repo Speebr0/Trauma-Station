@@ -535,7 +535,7 @@ public sealed class RespiratorSystem : EntitySystem
         var organs = _bodySystem.GetBodyOrganEntityComps<LungComponent>((ent, null));
         foreach (var entity in organs)
         {
-            _alertsSystem.ShowAlert(ent, entity.Comp1.Alert);
+            _alertsSystem.ShowAlert(ent.Owner, entity.Comp1.Alert);
         }
     }
 
@@ -545,7 +545,7 @@ public sealed class RespiratorSystem : EntitySystem
         var organs = _bodySystem.GetBodyOrganEntityComps<LungComponent>((ent, null));
         foreach (var entity in organs)
         {
-            _alertsSystem.ClearAlert(ent, entity.Comp1.Alert);
+            _alertsSystem.ClearAlert(ent.Owner, entity.Comp1.Alert);
         }
 
         if (!TryComp<RespiratorComponent>(ent.Owner, out var respirator))

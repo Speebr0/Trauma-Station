@@ -1,4 +1,4 @@
-﻿using Content.Shared.Alert;
+using Content.Shared.Alert;
 using Content.Shared.Movement.Components;
 using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
@@ -25,7 +25,7 @@ public sealed class WormSystem : EntitySystem
     private void OnMapInit(Entity<WormComponent> ent, ref MapInitEvent args)
     {
         EnsureComp<KnockedDownComponent>(ent, out var knocked);
-        _alerts.ShowAlert(ent, SharedStunSystem.KnockdownAlert);
+        _alerts.ShowAlert(ent.Owner, SharedStunSystem.KnockdownAlert);
         _stun.SetAutoStand((ent, knocked));
     }
 

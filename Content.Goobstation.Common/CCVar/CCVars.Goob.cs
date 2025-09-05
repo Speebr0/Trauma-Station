@@ -142,6 +142,12 @@ public sealed partial class GoobCVars
         CVarDef.Create("control.toggle_sprint", true, CVar.CLIENTONLY | CVar.ARCHIVE);
 
     /// <summary>
+    /// Whether the player mob is walking by default instead of running.
+    /// </summary>
+    public static readonly CVarDef<bool> DefaultWalk =
+        CVarDef.Create("control.default_walk", false, CVar.CLIENT | CVar.REPLICATED | CVar.ARCHIVE);
+
+    /// <summary>
     ///     Enable Dorm Notifier
     /// </summary>
     public static readonly CVarDef<bool> DormNotifier =

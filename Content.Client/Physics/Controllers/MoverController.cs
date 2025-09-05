@@ -26,6 +26,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.CCVar; // Goob
 using Content.Shared.Alert;
 using Content.Shared.CCVar;
 using Content.Shared.Friction;
@@ -48,6 +49,9 @@ public sealed class MoverController : SharedMoverController
     [Dependency] private readonly AlertsSystem _alerts = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
 
+    private bool _toggleWalk; // Goob
+    private bool _defaultWalk; // Goob
+
     public override void Initialize()
     {
         base.Initialize();
@@ -60,7 +64,12 @@ public sealed class MoverController : SharedMoverController
         SubscribeLocalEvent<MovementRelayTargetComponent, UpdateIsPredictedEvent>(OnUpdateRelayTargetPredicted);
         SubscribeLocalEvent<PullableComponent, UpdateIsPredictedEvent>(OnUpdatePullablePredicted);
 
-        Subs.CVar(_cfg, CCVars.DefaultWalk, _ => RaiseNetworkEvent(new UpdateInputCVarsMessage()));
+        // <Goob>
+        Subs.CVar(_cfg, CCVars.ToggleWalk, x => _toggleWalk = x, true);
+        // update it when it changes, don't raise the event on start
+        Subs.CVar(_cfg, GoobCCVars.DefaultWalk, x => { _defaultWalk = x; RaiseNetworkEvent(new UpdateInputCVarsMessage()) });
+        _defaultWalk = _cfg.GetCVar(GoobCCVars.DefaultWalk);
+        // </Goob>
     }
 
     private void OnUpdatePredicted(Entity<InputMoverComponent> entity, ref UpdateIsPredictedEvent args)
@@ -150,9 +159,12 @@ public sealed class MoverController : SharedMoverController
         // Logger.Info($"[{_gameTiming.CurTick}/{subTick}] Sprint: {enabled}");
         base.SetSprinting(entity, subTick, walking);
 
-        if (_cfg.GetCVar(CCVars.ToggleWalk) && (walking && !_cfg.GetCVar(CCVars.DefaultWalk) || !walking && _cfg.GetCVar(CCVars.DefaultWalk)))
-            _alerts.ShowAlert(entity, WalkingAlert, showCooldown: false, autoRemove: false);
+        // <Goob>
+        // store cvars on the system and check against defaultWalk
+        if (_toggleWalk && (walking != _defaultWalk))
+            _alerts.ShowAlert(entity.Owner, WalkingAlert, showCooldown: false, autoRemove: false);
         else
-            _alerts.ClearAlert(entity, WalkingAlert);
+            _alerts.ClearAlert(entity.Owner, WalkingAlert);
+        // </Goob>
     }
 }
