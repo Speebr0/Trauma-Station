@@ -125,8 +125,8 @@
     - Human
     - Moth
     - Reptilian
-    # Goobstation - Custom Races
     - Vulpkanin
+    # <Goob> - Custom Races
     - Felinid
     - Harpy
     - Gingerbread
@@ -135,18 +135,9 @@
     - Oni
     - Resomi
     - Tajaran
-    - Chitinid # DeltaV
+    - Chitinid
     - Shadowkin
-
-# Goobstation start
-- type: loadoutEffectGroup
-  id: HarnessWearers
-  effects:
-  - !type:SpeciesLoadoutEffect
-    species:
-    - Vox
-    - Plasmaman
-# Goobstation end
+    # </Goob>
 
 - type: loadoutEffectGroup
   id: EffectSpeciesVox
@@ -204,8 +195,8 @@
     - Dwarf
     - Human
     - Reptilian
-    # Goobstation - Custom Races
     - Vulpkanin
+    # </Goob> - Custom Races
     - Felinid
     - Harpy
     - Gingerbread
@@ -215,6 +206,7 @@
     - Resomi
     - Tajaran
     - Shadowkin
+    # <Goob>
 
 - type: loadoutEffectGroup
   id: OxygenBreatherMimeMoth
