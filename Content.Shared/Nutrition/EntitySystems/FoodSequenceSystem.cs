@@ -23,17 +23,18 @@ namespace Content.Shared.Nutrition.EntitySystems;
 
 public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
 {
-    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
-    [Dependency] private readonly MetaDataSystem _metaData = default!;
-    [Dependency] private readonly MobStateSystem _mobState = default!;
-    [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly SharedItemSystem _item = default!; // Goobstation - anythingburgers
     [Dependency] private readonly IPrototypeManager _proto = default!;
+    [Dependency] private readonly MetaDataSystem _metaData = default!;
+    [Dependency] private readonly MobStateSystem _mobState = default!;
+    [Dependency] private readonly IngestionSystem _ingestion = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly TagSystem _tag = default!;
 
     public override void Initialize()
     {
@@ -129,24 +130,31 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
         // <Goob> don't care if the burger accepts anything
         if (!start.Comp.AcceptAll)
         {
-            if (!TryComp<FoodComponent>(element, out var elementFood))
+            if (!Resolve(element, ref element.Comp2))
                 return false;
-            if (elementFood.RequireDead && _mobState.IsAlive(element))
+            if (element.Comp2.RequireDead && _mobState.IsAlive(element))
                 return false;
         }
         // </Goob>
 
         //looking for a suitable FoodSequence prototype
-        ProtoId<FoodSequenceElementPrototype> elementProto = string.Empty;
-        foreach (var pair in element.Comp.Entries)
+        // <Trauma>
+        // fall back to any entry if the desired one isn't present, for AcceptAll burgers
+        if (!element.Comp1.Entries.TryGetValue(start.Comp.Key, out var elementProto) && start.Comp.AcceptAll)
         {
-            if (pair.Key == start.Comp.Key || start.Comp.AcceptAll) // Goob - add AcceptAll check
+            foreach (var pair in element.Comp1.Entries)
             {
-                elementProto = pair.Value;
+                if (pair.Key == start.Comp.Key)
+                {
+                    elementProto = pair.Value;
+                    break;
+                }
             }
         }
-        if (!_proto.Resolve(elementProto, out var elementIndexed))
+        // use _proto.Resolve here too since not using empty string anymore
+        if (elementProto is not {} id || !_proto.Resolve(id, out var elementIndexed))
             return false;
+        // </Trauma>
 
         //if we run out of space, we can still put in one last, final finishing element.
         if (start.Comp.FoodLayers.Count >= start.Comp.MaxLayers && !elementIndexed.Final || start.Comp.Finished)
@@ -174,15 +182,15 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
 
         UpdateFoodName(start);
         UpdateFoodSize(start); // Goobstation - anythingburgers
-        MergeFoodSolutions(start, element);
+        MergeFoodSolutions(start.Owner, element.Owner);
         MergeFlavorProfiles(start, element);
-        MergeTrash(start, element);
+        MergeTrash(start.Owner, element.Owner);
         MergeTags(start, element);
 
         var ev = new FoodSequenceIngredientAddedEvent(start, element, elementProto, user);
         RaiseLocalEvent(start, ev);
 
-        PredictedQueueDel(element);
+        PredictedQueueDel(element.Owner);
         return true;
     }
 
@@ -227,26 +235,27 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
         _metaData.SetEntityName(start, newName);
     }
 
-    private void MergeFoodSolutions(EntityUid start, EntityUid element)
+    private void MergeFoodSolutions(Entity<EdibleComponent?> start, Entity<EdibleComponent?> element)
     {
-        if (!TryComp<FoodComponent>(start, out var startFood))
+        if (!Resolve(start, ref start.Comp, false))
             return;
 
         if (!_solutionContainer.TryGetSolution(start, startFood.Solution, out var startSolutionEntity, out var startSolution))
             return;
 
         // <Goob> - anythingburgers
-        // We don't give a FUCK if the solution container is food or not, and i dont see why you would.
-        if (TryComp<SolutionContainerManagerComponent>(element, out var elementSolutionContainer))
-        {
-            foreach (var name in elementSolutionContainer.Containers)
-            {
-                if (!_solutionContainer.TryGetSolution(element.Owner, name, out _, out var elementSolution))
-                    continue;
+        // check for any solution not being specifically edible
+        if (!TryComp<SolutionContainerManagerComponent>(element, out var elementSolutionContainer))
+            return;
 
-                startSolution.MaxVolume += elementSolution.MaxVolume;
-                _solutionContainer.TryAddSolution(startSolutionEntity.Value, elementSolution);
-            }
+        // We don't give a FUCK if the solution container is food or not, and i dont see why you would.
+        foreach (var name in elementSolutionContainer.Containers)
+        {
+            if (!_solutionContainer.TryGetSolution(element.Owner, name, out _, out var elementSolution))
+                continue;
+
+            startSolution.MaxVolume += elementSolution.MaxVolume;
+            _solutionContainer.TryAddSolution(startSolutionEntity.Value, elementSolution);
         }
         // </Goob>
     }
@@ -266,18 +275,15 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
         }
     }
 
-    private void MergeTrash(EntityUid start, EntityUid element)
+    private void MergeTrash(Entity<EdibleComponent?> start, Entity<EdibleComponent?> element)
     {
-        if (!TryComp<FoodComponent>(start, out var startFood))
+        if (!Resolve(start, ref start.Comp, false))
             return;
 
-        if (!TryComp<FoodComponent>(element, out var elementFood))
+        if (!Resolve(element, ref element.Comp, false))
             return;
 
-        foreach (var trash in elementFood.Trash)
-        {
-            startFood.Trash.Add(trash);
-        }
+        _ingestion.AddTrash((start, start.Comp), element.Comp.Trash);
     }
 
     private void MergeTags(EntityUid start, EntityUid element)
