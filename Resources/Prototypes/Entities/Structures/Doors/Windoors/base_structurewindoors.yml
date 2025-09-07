@@ -63,7 +63,7 @@
 #Normal windoors
 - type: entity
   id: BaseWindoor
-  parent: [BaseStructure, BaseDeltaPressureGlassQuarter]
+  parent: [BaseDeltaPressureGlassQuarter, BaseStructure]
   abstract: true
   placement:
     mode: SnapgridCenter
@@ -239,7 +239,7 @@
 
 - type: entity
   id: BaseSecureWindoor
-  parent: [BaseWindoor, BaseDeltaPressureReinforcedGlassQuarter]
+  parent: [BaseDeltaPressureReinforcedGlassQuarter, BaseWindoor]
   abstract: true
   components:
   - type: Sprite
@@ -313,7 +313,7 @@
 #Plasma Windoors
 - type: entity
   id: BasePlasmaWindoor
-  parent: [BaseWindoor, BaseDeltaPressurePlasmaQuarter]
+  parent: [BaseDeltaPressurePlasmaQuarter, BaseWindoor]
   abstract: true
   components:
   - type: Sprite
@@ -379,7 +379,7 @@
 
 - type: entity
   id: BaseSecurePlasmaWindoor
-  parent: [BaseSecureWindoor, BaseDeltaPressureReinforcedPlasmaQuarter]
+  parent: [BaseDeltaPressureReinforcedPlasmaQuarter, BaseSecureWindoor]
   abstract: true
   components:
   - type: Sprite
@@ -453,7 +453,7 @@
 #Uranium Windoors
 - type: entity
   id: BaseUraniumWindoor
-  parent: [BaseWindoor, BaseDeltaPressurePlasmaQuarter]
+  parent: [BaseDeltaPressurePlasmaQuarter, BaseWindoor]
   abstract: true
   components:
   - type: Sprite
@@ -521,7 +521,7 @@
 
 - type: entity
   id: BaseSecureUraniumWindoor
-  parent: [BaseSecureWindoor, BaseDeltaPressureReinforcedPlasmaQuarter]
+  parent: [BaseDeltaPressureReinforcedPlasmaQuarter, BaseSecureWindoor]
   abstract: true
   components:
   - type: Sprite
