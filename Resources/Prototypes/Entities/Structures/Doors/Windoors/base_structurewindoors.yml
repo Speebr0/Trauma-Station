@@ -63,7 +63,7 @@
 #Normal windoors
 - type: entity
   id: BaseWindoor
-  parent: BaseStructure
+  parent: [BaseStructure, BaseDeltaPressureGlassQuarter]
   abstract: true
   placement:
     mode: SnapgridCenter
@@ -225,10 +225,6 @@
     noAirWhenFullyAirBlocked: false
     airBlockedDirection:
       - South
-  - type: DeltaPressure
-    minPressure: 250
-    minPressureDelta: 187.5
-    scalingType: Threshold
   - type: Construction
     graph: Windoor
     node: windoor
@@ -243,7 +239,7 @@
 
 - type: entity
   id: BaseSecureWindoor
-  parent: BaseWindoor
+  parent: [BaseWindoor, BaseDeltaPressureReinforcedGlassQuarter]
   abstract: true
   components:
   - type: Sprite
@@ -304,10 +300,6 @@
   - type: Construction
     graph: Windoor
     node: windoorSecure
-  - type: DeltaPressure
-    minPressure: 3750
-    minPressureDelta: 2500
-    scalingType: Threshold
   - type: StaticPrice
     price: 350
   - type: Tag
@@ -321,7 +313,7 @@
 #Plasma Windoors
 - type: entity
   id: BasePlasmaWindoor
-  parent: BaseWindoor
+  parent: [BaseWindoor, BaseDeltaPressurePlasmaQuarter]
   abstract: true
   components:
   - type: Sprite
@@ -379,10 +371,6 @@
   - type: Construction
     graph: Windoor
     node: pwindoor
-  - type: DeltaPressure
-    minPressure: 18750
-    minPressureDelta: 12500
-    scalingType: Threshold
   - type: StaticPrice
     price: 500
   - type: Penetratable # Goobstation - Better snipers
@@ -391,7 +379,7 @@
 
 - type: entity
   id: BaseSecurePlasmaWindoor
-  parent: BaseSecureWindoor
+  parent: [BaseSecureWindoor, BaseDeltaPressureReinforcedPlasmaQuarter]
   abstract: true
   components:
   - type: Sprite
@@ -450,10 +438,6 @@
   - type: Construction
     graph: Windoor
     node: pwindoorSecure
-  - type: DeltaPressure
-    minPressure: 37500
-    minPressureDelta: 25000
-    scalingType: Threshold
   - type: StaticPrice
     price: 500
   - type: RadiationBlocker
@@ -469,7 +453,7 @@
 #Uranium Windoors
 - type: entity
   id: BaseUraniumWindoor
-  parent: BaseWindoor
+  parent: [BaseWindoor, BaseDeltaPressurePlasmaQuarter]
   abstract: true
   components:
   - type: Sprite
@@ -524,10 +508,6 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: DeltaPressure
-    minPressure: 18750
-    minPressureDelta: 12500
-    scalingType: Threshold
   - type: Construction
     graph: Windoor
     node: uwindoor
@@ -541,7 +521,7 @@
 
 - type: entity
   id: BaseSecureUraniumWindoor
-  parent: BaseSecureWindoor
+  parent: [BaseSecureWindoor, BaseDeltaPressureReinforcedPlasmaQuarter]
   abstract: true
   components:
   - type: Sprite
@@ -597,10 +577,6 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: DeltaPressure
-    minPressure: 37500
-    minPressureDelta: 25000
-    scalingType: Threshold
   - type: Construction
     graph: Windoor
     node: uwindoorSecure
