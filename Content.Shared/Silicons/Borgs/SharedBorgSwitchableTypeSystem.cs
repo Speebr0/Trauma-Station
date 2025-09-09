@@ -114,9 +114,7 @@ public abstract class SharedBorgSwitchableTypeSystem : EntitySystem
 
     protected void UpdateEntityAppearance(Entity<BorgSwitchableTypeComponent> entity)
     {
-        if (!Prototypes.TryIndex(entity.Comp.SelectedBorgType, out var proto) ||
-            !TryComp(entity, out BorgSwitchableSubtypeComponent? subtype) ||
-            !Prototypes.TryIndex(subtype.BorgSubtype, out var subtypeProto))
+        if (!Prototypes.Resolve(entity.Comp.SelectedBorgType, out var proto))
             return;
 
         UpdateEntityAppearance(entity, proto, subtypeProto);

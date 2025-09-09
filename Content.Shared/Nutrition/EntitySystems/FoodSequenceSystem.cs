@@ -64,7 +64,7 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
         if (!TryComp<FoodSequenceStartPointComponent>(args.Start, out var start))
             return;
 
-        if (!_proto.TryIndex(args.Proto, out var elementProto))
+        if (!_proto.Resolve(args.Proto, out var elementProto))
             return;
 
         if (!ent.Comp.OnlyFinal || elementProto.Final || start.FoodLayers.Count == start.MaxLayers)
@@ -151,7 +151,7 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
                 }
             }
         }
-        // use _proto.Resolve here too since not using empty string anymore
+
         if (elementProto is not {} id || !_proto.Resolve(id, out var elementIndexed))
             return false;
         // </Trauma>
@@ -214,7 +214,7 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
         var nameCounter = 1;
         foreach (var proto in existedContentNames)
         {
-            if (!_proto.TryIndex(proto, out var protoIndexed))
+            if (!_proto.Resolve(proto, out var protoIndexed))
                 continue;
 
             if (protoIndexed.Name is null)

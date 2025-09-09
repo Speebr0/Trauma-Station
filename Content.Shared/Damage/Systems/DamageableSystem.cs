@@ -193,7 +193,8 @@ namespace Content.Shared.Damage
         private void DamageableInit(EntityUid uid, DamageableComponent component, ComponentInit _)
         {
             if (component.DamageContainerID != null &&
-                _prototypeManager.TryIndex(component.DamageContainerID, out var damageContainerPrototype)) // Shitmed Change
+                _prototypeManager.Resolve<DamageContainerPrototype>(component.DamageContainerID,
+                out var damageContainerPrototype))
             {
                 // Initialize damage dictionary, using the types and groups from the damage
                 // container prototype
@@ -476,7 +477,7 @@ namespace Content.Shared.Damage
             if (!ignoreResistances)
             {
                 if (damageable.DamageModifierSetId != null &&
-                    _prototypeManager.TryIndex(damageable.DamageModifierSetId, out var modifierSet))
+                    _prototypeManager.Resolve<DamageModifierSetPrototype>(damageable.DamageModifierSetId, out var modifierSet))
                 {
                     damage = DamageSpecifier.ApplyModifierSet(damage,
                         DamageSpecifier.PenetrateArmor(modifierSet, damage.ArmorPenetration)); // Goob edit
