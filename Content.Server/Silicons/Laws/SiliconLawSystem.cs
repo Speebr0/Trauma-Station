@@ -108,8 +108,6 @@ using Content.Goobstation.Common.Silicons.Components;
 using Content.Goobstation.Maths.FixedPoint; // Goob edit
 using Content.Server.Administration;
 using Content.Server.Chat.Managers;
-using Content.Server.Radio.Components;
-using Content.Server.Radio.EntitySystems; // Goob edit
 using Content.Server.Research.Systems; // Goob edit
 using Content.Server.Station.Systems;
 using Content.Shared._CorvaxNext.Silicons.Borgs.Components; // Corvax-Next-AiRemoteControl
@@ -122,6 +120,8 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Random; // Goob edit
 using Content.Shared.Random.Helpers; // Goob edit
 using Content.Shared.Research.Components; // Goob edit
+using Content.Shared.Radio.Components;
+using Content.Shared.Radio.EntitySystems; // Goob edit
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
 using Content.Shared.Silicons.Laws;
