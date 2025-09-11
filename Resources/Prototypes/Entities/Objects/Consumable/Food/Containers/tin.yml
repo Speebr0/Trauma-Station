@@ -183,7 +183,7 @@
     flavors:
     - sweet
     - funny
-  - type: Food
+  - type: Edible
     trash:
     - FoodTinPeachesTrash
   - type: Tag
@@ -208,7 +208,7 @@
   components:
   - type: Sprite
     sprite: Objects/Consumable/Food/Tins/maint_peaches.rsi
-  - type: Food
+  - type: Edible
     trash:
     - FoodTinPeachesMaintTrash
 
@@ -250,7 +250,7 @@
     - savory
     - salty
     - cheap
-  - type: Food
+  - type: Edible
     trash:
     - FoodTinBeansTrash
 
@@ -286,7 +286,7 @@
     - meaty
     - salty
     - cheap
-  - type: Food
+  - type: Edible
     trash:
     - FoodTinMRETrash
   - type: Tag

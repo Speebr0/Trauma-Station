@@ -102,7 +102,6 @@
   name: bun
   description: A hamburger bun. Round and convenient to hold.
   components:
-  - type: Food
   - type: Sprite
     sprite: Objects/Consumable/Food/burger.rsi
     layers:
@@ -131,7 +130,6 @@
   - type: Item
     shape: # Goob - replace size normal
     - 0,0,1,0
-  - type: Food
   - type: Sprite
     drawdepth: Mobs
     noRot: true
@@ -165,7 +163,6 @@
   name: top bun
   description: The perfect finish for your burger tower.
   components:
-  - type: Food
   - type: Sprite
     sprite: Objects/Consumable/Food/burger_sequence.rsi
     layers:
@@ -205,6 +202,8 @@
           Quantity: 3
   - type: Item
     sprite: Objects/Consumable/Food/burger.rsi
+    shape:
+    - 0,0,1,0
 
 # Custom Burger Example
 
@@ -366,6 +365,8 @@
   name: bearger
   description: Best served rawr.
   components:
+  - type: Item
+    storedOffset: 0,1
   - type: FlavorProfile
     flavors:
       - bun
@@ -399,6 +400,11 @@
   name: big bite burger
   description: Forget the Big Mac. THIS is the future!
   components:
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,1,1
+    storedOffset: 0,3
   - type: FlavorProfile
     flavors: # What bun?
       - meaty
@@ -432,6 +438,8 @@
   name: brain burger
   description: A strange looking burger. It looks almost sentient.
   components:
+  - type: Item
+    storedOffset: 0,1
   - type: FlavorProfile
     flavors:
       - bun
@@ -466,6 +474,8 @@
   name: cat burger
   description: Finally those cats and catpeople are worth something!
   components:
+  - type: Item
+    storedOffset: -1,1
   - type: Sprite
     state: cat
   - type: FlavorProfile
@@ -589,6 +599,8 @@
   name: clown burger
   description: This tastes funny...
   components:
+  - type: Item
+    storedOffset: 0,1
   - type: FlavorProfile
     flavors:
       - bun
@@ -694,6 +706,11 @@
   name: crazy hamburger # Burger for you euro-cucks
   description: This looks like the sort of food that a demented clown in a trenchcoat would make.
   components:
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,1,1
+    storedOffset: -2,0
   - type: FlavorProfile
     flavors:
       - bun
@@ -733,6 +750,8 @@
   name: duck sandwich # Burger for you sick bastards
   description: A duck sandwich, only the criminally insane would dare to eat the meat of such an adorable creature.
   components:
+  - type: Item
+    storedOffset: 0,1
   - type: FlavorProfile
     flavors:
       - bun
@@ -775,6 +794,8 @@
   name: empowered burger
   description: It's shockingly good, if you live off of electricity that is.
   components:
+  - type: Item
+    storedOffset: -2,1
   - type: Sprite
     state: empowered
   - type: FlavorProfile
@@ -804,6 +825,8 @@
   name: fillet-o-carp burger
   description: Almost like a carp is yelling somewhere...
   components:
+  - type: Item
+    storedOffset: 0,1
   - type: FlavorProfile
     flavors:
       - bun
@@ -835,6 +858,11 @@
   name: five alarm burger
   description: HOT! HOT! HOT!
   components:
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,1,1
+    storedOffset: 0,1
   - type: FlavorProfile
     flavors:
       - meaty
@@ -872,6 +900,11 @@
   name: ghost burger
   description: Too spooky!
   components:
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,1,1
+    storedOffset: 0,3
   - type: FlavorProfile
     flavors:
       - bun
@@ -948,6 +981,8 @@
   name: McGuffin
   description: A cheap and greasy imitation of an eggs Benedict.
   components:
+  - type: Item
+    storedOffset: 0,1
   - type: FlavorProfile
     flavors:
       - muffin
@@ -989,7 +1024,7 @@
   name: BBQ Rib Sandwich
   description: An elusive rib shaped burger with limited availability across the galaxy. Not as good as you remember it.
   components:
-  - type: Food
+  - type: Edible
     trash:
     - FoodKebabSkewer
   - type: FlavorProfile
@@ -1182,6 +1217,8 @@
   name: soylent burger
   description: After eating this you have the overwhelming urge to purchase overpriced figurines of superheroes.
   components:
+  - type: Item
+    storedOffset: 0,1
   - type: FlavorProfile
     flavors:
       - bun
@@ -1221,6 +1258,11 @@
   name: spell burger
   description: This is absolutely Ei Nath.
   components:
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,1,1
+    storedOffset: -1,2
   - type: FlavorProfile
     flavors:
       - bun
@@ -1252,6 +1294,11 @@
   name: super bite burger
   description: This is a mountain of a burger. FOOD!
   components:
+  - type: Item
+    size: Normal
+    shape:
+    - 0,0,1,1
+    storedOffset: 0,4
   - type: FlavorProfile
     flavors: # What bun?
       - meaty
@@ -1374,6 +1421,9 @@
   name: mothroachburger
   description: The last lamp it saw was the one inside the microwave.
   components:
+  - type: Item
+    shape:
+    - 0,0,0,1
   - type: FlavorProfile
     flavors:
       - bun
