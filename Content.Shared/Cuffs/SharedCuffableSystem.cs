@@ -594,19 +594,19 @@ namespace Content.Shared.Cuffs
                 return false;
 
             // Shitmed Change Start
-            EnsureComp<HandcuffComponent>(handcuff, out var handcuffsComp);
-            handcuffsComp.Used = true;
-            Dirty(handcuff, handcuffsComp);
-            
+            cuff.Used = true;
+            Dirty(handcuff, cuff);
+            // Success!
+            _hands.TryDrop(user, handcuff);
+            // Shitmed Change End
+
+            _container.Insert(handcuff, component.Container);
+
             var ev = new TargetHandcuffedEvent();
             RaiseLocalEvent(target, ref ev);
 
-            // Success!
-            _hands.TryDrop(user, handcuff);
-            var result = _container.Insert(handcuff, component.Container);
-            // Shitmed Change End
-
             UpdateHeldItems(target, handcuff, component);
+
             return true;
         }
 
