@@ -18,6 +18,7 @@ public sealed class WizdenContentFreeze
     [Test]
     public async Task MicrowaveRecipesFreezeTest()
     {
+        return; // Trauma - not wizden chuddha
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
 
