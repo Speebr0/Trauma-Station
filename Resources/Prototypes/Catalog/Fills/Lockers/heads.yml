@@ -462,7 +462,8 @@
     - id: HandTeleporter
     #- id: ProtolatheMachineCircuitboard # Goobstation - Science Techfab
     - id: ResearchComputerCircuitboard
-    - id: ComputerCargoRequestScienceFlatpack # Goobstation
+    - id: ComputerCargoRequestScienceFlatpack # Goobstation - replaces board
+    - id: StationAiFixerCircuitboard
     - id: RubberStampRd
     # - id: EncryptionKeyBinary # goobstation - readd the cool binary channel access. fuck you. # Goobstation - WYCI + malf ai major
     - id: AnomalyLocator # GoobStation - adding anomaly locator to the RD locker to reduce the amount of anoms that crit
@@ -585,4 +586,3 @@
     - id: SpaceCash1000
     - id: BeachBall
     - id: BikeHorn
-

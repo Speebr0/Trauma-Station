@@ -1594,6 +1594,9 @@
   id: StationAi
 
 - type: Tag
+  id: StationAiCoreElectronics
+
+- type: Tag
   id: StationMapElectronics
 
 - type: Tag
