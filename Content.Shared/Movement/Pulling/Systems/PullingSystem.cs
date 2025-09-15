@@ -931,7 +931,7 @@ public sealed class PullingSystem : EntitySystem
             return true;
 
         var msg = new AttemptStopPullingEvent(user);
-        RaiseLocalEvent(pullableUid, ref msg, true); // Goob edit
+        RaiseLocalEvent(pullableUid, ref msg, true);
 
         if (msg.Cancelled)
             return false;
