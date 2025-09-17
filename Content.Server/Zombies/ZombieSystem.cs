@@ -96,7 +96,7 @@ namespace Content.Server.Zombies
         [Dependency] private readonly MobStateSystem _mobState = default!;
         [Dependency] private readonly SharedPopupSystem _popup = default!;
         [Dependency] private readonly SharedRoleSystem _role = default!;
-        [Dependency] private readonly LanguageSystem _language = default!;
+        [Dependency] private readonly LanguageSystem _language = default!; // Goob
 
         public readonly ProtoId<NpcFactionPrototype> Faction = "Zombie";
 
