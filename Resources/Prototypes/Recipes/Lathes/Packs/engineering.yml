@@ -31,7 +31,7 @@
   - HandheldStationMap
   - ClothingHeadHatWelding
   - ClothingHeadHatCone
-  - WeaponHammer
+  - WeaponHammer # Goob
 
 - type: latheRecipePack
   id: AtmosStatic
@@ -71,6 +71,8 @@
   - PowerDrill
   - WelderExperimental
   - JawsOfLife
+  #- Fulton # Goob
+  #- FultonBeacon # Goob
 
 - type: latheRecipePack
   id: AtmosTools
