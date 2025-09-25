@@ -213,6 +213,31 @@
   # Goobstation R&D Console rework end
 
 - type: technology
+  id: ExplosiveTechnology
+  name: research-technology-explosive-technology
+  icon:
+    sprite: Objects/Devices/payload.rsi
+    state: payload-explosive-armed
+  discipline: Arsenal
+  tier: 1
+  cost: 10000
+  recipeUnlocks:
+  - SignallerAdvanced
+  #- SignalTrigger # Trauma - these are roundstart
+  #- VoiceTrigger
+  #- TimerTrigger
+  - FlashPayload
+  - ExplosivePayload
+  #- ChemicalPayload # Trauma - roundstart
+  - CableDetStack1
+  - EmptyDetonator
+  # <Trauma>
+  position: 3,2
+  technologyPrequesites:
+  - NonlethalAmmunition
+  # </Trauma>
+
+- type: technology
   id: SpecialMeans
   name: research-technology-special-means
   icon:
