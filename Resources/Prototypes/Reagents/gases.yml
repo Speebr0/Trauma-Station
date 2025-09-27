@@ -601,7 +601,7 @@
           max: 0.1
         effectProto: StatusEffectForcedSleeping
         time: 3
-        type: Add
+        type: Update
       - !type:HealthChange
         conditions:
         - !type:OrganType # Goobstation - Yowie
@@ -647,7 +647,6 @@
         effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 15
-        refresh: false
       - !type:Drunk
         boozePower: 15
       - !type:PopupMessage
@@ -717,7 +716,6 @@
         effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 500
-        refresh: false
       - !type:Drunk
         boozePower: 500
         conditions:

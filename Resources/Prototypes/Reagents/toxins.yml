@@ -146,7 +146,6 @@
         effectProto: StatusEffectDrowsiness
         time: 4
         type: Add
-        refresh: false
       - !type:HealthChange
         conditions:
         - !type:OrganType # Goobstation - Yowie
@@ -449,7 +448,6 @@
         effectProto: StatusEffectSeeingRainbow
         type: Add
         time: 10
-        refresh: false
   # TODO: PROPER hallucinations
 
 - type: reagent
@@ -602,7 +600,7 @@
             type: Yowie
             shouldHave: false
           - !type:OrganType # Trauma
-            type: Plant 
+            type: Plant
             shouldHave: false
         type: Local
         visualType: MediumCaution
@@ -621,7 +619,7 @@
             type: Yowie
             shouldHave: false
           - !type:OrganType # Trauma
-            type: Plant 
+            type: Plant
             shouldHave: false
       - !type:HealthChange
         conditions:
@@ -635,7 +633,7 @@
           type: Yowie
           shouldHave: false
         - !type:OrganType # Trauma
-          type: Plant 
+          type: Plant
           shouldHave: false
         damage:
           types:
@@ -658,7 +656,7 @@
           type: Plant
         reagent: Protein
         amount: 0.5
-        
+
 - type: reagent
   id: Allicin
   name: reagent-name-allicin
