@@ -530,7 +530,8 @@
     - id: RubberStampHos
     - id: SecurityTechFabCircuitboard
     #- id: WeaponDisabler # Goobstation (Disablers in belts)
-    - id: ComputerCargoRequestSecurityFlatpack # Goobstation
+    - id: ComputerCargoRequestSecurityFlatpack # Goobstation - replaces board
+    #- id: WeaponTaser # Trauma - lol no
     - id: WantedListCartridge
     - id: DrinkHosFlask
     - id: ClothingBeltSheathHeadOfSecurityFilled # Goobstation - security revamp

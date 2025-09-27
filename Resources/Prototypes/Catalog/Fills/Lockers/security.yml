@@ -106,6 +106,7 @@
     children:
     - id: FlashlightSeclite
     #- id: WeaponDisabler # Goobstation (Disablers in belts)
+    #- id: WeaponTaser # Trauma - lol no
     - id: ClothingBeltSecurityFilled
     - id: Flash
     - id: ClothingEyesGlassesSecurity
@@ -157,6 +158,7 @@
     - id: FlashlightSeclite
       prob: 0.8
     #- id: WeaponDisabler # Goobstation (Disablers in belts)
+    #- id: WeaponTaser # Trauma - lol no
     - id: ClothingUniformJumpsuitSecGrey
       prob: 0.3
     - id: ClothingHeadHelmetBasic
@@ -197,12 +199,18 @@
         tableId: FillLockerBrigmedic
 
 - type: entityTable
-  id: FillLockerBrigmedic # heavily good edited
+  id: FillLockerBrigmedic # heavily goob edited
   table: !type:AllSelector
     children:
+    # <Goob>
     - id: BoxAutoinjectorCartidges
     - id: ClothingBackpackDuffelSurgeryFilled
     - id: ClothingHandsGlovesLatex
+    #- id: WeaponTaser
+    #- id: WeaponDisabler
+    #- id: TrackingImplanter
+    #  amount: 2
+    # </Goob>
     - id: ClothingOuterHardsuitBrigmedic
     - id: OxygenTankFilled
     - id: NitrogenTankFilled
