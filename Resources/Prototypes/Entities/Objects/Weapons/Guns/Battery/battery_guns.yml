@@ -916,7 +916,6 @@
   - type: Appearance
   - type: PacifismAllowedGun
 
-
 - type: entity
   name: elite taser
   parent: [ BaseCentcommContraband, WeaponTaser ]
