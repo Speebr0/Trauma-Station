@@ -1387,10 +1387,6 @@
       Min: 1
       Max: 5
       PotencyDivisor: 20
-    Desoxyephedrine:
-      Min: 1
-      Max: 10
-      PotencyDivisor: 10
     Vitamin:
       Min: 1
       Max: 2
@@ -1425,10 +1421,6 @@
       Min: 1
       Max: 5
       PotencyDivisor: 20
-    Desoxyephedrine:
-      Min: 1
-      Max: 10
-      PotencyDivisor: 10
 
 - type: seed
   id: galaxythistle
@@ -1475,6 +1467,10 @@
       Min: 1
       Max: 25
       PotencyDivisor: 4
+    Desoxyephedrine: # meff!!
+      Min: 1
+      Max: 10
+      PotencyDivisor: 10
 
 - type: seed
   id: flyAmanita
