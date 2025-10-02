@@ -8,11 +8,13 @@
 ## Static
 
 - type: latheRecipePack
+  parents:
+  - CargoStaticTrauma # Trauma
   id: CargoStatic
   recipes:
   - AppraisalTool
   - Pickaxe
-  - ConstructionBag #putting it here for less pack spam
+  - UtilityKnife
 
 - type: latheRecipePack
   id: CargoBoardsStatic
