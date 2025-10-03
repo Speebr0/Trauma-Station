@@ -253,6 +253,9 @@
   id: GorillaFormAction
 
 - type: Tag
+  id: GrimoireGhost
+
+- type: Tag
   id: Gygax
 
 - type: Tag
@@ -317,6 +320,12 @@
 
 - type: Tag
   id: HonkmotherMaw
+
+- type: Tag
+  id: HudMedical
+
+- type: Tag
+  id: HudSecurity
 
 - type: Tag
   id: HydroponicsToolClippers
@@ -612,7 +621,7 @@
 
 - type: Tag
   id: Vial
-  
+
 - type: Tag
   id: WallLight
 
