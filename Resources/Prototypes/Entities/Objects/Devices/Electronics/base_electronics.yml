@@ -35,8 +35,6 @@
   - type: Tag
     tags:
       - DroneUsable # Goobstation
-  - type: StaticPrice
-    price: 100
   - type: PhysicalComposition #Goobstation - Recycle update
     materialComposition:
       Glass: 12
