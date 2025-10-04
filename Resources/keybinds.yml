@@ -399,9 +399,18 @@ binds:
   type: State
   key: E
   mod1: Shift
-- function: SmartEquipBack # Goobstation - Smart equip to back
-  type: State # Goobstation - Smart equip to back
-  key: F # Goobstation - Smart equip to back
+- function: SmartEquipPocket1
+  type: State
+  key: H # Trauma - was F, keep suit storage the same as goob
+  mod1: Shift
+- function: SmartEquipPocket2
+  type: State
+  key: G
+  mod1: Shift
+- function: SmartEquipSuitStorage
+  type: State
+  key: F # Trauma - was H, keep the same as goob for muscle memory
+  #mod1: Shift # Trauma - same as goob
 - function: OpenBackpack
   type: State
   key: V
