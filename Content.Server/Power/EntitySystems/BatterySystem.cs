@@ -1,40 +1,9 @@
-// SPDX-FileCopyrightText: 2021 20kdc <asdd2808@gmail.com>
-// SPDX-FileCopyrightText: 2021 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2021 Vera Aguilera Puerto <6766154+Zumorica@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2021 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 Rane <60792108+Elijahrane@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 corentt <36075110+corentt@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Vasilis <vasilis@pikachu.systems>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <@deltanedas:kde.org>
-// SPDX-FileCopyrightText: 2024 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 BramvanZijp <56019239+BramvanZijp@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Brandon Hu <103440971+Brandon-Huu@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2024 Spatison <137375981+Spatison@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <comedian_vs_clown@hotmail.com>
-// SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 yglop <95057024+yglop@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Errant <35878406+Errant-4@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-// SPDX-FileCopyrightText: 2025 Kirus59 <145689588+Kirus59@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Kyle Tyo <36606155+VerinSenpai@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using System.Diagnostics.CodeAnalysis;
-using Content.Server._White.Blocking;
-using Content.Server.Cargo.Systems;
-using Content.Server.Emp;
 using Content.Server.Power.Components;
 using Content.Shared.Emp; // Goobstation
 using Content.Shared.Examine;
+using Content.Shared.Power;
+using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.Rejuvenate;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
@@ -44,7 +13,7 @@ using Robust.Shared.Timing;
 namespace Content.Server.Power.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class BatterySystem : EntitySystem
+    public sealed class BatterySystem : SharedBatterySystem
     {
         [Dependency] private readonly SharedContainerSystem _containers = default!; // WD EDIT
         [Dependency] private readonly IGameTiming Timing = default!;
@@ -59,7 +28,6 @@ namespace Content.Server.Power.EntitySystems
             SubscribeLocalEvent<PowerNetworkBatteryComponent, RejuvenateEvent>(OnNetBatteryRejuvenate);
             SubscribeLocalEvent<BatteryComponent, RejuvenateEvent>(OnBatteryRejuvenate);
             SubscribeLocalEvent<BatteryComponent, PriceCalculationEvent>(CalculateBatteryPrice);
-            SubscribeLocalEvent<BatteryComponent, EmpPulseEvent>(OnEmpPulse);
             SubscribeLocalEvent<BatteryComponent, ChangeChargeEvent>(OnChangeCharge);
             SubscribeLocalEvent<BatteryComponent, GetChargeEvent>(OnGetCharge);
 
@@ -89,7 +57,7 @@ namespace Content.Server.Power.EntitySystems
                 if (effectiveMax == 0)
                     effectiveMax = 1;
                 var chargeFraction = batteryComponent.CurrentCharge / effectiveMax;
-                var chargePercentRounded = (int) (chargeFraction * 100);
+                var chargePercentRounded = (int)(chargeFraction * 100);
                 args.PushMarkup(
                     Loc.GetString(
                         "examinable-battery-component-examine-detail",
@@ -152,16 +120,6 @@ namespace Content.Server.Power.EntitySystems
             args.Price += component.CurrentCharge * component.PricePerJoule;
         }
 
-        private void OnEmpPulse(EntityUid uid, BatteryComponent component, ref EmpPulseEvent args)
-        {
-            args.Affected = true;
-            if (!HasComp<RechargeableBlockingComponent>(uid)) // Goobstation - rechargeable blocking system handles it
-                args.Disabled = true;
-            UseCharge(uid, args.EnergyConsumption, component);
-            // Apply a cooldown to the entity's self recharge if needed to avoid it immediately self recharging after an EMP.
-            TrySetChargeCooldown(uid);
-        }
-
         private void OnChangeCharge(Entity<BatteryComponent> entity, ref ChangeChargeEvent args)
         {
             if (args.ResidualValue == 0)
@@ -176,7 +134,7 @@ namespace Content.Server.Power.EntitySystems
             args.MaxCharge += entity.Comp.MaxCharge;
         }
 
-        public float UseCharge(EntityUid uid, float value, BatteryComponent? battery = null)
+        public override float UseCharge(EntityUid uid, float value, BatteryComponent? battery = null)
         {
             if (value <= 0 || !Resolve(uid, ref battery) || battery.CurrentCharge == 0)
                 return 0;
@@ -184,7 +142,7 @@ namespace Content.Server.Power.EntitySystems
             return ChangeCharge(uid, -value, battery);
         }
 
-        public void SetMaxCharge(EntityUid uid, float value, BatteryComponent? battery = null)
+        public override void SetMaxCharge(EntityUid uid, float value, BatteryComponent? battery = null)
         {
             if (!Resolve(uid, ref battery))
                 return;
@@ -219,7 +177,7 @@ namespace Content.Server.Power.EntitySystems
         /// <summary>
         /// Changes the current battery charge by some value
         /// </summary>
-        public float ChangeCharge(EntityUid uid, float value, BatteryComponent? battery = null)
+        public override float ChangeCharge(EntityUid uid, float value, BatteryComponent? battery = null)
         {
             if (!Resolve(uid, ref battery))
                 return 0;
@@ -235,10 +193,7 @@ namespace Content.Server.Power.EntitySystems
             return delta;
         }
 
-        /// <summary>
-        /// Checks if the entity has a self recharge and puts it on cooldown if applicable.
-        /// </summary>
-        public void TrySetChargeCooldown(EntityUid uid, float value = -1)
+        public override void TrySetChargeCooldown(EntityUid uid, float value = -1)
         {
             if (!TryComp<BatterySelfRechargerComponent>(uid, out var batteryself))
                 return;
@@ -273,7 +228,7 @@ namespace Content.Server.Power.EntitySystems
         /// <summary>
         ///     If sufficient charge is available on the battery, use it. Otherwise, don't.
         /// </summary>
-        public bool TryUseCharge(EntityUid uid, float value, BatteryComponent? battery = null)
+        public override bool TryUseCharge(EntityUid uid, float value, BatteryComponent? battery = null)
         {
             if (!Resolve(uid, ref battery, false) || value > battery.CurrentCharge)
                 return false;
