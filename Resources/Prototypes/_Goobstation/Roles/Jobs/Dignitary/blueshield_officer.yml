@@ -36,13 +36,13 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Command
-      time: 90000 # 25 hours
+      time: 25h
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 54000 # 15 hours
+      time: 15h
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 90000 # 25 hours
+      time: 25h
     - !type:AgeRequirement
       requiredAge: 21
     - !type:SpeciesRequirement # Trauma - prevent anyone taking it that has it enabled previously in db

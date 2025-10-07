@@ -101,11 +101,11 @@
   objective: roles-antag-nuclear-operative-objective
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 36000 # 10 hours - Goobstation
-  - !type:DepartmentTimeRequirement
+    time: 10h # Goob - was 5h
+  - !type:DepartmentTimeRequirement # Goob
     department: Security
-    time: 36000 # 10h Goobstation
-  - !type:SpeciesRequirement
+    time: 10h
+  - !type:SpeciesRequirement # Goob
     inverted: true
     species:
     - Plasmaman
@@ -119,17 +119,18 @@
   objective: roles-antag-nuclear-operative-agent-objective
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 90000 # 25 hours - Goobstation
-  - !type:DepartmentTimeRequirement
+    time: 25h # Goob - was 5h
+  - !type:DepartmentTimeRequirement # Goob
     department: Security
-    time: 36000 # 10h Goobstation
+    time: 10h
   - !type:RoleTimeRequirement
     role: JobChemist
-    time: 18000 # 5h Goobstation
-  - !type:SpeciesRequirement
+    time: 5h # Goob - was 3h
+  - !type:SpeciesRequirement # Goob
     inverted: true
     species:
     - Plasmaman
+    time: 5h
   guides: [ NuclearOperatives ]
 
 - type: antag
@@ -140,15 +141,15 @@
   objective: roles-antag-nuclear-operative-commander-objective
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 90000 # 25 hours - Goobstation
+    time: 25h # Goob - was 5h
   - !type:DepartmentTimeRequirement
     department: Security
-    time: 36000 # 10h Goobstation
-  - !type:DepartmentTimeRequirement
+    time: 10h # Goob - was 5h
+  - !type:DepartmentTimeRequirement # Goob
     department: Command
-    time: 18000 # 5h Goobstation
+    time: 5h
 # should be changed to nukie playtime when thats tracked (wyci)
-  - !type:SpeciesRequirement
+  - !type:SpeciesRequirement # Goob
     inverted: true
     species:
     - Plasmaman
