@@ -472,7 +472,7 @@
     children:
     - !type:NestedSelector # Trauma
       tableId: LockerFillHeadOfSecurityTrauma
-    #- id: WeaponEnergyShotgun # Goobstation - security revamp
+    - id: WeaponEnergyMagnum
     - id: BookSpaceLaw
     - id: BoxEncryptionKeySecurity
     - id: CigarGoldCase

@@ -335,7 +335,7 @@
 
 - type: entity
   parent: BaseTraitorStealObjective
-  id: EnergyShotgunStealObjective
+  id: EnergyMagnumStealObjective
   components:
   - type: Objective
     # Warden will have this on them a lot of the time so..
@@ -343,8 +343,8 @@
   - type: NotJobRequirement
     job: Warden # Goob edit
   - type: StealCondition
-    stealGroup: WeaponEnergyShotgun
-    owner: job-name-warden # Goob edit
+    stealGroup: WeaponEnergyMagnum
+    owner: job-name-hos
 
 ## ce
 
