@@ -1,6 +1,5 @@
 using Content.Server.Administration.Logs;
 using Content.Server.DeviceNetwork.Systems;
-using Content.Shared.ActionBlocker;
 using Content.Shared.Chat; // Einstein Engines - Languages
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
@@ -18,7 +17,6 @@ namespace Content.Server.SurveillanceCamera;
 public sealed class SurveillanceCameraSystem : SharedSurveillanceCameraSystem
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
     [Dependency] private readonly ViewSubscriberSystem _viewSubscriberSystem = default!;
     [Dependency] private readonly DeviceNetworkSystem _deviceNetworkSystem = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
