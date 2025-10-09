@@ -409,13 +409,7 @@
           bounds: "-0.15,-0.3,0.15,0.3"
         hard: false
         mask:
-<<<<<<< HEAD
         - Opaque # Goobstation
-=======
-        - Opaque
-        - Impassable
-        - BulletImpassable
->>>>>>> df6307fe66 (Allow more energy projectiles to hit holo creatures (#40782))
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
@@ -454,13 +448,7 @@
           bounds: "-0.15,-0.3,0.15,0.3"
         hard: false
         mask:
-<<<<<<< HEAD
         - Opaque # Goobstation
-=======
-        - Opaque
-        - Impassable
-        - BulletImpassable
->>>>>>> df6307fe66 (Allow more energy projectiles to hit holo creatures (#40782))
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
@@ -1305,13 +1293,7 @@
           bounds: "-0.15,-0.3,0.15,0.3"
         hard: false
         mask:
-<<<<<<< HEAD
         - Opaque # Goobstation
-=======
-        - Opaque
-        - Impassable
-        - BulletImpassable
->>>>>>> df6307fe66 (Allow more energy projectiles to hit holo creatures (#40782))
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
