@@ -446,6 +446,7 @@
     emagStaticPacks:
     - SecurityWeaponsStatic
     - SecurityAmmoStatic
+    - SyndicateAmmoStatic
     # Goobstation
     - SecurityAmmoStaticGoob
     - SyndicateAmmoLightStatic
@@ -775,6 +776,7 @@
     - SecurityAmmo
     - SecurityWeapons
     - SecurityDisablers
+<<<<<<< HEAD
     # Goobstation
     - SecurityWeaponsGoob
     - RestraintTechnology
@@ -790,6 +792,11 @@
     emagStaticPacks:
     - SyndicateAmmoLightStatic
     - SyndicateAmmoHeavyStatic
+=======
+  - type: EmagLatheRecipes
+    emagStaticPacks:
+    - SyndicateAmmoStatic
+>>>>>>> fda846ac85 (Move Bulldog Drum to Emag (#40790))
   - type: MaterialStorage
     whitelist:
       tags:
@@ -823,12 +830,18 @@
       runningState: icon
       staticPacks:
       - SecurityAmmoStatic
+<<<<<<< HEAD
       # Goobstation Packs
       - SecurityAmmoStaticGoob
     - type: EmagLatheRecipes # Goobstation Packs
       emagStaticPacks:
       - SyndicateAmmoLightStatic
       - SyndicateAmmoHeavyStatic
+=======
+    - type: EmagLatheRecipes
+      emagStaticPacks:
+      - SyndicateAmmoStatic
+>>>>>>> fda846ac85 (Move Bulldog Drum to Emag (#40790))
     - type: MaterialStorage
       whitelist:
         tags:
