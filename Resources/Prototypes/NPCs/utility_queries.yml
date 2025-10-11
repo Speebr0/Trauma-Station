@@ -174,7 +174,7 @@
     - !type:ComponentFilter
       components:
         - type: Gun
-      invert: true
+      retainWithComp: false # Goob
     - !type:RemoveAnchoredFilter
   considerations:
     - !type:TargetMeleeCon
