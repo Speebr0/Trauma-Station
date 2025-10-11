@@ -146,27 +146,22 @@ public abstract partial class SharedHandsSystem : EntitySystem
             && TryGetActiveItem(session.AttachedEntity.Value, out var activeItem))
         {
             // Goobstation start
-            if (_net.IsServer && HasComp<DeleteOnDropAttemptComponent>(activeItem))
+            if (_HasComp<DeleteOnDropAttemptComponent>(activeItem))
             {
-                QueueDel(activeItem);
+                PredictedQueueDel(activeItem);
                 return false;
             }
 
-            if (session is not { AttachedEntity: not null })
+            if (session?.AttachedEntity is not {} ent)
                 return false;
-
-            var ent = session.AttachedEntity.Value;
 
             if (TryGetActiveItem(ent, out var item) && TryComp<VirtualItemComponent>(item, out var virtComp))
             {
-                var userEv = new VirtualItemDropAttemptEvent(virtComp.BlockingEntity, ent, item.Value, false);
-                RaiseLocalEvent(ent, userEv);
-
-                var targEv = new VirtualItemDropAttemptEvent(virtComp.BlockingEntity, ent, item.Value, false);
-                RaiseLocalEvent(virtComp.BlockingEntity, targEv);
-
-                if (userEv.Cancelled || targEv.Cancelled)
-                    return false;
+                var virtEv = new VirtualItemDropAttemptEvent(virtComp.BlockingEntity, ent, item.Value, false);
+                RaiseLocalEvent(ent, ref virtEv);
+                if (virtEv.Cancelled) return false;
+                RaiseLocalEvent(virtComp.BlockingEntity, ref virtEv);
+                if (virtEv.Cancelled) return false;
             }
             var activeHand = GetActiveHand(session.AttachedEntity.Value);
             TryDrop(ent, activeHand!, coords); // Supress nullable, because if active hand has something, it exists.
@@ -242,7 +237,7 @@ public abstract partial class SharedHandsSystem : EntitySystem
         if (!CanDropHeld(uid, handName, checkActionBlocker))
             return false;
 
-        if (!CanPickupToHand(uid, entity.Value, handsComp.ActiveHandId, checkActionBlocker, handsComp))
+        if (!CanPickupToHand(uid, entity.Value, handsComp.ActiveHandId, checkActionBlocker: checkActionBlocker, handsComp: handsComp))
             return false;
 
         DoDrop(uid, handName, false, log: false);
