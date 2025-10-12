@@ -488,7 +488,6 @@
     - id: RubberStampHos
     - id: BoxHoSCircuitboards
     #- id: WeaponDisabler # Goobstation (Disablers in belts)
-    #- id: WeaponTaser # Trauma - lol no
     - id: WantedListCartridge
     - id: DrinkHosFlask
 
