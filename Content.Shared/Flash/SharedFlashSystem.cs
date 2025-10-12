@@ -313,9 +313,10 @@ public abstract class SharedFlashSystem : EntitySystem
 
     private void OnExamine(Entity<FlashImmunityComponent> ent, ref ExaminedEvent args)
     {
-        if (HasComp<MobStateComponent>(args.Examined)) // Goobstation - dont add exmained value to mobs whit flash protection
+        if (HasComp<MobStateComponent>(args.Examined)) // Goobstation - dont add exmained value to mobs with flash protection
             return;
 
-        args.PushMarkup(Loc.GetString("flash-protection"));
+        if (ent.Comp.ShowInExamine)
+            args.PushMarkup(Loc.GetString("flash-protection"));
     }
 }
