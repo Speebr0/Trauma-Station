@@ -942,6 +942,15 @@
 
 
 # Deception
+- type: listing
+  id: UplinkSyndicateIDCard
+  name: uplink-syndicate-id-card-name
+  description: uplink-syndicate-id-card-desc
+  productEntity: SyndicateIDCard
+  cost:
+    Telecrystal: 10 # Trauma - inflated was 1
+  categories:
+  - UplinkDeception
 
 - type: listing
   id: UplinkAgentIDCard
