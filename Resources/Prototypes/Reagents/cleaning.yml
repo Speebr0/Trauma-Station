@@ -53,9 +53,9 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goob - Yowie
+          type: [ Yowie ]
+          inverted: true
         damage:
           types:
             Poison: 2
@@ -67,9 +67,9 @@
         probability: 0.33
       - !type:Emote
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goob - Yowie
+          type: [ Yowie ]
+          inverted: true
         emote: Scream
         probability: 0.15
 
@@ -100,22 +100,24 @@
   metabolisms:
     Food:
       effects:
-      - !type:ChemVomit
+      - !type:Vomit
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:MetabolizerTypeCondition # Goob - Yowie
+          type: [ Yowie ]
+          inverted: true
+        - !type:ReagentCondition
+          reagent: SoapReagent
           min: 6
         probability: 0.20
     Drink:
       effects:
-      - !type:ChemVomit
+      - !type:Vomit
         conditions:
-        - !type:OrganType # Goobstation - Yowie
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:MetabolizerTypeCondition # Goob - Yowie
+          type: [ Yowie ]
+          inverted: true
+        - !type:ReagentCondition
+          reagent: SoapReagent
           min: 6
         probability: 0.20
 
@@ -155,7 +157,7 @@
       methods: [ Touch ]
       effects:
       # pva glue? no, antibiotic glue for sealing wounds
-      - !type:ModifyBleedAmount
+      - !type:ModifyBleed
         amount: -1.5
   metabolisms:
     Narcotic:
@@ -169,8 +171,6 @@
       - !type:GenericStatusEffect
         key: Muted
         component: Muted
-        type: Add
         time: 5
-        refresh: false
   footstepSound:
     collection: FootstepSlime

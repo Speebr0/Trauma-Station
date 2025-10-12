@@ -25,9 +25,9 @@
             Blunt: 4
       - !type:HealthChange
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         damage:
           types:
             Poison: 4
@@ -35,11 +35,13 @@
         reagent: Triclor
         amount: 0.5 # Counteracts some loss from vomiting, makes effects more linear
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Triclor
           max: 15 # Limit self-replication to prevent infinite accumulation
       - !type:AdjustReagent
         conditions: # Vomiting behaves weirdly and might leave unmetabolisable 0.1 at 40u (floating point errors?)
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Triclor
           max: 1
         reagent: Triclor
         amount: -0.5
@@ -75,23 +77,23 @@
             Poison: 0.75 # 37.5 per 5u but pretty slow
             Asphyxiation: 0.25
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
       - !type:Paralyze
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         probability: 0.05
         paralyzeTime: 2
       - !type:Emote
         emote: Gasp
         probability: 0.1
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
 
 - type: reagent
   id: Anacea
@@ -126,9 +128,9 @@
           types:
             Poison: 0.2 # this works out to 20 per 5u
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
 
 - type: reagent
   id: Pendetide
@@ -153,9 +155,9 @@
           damage:
             types:
               Radiation: 2 # kinda arbitrary, it'll trigger after some rads
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
       - !type:GenericStatusEffect
         key: Stutter
         component: StutteringAccent
@@ -175,7 +177,8 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Aluite
           min: 6
         damage:
           types:
@@ -216,7 +219,8 @@
         probability: 0.5
         paralyzeTime: 4
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Sarin
           min: 5
       - !type:PopupMessage
         type: Local
@@ -239,7 +243,8 @@
         - norepinephricacid-effect-darkness
         - norepinephricacid-effect-blindness
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Sarin
           min: 5
       - !type:Emote
         emote: Scream
@@ -248,7 +253,8 @@
         key: TemporaryBlindness
         component: TemporaryBlindness
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Sarin
           min: 2.5
   reactiveEffects:
     Acidic:
@@ -280,9 +286,9 @@
       effects:
       - !type:TakeStaminaDamage
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         amount: 13 # 13 parity
         immediate: false
 
@@ -300,11 +306,12 @@
       effects:
       - !type:ChemVomit
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: NevcottaPowder
           min: 10
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         probability: 0.15
       - !type:HealthChange
         damage:
@@ -312,9 +319,9 @@
             Poison: 2
             Asphyxiation: 0.25
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
       - !type:GenericStatusEffect
         key: SeeingRainbows
         component: SeeingRainbows
@@ -323,8 +330,8 @@
         refresh: false
       - !type:Paralyze
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         probability: 0.05
         paralyzeTime: 2

@@ -130,7 +130,8 @@
             Radiation: -0.05
             Asphyxiation: 1
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: BeesKnees
           min: 35
       - !type:ModifyBloodLevel
         amount: 0.2

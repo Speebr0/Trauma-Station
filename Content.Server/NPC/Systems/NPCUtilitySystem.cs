@@ -1,3 +1,9 @@
+// <Trauma>
+using Content.Server._Goobstation.Wizard.NPC;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Wieldable;
+using Content.Shared.Wieldable.Components;
+// </Trauma>
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Hands.Systems;
 using Content.Server.NPC.Queries;
@@ -5,14 +11,12 @@ using Content.Server.NPC.Queries.Considerations;
 using Content.Server.NPC.Queries.Curves;
 using Content.Server.NPC.Queries.Queries;
 using Content.Server.Nutrition.Components;
-using Content.Server.Temperature.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Fluids.Components;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components; // Goobstation
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Nutrition.Components;
@@ -31,9 +35,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared.Atmos.Components;
 using System.Linq;
-using Content.Server._Goobstation.Wizard.NPC;
-using Content.Shared.Wieldable;
-using Content.Shared.Wieldable.Components;
+using Content.Shared.Temperature.Components;
 
 namespace Content.Server.NPC.Systems;
 

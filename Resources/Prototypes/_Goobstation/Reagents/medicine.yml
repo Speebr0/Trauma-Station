@@ -29,35 +29,36 @@
   metabolisms:
     Medicine:
       effects:
-        - !type:ModifyBloodLevel
-          amount: 10
-        - !type:ModifyBleedAmount
-          amount: -2
-        - !type:ReduceRotting
-          seconds: 30
-          conditions:
-          - !type:MobStateCondition
-            mobstate: Dead
-        - !type:HealthChange
-          damage:
-            groups:
-              Brute: -20
-              Burn: -20
-              Airloss: -20
-              Toxin: -20
-              Genetic: -20
-        - !type:HealthChange
-          conditions:
-          - !type:ReagentThreshold
-            min: 21
-          damage:
-            types:
-              Blunt: 100
-        - !type:AdjustTemperature
-          conditions:
-          - !type:Temperature
-            min: 263.15
-          amount: -50000
+      - !type:ModifyBloodLevel
+        amount: 10
+      - !type:ModifyBleedAmount
+        amount: -2
+      - !type:ReduceRotting
+        seconds: 30
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Dead
+      - !type:HealthChange
+        damage:
+          groups:
+            Brute: -20
+            Burn: -20
+            Airloss: -20
+            Toxin: -20
+            Genetic: -20
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Stasizium
+          min: 21
+        damage:
+          types:
+            Blunt: 100
+      - !type:AdjustTemperature
+        conditions:
+        - !type:Temperature
+          min: 263.15
+        amount: -50000
 
 - type: reagent
   id: LingPanacea
@@ -71,56 +72,56 @@
     Medicine:
       metabolismRate: 0.5
       effects:
-        - !type:HealthChange
-          damage:
-            types:
-              Poison: -3
-              Cellular: -3
-              Radiation: -3
-        - !type:PopupMessage
-            type: Local
-            messages: [ "reagent-popup-panacea" ]
-            probability: 0.2
-        - !type:AdjustReagent
-          reagent: Pax
-          amount: -7.5
-        - !type:AdjustReagent
-          reagent: BZ
-          amount: -7.5
-        - !type:GenericStatusEffect
-            key: Jitter
-            time: 10.0
-            type: Remove
-        - !type:GenericStatusEffect
-            key: SeeingRainbows
-            time: 10.0
-            type: Remove
-        - !type:GenericStatusEffect
-            key: Drunk
-            time: 10.0
-            type: Remove
-        - !type:ChemHealEyeDamage
-        - !type:RemoveComponentEffect
-          component: PermanentBlindness
-          locale: reagent-effect-guidebook-remove-permanentblindness
-        - !type:RemoveComponentEffect
-          component: Narcolepsy
-          locale: reagent-effect-guidebook-remove-narcolepsy
-        - !type:RemoveComponentEffect
-          component: Unrevivable # i don't think this really affects lings, but might aswell to be safe
-          locale: reagent-effect-guidebook-remove-unrevivable
-        - !type:RemoveComponentEffect
-          component: Muted
-          locale: reagent-effect-guidebook-remove-muted
-        - !type:RemoveComponentEffect
-          component: Paracusia
-          locale: reagent-effect-guidebook-remove-paracusia
-        - !type:RemoveComponentEffect
-          component: PainNumbness
-          locale: reagent-effect-guidebook-remove-painnumbness
-        - !type:RemoveComponentEffect
-          component: LegsStartParalyzed
-          locale: reagent-effect-guidebook-remove-legsstartparalyzed
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: -3
+            Cellular: -3
+            Radiation: -3
+      - !type:PopupMessage
+          type: Local
+          messages: [ "reagent-popup-panacea" ]
+          probability: 0.2
+      - !type:AdjustReagent
+        reagent: Pax
+        amount: -7.5
+      - !type:AdjustReagent
+        reagent: BZ
+        amount: -7.5
+      - !type:GenericStatusEffect
+          key: Jitter
+          time: 10.0
+          type: Remove
+      - !type:GenericStatusEffect
+          key: SeeingRainbows
+          time: 10.0
+          type: Remove
+      - !type:GenericStatusEffect
+          key: Drunk
+          time: 10.0
+          type: Remove
+      - !type:ChemHealEyeDamage
+      - !type:RemoveComponentEffect
+        component: PermanentBlindness
+        locale: reagent-effect-guidebook-remove-permanentblindness
+      - !type:RemoveComponentEffect
+        component: Narcolepsy
+        locale: reagent-effect-guidebook-remove-narcolepsy
+      - !type:RemoveComponentEffect
+        component: Unrevivable # i don't think this really affects lings, but might aswell to be safe
+        locale: reagent-effect-guidebook-remove-unrevivable
+      - !type:RemoveComponentEffect
+        component: Muted
+        locale: reagent-effect-guidebook-remove-muted
+      - !type:RemoveComponentEffect
+        component: Paracusia
+        locale: reagent-effect-guidebook-remove-paracusia
+      - !type:RemoveComponentEffect
+        component: PainNumbness
+        locale: reagent-effect-guidebook-remove-painnumbness
+      - !type:RemoveComponentEffect
+        component: LegsStartParalyzed
+        locale: reagent-effect-guidebook-remove-legsstartparalyzed
 
 - type: reagent
   id: LingAdrenaline
@@ -135,55 +136,56 @@
     Medicine:
       metabolismRate: 0.5
       effects:
-        - !type:AdjustReagent
-          reagent: ChloralHydrate
-          amount: -10.0
-        - !type:AdjustReagent
-          reagent: NitrousOxide
-          amount: -10.0
-        - !type:AdjustReagent
-          reagent: Nocturine
-          amount: -10.0
-        - !type:GenericStatusEffect
-          key: Stutter
-          component: StutteringAccent
-        - !type:Jitter
-        - !type:GenericStatusEffect
-          key: Stun
-          time: 5
-          type: Remove
-        - !type:GenericStatusEffect
-          key: KnockedDown
-          time: 10
-          type: Remove
-        - !type:GenericStatusEffect
-          conditions:
-          key: Drowsiness
-          time: 10
-          type: Remove
-        - !type:GenericStatusEffect
-          conditions:
-          key: ForcedSleep
-          time: 10
-          type: Remove
-        - !type:GenericStatusEffect # goob edit
-          key: Adrenaline
-          component: IgnoreSlowOnDamage
-          time: 2
-        - !type:RemoveComponentEffect # goob edit
-          component: DelayedKnockdown
-          locale: reagent-effect-guidebook-remove-delayed-knockdown
-        - !type:PopupMessage
-              type: Local
-              messages: [ "reagent-popup-lingdrenaline" ]
-              probability: 0.2
-        - !type:HealthChange
-          conditions:
-          - !type:ReagentThreshold
-            min: 5.01
-          damage:
-            types:
-              Poison: 1.35 # 6.75 toxin damage per inject if used directly after cooldown (47.25 if used 4 times)
+      - !type:AdjustReagent
+        reagent: ChloralHydrate
+        amount: -10.0
+      - !type:AdjustReagent
+        reagent: NitrousOxide
+        amount: -10.0
+      - !type:AdjustReagent
+        reagent: Nocturine
+        amount: -10.0
+      - !type:GenericStatusEffect
+        key: Stutter
+        component: StutteringAccent
+      - !type:Jitter
+      - !type:GenericStatusEffect
+        key: Stun
+        time: 5
+        type: Remove
+      - !type:GenericStatusEffect
+        key: KnockedDown
+        time: 10
+        type: Remove
+      - !type:GenericStatusEffect
+        conditions:
+        key: Drowsiness
+        time: 10
+        type: Remove
+      - !type:GenericStatusEffect
+        conditions:
+        key: ForcedSleep
+        time: 10
+        type: Remove
+      - !type:GenericStatusEffect
+        key: Adrenaline
+        component: IgnoreSlowOnDamage
+        time: 2
+      - !type:RemoveComponentEffect
+        component: DelayedKnockdown
+        locale: reagent-effect-guidebook-remove-delayed-knockdown
+      - !type:PopupMessage
+            type: Local
+            messages: [ "reagent-popup-lingdrenaline" ]
+            probability: 0.2
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: LingAdrenaline
+          min: 5.01
+        damage:
+          types:
+            Poison: 1.35 # 6.75 toxin damage per inject if used directly after cooldown (47.25 if used 4 times)
 
 # Normal, but little gimmicky meds
 
@@ -204,29 +206,32 @@
             Brute: -1.5 # Lower than Bicardine, offloading healing onto mitotrophin
       - !type:TakeStaminaDamage
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Probital
           min: 20
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goob - Yowie
+          type: [ Yowie ]
+          inverted: true
         amount: 5 # effectively 3 "sleeps" per 20OD, but only 1 on 10 (like with 2 syringes)
         immediate: false
       - !type:MovespeedModifier # kinda sleepiness
         conditions:
         - !type:StaminaDamageThreshold
           min: 80
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Probital
           min: 20
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition # Goob - Yowie
+          type: [ Yowie ]
+          inverted: true
         walkSpeedModifier: 0.8
         sprintSpeedModifier: 0.8
       - !type:GenericStatusEffect
         conditions:
         - !type:StaminaDamageThreshold
           min: 80
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Probital
           min: 20
         key: Stutter
         component: StutteringAccent
@@ -234,11 +239,12 @@
         conditions:
         - !type:StaminaDamageThreshold
           min: 100
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Probital
           min: 20
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         key: ForcedSleep
         component: ForcedSleeping
         refresh: false
@@ -248,11 +254,12 @@
         conditions:
         - !type:StaminaDamageThreshold
           min: 100
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Probital
           min: 20
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         amount: -100 # power nap
         immediate: true
       - !type:AdjustReagent
@@ -273,11 +280,12 @@
       effects:
       - !type:ChemVomit
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Mitogen
           min: 10
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         probability: 0.15
 
 - type: reagent
@@ -322,24 +330,25 @@
             Asphyxiation: -6 # intended to be stronger, but more annoying than inapr
       - !type:TakeStaminaDamage
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         amount: 3 # full syringe doesn't stamcrit (maybe it should?)
         immediate: false
       - !type:MovespeedModifier
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         walkSpeedModifier: 0.75
         sprintSpeedModifier: 0.75
       - !type:Paralyze # more severe effect when overdosing, doesn't matter since you want to use it on crit ppl
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
+        - !type:ReagentCondition
+          reagent: Tirimol
           min: 15
         probability: 0.2
         paralyzeTime: 4
@@ -371,16 +380,17 @@
           groups:
             Brute: 0.1
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
       - !type:HealthChange
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Musiver
           min: 20
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         damage:
           types:
             Blunt: 5
@@ -406,16 +416,17 @@
           groups:
             Brute: 0.1
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
       - !type:HealthChange
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Tehifin
           min: 10
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         damage:
           types:
             Blunt: 5
@@ -452,7 +463,8 @@
         amount: 3
       - !type:HealthChange
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: ProcenylLazide
           min: 6
         damage:
           types:
@@ -460,7 +472,8 @@
       - !type:ModifyBleedAmount
         amount: 1
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: ProcenylLazide
           min: 6
       - !type:AdjustReagent
         amount: -25
@@ -490,16 +503,17 @@
           types:
             Radiation: 0.05 # very slight side effect
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
       - !type:HealthChange
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Bozaide
           min: 20
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         damage:
           types:
             Radiation: 5
@@ -552,9 +566,9 @@
           groups:
             Brute: 0.5
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
 
 - type: reagent
   id: Monover
@@ -588,9 +602,9 @@
         conditions:
         - !type:UniqueBloodstreamChemThreshold
           min: 1 # potential use for checking bloodstream cleanliness?
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
 
 - type: reagent
   id: Calomel
@@ -627,24 +641,26 @@
         conditions:
         - !type:MobStateCondition
           mobstate: Alive
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
       - !type:HealthChange
         damage:
           types:
             Poison: 6
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Calomel
           min: 15
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
       - !type:AdjustReagent
         reagent: Calomel
         amount: -2
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Calomel
           min: 15
 
 - type: reagent
@@ -656,12 +672,12 @@
   flavor: medicine
   color: "#bad2ff"
   plantMetabolism:
-    - !type:PlantAdjustToxins
-      amount: 10
-    - !type:PlantAdjustWeeds
-      amount: -20
-    - !type:PlantAdjustHealth
-      amount: -20
+  - !type:PlantAdjustToxins
+    amount: 10
+  - !type:PlantAdjustWeeds
+    amount: -20
+  - !type:PlantAdjustHealth
+    amount: -20
   metabolisms:
     Medicine:
       metabolismRate: 0.15
@@ -674,17 +690,19 @@
           types:
             Poison: 1
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: AmmoniatedMercury
           min: 10
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
       - !type:HealthChange
         damage:
           types:
             Poison: -3
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: AmmoniatedMercury
           max: 10
         - !type:TypedDamageThreshold
           damage:
@@ -732,10 +750,10 @@
   flavor: medicine
   color: "#be5c5c"
   plantMetabolism:
-    - !type:PlantAdjustWeeds
-      amount: -5
-    - !type:PlantAdjustHealth
-      amount: -10
+  - !type:PlantAdjustWeeds
+    amount: -5
+  - !type:PlantAdjustHealth
+    amount: -10
   metabolisms:
     Medicine:
       metabolismRate: 0.15
@@ -745,7 +763,8 @@
         time: 30
       - !type:AdjustPainFeels
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Ibuprofen
           min: 15
         amount: 0.04
       - !type:HealthChange
@@ -767,14 +786,16 @@
           types:
             Poison: 0.2
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Ibuprofen
           min: 20
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
       - !type:AdjustConsciousness
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Ibuprofen
           min: 10
         allowNewModifiers: true
         modifierType: Pain
@@ -831,9 +852,9 @@
 #          types:
 #            Poison: 2
 #        conditions:
-#        - !type:OrganType
-#          type: Yowie
-#          shouldHave: false
+#        - !type:MetabolizerTypeCondition
+#          type: [ Yowie ]
+#          inverted: true
 
 #- type: reagent # Trauma
 #  id: StypticCrystalCatalyst
@@ -901,9 +922,9 @@
 #          types:
 #            Poison: 2
 #        conditions:
-#        - !type:OrganType
-#         type: Yowie
-#          shouldHave: false
+#        - !type:MetabolizerTypeCondition
+#         type: [ Yowie ]
+#          inverted: true
 
 - type: reagent
   id: Synthflesh # synthflesh is somewhat mid in SS14 due to topicals, so it's mostly a reference here
@@ -973,10 +994,10 @@
   flavor: medicine
   color: "#e8cb4e"
   plantMetabolism:
-    - !type:PlantAdjustWeeds
-      amount: -4
-    - !type:PlantAdjustHealth
-      amount: -10
+  - !type:PlantAdjustWeeds
+    amount: -4
+  - !type:PlantAdjustHealth
+    amount: -10
   metabolisms:
     Medicine:
       effects:
@@ -989,7 +1010,8 @@
           damage:
             groups:
               Brute: 25
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: SalicylicAcid
           max: 25
       - !type:HealthChange
         damage:
@@ -1001,18 +1023,20 @@
             groups:
               Brute: 25
           inverse: true
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: SalicylicAcid
           max: 25
       - !type:HealthChange
         damage:
           groups:
             Brute: 3
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: SalicylicAcid
           min: 25
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
 
 - type: reagent
   id: Oxandrolone
@@ -1023,8 +1047,8 @@
   flavor: medicine
   color: "#cac6bf"
   plantMetabolism:
-    - !type:PlantAdjustHealth
-      amount: -8
+  - !type:PlantAdjustHealth
+    amount: -8
   metabolisms:
     Medicine:
       effects:
@@ -1040,7 +1064,8 @@
           damage:
             groups:
               Burn: 25
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Oxandrolone
           max: 25
       - !type:HealthChange
         damage:
@@ -1052,18 +1077,20 @@
             groups:
               Burn: 25
           inverse: true
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Oxandrolone
           max: 25
       - !type:HealthChange
         damage:
           groups:
             Burn: 4
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Oxandrolone
           min: 25
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
 
 - type: reagent
   id: PentenicAcid
@@ -1122,14 +1149,15 @@
         conditions:
         - !type:MobStateCondition
           mobstate: Critical
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Atropine
           min: 0
           max: 35
       - !type:MovespeedModifier # and basically every visual/combat side effect that can be reasonably put
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
         walkSpeedModifier: 0.75
         sprintSpeedModifier: 0.75
       - !type:GenericStatusEffect
@@ -1138,10 +1166,11 @@
       - !type:Jitter
       - !type:Paralyze
         conditions:
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
-        - !type:ReagentThreshold
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
+        - !type:ReagentCondition
+          reagent: Atropine
           min: 35
         probability: 0.1
         paralyzeTime: 2
@@ -1152,11 +1181,12 @@
           types:
             Poison: 2
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Atropine
           min: 35
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
       - !type:ModifyBloodLevel
         amount: 5
       - !type:ModifyBleedAmount
@@ -1338,11 +1368,12 @@
           types:
             Poison: 0.8
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Tramadol
           min: 15.5
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
       - !type:AdjustConsciousness
         allowNewModifiers: true
         modifierType: Pain
@@ -1374,11 +1405,12 @@
           types:
             Poison: 1.2
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
+          reagent: Oxycodone
           min: 10.5
-        - !type:OrganType
-          type: Yowie
-          shouldHave: false
+        - !type:MetabolizerTypeCondition
+          type: [ Yowie ]
+          inverted: true
       - !type:AdjustConsciousness
         allowNewModifiers: true
         modifierType: Pain
