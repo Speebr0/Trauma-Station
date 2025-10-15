@@ -1082,6 +1082,11 @@ BibleSatanic: null
 ClothingBeltAssault: ClothingBeltMilitaryWebbing
 WarpPointBombing: null
 
+# 2025-10-13
+ToyGriffin: ToyFigurineGriffin
+ToyOwlman: ToyFigurineOwlman
+ToySkeleton: ToyFigurineSkeleton
+
 # Trauma - 2025-10-19
 LockerBlueshieldOfficerFilled: null
 DresserBlueshieldOfficerFilled: null
