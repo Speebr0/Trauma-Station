@@ -19,14 +19,16 @@ public abstract class SharedBatterySystem : EntitySystem
         SubscribeLocalEvent<BatteryComponent, EmpPulseEvent>(OnEmpPulse);
     }
 
-    private void OnEmpPulse(EntityUid uid, BatteryComponent component, ref EmpPulseEvent args)
+    private void OnEmpPulse(Entity<BatteryComponent> entity, ref EmpPulseEvent args)
     {
         args.Affected = true;
-        if (!HasComp<RechargeableBlockingComponent>(uid)) // Goobstation - rechargeable blocking system handles it
+        // <Goob> - rechargeable blocking system handles it
+        if (!HasComp<RechargeableBlockingComponent>(entity))
             args.Disabled = true;
-        UseCharge(uid, args.EnergyConsumption, component);
+        // </Goob>
+        UseCharge(entity, args.EnergyConsumption, entity.Comp);
         // Apply a cooldown to the entity's self recharge if needed to avoid it immediately self recharging after an EMP.
-        TrySetChargeCooldown(uid);
+        TrySetChargeCooldown(entity);
     }
 
     public virtual float UseCharge(EntityUid uid, float value, BatteryComponent? battery = null)
