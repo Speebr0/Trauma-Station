@@ -6,11 +6,11 @@
 
 namespace Content.Shared.Rejuvenate;
 
-public sealed class RejuvenateEvent(bool uncuff = true, bool resetActions = true) : EntityEventArgs // Goob edit
-{
-    // Goobstation start
-    public bool Uncuff = uncuff;
-
-    public bool ResetActions = resetActions;
-    // Goobstation end
-}
+/// <summary>
+/// Raised when an entity is supposed to be rejuvenated,
+/// meaning it should heal all damage, debuffs or other negative status effects.
+/// Systems should handle healing the entity in a subscription to this event.
+/// Used for the Rejuvenate admin verb.
+/// </summary>
+// Trauma - change to a struct and add Uncuff + ResetActions
+public record struct RejuvenateEvent(bool Uncuff = true, bool ResetActions = true);
