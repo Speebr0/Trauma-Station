@@ -335,3 +335,9 @@ Entries:
       message: Fixed rev printing press gmod ERROR
   id: 37
   time: '2025-10-19T15:17:12.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Remove
+      message: Removed BSO.
+  id: 38
+  time: '2025-10-19T16:27:21.0000000+00:00'
