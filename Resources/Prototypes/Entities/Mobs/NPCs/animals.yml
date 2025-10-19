@@ -1653,11 +1653,12 @@
   - type: VentCrawler # goobstation - Ventcrawl
     allowInventory: false
   - type: CombatMode
-  # Shitmed Change Start
+    canDisarm: true
+  # <Shitmed>
   - type: Targeting
   - type: HumanoidAppearance
     species: Monkey
-  # Shitmed Change End
+  # </Shitmed>
   - type: Inventory
     templateId: monkey
     speciesId: monkey
