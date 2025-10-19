@@ -329,3 +329,9 @@ Entries:
       message: Fixed revs not being able to build a printing press.
   id: 36
   time: '2025-10-18T20:43:36.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Fix
+      message: Fixed rev printing press gmod ERROR
+  id: 37
+  time: '2025-10-19T15:17:12.0000000+00:00'
