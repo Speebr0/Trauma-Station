@@ -341,3 +341,11 @@ Entries:
       message: Removed BSO.
   id: 38
   time: '2025-10-19T16:27:21.0000000+00:00'
+- author: JoeHammad
+  changes:
+    - type: Add
+      message: You can now wear the RPG2 on your back
+    - type: Tweak
+      message: RPG2 sprites are now 48x32, aka longer
+  id: 39
+  time: '2025-10-20T04:10:17.0000000+00:00'
