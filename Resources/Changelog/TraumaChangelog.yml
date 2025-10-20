@@ -349,3 +349,9 @@ Entries:
       message: RPG2 sprites are now 48x32, aka longer
   id: 39
   time: '2025-10-20T04:10:17.0000000+00:00'
+- author: Lumminal
+  changes:
+    - type: Tweak
+      message: Flashes only work directionally now.
+  id: 40
+  time: '2025-10-20T22:44:03.0000000+00:00'
