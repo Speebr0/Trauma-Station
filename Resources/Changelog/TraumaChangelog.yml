@@ -375,3 +375,9 @@ Entries:
         mechs.
   id: 42
   time: '2025-10-21T01:37:52.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Remove
+      message: Gygax and Durand bounty
+  id: 43
+  time: '2025-10-21T01:40:40.0000000+00:00'
