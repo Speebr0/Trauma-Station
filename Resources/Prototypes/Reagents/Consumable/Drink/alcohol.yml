@@ -295,7 +295,7 @@
           type: [ Dwarf, Yowie, Cybernetic ] # Goob - added Yowie-Cybernetic
           inverted: true
       - !type:Drunk
-        boozePower: 2
+        boozePower: 20
 
 - type: reagent
   id: Gin
