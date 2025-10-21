@@ -355,3 +355,9 @@ Entries:
       message: Flashes only work directionally now.
   id: 40
   time: '2025-10-20T22:44:03.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Replace Sec roundstart 80DPS pistol with a 32 DPS laser pistol
+  id: 41
+  time: '2025-10-21T00:21:01.0000000+00:00'
