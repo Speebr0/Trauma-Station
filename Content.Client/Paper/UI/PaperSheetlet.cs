@@ -22,12 +22,22 @@ public sealed class PaperSheetlet : Sheetlet<NanotrasenStylesheet>
             { Texture = sheet.GetTexture(windowCfg.TransparentWindowBackgroundBorderedPath) };
         paperBox.SetPatchMargin(StyleBox.Margin.All, 2);
 
+        var borderedTransparentTex = ResCache.GetTexture("/Textures/Interface/Nano/transparent_window_background_bordered.png");
+        var borderedTransparentBackground = new StyleBoxTexture
+        {
+            Texture = borderedTransparentTex,
+        };
+        borderedTransparentBackground.SetPatchMargin(StyleBox.Margin.All, 2);
+
         return
         [
             E<PanelContainer>().Identifier("PaperContainer").Panel(paperBox),
             E<PanelContainer>()
                 .Identifier("PaperDefaultBorder")
                 .Prop(PanelContainer.StylePropertyPanel, paperBackground),
+            E<PanelContainer>()
+                .Identifier("PaperEditBackground")
+                .Prop(PanelContainer.StylePropertyPanel, borderedTransparentBackground),
         ];
     }
 }
