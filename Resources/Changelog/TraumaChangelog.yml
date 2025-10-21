@@ -361,3 +361,17 @@ Entries:
       message: Replace Sec roundstart 80DPS pistol with a 32 DPS laser pistol
   id: 41
   time: '2025-10-21T00:21:01.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: The station has to be on blue alert for 10 minutes to unlock red alert.
+    - type: Tweak
+      message: >-
+        The station has to be on red alert or higher to order guns and combat
+        hardsuits.
+    - type: Tweak
+      message: >-
+        The station has to be on red alert or higher to build gygax/durand
+        mechs.
+  id: 42
+  time: '2025-10-21T01:37:52.0000000+00:00'
