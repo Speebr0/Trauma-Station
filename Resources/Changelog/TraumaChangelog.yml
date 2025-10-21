@@ -395,3 +395,30 @@ Entries:
       message: Some slop chems
   id: 45
   time: '2025-10-21T03:50:46.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: >-
+        Every grenade can be taken apart and put back together with each others
+        payloads / triggers.
+    - type: Add
+      message: >-
+        EMP, air, bee, cluster, clusterband, explosive, foam, holy, incendiary,
+        minibomb, nuclear, plasteel shrapnel, sarin gas, speaker, smoke,
+        stinger, supermatter, tear gas, and whitehole grenade payloads.
+    - type: Add
+      message: Whitehole, supermatter, silent, minibomb, and holy timers.
+    - type: Add
+      message: >-
+        you can put the new grenade payloads in landmines, or other grenade
+        shells
+    - type: Add
+      message: TONS of grenade shells
+    - type: Add
+      message: Crowbars take grenades apart.
+    - type: Add
+      message: you can put any bomb in plushies
+    - type: Add
+      message: bomb components can spawn in maints
+  id: 46
+  time: '2025-10-21T04:28:43.0000000+00:00'
