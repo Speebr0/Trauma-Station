@@ -110,12 +110,10 @@ public sealed partial class CriminalRecordsConsoleSystem : SharedCriminalRecords
     private void OnChangeStatus(Entity<CriminalRecordsConsoleComponent> ent, ref CriminalRecordChangeStatus msg)
     {
         // prevent malf client violating wanted/reason nullability
-        var requireReason = msg.Status is SecurityStatus.Wanted
-            or SecurityStatus.Suspected
-            or SecurityStatus.Search
-            or SecurityStatus.Dangerous;
-
-        if (requireReason != (msg.Reason != null))
+        if (msg.Status == SecurityStatus.Wanted != (msg.Reason != null) &&
+            msg.Status == SecurityStatus.Suspected != (msg.Reason != null) &&
+            msg.Status == SecurityStatus.Search != (msg.Reason != null) && // Goob
+            msg.Status == SecurityStatus.Hostile != (msg.Reason != null))
             return;
 
         if (!CheckSelected(ent, msg.Actor, out var mob, out var key))
@@ -172,6 +170,8 @@ public sealed partial class CriminalRecordsConsoleSystem : SharedCriminalRecords
         // figure out which radio message to send depending on transition
         var statusString = (oldStatus, msg.Status) switch
         {
+            (_, SecurityStatus.Hostile) => "hostile",
+            (_, SecurityStatus.Eliminated) => "eliminated",
             // person has been detained
             (_, SecurityStatus.Detained) => "detained",
             // person did something sus
@@ -182,12 +182,14 @@ public sealed partial class CriminalRecordsConsoleSystem : SharedCriminalRecords
             (_, SecurityStatus.Discharged) => "released",
             // going from any other state to wanted, AOS or prisonbreak / lazy secoff never set them to released and they reoffended
             (_, SecurityStatus.Wanted) => "wanted",
+            // <Goob>
             // person has been sentenced to perma
             (_, SecurityStatus.Perma) => "perma",
             // person needs to be searched
             (_, SecurityStatus.Search) => "search",
-            // person is very dangerous
-            (_, SecurityStatus.Dangerous) => "dangerous",
+            // </Goob>
+            (SecurityStatus.Hostile, SecurityStatus.None) => "not-hostile",
+            (SecurityStatus.Eliminated, SecurityStatus.None) => "not-eliminated",
             // person is no longer sus
             (SecurityStatus.Suspected, SecurityStatus.None) => "not-suspected",
             // going from wanted to none, must have been a mistake
