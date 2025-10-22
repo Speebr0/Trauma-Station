@@ -324,6 +324,12 @@
   - type: SolutionContainerVisuals
     maxFillLevels: 2
     fillBaseName: packet-solid-
+  - type: StatusEffectOnCollideGhost # Goobstation
+    whitelist:
+      tags:
+      - WeakToSalt
+    statusEffect: Corporeal
+    duration: 8
 
 - type: entity
   parent: BaseFoodCondimentPacketDrink
