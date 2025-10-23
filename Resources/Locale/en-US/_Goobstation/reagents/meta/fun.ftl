@@ -10,7 +10,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 reagent-name-tranquility = tranquility
-reagent-desc-tranquility = You feel oddly calm...
+reagent-desc-tranquility = A chemical found within gondolas that can mutate other beings into one. Studies have found consuming enough spicy food will neutralize the chemical.
 reagent-popup-tranquility = You feel oddly calm...
 
 reagent-name-binglejuice = bingle juice
