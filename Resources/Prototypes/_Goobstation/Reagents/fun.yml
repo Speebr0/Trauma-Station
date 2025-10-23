@@ -14,16 +14,16 @@
   id: Tranquility
   name: reagent-name-tranquility
   group: Toxins
-  desc: reagent-desc-tranquility
+  desc: reagent-desc-tranquility-trauma # Trauma
   physicalDesc: reagent-physical-desc-calming
   flavor: mindful
   color: "#915E48"
   metabolisms:
     Poison:
-      metabolismRate: 0.05 # Traumastation Rework
+      metabolismRate: 0.05 # Trauma
       effects:
       - !type:AdjustReagent
-        reagent: Tranquility # Traumastation - Gradually builds up if not "neutralized" with spicy food
+        reagent: Tranquility # Trauma - Gradually builds up if not "neutralized" with spicy food
         amount: 0.1 # 20s/1u after metabolism
         conditions:
         - !type:ReagentThreshold
@@ -31,7 +31,7 @@
       - !type:PopupMessage
           type: Local
           messages: [ "reagent-popup-tranquility" ]
-          probability: 0.05 # Traumastation - Reduced so that it doesn't spam you over the course of your "infection"
+          probability: 0.05 # Trauma - Reduced so that it doesn't spam you over the course of your "infection"
       - !type:GenericStatusEffect
         key: Pacified
         component: Pacified
@@ -43,7 +43,7 @@
         component: Muted
         conditions:
         - !type:ReagentThreshold
-          min: 20 # Traumastation - Threshold increased so you can ask medical for help
+          min: 20 # Trauma - Threshold increased so you can ask medical for help
       - !type:Polymorph
         prototype: Gondola
         conditions:
