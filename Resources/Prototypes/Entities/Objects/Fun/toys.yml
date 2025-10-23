@@ -472,10 +472,10 @@
         - ItemMask
         restitution: 0.5 # a little bouncy
         friction: 0.2
-  - type: Catchable
-    catchChance: 0.8
-    catchSuccessSound:
-      path: /Audio/Effects/Footsteps/bounce.ogg
+  #- type: Catchable # Trauma - get a better fetish bro
+  #  catchChance: 0.8
+  #  catchSuccessSound:
+  #    path: /Audio/Effects/Footsteps/bounce.ogg
   - type: EmitSoundOnCollide
     sound:
       path: /Audio/Effects/Footsteps/bounce.ogg
@@ -488,11 +488,11 @@
       params:
         volume: -4
   - type: UseDelay
-  - type: Clothing
-    slots: [mask]
-  - type: Tag
-    tags:
-    - PetWearable
+  #- type: Clothing # Trauma - get a better fetish bro
+  #  slots: [mask]
+  #- type: Tag # Trauma - get a better fetish bro
+  #  tags:
+  #  - PetWearable
 
 - type: entity
   parent: BaseItem
