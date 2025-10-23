@@ -20,11 +20,11 @@
   color: "#915E48"
   metabolisms:
     Poison:
-      metabolismRate: 0.03 # Traumastation Rework
+      metabolismRate: 0.05 # Traumastation Rework
       effects:
       - !type:AdjustReagent
         reagent: Tranquility # Traumastation - Gradually builds up if not "neutralized" with spicy food
-        amount: 0.06 # 33s/1u after metabolism
+        amount: 0.1 # 20s/1u after metabolism
         conditions:
         - !type:ReagentThreshold
           min: 2.5 # Not sure where to put this yet, but shouldn't work diluted
