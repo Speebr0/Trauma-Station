@@ -25,7 +25,7 @@
         - ReagentId: Fat
           Quantity: 9
         - ReagentId: Tranquility
-          Quantity: 1 # Traumastation - Tranquility Rework
+          Quantity: 2 # Traumastation - Tranquility Rework
   - type: Construction
     graph: GondolaSteak
     node: start
@@ -54,7 +54,7 @@
         - ReagentId: Protein
           Quantity: 5
         - ReagentId: Tranquility
-          Quantity: 2.5 # Traumastation - Tranquility Rework
+          Quantity: 3 # Traumastation - Tranquility Rework
   - type: Construction
     graph: GondolaSteak
     node: gondola steak
