@@ -20,24 +20,30 @@
   color: "#915E48"
   metabolisms:
     Poison:
-      metabolismRate: 0.25
+      metabolismRate: 0.03 # Traumastation Rework
       effects:
+      - !type:AdjustReagent
+        reagent: Tranquility # Traumastation - Gradually builds up if not "neutralized" with spicy food
+        amount: 0.06 # 33s/1u after metabolism
+        conditions:
+        - !type:ReagentThreshold
+          min: 2.5 # Not sure where to put this yet, but shouldn't work diluted
       - !type:PopupMessage
           type: Local
           messages: [ "reagent-popup-tranquility" ]
-          probability: 0.2
-      - !type:GenericStatusEffect
-        key: Muted
-        component: Muted
-        conditions:
-        - !type:ReagentThreshold
-          min: 5
+          probability: 0.05 # Traumastation - Reduced so that it doesn't spam you over the course of your "infection"
       - !type:GenericStatusEffect
         key: Pacified
         component: Pacified
         conditions:
         - !type:ReagentThreshold
           min: 10
+      - !type:GenericStatusEffect
+        key: Muted
+        component: Muted
+        conditions:
+        - !type:ReagentThreshold
+          min: 20 # Traumastation - Threshold increased so you can ask medical for help
       - !type:Polymorph
         prototype: Gondola
         conditions:
