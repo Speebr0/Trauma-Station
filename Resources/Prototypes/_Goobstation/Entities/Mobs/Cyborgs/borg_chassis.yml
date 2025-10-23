@@ -64,6 +64,7 @@
   description: An abomination that supposedly assists in station activity.
   components:
   - type: Sprite
+    sprite: _Goobstation/Mobs/Silicon/huborg.rsi
     layers:
     - state: huborg
     - state: huborg_e_r
