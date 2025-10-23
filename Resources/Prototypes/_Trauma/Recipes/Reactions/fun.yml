@@ -4,7 +4,7 @@
     Tranquility:
       amount: 1
     Hotsauce:
-      amount: 2
+      amount: 1
 
 - type: reaction
   id: TranqulityNeutralizationCapsaicin
@@ -12,4 +12,4 @@
     Tranquility:
       amount: 1
     CapsaicinOil:
-      amount: 2
+      amount: 1
