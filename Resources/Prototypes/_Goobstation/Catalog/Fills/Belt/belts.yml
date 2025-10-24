@@ -195,7 +195,7 @@
 
 - type: entity
   id: ClothingBeltAssaultFilled
-  parent: ClothingBeltAssault
+  parent: ClothingBeltMilitaryWebbing
   suffix: Filled, BSO
   components:
   - type: EntityTableContainerFill
