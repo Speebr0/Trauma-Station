@@ -428,3 +428,11 @@ Entries:
       message: Bigger fland maints
   id: 47
   time: '2025-10-22T02:02:07.0000000+00:00'
+- author: Speebro
+  changes:
+    - type: Add
+      message: >-
+        Tranquility now slowly increases while in your bloodstream, find a cure
+        before you turn...
+  id: 48
+  time: '2025-10-24T10:52:03.0000000+00:00'
