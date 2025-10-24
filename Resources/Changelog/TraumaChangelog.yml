@@ -436,3 +436,11 @@ Entries:
         before you turn...
   id: 48
   time: '2025-10-24T10:52:03.0000000+00:00'
+- author: TurboTrackerss14
+  changes:
+    - type: Remove
+      message: Nutriment no longer provides minor healing.
+    - type: Tweak
+      message: Vitamin gained the healing lost from nutriment values.
+  id: 49
+  time: '2025-10-24T21:19:14.0000000+00:00'
