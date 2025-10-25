@@ -423,6 +423,10 @@ namespace Content.Server.Body.Systems
                     }
 
                     var actualEntity = ent.Comp2?.Body ?? solutionEntityUid.Value;
+                    // <Trauma> - Check group conditions before any effects
+                    if (!CanMetabolizeEffect(actualEntity, ent, soln.Value, proto.Conditions))
+                        continue;
+                    // </Trauma>
 
                     // do all effects, if conditions apply
                     foreach (var effect in entry.Effects)

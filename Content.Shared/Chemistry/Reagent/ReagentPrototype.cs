@@ -120,6 +120,7 @@ using System.Text.Json.Serialization;
 using Content.Shared.Body.Prototypes;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Contraband;
+using Content.Shared.EntityConditions; // Trauma
 using Content.Shared.EntityEffects;
 using Content.Shared.Localizations;
 using Content.Shared.Nutrition;
@@ -407,6 +408,12 @@ namespace Content.Shared.Chemistry.Reagent
         [JsonPropertyName("effects")]
         [DataField("effects", required: true)]
         public EntityEffect[] Effects = default!;
+
+        /// <summary>
+        /// Trauma - Group conditions that apply before individual effects.
+        /// </summary>
+        [DataField]
+        public EntityCondition[] Conditions = [];
 
         public string EntityEffectFormat => "guidebook-reagent-effect-description";
 
