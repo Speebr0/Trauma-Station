@@ -2,17 +2,17 @@
 using Content.Shared.Item;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Interaction.Components;
+using Content.Shared.Nutrition;
+using Content.Shared.Storage;
 // </Trauma>
 using System.Numerics;
 using System.Text;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Nutrition;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Nutrition.Prototypes;
 using Content.Shared.Popups;
-using Content.Shared.Storage;
 using Content.Shared.Storage.Components;
 using Content.Shared.Tag;
 using Robust.Shared.Prototypes;
@@ -23,8 +23,6 @@ namespace Content.Shared.Nutrition.EntitySystems;
 public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly IPrototypeManager _proto = default!;
-    [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly SharedItemSystem _item = default!; // Goobstation - anythingburgers
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
@@ -97,7 +95,7 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
             return true;
 
         Metamorf(start, _random.Pick(availableRecipes)); //In general, if there's more than one recipe, the yml-guys screwed up. Maybe some kind of unit test is needed.
-        QueueDel(start);
+        PredictedQueueDel(start);
         return true;
     }
 
