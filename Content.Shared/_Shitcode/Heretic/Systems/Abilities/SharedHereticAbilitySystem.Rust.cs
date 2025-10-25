@@ -8,7 +8,7 @@ using Content.Shared.Electrocution;
 using Content.Shared.Explosion;
 using Content.Shared.Maps;
 using Content.Shared.Slippery;
-using Content.Shared.StatusEffect;
+using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Map;
 
@@ -21,7 +21,8 @@ public abstract partial class SharedHereticAbilitySystem
     protected virtual void SubscribeRust()
     {
         SubscribeLocalEvent<RustbringerComponent, BeforeStaminaDamageEvent>(OnBeforeStaminaDamage);
-        SubscribeLocalEvent<RustbringerComponent, OldBeforeStatusEffectAddedEvent>(OnBeforeStatusEffect);
+        SubscribeLocalEvent<RustbringerComponent, KnockDownAttemptEvent>(OnKnockDownAttempt);
+        // TODO REBASE: prevent stun too
         SubscribeLocalEvent<RustbringerComponent, SlipAttemptEvent>(OnSlipAttempt);
         SubscribeLocalEvent<RustbringerComponent, GetExplosionResistanceEvent>(OnGetExplosionResists);
         SubscribeLocalEvent<RustbringerComponent, ElectrocutionAttemptEvent>(OnElectrocuteAttempt);
@@ -72,12 +73,9 @@ public abstract partial class SharedHereticAbilitySystem
         args.NoSlip = true;
     }
 
-    private void OnBeforeStatusEffect(Entity<RustbringerComponent> ent, ref OldBeforeStatusEffectAddedEvent args)
+    private void OnKnockDownAttempt(Entity<RustbringerComponent> ent, ref KnockDownAttemptEvent args)
     {
         if (!IsTileRust(Transform(ent).Coordinates, out _))
-            return;
-
-        if (args.Key is not ("KnockedDown" or "Stun"))
             return;
 
         args.Cancelled = true;

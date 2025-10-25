@@ -26,15 +26,19 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+// <Trauma>
+using Content.Shared._Starlight.CollectiveMind;
+using Robust.Shared.Console;
+using Robust.Shared.Player;
+using Robust.Shared.Serialization;
+// </Trauma>
 using System.Collections.Frozen;
-using Content.Shared._Starlight.CollectiveMind; // Goobstation - Starlight collective mind port
 using System.Text.RegularExpressions;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Speech;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization; // Einstein Engines - Language
 using Robust.Shared.Utility;
 
 namespace Content.Shared.Chat;

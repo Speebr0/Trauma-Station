@@ -1,3 +1,9 @@
+// <Goob>
+using Content.Shared.Examine;
+using Content.Shared.Item;
+using Content.Shared.Item.ItemToggle;
+using Content.Shared.Item.ItemToggle.Components;
+// </Goob>
 using Content.Shared.Inventory;
 using Content.Shared.Storage.Components;
 using Content.Shared.Whitelist;
@@ -16,7 +22,7 @@ public sealed class MagnetPickupSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly SharedStorageSystem _storage = default!;
-    [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
+    [Dependency] private readonly ItemToggleSystem _toggle = default!; // Goob
     [Dependency] private readonly SharedItemSystem _item = default!; // White Dream
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
 
@@ -36,7 +42,7 @@ public sealed class MagnetPickupSystem : EntitySystem
     //WD EDIT start
     private void OnExamined(Entity<MagnetPickupComponent> entity, ref ExaminedEvent args)
     {
-        var onMsg = _itemToggle.IsActivated(entity.Owner)
+        var onMsg = _toggle.IsActivated(entity.Owner)
             ? Loc.GetString("comp-magnet-pickup-examined-on")
             : Loc.GetString("comp-magnet-pickup-examined-off");
         args.PushMarkup(onMsg);

@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Shared.Item;
 using Content.Shared.Chemistry.Components.SolutionManager;
-using Content.Server.Singularity.Components;
 using Content.Shared.Interaction.Components;
 // </Trauma>
 using System.Numerics;
@@ -322,10 +321,13 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
             }
 
             _item.SetShape(start, new List<Box2i> { new Box2i(0, 0, 1, increment) });
+        /* TODO: uncomment this if >15 item burgers are ever added again AND gravity well is moved to shared
         } else if (increment >= 8) {
             EnsureComp<GravityWellComponent>(start, out var gravityWell);
             gravityWell.MaxRange = (float)Math.Sqrt(increment/4);
             gravityWell.BaseRadialAcceleration = (float)Math.Sqrt(increment/4);
+            Dirty(start, gravityWell);
+        */
         }
     }
 }

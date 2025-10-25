@@ -18,7 +18,7 @@ namespace Content.Shared._EinsteinEngines.TelescopicBaton;
 
 public sealed class KnockdownOnHitSystem : EntitySystem
 {
-    [Dependency] private readonly StunSystem _stun = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly MobStateSystem _mobState = default!; // Goobstation
 
     public override void Initialize()

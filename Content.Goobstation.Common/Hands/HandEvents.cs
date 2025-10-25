@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace Content.Goobstation.Common.Hands;
 
 /// <summary>

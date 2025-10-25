@@ -521,11 +521,11 @@ public abstract class SharedEntityStorageSystem : EntitySystem
     }
 
     // Goobstation - Recycle update - Empty container in recycle
-    protected void OnReclaimed(EntityUid uid, SharedEntityStorageComponent component, GotReclaimedEvent args)
+    private void OnReclaimed(Entity<EntityStorageComponent> ent, ref GotReclaimedEvent args)
     {
-        if (component.DeleteContentsOnDestruction)
+        if (ent.Comp.DeleteContentsOnDestruction)
             return;
 
-        _container.EmptyContainer(component.Contents, destination: args.ReclaimerCoordinates);
+        _container.EmptyContainer(ent.Comp.Contents, destination: args.ReclaimerCoordinates);
     }
 }

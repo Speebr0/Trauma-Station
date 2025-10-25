@@ -9,17 +9,18 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Standing;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Timing;
 using Content.Shared.Weapons.Melee.Events;
+using Robust.Shared.Timing;
 
 namespace Content.Shared._EinsteinEngines.TelescopicBaton;
 
 // This is so heavily edited by Goobstation that I won't even bother commenting. It's not like we upstream from EE anyway.
 public sealed class TelescopicBatonSystem : EntitySystem
 {
+    [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly ItemToggleSystem _toggle = default!;
     [Dependency] private readonly UseDelaySystem _delay = default!;
 
@@ -35,43 +36,27 @@ public sealed class TelescopicBatonSystem : EntitySystem
     private void OnMeleeHit(Entity<TelescopicBatonComponent> ent, ref MeleeHitEvent args)
     {
         if (!ent.Comp.AlwaysDropItems)
-            ent.Comp.CanDropItems = false;
+        {
+            ent.Comp.NextAttack = TimeSpan.Zero;
+            Dirty(ent);
+        }
 
         if (args is { IsHit: true, HitEntities.Count: > 0 } && TryComp(ent, out UseDelayComponent? delay))
             _delay.ResetAllDelays((ent, delay));
     }
 
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        var query = EntityQueryEnumerator<TelescopicBatonComponent>();
-        while (query.MoveNext(out var baton))
-        {
-            if (baton.AlwaysDropItems
-                || !baton.CanDropItems)
-                continue;
-
-            baton.TimeframeAccumulator += TimeSpan.FromSeconds(frameTime);
-            if (baton.TimeframeAccumulator <= baton.AttackTimeframe)
-                continue;
-
-            baton.CanDropItems = false;
-            baton.TimeframeAccumulator = TimeSpan.Zero;
-        }
-    }
-
     private void OnToggled(Entity<TelescopicBatonComponent> baton, ref ItemToggledEvent args)
     {
-        baton.Comp.TimeframeAccumulator = TimeSpan.Zero;
-        baton.Comp.CanDropItems = args.Activated;
+        baton.Comp.NextAttack = args.Activated
+            ? _timing.CurTime + AttackTimeframe
+            : TimeSpan.Zero;
     }
 
     private void OnKnockdownAttempt(Entity<TelescopicBatonComponent> baton, ref KnockdownOnHitAttemptEvent args)
     {
         if (!_toggle.IsActivated(baton.Owner))
             args.Cancelled = true;
-        else if (!baton.Comp.CanDropItems)
-            args.DropItems = false;
+        else
+            args.DropItems = baton.Comp.NextAttack > _timing.CurTime;
     }
 }

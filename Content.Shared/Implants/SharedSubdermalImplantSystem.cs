@@ -196,10 +196,3 @@ public readonly record struct ImplantRemovedEvent
         Implanted = implanted;
     }
 }
-
-/// <summary>
-/// Goobstation - Event that is raised whenever an implant is removed from an implanted entity.
-/// Raised on the implant.
-/// </summary>
-[ByRefEvent]
-public readonly record struct ImplantRemovedEvent(EntityUid Implant, EntityUid Implanted);
