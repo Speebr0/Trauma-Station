@@ -40,6 +40,7 @@ namespace Content.Shared._EinsteinEngines.Flight;
 public abstract class SharedFlightSystem : EntitySystem
 {
     [Dependency] private readonly SharedActionsSystem _actionsSystem = default!;
+    [Dependency] private readonly SharedGravitySystem _gravity = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private readonly SharedStaminaSystem _staminaSystem = default!;
     [Dependency] private readonly SharedHandsSystem _hands = default!;
@@ -49,7 +50,6 @@ public abstract class SharedFlightSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standing = default!;
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly SharedFloatingVisualizerSystem _floating = default!;
 
     public override void Initialize()
     {
@@ -71,8 +71,6 @@ public abstract class SharedFlightSystem : EntitySystem
         SubscribeLocalEvent<FlightComponent, SleepStateChangedEvent>(OnSleep);
         SubscribeLocalEvent<FlightComponent, AttemptClimbEvent>(OnAttemptClimb);
         SubscribeLocalEvent<FlightComponent, IsWeightlessEvent>(OnIsWeightless);
-
-        SubscribeLocalEvent<FloatingVisualsComponent, FlightEvent>(OnFloatingFlight);
     }
 
     public override void Update(float frameTime)
@@ -120,6 +118,7 @@ public abstract class SharedFlightSystem : EntitySystem
         component.TimeUntilFlap = 0f;
         _actionsSystem.SetToggled(component.ToggleActionEntity, component.On);
         RaiseLocalEvent(uid, new FlightEvent(uid, component.On, component.IsAnimated));
+        _gravity.RefreshWeightless(uid);
         _staminaSystem.ToggleStaminaDrain(uid, component.StaminaDrainRate, active, false, component.StaminaDrainKey, uid);
         _movementSpeed.RefreshWeightlessModifiers(uid);
         ToggleCollisionMasks(uid, component);
@@ -337,15 +336,6 @@ public abstract class SharedFlightSystem : EntitySystem
 
         args.Handled = true;
         args.IsWeightless = ent.Comp.On;
-    }
-
-    private void OnFloatingFlight(Entity<FloatingVisualsComponent> ent, ref FlightEvent args)
-    {
-        ent.Comp.CanFloat = args.IsFlying;
-        if (!args.IsFlying || !args.IsAnimated)
-            return;
-
-        _floating.FloatAnimation(ent, ent.Comp.Offset, ent.Comp.AnimationKey, ent.Comp.AnimationTime);
     }
 
     #endregion

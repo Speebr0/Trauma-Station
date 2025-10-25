@@ -154,7 +154,7 @@ public abstract class SharedInjectorSystem : EntitySystem
     {
         if (HasComp<BlockInjectionComponent>(target)) // DeltaV
         {
-            Popup.PopupEntity(Loc.GetString("injector-component-deny-user"), target, user);
+            _popup.PopupClient(Loc.GetString("injector-component-deny-user"), target, user);
             return;
         }
 
@@ -299,7 +299,7 @@ public abstract class SharedInjectorSystem : EntitySystem
     private bool TryInject(Entity<InjectorComponent> injector, EntityUid target,
         Entity<SolutionComponent> targetSolution, EntityUid user, bool asRefill)
     {
-        if (HasComp<BlockInjectionComponent>(targetEntity))  // DeltaV
+        if (HasComp<BlockInjectionComponent>(target))  // DeltaV
             return false;
 
         if (!SolutionContainer.ResolveSolution(injector.Owner, injector.Comp.SolutionName, ref injector.Comp.Solution,

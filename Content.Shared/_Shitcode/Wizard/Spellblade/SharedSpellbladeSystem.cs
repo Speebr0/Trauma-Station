@@ -65,7 +65,7 @@ public abstract class SharedSpellbladeSystem : EntitySystem
 
     private void OnBeforeStatusEffect(Entity<ShieldedComponent> ent, ref BeforeStatusEffectAddedEvent args)
     {
-        if (!ent.Comp.AntiStun || args.Key != StatusEffectStunned)
+        if (!ent.Comp.AntiStun || args.Effect != StatusEffectStunned)
             return;
 
         args.Cancelled = true;

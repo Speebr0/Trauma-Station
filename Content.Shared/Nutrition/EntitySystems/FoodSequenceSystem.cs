@@ -95,13 +95,13 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
             return true;
 
         Metamorf(start, _random.Pick(availableRecipes)); //In general, if there's more than one recipe, the yml-guys screwed up. Maybe some kind of unit test is needed.
-        PredictedQueueDel(start);
+        PredictedQueueDel(start.Owner);
         return true;
     }
 
     private void Metamorf(Entity<FoodSequenceStartPointComponent> start, MetamorphRecipePrototype recipe)
     {
-        var result = SpawnAtPosition(recipe.Result, Transform(start).Coordinates);
+        var result = PredictedSpawnNextToOrDrop(recipe.Result, start);
 
         //Try putting in container
         _transform.DropNextTo(result, (start, Transform(start)));
@@ -117,11 +117,11 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
         _solutionContainer.TryAddSolution(resultSoln.Value, startSolution);
 
         MergeFlavorProfiles(start, result);
-        MergeTrash(start, result);
+        MergeTrash(start.Owner, result);
         MergeTags(start, result);
     }
 
-    private bool TryAddFoodElement(Entity<FoodSequenceStartPointComponent> start, Entity<FoodSequenceElementComponent> element, EntityUid? user = null)
+    private bool TryAddFoodElement(Entity<FoodSequenceStartPointComponent> start, Entity<FoodSequenceElementComponent, EdibleComponent?> element, EntityUid? user = null)
     {
         // we can't add a live mouse to a burger.
         // <Goob> don't care if the burger accepts anything
@@ -136,20 +136,19 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
 
         //looking for a suitable FoodSequence prototype
         // <Trauma>
-        // fall back to any entry if the desired one isn't present, for AcceptAll burgers
-        if (!element.Comp1.Entries.TryGetValue(start.Comp.Key, out var elementProto) && start.Comp.AcceptAll)
+        // default to the correct element type if it exists
+        ProtoId<FoodSequenceElementPrototype>? id;
+        if (!element.Comp1.Entries.TryGetValue(start.Comp.Key, out elementProto) && start.Comp.AcceptAll)
         {
+            // fall back to any entry if the desired one isn't present, with AcceptAll burgers
             foreach (var pair in element.Comp1.Entries)
             {
-                if (pair.Key == start.Comp.Key)
-                {
-                    elementProto = pair.Value;
-                    break;
-                }
+                elementProto = pair.Value;
+                break;
             }
         }
 
-        if (elementProto is not {} id || !_proto.Resolve(id, out var elementIndexed))
+        if (id is not {} elementProto || !_proto.Resolve(elementProto, out var elementIndexed))
             return false;
         // </Trauma>
 
@@ -161,11 +160,18 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
             return false;
         }
 
+        // Prevents plushies with items hidden in them from being added to prevent deletion of items
+        // If more of these types of checks need to be added, this should be changed to an event or something.
+        if (TryComp<SecretStashComponent>(element, out var stashComponent) && stashComponent.ItemContainer.Count != 0)
+        {
+            return false;
+        }
+
         //Generate new visual layer
         var flip = start.Comp.AllowHorizontalFlip && _random.Prob(0.5f);
         var layer = new FoodSequenceVisualLayer(elementIndexed,
             _random.Pick(elementIndexed.Sprites),
-            new Vector2(flip ? -1 : 1, 1),
+            new Vector2(flip ? -elementIndexed.Scale.X : elementIndexed.Scale.X, elementIndexed.Scale.Y),
             new Vector2(
                 _random.NextFloat(start.Comp.MinLayerOffset.X, start.Comp.MaxLayerOffset.X),
                 _random.NextFloat(start.Comp.MinLayerOffset.Y, start.Comp.MaxLayerOffset.Y))
@@ -237,7 +243,7 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
         if (!Resolve(start, ref start.Comp, false))
             return;
 
-        if (!_solutionContainer.TryGetSolution(start, startFood.Solution, out var startSolutionEntity, out var startSolution))
+        if (!_solutionContainer.TryGetSolution(start.Owner, start.Comp.Solution, out var startSolutionEntity, out var startSolution))
             return;
 
         // <Goob> - anythingburgers

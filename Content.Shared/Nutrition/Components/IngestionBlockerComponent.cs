@@ -1,4 +1,5 @@
 using Content.Shared.Nutrition.EntitySystems;
+using Robust.Shared.GameStates; // Trauma
 
 namespace Content.Shared.Nutrition.Components;
 
@@ -10,11 +11,18 @@ namespace Content.Shared.Nutrition.Components;
 ///     masks), then this component might become redundant.
 /// </remarks>
 [RegisterComponent, Access(typeof(IngestionSystem))]
+[NetworkedComponent, AutoGenerateComponentState] // Trauma
 public sealed partial class IngestionBlockerComponent : Component
 {
     /// <summary>
     ///     Is this component currently blocking consumption.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField] // Trauma - networked
     public bool Enabled { get; set; } = true;
+
+    /// <summary>
+    /// Goob - Blocks smoke inhalation when this mask is down, even if internals are off.
+    /// </summary>
+    [DataField]
+    public bool BlockSmokeIngestion;
 }

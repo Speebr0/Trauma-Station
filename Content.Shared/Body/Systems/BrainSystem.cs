@@ -1,3 +1,4 @@
+using Content.Shared._Shitmed.Body.Organ; // Shitmed
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Events;
 using Content.Shared.Ghost;
@@ -54,7 +55,7 @@ public sealed class BrainSystem : EntitySystem
         if (!HasBrain(args.OldBody))
         {
             // Prevents revival, should kill the user within a given timespan too.
-            EnsureComp<DebrainedComponent>(args.Body);
+            EnsureComp<DebrainedComponent>(args.OldBody);
             HandleMind(uid, args.OldBody);
         }
     }

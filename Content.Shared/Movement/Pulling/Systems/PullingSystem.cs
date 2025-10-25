@@ -6,6 +6,7 @@ using Content.Shared._White.Grab;
 using Content.Shared.CombatMode;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Cuffs.Components;
+using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Effects;
@@ -75,12 +76,12 @@ public sealed class PullingSystem : EntitySystem
     [Dependency] private readonly HeldSpeedModifierSystem _clothingMoveSpeed = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedVirtualItemSystem _virtual = default!;
-    [Dependency] private readonly IRobustRandom _random = default!;
     // <Goob>
+    [Dependency] private readonly INetManager _net = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly GrabThrownSystem _grabThrown = default!;
     [Dependency] private readonly SharedCombatModeSystem _combatMode = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
@@ -1013,8 +1014,8 @@ public sealed class PullingSystem : EntitySystem
         var massModifier = _contests.MassContest(puller, pullable);
         pullable.Comp.GrabEscapeChance = Math.Clamp(puller.Comp.EscapeChances[stage] / massModifier * escapeAttemptModifier, 0f, 1f);
 
-        _alertsSystem.ShowAlert(puller, puller.Comp.PullingAlert, puller.Comp.PullingAlertSeverity[stage]);
-        _alertsSystem.ShowAlert(pullable, pullable.Comp.PulledAlert, pullable.Comp.PulledAlertAlertSeverity[stage]);
+        _alertsSystem.ShowAlert(puller.Owner, puller.Comp.PullingAlert, puller.Comp.PullingAlertSeverity[stage]);
+        _alertsSystem.ShowAlert(pullable.Owner, pullable.Comp.PulledAlert, pullable.Comp.PulledAlertAlertSeverity[stage]);
 
         _blocker.UpdateCanMove(pullable);
         _modifierSystem.RefreshMovementSpeedModifiers(puller);

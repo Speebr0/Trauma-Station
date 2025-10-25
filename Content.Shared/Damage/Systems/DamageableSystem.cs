@@ -298,11 +298,13 @@ namespace Content.Shared.Damage
             EntityUid? origin = null,
             bool ignoreGlobalModifiers = false,
             bool canBeCancelled = false,
+            // <Shitmed>
             float partMultiplier = 1.00f,
             TargetBodyPart? targetPart = null,
             bool ignoreBlockers = false,
             SplitDamageBehavior splitDamage = SplitDamageBehavior.Split,
             bool canMiss = true)
+            // </Shitmed>
         {
             if (!uid.HasValue || !_damageableQuery.Resolve(uid.Value, ref damageable, false))
                 return null;
@@ -327,7 +329,8 @@ namespace Content.Shared.Damage
             }
 
             // For entities without a body, apply damage directly
-            return ApplyDamageToEntity(uid.Value, damage, ignoreResistances, interruptsDoAfters, origin, damageable, ignoreBlockers);
+            // Shitmed - add ignoreGlobalModifiers
+            return ApplyDamageToEntity(uid.Value, damage, ignoreResistances, interruptsDoAfters, origin, damageable, ignoreGlobalModifiers, ignoreBlockers);
         }
 
         /// <summary>
@@ -482,6 +485,7 @@ namespace Content.Shared.Damage
             bool interruptsDoAfters,
             EntityUid? origin,
             DamageableComponent? damageable = null,
+            bool ignoreGlobalModifiers = false, // Shitmed
             bool ignoreBlockers = false)
         {
             if (!Resolve(uid, ref damageable) || damage == null)
@@ -525,7 +529,7 @@ namespace Content.Shared.Damage
                     return damage;
             }
 
-            if (!ignoreGlobalModifiers)
+            if (!ignoreGlobalModifiers) // Shitmed
                 damage = ApplyUniversalAllModifiers(damage);
 
             var delta = new DamageSpecifier();

@@ -49,7 +49,7 @@ public sealed partial class EvenHealthChangeEntityEffectSystem : EntityEffectSys
             args.Effect.IgnoreResistances,
             interruptsDoAfters: false,
             damageable: entity.Comp,
-            splitDamage: SplitDamage); // Shitmed Change
+            splitDamage: args.Effect.SplitDamage); // Shitmed Change
     }
 }
 

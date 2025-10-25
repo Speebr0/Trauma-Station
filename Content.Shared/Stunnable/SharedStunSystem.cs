@@ -318,6 +318,12 @@ public abstract partial class SharedStunSystem : EntitySystem
         }
     }
 
+    /// <summary>
+    /// Goob - Try to knockdown an entity, stunning if that fails.
+    /// </summary>
+    public bool KnockdownOrStun(EntityUid uid, TimeSpan? duration)
+        => TryKnockdown(uid, duration) || TryUpdateParalyzeDuration(uid, duration);
+
     public bool TryAddParalyzeDuration(EntityUid uid, TimeSpan? duration) // Goob - made duration optional
     {
         // <Goob> - made duration optional

@@ -158,7 +158,7 @@ public sealed class MimePowersSystem : EntitySystem
         _actionsSystem.RemoveAction(uid, mimePowers.InvisibleWallActionEntity);
         // <Trauma> - Mime Enforcement rewrite
         var ev = new MimeBrokeVowEvent();
-        RaiseLocalEvent(uid, ev);
+        RaiseLocalEvent(uid, ref ev);
         // </Trauma>
     }
 

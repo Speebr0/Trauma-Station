@@ -72,6 +72,11 @@ public sealed class StandingStateSystem : EntitySystem
 
     public bool IsMatchingState(Entity<StandingStateComponent?> entity, bool standing)
     {
+        return standing != IsDown(entity);
+    }
+
+    public bool IsDown(Entity<StandingStateComponent?> entity)
+    {
         if (!Resolve(entity, ref entity.Comp, false))
             return false;
 

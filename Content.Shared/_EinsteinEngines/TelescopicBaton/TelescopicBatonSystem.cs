@@ -48,8 +48,9 @@ public sealed class TelescopicBatonSystem : EntitySystem
     private void OnToggled(Entity<TelescopicBatonComponent> baton, ref ItemToggledEvent args)
     {
         baton.Comp.NextAttack = args.Activated
-            ? _timing.CurTime + AttackTimeframe
+            ? _timing.CurTime + baton.Comp.AttackTimeframe
             : TimeSpan.Zero;
+        Dirty(baton);
     }
 
     private void OnKnockdownAttempt(Entity<TelescopicBatonComponent> baton, ref KnockdownOnHitAttemptEvent args)

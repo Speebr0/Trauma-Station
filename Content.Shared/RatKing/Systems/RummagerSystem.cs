@@ -30,7 +30,7 @@ public sealed class RummagerSystem : EntitySystem
     // Goobstation
     public void OnComponentInit(EntityUid uid, RummageableComponent component, ComponentInit args)
     {
-        component.LastLooted = _gameTiming.CurTime;
+        component.LastLooted = _timing.CurTime;
         Dirty(uid, component);
     }
 

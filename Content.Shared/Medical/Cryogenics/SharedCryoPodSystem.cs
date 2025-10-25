@@ -1,4 +1,5 @@
 using Content.Shared.Administration.Logs;
+using Content.Shared.Bed.Sleep; // Shitmed
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chemistry;
@@ -31,6 +32,7 @@ namespace Content.Shared.Medical.Cryogenics;
 
 public abstract partial class SharedCryoPodSystem : EntitySystem
 {
+    [Dependency] private readonly SleepingSystem _sleeping = default!; // Shitmed
     [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
     [Dependency] private readonly StandingStateSystem _standingState = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
@@ -184,7 +186,7 @@ public abstract partial class SharedCryoPodSystem : EntitySystem
         }
         else
         {
-            var insidePod = entity.Comp.BodyContainer.ContainedEntity; // Shitmed
+            var insidePod = ent.Comp.BodyContainer.ContainedEntity; // Shitmed
             RemComp<ActiveCryoPodComponent>(ent);
             _ui.CloseUi(ent.Owner, HealthAnalyzerUiKey.Key);
             // <Shitmed>

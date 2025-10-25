@@ -111,8 +111,14 @@ public sealed class SlipperySystem : EntitySystem
 
     public bool CanSlip(EntityUid uid, EntityUid toSlip) // Goob edit
     {
-        return !_container.IsEntityInContainer(uid)
-                && _status.CanAddStatusEffect(toSlip, SharedStunSystem.KnockdownId); // Trauma - replace StunId with KnockdownId
+        // <Trauma> check if knockdown event is cancelled instead of if stun can be applied
+        if (_container.IsEntityInContainer(uid))
+            return false;
+
+        var ev = new KnockDownAttemptEvent(false, false, TimeSpan.Zero);
+        RaiseLocalEvent(toSlip, ref ev);
+        return !ev.Cancelled;
+        // </Trauma>
     }
 
     // Goob - added predicted
