@@ -945,7 +945,7 @@ public sealed class PullingSystem : EntitySystem
         // It's blocking stage update, maybe better UX?
         if (puller.Comp.GrabStage == GrabStage.Suffocate)
         {
-            _stamina.TakeStaminaDamage(pullable, puller.Comp.SuffocateGrabStaminaDamage, applyResistances: true);
+            _stamina.TakeStaminaDamage(pullable, puller.Comp.SuffocateGrabStaminaDamage);
 
             var comboEv = new ComboAttackPerformedEvent(puller.Owner, pullable.Owner, puller.Owner, ComboAttackType.Grab);
             RaiseLocalEvent(puller.Owner, comboEv);

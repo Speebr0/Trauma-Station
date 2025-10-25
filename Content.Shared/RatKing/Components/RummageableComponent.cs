@@ -22,10 +22,10 @@ public sealed partial class RummageableComponent : Component
     public bool Looted;
 
     /// <summary>
-    /// DeltaV: Last time the object was looted, used to check if cooldown has expired
+    /// DeltaV: When it can be looted next
     /// </summary>
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
-    public TimeSpan LastLooted = TimeSpan.Zero;
+    public TimeSpan NextLoot;
 
     /// <summary>
     /// DeltaV: Minimum time between rummage attempts

@@ -1,4 +1,5 @@
 using Content.Shared.Abilities.Mime;
+using Content.Trauma.Common.Abilities.Mime;
 using Content.Trauma.Shared.EntityEffects;
 using Robust.Shared.Prototypes;
 

@@ -465,12 +465,13 @@ public abstract partial class SharedGunSystem : EntitySystem
             var emptyGunShotEvent = new OnEmptyGunShotEvent(user);
             RaiseLocalEvent(gunUid, ref emptyGunShotEvent);
 
-            // Goobstation
+            // <Goob>
             if (isRechargingGun)
             {
                 gun.NextFire = lastFire; // for empty PKAs, don't play no-ammo sound and don't trigger the reload
-                return;
+                return false;
             }
+            // </Goob>
 
             if (!gun.LockOnTargetBurst || gun.ShootCoordinates == null) // Goobstation
                 gun.Target = null;

@@ -219,11 +219,9 @@ public abstract class SharedSpellsSystem : EntitySystem
             return;
         }
 
-        if (TryComp(ev.Target, out StatusEffectsComponent? status))
-        {
-            Stun.TryParalyze(ev.Target, ev.ParalyzeDuration, true, status);
-            _jitter.DoJitter(ev.Target, ev.StutterDuration, true, status: status);
-        }
+        // TODO: all this shit can be entity effects
+        Stun.TryUpdateParalyzeDuration(ev.Target, ev.ParalyzeDuration);
+        _jitter.DoJitter(ev.Target, ev.StutterDuration, true);
 
         EnsureComp<CluwneComponent>(ev.Target);
 
@@ -241,12 +239,9 @@ public abstract class SharedSpellsSystem : EntitySystem
             return;
         }
 
-        if (TryComp(ev.Target, out StatusEffectsComponent? status))
-        {
-            Stun.TryParalyze(ev.Target, ev.ParalyzeDuration, true, status);
-            _jitter.DoJitter(ev.Target, ev.JitterStutterDuration, true, status: status);
-            _stutter.DoStutter(ev.Target, ev.JitterStutterDuration, true, status);
-        }
+        Stun.TryUpdateParalyzeDuration(ev.Target, ev.ParalyzeDuration);
+        _jitter.DoJitter(ev.Target, ev.JitterStutterDuration, refresh: true);
+        _stutter.DoStutter(ev.Target, ev.JitterStutterDuration, refresh: true);
 
         var targetWizard = HasComp<WizardComponent>(ev.Target) || HasComp<ApprenticeComponent>(ev.Target);
 
@@ -269,10 +264,7 @@ public abstract class SharedSpellsSystem : EntitySystem
             return;
         }
 
-        if (!TryComp(ev.Target, out StatusEffectsComponent? status))
-            return;
-
-        Stun.TryParalyze(ev.Target, ev.ParalyzeDuration, true, status);
+        Stun.TryUpdateParalyzeDuration(ev.Target, ev.ParalyzeDuration);
 
         var targetWizard = HasComp<WizardComponent>(ev.Target) || HasComp<ApprenticeComponent>(ev.Target);
 
@@ -281,7 +273,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         if (!targetWizard)
             MakeMime(ev.Target);
         else
-            _statusEffects.TryAddStatusEffect<MutedComponent>(ev.Target, "Muted", ev.WizardMuteDuration, true, status);
+            _statusEffects.TryAddStatusEffect<MutedComponent>(ev.Target, "Muted", ev.WizardMuteDuration, true);
 
         ev.Handled = true;
     }
@@ -399,7 +391,6 @@ public abstract class SharedSpellsSystem : EntitySystem
         var targets = Lookup.GetEntitiesInRange<DamageableComponent>(coords, ev.KnockdownRange);
         var ghostQuery = GetEntityQuery<GhostComponent>();
         var spectralQuery = GetEntityQuery<SpectralComponent>();
-        var statusQuery = GetEntityQuery<StatusEffectsComponent>();
         var bodyPartQuery = GetEntityQuery<BodyPartComponent>();
         foreach (var (target, damageable) in targets)
         {
@@ -419,13 +410,10 @@ public abstract class SharedSpellsSystem : EntitySystem
                 origin: ev.Performer,
                 targetPart: TargetBodyPart.All);
 
-            if (!statusQuery.TryComp(target, out var status))
-                continue;
-
             if (HasComp<SiliconComponent>(target) || HasComp<BorgChassisComponent>(target))
-                Stun.TryParalyze(target, ev.SiliconStunTime / range, true, status);
+                Stun.TryUpdateParalyzeDuration(target, ev.SiliconStunTime / range);
             else
-                Stun.KnockdownOrStun(target, ev.KnockdownTime / range, true, status);
+                Stun.KnockdownOrStun(target, ev.KnockdownTime / range);
         }
 
         ev.Handled = true;

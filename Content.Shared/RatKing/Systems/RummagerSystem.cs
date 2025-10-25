@@ -30,7 +30,7 @@ public sealed class RummagerSystem : EntitySystem
     // Goobstation
     public void OnComponentInit(EntityUid uid, RummageableComponent component, ComponentInit args)
     {
-        component.LastLooted = _timing.CurTime;
+        component.NextLoot = _timing.CurTime;
         Dirty(uid, component);
     }
 
@@ -76,7 +76,7 @@ public sealed class RummagerSystem : EntitySystem
         if (now < ent.Comp.NextLoot)
             return;
 
-        component.NextLoot = now + ent.Comp.RummageCooldown;
+        ent.Comp.NextLoot = now + ent.Comp.RummageCooldown;
         // </DeltaV>
         Dirty(ent, ent.Comp);
         _audio.PlayPredicted(ent.Comp.Sound, ent, args.User);

@@ -16,7 +16,7 @@ namespace Content.Goobstation.Shared.Knockdown;
 
 public sealed class KnockdownOnCollideSystem : EntitySystem
 {
-    [Dependency] private readonly SharedStunnableSystem _stun = default!;
+    [Dependency] private readonly SharedStunSystem _stun = default!;
     [Dependency] private readonly SharedHulkSystem _hulk = default!;
 
     public override void Initialize()

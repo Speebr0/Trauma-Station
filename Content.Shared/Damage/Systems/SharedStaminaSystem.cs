@@ -150,7 +150,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         if (component.Critical)
             return;
 
-        TakeStaminaDamage(uid, args.StaminaDamage, component, source: args.Source, applyResistances: true);
+        TakeStaminaDamage(uid, args.StaminaDamage, component, source: args.Source);
 
         args.PopupPrefix = "disarm-action-shove-";
         args.IsStunned = component.Critical;
@@ -227,7 +227,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         if (!TryComp<StaminaComponent>(args.Embedded, out var stamina))
             return;
 
-        TakeStaminaDamage(args.Embedded, component.Damage, stamina, source: uid, applyResistances: true);
+        TakeStaminaDamage(args.Embedded, component.Damage, stamina, source: uid);
     }
 
     private void OnThrowHit(EntityUid uid, StaminaDamageOnCollideComponent component, ThrowDoHitEvent args)
@@ -313,9 +313,9 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         overtime!.Damage = hasComp ? overtime.Damage + value : value;
     }
 
-    // goob edit - stunmeta
     public void TakeStaminaDamage(EntityUid uid, float value, StaminaComponent? component = null,
-        EntityUid? source = null, EntityUid? with = null, bool visual = true, SoundSpecifier? sound = null, bool immediate = true, bool applyResistances = false)
+        EntityUid? source = null, EntityUid? with = null, bool visual = true, SoundSpecifier? sound = null, bool ignoreResist = false,
+        bool immediate = true) // Goob - stunmeta
     {
         if (!Resolve(uid, ref component, false)
         || value == 0) // no damage???
@@ -326,7 +326,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         if (ev.Cancelled)
             return;
 
-        if (applyResistances)
+        if (!ignoreResist)
             value = ev.Value;
 
         value = UniversalStaminaDamageModifier * value;
@@ -399,7 +399,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
     }
 
     // Goob edit - stamina drains
-    public void ToggleStaminaDrain(EntityUid target, float drainRate, bool enabled, bool modifiesSpeed, string key, EntityUid? source = null, bool applyResistances = false)
+    public void ToggleStaminaDrain(EntityUid target, float drainRate, bool enabled, bool modifiesSpeed, string key, EntityUid? source = null, bool ignoreResist = false)
     {
         if (!TryComp<StaminaComponent>(target, out var stamina))
             return;
@@ -409,7 +409,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
 
         if (enabled)
         {
-            stamina.ActiveDrains.TryAdd(key, (drainRate, modifiesSpeed, GetNetEntity(actualSource), applyResistances));
+            stamina.ActiveDrains.TryAdd(key, (drainRate, modifiesSpeed, GetNetEntity(actualSource), ignoreResist));
             EnsureComp<ActiveStaminaComponent>(target);
         }
         else
@@ -426,8 +426,8 @@ public abstract partial class SharedStaminaSystem : EntitySystem
         if (!Resolve(target, ref component, false))
             return;
 
-        if (component.ActiveDrains.ContainsKey(key))
-            component.ActiveDrains[key] = (newValue, component.ActiveDrains[key].Item2, component.ActiveDrains[key].Item3, component.ActiveDrains[key].Item4);
+        if (component.ActiveDrains.TryGetValue(key, out var old))
+            component.ActiveDrains[key] = (newValue, old.Item2, old.Item3, old.Item4);
 
         Dirty(target, component);
     }
@@ -450,13 +450,13 @@ public abstract partial class SharedStaminaSystem : EntitySystem
                 continue;
             }
             if (comp.ActiveDrains.Count > 0)
-                foreach (var (drainRate, _, source, applyResistances) in comp.ActiveDrains.Values)
+                foreach (var (drainRate, _, source, ignoreResist) in comp.ActiveDrains.Values)
                     TakeStaminaDamage(uid,
                     drainRate * frameTime,
                     comp,
                     source: GetEntity(source),
                     visual: false,
-                    applyResistances: applyResistances);
+                    ignoreResist: ignoreResist);
 
             // Shouldn't need to consider paused time as we're only iterating non-paused stamina components.
             var nextUpdate = comp.NextUpdate;

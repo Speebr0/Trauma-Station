@@ -6,7 +6,7 @@
 
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Traits.Assoerted;
+using Content.Shared.Traits.Assorted;
 
 namespace Content.Goobstation.Shared.Traits.Systems;
 

@@ -139,9 +139,9 @@ public abstract partial class SharedStunSystem : EntitySystem
         // <Goob>
         var modifierEv = new GetClothingStunModifierEvent(uid);
         RaiseLocalEvent(modifierEv);
-        time *= modifierEv.Modifier;
+        duration *= modifierEv.Modifier;
 
-        if (time <= TimeSpan.Zero)
+        if (duration <= TimeSpan.Zero)
             return false;
         // </Goob>
 
@@ -164,8 +164,11 @@ public abstract partial class SharedStunSystem : EntitySystem
     private void OnStunnedSuccessfully(EntityUid uid, TimeSpan? duration)
     {
         // <Goob>
-        _jitter.DoJitter(uid, duration, refresh);
-        _stutter.DoStutter(uid, duration, refresh);
+        if (duration is {} time)
+        {
+            _jitter.DoJitter(uid, time, refresh: true);
+            _stutter.DoStutter(uid, time, refresh: true);
+        }
         // </Goob>
 
         var ev = new StunnedEvent(); // todo: rename event or change how it is raised - this event is raised each time duration of stun was externally changed
@@ -229,7 +232,7 @@ public abstract partial class SharedStunSystem : EntitySystem
         // <Goob>
         if (time != null)
         {
-            var modifierEv = new GetClothingStunModifierEvent(uid);
+            var modifierEv = new GetClothingStunModifierEvent(entity);
             RaiseLocalEvent(modifierEv);
             time *= modifierEv.Modifier;
 

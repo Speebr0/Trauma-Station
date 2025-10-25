@@ -136,7 +136,7 @@ public abstract class SharedShadowCloakSystem : EntitySystem
 
         if (ent.Comp.DebuffOnEarlyReveal)
         {
-            _stun.KnockDownOrStun(ent, ent.Comp.KnockdownTime, true);
+            _stun.KnockdownOrStun(ent, ent.Comp.KnockdownTime);
             _status.TryUpdateStatusEffectDuration(ent, ent.Comp.SlowdownEffect, ent.Comp.SlowdownTime);
         }
 
@@ -246,7 +246,7 @@ public abstract class SharedShadowCloakSystem : EntitySystem
     {
         Startup(ent);
 
-        _status.TryUpdateStatusEffectDuration(ent, ent.Comp.Effect, null); // runs indefinitely
+        _status.TryUpdateStatusEffectDuration(ent, ent.Comp.Status, null); // runs indefinitely
 
         if (_net.IsClient)
             return;

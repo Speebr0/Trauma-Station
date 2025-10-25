@@ -208,10 +208,12 @@ public abstract class SharedFlashSystem : EntitySystem
         if (!_statusEffectsSystem.TryAddStatusEffect<FlashedComponent>(target, FlashedKey, flashDuration, true))
             return;
 
+        // <Goob> - multiply durations by multiplier
         if (stunDuration != null)
-            _stun.TryParalyze(target, stunDuration.Value * multiplier, true); // Goob edit
+            _stun.TryUpdateParalyzeDuration(target, stunDuration.Value * multiplier);
         else
-            _stun.TrySlowdown(target, flashDuration * multiplier, true, slowTo, slowTo); // Goob edit
+            _movementMod.TryUpdateMovementSpeedModDuration(target, MovementModStatusSystem.FlashSlowdown, flashDuration * multiplier, slowTo);
+        // </Goob>
 
         if (displayPopup && user != null && target != user && Exists(user.Value))
         {

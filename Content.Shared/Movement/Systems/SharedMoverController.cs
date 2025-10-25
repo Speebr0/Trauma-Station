@@ -220,7 +220,6 @@ public abstract partial class SharedMoverController : VirtualController
 
         InitializeInput();
         InitializeRelay();
-        InitializeCVars();
         Subs.CVar(_configManager, CCVars.RelativeMovement, value => _relativeMovement = value, true);
         Subs.CVar(_configManager, CCVars.MinFriction, value => _minDamping = value, true);
         Subs.CVar(_configManager, CCVars.AirFriction, value => _airDamping = value, true);

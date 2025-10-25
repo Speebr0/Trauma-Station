@@ -137,7 +137,7 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
         //looking for a suitable FoodSequence prototype
         // <Trauma>
         // default to the correct element type if it exists
-        ProtoId<FoodSequenceElementPrototype>? id;
+        ProtoId<FoodSequenceElementPrototype> elementProto = default!;
         if (!element.Comp1.Entries.TryGetValue(start.Comp.Key, out elementProto) && start.Comp.AcceptAll)
         {
             // fall back to any entry if the desired one isn't present, with AcceptAll burgers
@@ -148,7 +148,7 @@ public sealed class FoodSequenceSystem : SharedFoodSequenceSystem
             }
         }
 
-        if (id is not {} elementProto || !_proto.Resolve(elementProto, out var elementIndexed))
+        if (elementProto == default! || !_proto.Resolve(elementProto, out var elementIndexed))
             return false;
         // </Trauma>
 

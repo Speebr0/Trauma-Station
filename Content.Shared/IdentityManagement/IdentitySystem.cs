@@ -214,15 +214,16 @@ public sealed class IdentitySystem : EntitySystem
     /// Gets an 'identity representation' of an entity, with their true name being the entity name
     /// and their 'presumed name' and 'presumed job' being the name/job on their ID card, if they have one.
     /// </summary>
-    private IdentityRepresentation GetIdentityRepresentation(Entity<InventoryComponent?, HumanoidAppearanceComponent?> target)
+    // Goob - added raiseEvent
+    private IdentityRepresentation GetIdentityRepresentation(Entity<InventoryComponent?, HumanoidAppearanceComponent?> target, bool raiseEvent = true)
     {
         // <Goob>
-        if (raiseIdentityRepresentationEntityEvent)
+        if (raiseEvent)
         {
             var ev = new GetIdentityRepresentationEntityEvent();
             RaiseLocalEvent(target, ref ev);
             if (ev.Uid != null)
-                return GetIdentityRepresentation(ev.Uid.Value, raiseIdentityRepresentationEntityEvent: false);
+                return GetIdentityRepresentation(ev.Uid.Value, raiseEvent: false); // no infinite recursion
         }
         // </Goob>
 
@@ -262,7 +263,7 @@ public sealed class IdentitySystem : EntitySystem
     {
         var target = uid;
 
-        if (_inventorySystem.TryGetContainingEntity(uid, out var containing))
+        if (_inventory.TryGetContainingEntity(uid, out var containing))
             target = containing.Value;
 
         QueueIdentityUpdate(target);

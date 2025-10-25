@@ -62,7 +62,7 @@ public abstract class SharedHulkSystem : EntitySystem
 
     private void OnBeforeStatusEffect(Entity<HulkComponent> ent, ref BeforeStatusEffectAddedEvent args)
     {
-        if (args.Key != StatusEffectStunned)
+        if (args.Effect != StatusEffectStunned)
             return;
 
         Roar(ent);
