@@ -444,3 +444,29 @@ Entries:
       message: Vitamin gained the healing lost from nutriment values.
   id: 49
   time: '2025-10-24T21:19:14.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Rev Tech Analyzer
+    - type: Add
+      message: Rev reflective armor
+    - type: Add
+      message: Updated fire sprites
+    - type: Add
+      message: Rev boots, with caltrop resist
+    - type: Add
+      message: A WHOLE REV FLAMETHROWER
+    - type: Add
+      message: Four four new rev datachips
+    - type: Add
+      message: Rev AI lawboard
+    - type: Add
+      message: Command pinpointer
+    - type: Add
+      message: Rev shieldripper
+    - type: Add
+      message: Rev fake mindshield
+    - type: Fix
+      message: Bugs
+  id: 50
+  time: '2025-10-25T16:23:58.0000000+00:00'
