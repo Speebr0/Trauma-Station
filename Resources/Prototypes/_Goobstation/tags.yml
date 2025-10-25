@@ -58,6 +58,9 @@
   id: AthiestsFedora
 
 - type: Tag
+  id: AtmosBackTank # Assmos - Extinguisher Nozzle
+
+- type: Tag
   id: AntagGateway
 
 - type: Tag
@@ -310,6 +313,9 @@
   id: HereticBladeBlade
 
 - type: Tag
+  id: HereticCarving
+
+- type: Tag
   id: HereticItem
 
 - type: Tag
@@ -367,6 +373,9 @@
   id: LaserLMGBackpack
 
 - type: Tag
+  id: Lighter # for whitelisted cig pack strorage
+
+- type: Tag
   id: Liver
 
 # tag roundstart rules that should be run alone
@@ -389,10 +398,16 @@
   id: MagazineMagnumLeverRifle
 
 - type: Tag
+  id: MagazineMagnumSubMachineGun
+
+- type: Tag
   id: MagazineNailgun
 
 - type: Tag
   id: MagazineShotgunHeavy
+
+- type: Tag
+  id: MagazineShotgunLeverRifle
 
 - type: Tag
   id: MagazineSmart
@@ -470,6 +485,9 @@
   id: NonLethalGrenade
 
 - type: Tag
+  id: Nozzle # Assmos - Extinguisher Nozzle
+
+- type: Tag
   id: NukeOpsCommanderUplink
 
 - type: Tag
@@ -483,6 +501,9 @@
 
 - type: Tag
   id: NunHood
+
+- type: Tag
+  id: Oni # for oni shitcode
 
 - type: Tag
   id: Organ
@@ -528,6 +549,9 @@
 
 - type: Tag
   id: SnapPop
+
+- type: Tag
+  id: Softsuit # Used for Yowies outerslot whitelist
 
 - type: Tag
   id: SolarAssemblyFlatpack # stupid upstream thing used it in a construction graph
