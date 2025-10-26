@@ -304,8 +304,8 @@
         Heat: 0
   - type: PolymorphOnTrigger
     polymorph: WizardWabbajack
-  - type: TriggerWhitelist
-    whitelist:
+  - type: WhitelistTriggerCondition
+    userWhitelist:
       components:
       - Body
   - type: TriggerOnProjectileHit

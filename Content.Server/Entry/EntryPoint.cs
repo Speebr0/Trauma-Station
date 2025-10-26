@@ -179,8 +179,8 @@ namespace Content.Server.Entry
         [Dependency] private readonly CVarControlManager _cvarCtrl = default!;
         [Dependency] private readonly ContentLocalizationManager _loc = default!;
         [Dependency] private readonly ContentNetworkResourceManager _netResMan = default!;
-        [Dependency] private readonly DiscordChatLink _discordChatLink = default!;
-        [Dependency] private readonly DiscordLink _discordLink = default!;
+        //[Dependency] private readonly DiscordChatLink _discordChatLink = default!; // Trauma - wasn't cherry picked
+        //[Dependency] private readonly DiscordLink _discordLink = default!; // Trauma
         [Dependency] private readonly EuiManager _euiManager = default!;
         [Dependency] private readonly GhostKickManager _ghostKick = default!;
         [Dependency] private readonly IAdminManager _admin = default!;

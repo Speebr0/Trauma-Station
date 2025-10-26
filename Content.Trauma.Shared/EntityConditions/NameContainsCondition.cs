@@ -15,7 +15,7 @@ public sealed partial class NameContainsCondition : EntityConditionBase<NameCont
     [DataField(required: true)]
     public string Name = string.Empty;
 
-    public override string GuidebookExplanation(IPrototypeManager prototype)
+    public override string EntityConditionGuidebookText(IPrototypeManager prototype)
         => Loc.GetString("reagent-effect-condition-guidebook-has-mob-name", ("name", Name));
 }
 

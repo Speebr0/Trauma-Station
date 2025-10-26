@@ -20,13 +20,13 @@ public sealed class DrunknessLimitSystem : EntitySystem
 
         SubscribeLocalEvent<DrunknessLimitComponent, StatusEffectEndTimeUpdatedEvent>(OnEndTimeUpdated);
 
-        Subs.CVar(_cfg, GoobCVars.MaxDrunkLimit, x => _maxDrunkLimit = TimeSpan.FromSeconds(x), true);
+        Subs.CVar(_cfg, GoobCVars.MaxDrunkTime, x => _maxDrunkLimit = TimeSpan.FromSeconds(x), true);
     }
 
     protected void OnEndTimeUpdated(Entity<DrunknessLimitComponent> ent, ref StatusEffectEndTimeUpdatedEvent args)
     {
         var maxEnd = _timing.CurTime + _maxDrunkLimit;
         if (args.EndTime is not {} endTime || endTime > maxEnd)
-            _status.SetStatusEffectEndTime(maxEnd);
+            _status.SetStatusEffectEndTime(ent.Owner, maxEnd);
     }
 }

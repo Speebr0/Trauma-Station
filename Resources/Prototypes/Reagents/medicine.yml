@@ -1476,11 +1476,21 @@
       effects:
       - !type:SatiateThirst
         factor: 3
-      - !type:CleanseCult # DeltaV - Cosmic Cult
+      - !type:AddComponents # DeltaV - Cosmic Cult
         conditions:
         - !type:ReagentCondition
           reagent: Holywater
           min: 10
+        - !type:WhitelistCondition
+          whitelist:
+            components:
+            - CosmicCult
+            - RogueAscendedInfection
+          blacklist:
+            components:
+            - CleanseCult
+        components:
+        - type: CleanseCult
       - !type:HealthChange
         conditions:
         - !type:TotalDamageCondition

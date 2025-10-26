@@ -190,7 +190,6 @@
   - type: StatusEffects
     allowed:
     - Stun
-    - KnockedDown
     - SlowedDown
     - Flashed # Goobstation - counter to shitter drones
   - type: SlowOnDamage

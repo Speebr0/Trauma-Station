@@ -12,7 +12,7 @@
 using System.Linq;
 using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
-using Content.Server.Emp;
+using Content.Shared.Emp;
 using Content.Server.Explosion.EntitySystems;
 using Content.Shared.Damage;
 using Content.Shared.Mobs.Components;

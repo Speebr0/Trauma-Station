@@ -1,4 +1,8 @@
-using Content.Shared._White.Blocking; // Goob
+// <Trauma>
+using Content.Shared._White.Blocking;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.PowerCell.Components;
+// </Trauma>
 using Content.Shared.Emp;
 using Content.Shared.Power.Components;
 
@@ -6,6 +10,8 @@ namespace Content.Shared.Power.EntitySystems;
 
 public abstract class SharedBatterySystem : EntitySystem
 {
+    [Dependency] private readonly ItemSlotsSystem _slots = default!; // _Trauma
+
     public override void Initialize()
     {
         base.Initialize();
@@ -43,5 +49,21 @@ public abstract class SharedBatterySystem : EntitySystem
     public virtual bool TryUseCharge(EntityUid uid, float value, BatteryComponent? battery = null)
     {
         return false;
+    }
+
+    /// <summary>
+    /// Trauma - Gets the battery for an entity either if it is a battery, or from its power cell if it has a slot.
+    /// </summary>
+    public Entity<BatteryComponent>? GetBattery(EntityUid uid)
+    {
+        if (TryComp<BatteryComponent>(uid, out var battery))
+            return (uid, battery);
+
+        // not a battery and no slot found
+        if (!TryComp<PowerCellSlotComponent>(uid, out var slotComp) ||
+            _slots.GetItemOrNull(uid, slotComp.CellSlotId) is not {} cell)
+            return null;
+
+        return GetBattery(cell);
     }
 }

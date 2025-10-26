@@ -48,6 +48,6 @@ public sealed class KnockdownOnCollideSystem : EntitySystem
         if (HasComp<RustbringerComponent>(target))
             return;
 
-        _stun.TryKnockdown(target, null, null, drop: component.DropItems);
+        _stun.TryKnockdown(target, time: null, drop: component.DropItems);
     }
 }

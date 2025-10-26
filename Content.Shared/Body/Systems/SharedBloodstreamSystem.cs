@@ -1,3 +1,4 @@
+// <Trauma>
 using Content.Goobstation.Common.Bloodstream;
 using Content.Goobstation.Maths.FixedPoint;
 using Content.Shared._Shitmed.Damage;
@@ -5,6 +6,8 @@ using Content.Shared._Shitmed.Medical.Surgery.Consciousness;
 using Content.Shared._Shitmed.Medical.Surgery.Traumas.Components;
 using Content.Shared._Shitmed.Medical.Surgery.Wounds.Components;
 using Content.Shared._Shitmed.Targeting;
+using System.Linq;
+// </Trauma>
 using Content.Shared.Alert;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Events;
@@ -28,11 +31,10 @@ using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
-using System.Linq;
 
 namespace Content.Shared.Body.Systems;
 
-public abstract partial class SharedBloodstreamSystem : EntitySystem
+public abstract partial class SharedBloodstreamSystem : EntitySystem // Shitmed - made partial
 {
     public static readonly EntProtoId Bloodloss = "StatusEffectBloodloss";
 
@@ -53,15 +55,15 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
 
         SubscribeLocalEvent<BloodstreamComponent, MapInitEvent>(OnMapInit);
         SubscribeLocalEvent<BloodstreamComponent, EntRemovedFromContainerMessage>(OnEntRemoved);
-        //SubscribeLocalEvent<BloodstreamComponent, ReactionAttemptEvent>(OnReactionAttempt); // Goobstation - moved to Server
-        //SubscribeLocalEvent<BloodstreamComponent, SolutionRelayEvent<ReactionAttemptEvent>>(OnReactionAttempt); // Goobstation - moved to Server
+        SubscribeLocalEvent<BloodstreamComponent, ReactionAttemptEvent>(OnReactionAttempt);
+        SubscribeLocalEvent<BloodstreamComponent, SolutionRelayEvent<ReactionAttemptEvent>>(OnReactionAttempt);
         SubscribeLocalEvent<BloodstreamComponent, DamageChangedEvent>(OnDamageChanged);
         SubscribeLocalEvent<BloodstreamComponent, HealthBeingExaminedEvent>(OnHealthBeingExamined);
         SubscribeLocalEvent<BloodstreamComponent, BeingGibbedEvent>(OnBeingGibbed);
         SubscribeLocalEvent<BloodstreamComponent, ApplyMetabolicMultiplierEvent>(OnApplyMetabolicMultiplier);
         SubscribeLocalEvent<BloodstreamComponent, RejuvenateEvent>(OnRejuvenate);
 
-        InitializeWounds();
+        InitializeWounds(); // Shitmed
     }
 
     public override void Update(float frameTime)
@@ -204,8 +206,6 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
             entity.Comp.TemporarySolution = null;
     }
 
-    // Goob edit - ported these 2 events to Server since we don't have predicted EntityEffects yet
-    /*
     private void OnReactionAttempt(Entity<BloodstreamComponent> ent, ref ReactionAttemptEvent args)
     {
         if (args.Cancelled)
@@ -244,7 +244,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
 
         OnReactionAttempt(ent, ref args.Event);
     }
-    */
+
 
     private void OnDamageChanged(Entity<BloodstreamComponent> ent, ref DamageChangedEvent args)
     {
@@ -575,9 +575,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
         var dnaData = new DnaData();
 
         if (TryComp<DnaComponent>(uid, out var donorComp) && donorComp.DNA != null)
-        {
             dnaData.DNA = donorComp.DNA;
-        }
         else
             dnaData.DNA = Loc.GetString("forensics-dna-unknown");
 

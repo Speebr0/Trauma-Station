@@ -170,7 +170,6 @@
     baseSprintSpeed : 4
   - type: StatusEffects
     allowed:
-    - KnockedDown
     - SlowedDown
     - Stutter
     - Flashed

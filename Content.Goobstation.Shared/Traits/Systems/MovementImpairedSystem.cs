@@ -16,7 +16,7 @@ public sealed partial class MovementImpairedSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MovementImpairedComponent, ExaminedEvent>(OnExamined);
+        SubscribeLocalEvent<ImpairedMobilityComponent, ExaminedEvent>(OnExamined);
     }
 
     private void OnExamined(Entity<ImpairedMobilityComponent> ent, ref ExaminedEvent args)

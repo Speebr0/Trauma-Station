@@ -542,7 +542,7 @@
         group: Medicine
         amount: -3
         conditions:
-        - !type:UniqueBloodstreamChemThreshold
+        - !type:BloodstreamCountCondition
           max: 3 # the gist is, 2 and below this sucks, 3 and above it's great; mix with water etc for good results
       - !type:AdjustReagent
         group: Poison
@@ -556,7 +556,7 @@
             Poison: -1
       - !type:HealthChange
         conditions:
-        - !type:UniqueBloodstreamChemThreshold
+        - !type:BloodstreamCountCondition
           min: 2
         damage:
           types:
@@ -590,7 +590,7 @@
       effects:
       - !type:HealthChange
         conditions:
-        - !type:UniqueBloodstreamChemThreshold
+        - !type:BloodstreamCountCondition
           max: 2
         damage:
           types:
@@ -600,7 +600,7 @@
           groups:
             Brute: 1
         conditions:
-        - !type:UniqueBloodstreamChemThreshold
+        - !type:BloodstreamCountCondition
           min: 1 # potential use for checking bloodstream cleanliness?
         - !type:MetabolizerTypeCondition
           type: [ Yowie ]
@@ -704,7 +704,7 @@
         - !type:ReagentCondition
           reagent: AmmoniatedMercury
           max: 10
-        - !type:TypedDamageThreshold
+        - !type:TypedDamageCondition
           damage:
             groups:
               Brute: 1
@@ -805,127 +805,6 @@
 
 # Externally applied meds
 
-#- type: reagent # Trauma
-#  id: SilverSulfadiazine
-#  name: reagent-name-silver-sulfadiazine
-#  group: Medicine
-#  desc: reagent-desc-silver-sulfadiazine
-#  physicalDesc: reagent-physical-desc-viscous
-#  flavor: bitter
-#  color: "#ffed24"
-#  plantMetabolism:
-#    - !type:PlantAdjustWeeds
-#      amount: -8
-#    - !type:PlantAdjustHealth
-#      amount: -20
-#  worksOnTheDead: true
-#  reactiveEffects:
-#    Acidic:
-#      methods: [ Touch ]
-#      effects:
-#      - !type:HealthChange
-#        scaleByQuantity: true
-#        ignoreResistances: false
-#        ignoreBlockers: false
-#        damage:
-#          types:
-#            Heat: -1.5
-#            Cold: -1.5
-#            Shock: -1
-#            Caustic: -1
-#        conditions:
-#        - !type:HasComponentOnEquipmentCondition
-#          components:
-#          - type: PressureProtection # can't get through this to reach the bodyparts!
-#          invert: true
-#  metabolisms:
-#    Medicine:
-#      metabolismRate: 3
-#      effects:
-#      - !type:HealthChange
-#        damage:
-#          types:
-#            Heat: -1
-#            Cold: -1
-#      - !type:HealthChange
-#        damage:
-#          types:
-#            Poison: 2
-#        conditions:
-#        - !type:MetabolizerTypeCondition
-#          type: [ Yowie ]
-#          inverted: true
-
-#- type: reagent # Trauma
-#  id: StypticCrystalCatalyst
-#  name: reagent-name-styptic-crystal-catalyst
-#  group: Medicine
-#  desc: reagent-desc-styptic-crystal-catalyst
-#  physicalDesc: reagent-physical-desc-shiny
-#  flavor: bitter
-#  color: "#ed603e"
-#  plantMetabolism:
-#    - !type:PlantAdjustWeeds
-#      amount: -8
-#    - !type:PlantAdjustHealth
-#      amount: -20
-
-#- type: reagent
-#  id: StypticPowder
-#  name: reagent-name-styptic-powder
-#  group: Medicine
-#  desc: reagent-desc-styptic-powder
-#  physicalDesc: reagent-physical-desc-powdery
-#  flavor: bitter
-#  color: "#ff9b83"
-#  plantMetabolism:
-#    - !type:PlantAdjustWeeds
-#      amount: -8
-#    - !type:PlantAdjustHealth
-#      amount: -20
-#  worksOnTheDead: true
-#  reactiveEffects:
-#    Acidic:
-#      methods: [ Touch ]
-#      effects:
-#      - !type:HealthChange
-#        scaleByQuantity: true
-#        ignoreResistances: false
-#        ignoreBlockers: false
-#        damage:
-#          types:
-#            Blunt: -2
-#            Piercing: -1 # limits combat effectivness
-#            Slash: -2
-#        conditions:
-#        - !type:HasComponentOnEquipmentCondition
-#          components:
-#          - type: PressureProtection # can't get through this to reach the bodyparts!
-#          invert: true
-#      - !type:ModifyBleedAmount
-#        amount: -2
-#        conditions:
-#        - !type:HasComponentOnEquipmentCondition
-#          components:
-#          - type: PressureProtection
-#          invert: true
-#  metabolisms:
-#    Medicine:
-#      metabolismRate: 3
-#      effects:
-#      - !type:HealthChange
-#        damage:
-#          groups:
-#            Brute: -2
-#      - !type:HealthChange
-#        damage:
-#          types:
-#            Poison: 2
-#        conditions:
-#        - !type:MetabolizerTypeCondition
-#         type: [ Yowie ]
-#          inverted: true
-
 - type: reagent
   id: Synthflesh # synthflesh is somewhat mid in SS14 due to topicals, so it's mostly a reference here
   name: reagent-name-synthflesh
@@ -967,10 +846,8 @@
             Poison: -2
             Radiation: -1
         conditions:
-        - !type:HasComponentOnEquipmentCondition
-          components:
-          - type: PressureProtection # can't get through this to reach the bodyparts!
-          invert: true
+        - !type:NestedCondition
+          proto: NoPressureProtection
   metabolisms:
     Medicine:
       effects:
@@ -1006,7 +883,7 @@
           groups:
             Brute: -12
         conditions:
-        - !type:TypedDamageThreshold
+        - !type:TypedDamageCondition
           damage:
             groups:
               Brute: 25
@@ -1018,7 +895,7 @@
           groups:
             Brute: -3
         conditions:
-        - !type:TypedDamageThreshold
+        - !type:TypedDamageCondition
           damage:
             groups:
               Brute: 25
@@ -1060,7 +937,7 @@
             Cold: -4
             Caustic: -3
         conditions:
-        - !type:TypedDamageThreshold
+        - !type:TypedDamageCondition
           damage:
             groups:
               Burn: 25
@@ -1072,7 +949,7 @@
           groups:
             Burn: -4
         conditions:
-        - !type:TypedDamageThreshold
+        - !type:TypedDamageCondition
           damage:
             groups:
               Burn: 25
@@ -1275,7 +1152,7 @@
           types:
             Heat: -3
         conditions:
-        - !type:TypedDamageThreshold
+        - !type:TypedDamageCondition
           damage:
             types:
               Heat: 40
@@ -1332,7 +1209,7 @@
           types:
             Cold: -3
         conditions:
-        - !type:TypedDamageThreshold
+        - !type:TypedDamageCondition
           damage:
             types:
               Cold: 40

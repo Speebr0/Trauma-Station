@@ -7,6 +7,7 @@ using System.Linq;
 using System.Numerics;
 using Content.Server._Lavaland.Procedural.Components;
 using Content.Server.Procedural;
+using Content.Shared._Lavaland.Procedural.Components;
 using Content.Shared._Lavaland.Procedural.Prototypes;
 using Content.Shared.Decals;
 using Content.Shared.Maps;

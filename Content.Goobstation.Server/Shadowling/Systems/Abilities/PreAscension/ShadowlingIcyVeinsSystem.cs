@@ -102,9 +102,6 @@ public sealed class ShadowlingIcyVeinsSystem : EntitySystem
         EnsureComp<IcyVeinsTargetComponent>(target);
         _popup.PopupEntity(Loc.GetString("shadowling-icy-veins-activated"), target, target, PopupType.MediumCaution);
 
-        if (!TryComp<StatusEffectsComponent>(target, out var statusEffectsComponent))
-            return;
-
-        _stun.TryParalyze(target, TimeSpan.FromSeconds(component.ParalyzeTime), false, statusEffectsComponent);
+        _stun.TryAddParalyzeDuration(target, TimeSpan.FromSeconds(component.ParalyzeTime));
     }
 }

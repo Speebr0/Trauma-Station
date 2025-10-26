@@ -79,9 +79,6 @@ using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Timer = Robust.Shared.Timing.Timer;
-using Content.Server.Explosion.EntitySystems;
-using Content.Server.Chat.Systems;
-using Content.Shared.Chat;
 
 namespace Content.Server.Shuttles.Systems;
 

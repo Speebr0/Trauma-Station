@@ -36,10 +36,10 @@ public sealed partial class ComboPrototype : IPrototype
     public float ExtraDamage;
 
     /// <summary>
-    /// Stun time in seconds
+    /// Stun time.
     /// </summary>
     [DataField]
-    public int ParalyzeTime;
+    public TimeSpan ParalyzeTime = TimeSpan.Zero;
 
     /// <summary>
     /// Can a lying person perform this combo

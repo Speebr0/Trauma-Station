@@ -16,8 +16,8 @@ public readonly record struct ThrownEvent(EntityUid? User, EntityUid Thrown);
 /// Raised directed on the target entity being hit by the thrown entity.
 /// </summary>
 [ByRefEvent]
-// Goob - added Handled
-public readonly record struct ThrowHitByEvent(EntityUid Thrown, EntityUid Target, ThrownItemComponent Component, bool Handled = false);
+// Goob - added Handled, removed readonly
+public record struct ThrowHitByEvent(EntityUid Thrown, EntityUid Target, ThrownItemComponent Component, bool Handled = false);
 
 /// <summary>
 /// Raised directed on the thrown entity that hits another.

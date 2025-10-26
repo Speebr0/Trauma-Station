@@ -5,9 +5,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Electrocution;
-using Content.Server.Popups;
-using Content.Server.Power.Components;
-using Content.Server.Power.EntitySystems;
+using Content.Shared.Popups;
+using Content.Shared.Power.Components;
+using Content.Shared.Power.EntitySystems;
 using Content.Shared.Electrocution;
 using Robust.Shared.Random;
 
@@ -16,8 +16,8 @@ namespace Content.Server._EinsteinEngines.Power.Systems;
 public sealed class BatteryElectrocuteChargeSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
-    [Dependency] private readonly BatterySystem _battery = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedBatterySystem _battery = default!;
 
     public override void Initialize()
     {

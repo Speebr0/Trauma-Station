@@ -27,7 +27,7 @@ using Content.Server.GameTicking;
 using Content.Server.Ghost;
 using Content.Server.Objectives.Components;
 using Content.Server.Popups;
-using Content.Server.Radio.Components;
+using Content.Shared.Radio.Components;
 using Content.Server.Roles;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;

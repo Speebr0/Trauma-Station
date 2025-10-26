@@ -1,4 +1,4 @@
-﻿- type: reagent
+- type: reagent
   id: Johntonite
   name: reagent-name-johntonite
   group: Toxins
@@ -9,6 +9,9 @@
   metabolisms:
     Poison:
       metabolismRate: 0.5
+      conditions:
+      - !type:NameContainsCondition
+        name: John
       effects:
       - !type:HealthChange
         damage:
@@ -16,9 +19,6 @@
             Asphyxiation: 1.5
             Heat: 5
             Cellular: 1
-        conditions:
-        - !type:HasMobName
-          name: John
       - !type:PopupMessage
         type: Local
         visualType: MediumCaution
@@ -26,28 +26,13 @@
         messages:
         - generic-reagent-effect-burning-insides
         - generic-reagent-effect-tearing-up
-        conditions:
-        - !type:HasMobName
-          name: John
       - !type:Paralyze
         probability: 0.2
         paralyzeTime: 2
-        conditions:
-        - !type:HasMobName
-          name: John
       - !type:Emote
         emote: Gasp
         probability: 0.1
-        conditions:
-        - !type:HasMobName
-          name: John
       - !type:Emote
         emote: Scream
         probability: 0.1
-        conditions:
-        - !type:HasMobName
-          name: John
       - !type:Jitter
-        conditions:
-        - !type:HasMobName
-          name: John

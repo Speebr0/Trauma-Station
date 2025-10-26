@@ -41,7 +41,7 @@ using Robust.Shared.Audio.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Random;
 using Content.Shared.Body.Systems;
-using Content.Server.Medical;
+using Content.Shared.Medical;
 using Robust.Server.GameObjects;
 using Content.Shared.Stunnable;
 using Robust.Shared.Map;

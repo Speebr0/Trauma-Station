@@ -12,32 +12,22 @@
   physicalDesc: reagent-physical-desc-thick
   metabolisms:
     Poison:
+      conditions:
+      - !type:MetabolizerTypeCondition
+        type: [ Yowie ]
+        inverted: true
+      - !type:WhitelistCondition
+        blacklist:
+          components:
+          - Wizard
+          - Apprentice
+        guidebookText: entity-effect-condition-not-wizard-or-apprentice
       effects:
       - !type:Emote
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
-        - !type:HasComponentCondition
-          components:
-            - Wizard
-            - Apprentice
-          guidebookComponentName: reagent-comp-condition-wizard-or-apprentice
-          invert: true
         emote: Cough
         showInChat: true
         probability: 0.2
       - !type:DropItemsEntityEffect
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
-        - !type:HasComponentCondition
-          components:
-            - Wizard
-            - Apprentice
-          guidebookComponentName: reagent-comp-condition-wizard-or-apprentice
-          invert: true
         probability: 0.2
 
 - type: reagent
@@ -57,15 +47,16 @@
   metamorphicChangeColor: false
   metabolisms:
     Medicine:
+      conditions:
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - Wizard
+          - Apprentice
+        guidebookText: entity-effect-condition-wizard-or-apprentice
       effects:
       - !type:ModifyBloodLevel
         amount: 3
-        conditions:
-        - !type:HasComponentCondition
-          components:
-            - Wizard
-            - Apprentice
-          guidebookComponentName: reagent-comp-condition-wizard-or-apprentice
       - !type:HealthChange
         damage:
           groups:
@@ -74,35 +65,11 @@
             Airloss: -5
             Brute: -5
             Genetic: -5
-        conditions:
-        - !type:HasComponentCondition
-          components:
-            - Wizard
-            - Apprentice
-          guidebookComponentName: reagent-comp-condition-wizard-or-apprentice
       - !type:ModifyBleedAmount
         amount: -1.5
-        conditions:
-        - !type:HasComponentCondition
-          components:
-            - Wizard
-            - Apprentice
-          guidebookComponentName: reagent-comp-condition-wizard-or-apprentice
       - !type:ChemCleanBloodstream
         cleanseRate: 6
-        conditions:
-        - !type:HasComponentCondition
-          components:
-            - Wizard
-            - Apprentice
-          guidebookComponentName: reagent-comp-condition-wizard-or-apprentice
       - !type:GenericStatusEffect
         key: SeeingRainbows
         time: 100.0
         type: Remove
-        conditions:
-        - !type:HasComponentCondition
-          components:
-            - Wizard
-            - Apprentice
-          guidebookComponentName: reagent-comp-condition-wizard-or-apprentice

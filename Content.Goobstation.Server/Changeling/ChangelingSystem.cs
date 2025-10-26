@@ -50,7 +50,7 @@ using Content.Server.Administration.Systems;
 using Content.Server.Atmos.Components;
 using Content.Server.Body.Systems;
 using Content.Server.DoAfter;
-using Content.Server.Emp;
+using Content.Shared.Emp;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Gravity;
 using Content.Server.Guardian;

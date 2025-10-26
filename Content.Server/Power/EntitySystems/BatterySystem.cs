@@ -1,12 +1,15 @@
+// <Trauma>
+using Content.Shared.Emp;
+using Robust.Shared.Containers;
+// </Trauma>
 using Content.Server.Power.Components;
-using Content.Shared.Emp; // Goobstation
+using Content.Shared.Cargo;
 using Content.Shared.Examine;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Rejuvenate;
 using JetBrains.Annotations;
-using Robust.Shared.Containers;
 using Robust.Shared.Utility;
 using Robust.Shared.Timing;
 
@@ -16,7 +19,7 @@ namespace Content.Server.Power.EntitySystems
     public sealed class BatterySystem : SharedBatterySystem
     {
         [Dependency] private readonly SharedContainerSystem _containers = default!; // WD EDIT
-        [Dependency] private readonly IGameTiming Timing = default!;
+        [Dependency] private readonly IGameTiming _timing = default!;
 
         private EntityQuery<EmpDisabledComponent> _disabledQuery; // Goobstation
 
@@ -100,7 +103,7 @@ namespace Content.Server.Power.EntitySystems
 
                 if (comp.AutoRechargePause)
                 {
-                    if (comp.NextAutoRecharge > Timing.CurTime)
+                    if (comp.NextAutoRecharge > _timing.CurTime)
                         continue;
                 }
 
@@ -205,7 +208,7 @@ namespace Content.Server.Power.EntitySystems
             if (value < 0)
                 value = batteryself.AutoRechargePauseTime;
 
-            if (Timing.CurTime + TimeSpan.FromSeconds(value) <= batteryself.NextAutoRecharge)
+            if (_timing.CurTime + TimeSpan.FromSeconds(value) <= batteryself.NextAutoRecharge)
                 return;
 
             SetChargeCooldown(uid, batteryself.AutoRechargePauseTime, batteryself);
@@ -220,9 +223,9 @@ namespace Content.Server.Power.EntitySystems
                 return;
 
             if (value >= 0)
-                batteryself.NextAutoRecharge = Timing.CurTime + TimeSpan.FromSeconds(value);
+                batteryself.NextAutoRecharge = _timing.CurTime + TimeSpan.FromSeconds(value);
             else
-                batteryself.NextAutoRecharge = Timing.CurTime;
+                batteryself.NextAutoRecharge = _timing.CurTime;
         }
 
         /// <summary>
@@ -248,7 +251,7 @@ namespace Content.Server.Power.EntitySystems
             return battery.CurrentCharge >= battery.MaxCharge;
         }
 
-        // Goobstation
+        // <Goob>
         public int GetChargeDifference(EntityUid uid, BatteryComponent? battery = null) // Debug
         {
             if (!Resolve(uid, ref battery))
@@ -267,33 +270,6 @@ namespace Content.Server.Power.EntitySystems
             RaiseLocalEvent(uid, ref ev);
             return newValue;
         }
-
-        // WD EDIT START
-        public bool TryGetBatteryComponent(EntityUid uid, [NotNullWhen(true)] out BatteryComponent? battery,
-            [NotNullWhen(true)] out EntityUid? batteryUid)
-        {
-            if (TryComp(uid, out battery))
-            {
-                batteryUid = uid;
-                return true;
-            }
-
-            if (!_containers.TryGetContainer(uid, "cell_slot", out var container)
-                || container is not ContainerSlot slot)
-            {
-                battery = null;
-                batteryUid = null;
-                return false;
-            }
-
-            batteryUid = slot.ContainedEntity;
-
-            if (batteryUid != null)
-                return TryComp(batteryUid, out battery);
-
-            battery = null;
-            return false;
-        }
-        // WD EDIT END
+        // </Goob>
     }
 }

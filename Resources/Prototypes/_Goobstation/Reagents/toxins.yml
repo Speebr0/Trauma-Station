@@ -151,7 +151,7 @@
           types:
             Radiation: 2
         conditions:
-        - !type:TypedDamageThreshold
+        - !type:TypedDamageCondition
           damage:
             types:
               Radiation: 2 # kinda arbitrary, it'll trigger after some rads
@@ -267,10 +267,8 @@
           types:
             Caustic: 3 # any less and you wont crit from the full duration if you have internals
         conditions:
-        - !type:HasComponentOnEquipmentCondition
-          components:
-          - type: PressureProtection # can't get through this to reach the bodyparts!
-          invert: true
+        - !type:NestedCondition
+          proto: NoPressureProtection
 
 - type: reagent
   id: Tirizene

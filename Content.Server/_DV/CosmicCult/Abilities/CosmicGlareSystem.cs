@@ -12,7 +12,6 @@ using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Bible;
 using Content.Goobstation.Shared.Religion; // Goobstation - Bible
 using Content.Server.Flash;
-using Content.Server.Light.EntitySystems;
 using Content.Shared._DV.CosmicCult;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared._EinsteinEngines.Silicon.Components;
@@ -21,6 +20,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
 using Content.Shared.Light.Components;
+using Content.Shared.Light.EntitySystems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
 using Content.Shared.Silicons.Borgs.Components;

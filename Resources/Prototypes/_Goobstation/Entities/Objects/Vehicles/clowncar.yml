@@ -84,8 +84,8 @@
     collidableEntities:
       components:
       - HumanoidAppearance
-      - KnockedDown
       - Item
+      - KnockedDown
       - Puddle
       - Airlock
       - Door

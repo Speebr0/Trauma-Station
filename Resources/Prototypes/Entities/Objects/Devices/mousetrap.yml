@@ -122,6 +122,7 @@
     - type: PreventableStepTrigger
     - type: DamageOnTrigger
       targetUser: true
+      targetPart: Feet # Trauma
       damage:
         types:
           Blunt: 2 # base damage, scales based on mass

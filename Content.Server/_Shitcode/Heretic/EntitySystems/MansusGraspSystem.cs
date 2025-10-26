@@ -21,7 +21,6 @@
 
 using Content.Goobstation.Common.Religion;
 using Content.Server.Chat.Systems;
-using Content.Server.Explosion.EntitySystems;
 using Content.Server.Heretic.Abilities;
 using Content.Server.Heretic.Components;
 using Content.Server.Heretic.Components.PathSpecific;
@@ -40,6 +39,7 @@ using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Timing;
+using Content.Shared.Trigger;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
@@ -82,10 +82,10 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
         SubscribeLocalEvent<TagComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<RustGraspComponent, AfterInteractEvent>(OnRustInteract);
         SubscribeLocalEvent<HereticComponent, DrawRitualRuneDoAfterEvent>(OnRitualRuneDoAfter);
-        SubscribeLocalEvent<MansusGraspBlockTriggerComponent, BeforeTriggerEvent>(OnTriggerAttempt);
+        SubscribeLocalEvent<MansusGraspBlockTriggerComponent, TriggerAttemptEvent>(OnAttemptTrigger);
     }
 
-    private void OnTriggerAttempt(Entity<MansusGraspBlockTriggerComponent> ent, ref BeforeTriggerEvent args)
+    private void OnAttemptTrigger(Entity<MansusGraspBlockTriggerComponent> ent, ref AttemptTriggerEvent args)
     {
         if (HasComp<MansusGraspAffectedComponent>(args.User))
         {

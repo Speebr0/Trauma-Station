@@ -16,7 +16,7 @@ using Content.Goobstation.Shared.Blob.Components;
 using Content.Goobstation.Shared.Blob.Events;
 using Content.Server.Construction.Components;
 using Content.Server.Destructible;
-using Content.Server.Emp;
+using Content.Shared.Emp;
 using Content.Shared.Damage;
 using Content.Shared.Destructible;
 using Content.Shared.Mobs.Components;

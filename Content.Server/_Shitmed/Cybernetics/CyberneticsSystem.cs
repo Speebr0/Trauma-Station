@@ -6,7 +6,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Emp;
+using Content.Shared.Emp;
 using Content.Shared._Shitmed.Body.Organ;
 using Content.Shared._Shitmed.Body.Events;
 using Content.Shared._Shitmed.Cybernetics;
@@ -59,7 +59,7 @@ internal sealed class CyberneticsSystem : EntitySystem
         }
     }
 
-    private void OnEmpDisabledRemoved(Entity<CyberneticsComponent> cyberEnt, ref EmpDisabledRemoved ev)
+    private void OnEmpDisabledRemoved(Entity<CyberneticsComponent> cyberEnt, ref EmpDisabledRemovedEvent ev)
     {
         if (cyberEnt.Comp.Disabled)
         {

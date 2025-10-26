@@ -317,7 +317,6 @@
     - type: StatusEffects
       allowed:
         - Stun
-        - KnockedDown
         - SlowedDown
         - Stutter
         - SeeingRainbows
