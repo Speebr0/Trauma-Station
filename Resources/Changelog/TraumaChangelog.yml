@@ -484,3 +484,15 @@ Entries:
         lecters on green.
   id: 52
   time: '2025-10-26T12:51:20.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Tweak
+      message: >-
+        Made rev endgame armor much stronger, it was worse than crew's free
+        roundstart gear.
+    - type: Tweak
+      message: >-
+        Changed rev endgame armor to have construction steps instead of a 30s
+        doafter.
+  id: 53
+  time: '2025-10-26T13:47:00.0000000+00:00'
