@@ -476,3 +476,11 @@ Entries:
       message: Salv now gets up to 100 evil coin if they actually mine.
   id: 51
   time: '2025-10-26T11:32:24.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: >-
+        Re ported alert level locks for gun safes from white dream, no more
+        lecters on green.
+  id: 52
+  time: '2025-10-26T12:51:20.0000000+00:00'
