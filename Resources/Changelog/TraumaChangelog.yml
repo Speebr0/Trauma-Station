@@ -504,3 +504,9 @@ Entries:
         instead of the scientist.
   id: 54
   time: '2025-10-26T16:21:39.0000000+00:00'
+- author: rustdevelopment
+  changes:
+    - type: Tweak
+      message: Changed default rat servant behavior from "Loose" to "Follow"
+  id: 55
+  time: '2025-10-27T20:13:14.0000000+00:00'
