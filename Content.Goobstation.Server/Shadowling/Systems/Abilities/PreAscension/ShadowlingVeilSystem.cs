@@ -1,5 +1,6 @@
 using Content.Goobstation.Shared.Shadowling;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.PreAscension;
+using Content.Server.Light.Components;
 using Content.Shared.Actions;
 using Content.Shared.Light;
 using Content.Shared.Light.Components;

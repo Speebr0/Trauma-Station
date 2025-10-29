@@ -446,7 +446,7 @@
 - type: entity
   abstract: true # Trauma - chud wizard removed pending rework
   parent: BaseWizardRule
-  id: Wizard
+  id: WizardFake
   components:
   - type: GameRule
     minPlayers: 10
@@ -480,7 +480,6 @@
       - MindRoleWizard
   - type: DynamicRuleCost
     cost: 150
->>>>>>> f23e8c2861 (Multiantag Gamemode (#37783))
 
 - type: entity
   id: Zombie

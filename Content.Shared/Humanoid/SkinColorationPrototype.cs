@@ -36,6 +36,10 @@ public enum SkinColorationStrategyInput
     /// A <see cref="Color" />
     /// </summary>
     Color,
+    /// <summary>
+    /// Goob - No color option (#ffffff)
+    /// </summary>
+    NoColor
 }
 
 /// <summary>

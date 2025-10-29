@@ -1,3 +1,8 @@
+// <Trauma>
+using Content.Server._Imp.Drone;
+using Content.Shared._CorvaxNext.Silicons.Borgs.Components;
+using Robust.Shared.Player;
+// </Trauma>
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DeviceNetwork;
 using Content.Shared.Damage;
@@ -12,9 +17,6 @@ using Content.Shared.DeviceNetwork.Components;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.Emag.Systems;
 using Robust.Shared.Utility;
-using Content.Server._Imp.Drone; //Goobstation drone
-using Robust.Shared.Player; //Goobstation drone
-using Content.Shared._CorvaxNext.Silicons.Borgs.Components; // Corvax-Next-AiRemoteControl
 
 namespace Content.Server.Silicons.Borgs;
 
@@ -80,11 +82,13 @@ public sealed partial class BorgSystem
             if (now < comp.NextBroadcast)
                 continue;
             var hasBrain = HasComp<ActorComponent>(uid);
+            var hpPercent = CalcHP(uid);
             var data = new CyborgControlData(
                 comp.Sprite,
                 comp.Name,
                 meta.EntityName,
                 1f,
+                hpPercent,
                 0,
                 hasBrain,
                 false, // Corvax-Next-AiRemoteControl

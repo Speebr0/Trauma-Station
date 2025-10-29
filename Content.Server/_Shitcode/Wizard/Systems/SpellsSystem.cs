@@ -22,7 +22,6 @@ using Content.Server.Explosion.EntitySystems;
 using Content.Server.Fluids.EntitySystems;
 using Content.Server.Inventory;
 using Content.Server.Polymorph.Systems;
-using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.Singularity.EntitySystems;
 using Content.Server.Spreader;
@@ -35,6 +34,7 @@ using Content.Shared._Goobstation.Wizard.BindSoul;
 using Content.Shared._Goobstation.Wizard.Chuuni;
 using Content.Shared._Goobstation.Wizard.FadingTimedDespawn;
 using Content.Shared._Goobstation.Wizard.SpellCards;
+using Content.Shared._Shitcode.Roles;
 using Content.Shared._Shitmed.Targeting;
 using Content.Shared._Shitmed.Damage; // Shitmed Change
 using Content.Shared.Abilities.Mime;
@@ -54,7 +54,9 @@ using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Physics;
+using Content.Shared.Power.Components;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Roles.Components;
 using Content.Shared.Speech.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Robust.Server.Player;
@@ -249,7 +251,7 @@ public sealed class SpellsSystem : SharedSpellsSystem
             if (distance2 < minRange2)
                 continue;
 
-            Stun.TryParalyze(entity, ev.StunTime, true);
+            Stun.TryUpdateParalyzeDuration(entity, ev.StunTime);
 
             Spawn(ev.EffectProto, TransformSystem.GetMapCoordinates(entity, xform));
 

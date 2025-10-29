@@ -37,7 +37,7 @@ public sealed class BlobTileSystem : SharedBlobTileSystem
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly BlobCoreSystem _blobCoreSystem = default!;
     [Dependency] private readonly AudioSystem _audioSystem = default!;
-    [Dependency] private readonly EmpSystem _empSystem = default!;
+    [Dependency] private readonly SharedEmpSystem _emp = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
@@ -90,7 +90,7 @@ public sealed class BlobTileSystem : SharedBlobTileSystem
 
         if (blobCoreComponent.CurrentChem == BlobChemType.ElectromagneticWeb)
         {
-            _empSystem.EmpPulse(_transform.GetMapCoordinates(uid), 3f, 50f, 3f);
+            _emp.EmpPulse(_transform.GetMapCoordinates(uid), 3f, 50f, TimeSpan.FromSeconds(3f));
         }
     }
 

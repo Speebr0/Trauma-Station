@@ -1,3 +1,7 @@
+// <Trauma>
+using Content.Goobstation.Common.Traits;
+using Content.Shared.Rejuvenate;
+// </Trauma>
 using Content.Server.Administration.Managers;
 using Content.Server.Atmos.Components;
 using Content.Server.Body.Components;
@@ -41,7 +45,6 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Tag;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
-using Content.Shared.Rejuvenate; // Shitmed Change
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.Roles;
 using Content.Shared.Temperature.Components;
@@ -141,7 +144,7 @@ public sealed partial class ZombieSystem
         RemComp<ThirstComponent>(target);
         RemComp<ReproductiveComponent>(target);
         RemComp<ReproductivePartnerComponent>(target);
-        RemComp<LegsParalyzedComponent>(target);
+        RemComp<LegsParalyzedComponent>(target); // Goob
         RemComp<ComplexInteractionComponent>(target);
         RemComp<SentienceTargetComponent>(target);
 

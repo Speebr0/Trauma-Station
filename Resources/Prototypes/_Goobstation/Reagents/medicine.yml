@@ -101,27 +101,16 @@
           time: 10.0
           type: Remove
       - !type:ChemHealEyeDamage
-      - !type:RemoveComponentEffect
-        component: PermanentBlindness
-        locale: reagent-effect-guidebook-remove-permanentblindness
-      - !type:RemoveComponentEffect
-        component: Narcolepsy
-        locale: reagent-effect-guidebook-remove-narcolepsy
-      - !type:RemoveComponentEffect
-        component: Unrevivable # i don't think this really affects lings, but might aswell to be safe
-        locale: reagent-effect-guidebook-remove-unrevivable
-      - !type:RemoveComponentEffect
-        component: Muted
-        locale: reagent-effect-guidebook-remove-muted
-      - !type:RemoveComponentEffect
-        component: Paracusia
-        locale: reagent-effect-guidebook-remove-paracusia
-      - !type:RemoveComponentEffect
-        component: PainNumbness
-        locale: reagent-effect-guidebook-remove-painnumbness
-      - !type:RemoveComponentEffect
-        component: LegsStartParalyzed
-        locale: reagent-effect-guidebook-remove-legsstartparalyzed
+      - !type:RemoveComponents
+        components:
+        - type: PermanentBlindness
+        - type: Narcolepsy
+        - type: Unrevivable # i don't think this really affects lings, but might aswell to be safe
+        - type: Muted
+        - type: Paracusia
+        - type: PainNumbness
+        - type: LegsStartParalyzed
+        guidebookText: entity-effect-guidebook-removes-disabilities
 
 - type: reagent
   id: LingAdrenaline
@@ -171,9 +160,10 @@
         key: Adrenaline
         component: IgnoreSlowOnDamage
         time: 2
-      - !type:RemoveComponentEffect
-        component: DelayedKnockdown
-        locale: reagent-effect-guidebook-remove-delayed-knockdown
+      - !type:RemoveComponents
+        components:
+        - type: DelayedKnockdown
+        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
       - !type:PopupMessage
             type: Local
             messages: [ "reagent-popup-lingdrenaline" ]

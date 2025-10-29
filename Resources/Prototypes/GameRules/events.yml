@@ -226,7 +226,6 @@
       weight: 15
       children:
         - id: DerelictSyndicateAssaultCyborgSpawn
->>>>>>> 5c206ede67 (Added more Derelict Cyborgs. (#38159))
 
 - type: entity
   id: BaseStationEvent

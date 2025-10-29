@@ -100,6 +100,7 @@ public sealed partial class HumanoidCharacterAppearance : ICharacterAppearance, 
         {
             SkinColorationStrategyInput.Unary => skinColoration.FromUnary(speciesPrototype.DefaultHumanSkinTone),
             SkinColorationStrategyInput.Color => skinColoration.ClosestSkinColor(speciesPrototype.DefaultSkinTone),
+            SkinColorationStrategyInput.NoColor => Color.White, // Goob
             _ => skinColoration.ClosestSkinColor(speciesPrototype.DefaultSkinTone),
         };
 
@@ -156,6 +157,7 @@ public sealed partial class HumanoidCharacterAppearance : ICharacterAppearance, 
         {
             SkinColorationStrategyInput.Unary => strategy.FromUnary(random.NextFloat(0f, 100f)),
             SkinColorationStrategyInput.Color => strategy.ClosestSkinColor(new Color(random.NextFloat(1), random.NextFloat(1), random.NextFloat(1), 1)),
+            SkinColorationStrategyInput.NoColor => Color.White, // Goob
             _ => strategy.ClosestSkinColor(new Color(random.NextFloat(1), random.NextFloat(1), random.NextFloat(1), 1)),
         };
 

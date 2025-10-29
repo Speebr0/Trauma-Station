@@ -1,3 +1,4 @@
+using Content.Shared._CorvaxNext.Silicons.Borgs.Components; // Goob
 using Content.Server.Inventory;
 using Content.Shared.Inventory;
 using Content.Shared.Radio.Components;
@@ -16,6 +17,7 @@ public sealed partial class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeS
     [Dependency] private readonly BorgSystem _borgSystem = default!;
     [Dependency] private readonly ServerInventorySystem _inventorySystem = default!;
 
+    // Goob - added borgSubtype
     protected override void SelectBorgModule(Entity<BorgSwitchableTypeComponent> ent, ProtoId<BorgTypePrototype> borgType, ProtoId<BorgSubtypePrototype> borgSubtype)
     {
         var prototype = Prototypes.Index(borgType);
@@ -99,6 +101,7 @@ public sealed partial class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeS
             _inventorySystem.SetTemplateId((ent.Owner, inventory), prototype.InventoryTemplateId);
         }
 
+        // Goob - added borgSubtype
         base.SelectBorgModule(ent, borgType, borgSubtype);
     }
 }

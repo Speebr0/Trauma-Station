@@ -7,8 +7,8 @@
   components:
   - type: Hunger
   - type: Thirst
-  - type: MessyDrinker
-    spillChance: 0.33
+  #- type: MessyDrinker # Trauma - die
+  #  spillChance: 0.33
   - type: Icon
     sprite: Mobs/Species/Vulpkanin/parts.rsi
     state: full
@@ -18,6 +18,13 @@
     speechSounds: Vulpkanin
     speechVerb: Vulpkanin
     allowedEmotes: [ 'Bark', 'Snarl', 'Whine', 'Howl', 'Growl' ]
+  - type: LanguageKnowledge # Trauma
+    speaks:
+    - TauCetiBasic
+    - Canilunzt
+    understands:
+    - TauCetiBasic
+    - Canilunzt
   - type: Vocal
     sounds:
       Male: MaleVulpkanin
@@ -48,6 +55,7 @@
   - type: TemperatureProtection
     heatingCoefficient: 1.2
     coolingCoefficient: 0.3
+  - type: ScentTracker # Einstein Engines
   - type: JumpAbility
     action: ActionVulpkaninGravityJump
     canCollide: true

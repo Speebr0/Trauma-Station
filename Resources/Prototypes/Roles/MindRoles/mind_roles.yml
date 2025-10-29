@@ -309,7 +309,6 @@
 
 # Changeling
 - type: entity
-  abstract: true # Trauma - goidaling isnt cherry picked
   parent: BaseMindRoleAntag
   id: MindRoleChangeling
   name: Changeling Role
@@ -320,5 +319,5 @@
     roleType: SoloAntagonist
     subtype: role-subtype-changeling
   - type: ChangelingRole
-  - type: RoleBriefing
-    briefing: changeling-briefing
+  #- type: RoleBriefing # Trauma - code adds a briefing
+  #  briefing: changeling-briefing

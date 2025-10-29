@@ -1,4 +1,10 @@
-using Content.Goobstation.Common.Speech; // Goob
+// <Trauma>
+using Content.Goobstation.Common.Speech;
+using Content.Server.Speech.EntitySystems;
+using Content.Shared._Goobstation.Wizard.Traps;
+using Content.Shared.Speech.Components;
+using Content.Shared.Temperature.Components;
+// </Trauma>
 using Content.Server.Administration.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Body.Components;
@@ -16,8 +22,6 @@ using Content.Server.Speech.Components;
 using Content.Server.Storage.EntitySystems;
 using Content.Server.Tabletop;
 using Content.Server.Tabletop.Components;
-using Content.Server.Temperature.Components; // Goob
-using Content.Shared._Goobstation.Wizard.Traps; // Goob
 using Content.Shared.Actions;
 using Content.Shared.Administration;
 using Content.Shared.Administration.Components;
@@ -62,8 +66,6 @@ using Robust.Shared.Utility;
 using System.Numerics;
 using System.Threading;
 using Timer = Robust.Shared.Timing.Timer;
-using Content.Server.Speech.EntitySystems;
-using Content.Shared.Speech.Components;
 
 namespace Content.Server.Administration.Systems;
 
@@ -981,10 +983,12 @@ public sealed partial class AdminVerbSystem
                 EnsureComp<SouthernAccentComponent>(args.Target);
                 EnsureComp<SpanishAccentComponent>(args.Target);
                 EnsureComp<StutteringAccentComponent>(args.Target);
-                EnsureComp<MedievalAccentComponent>(args.Target); // Goobtation
-                EnsureComp<OhioAccentComponent>(args.Target); // Goobtation
-                EnsureComp<PirateAccentComponent>(args.Target); // Goobtation
-                EnsureComp<VulgarAccentComponent>(args.Target); // Goobtation
+                // <Goob>
+                EnsureComp<MedievalAccentComponent>(args.Target);
+                EnsureComp<OhioAccentComponent>(args.Target);
+                EnsureComp<PirateAccentComponent>(args.Target);
+                EnsureComp<VulgarAccentComponent>(args.Target);
+                // </Goob>
 
                 if (_random.Next(0, 8) == 0)
                 {

@@ -202,7 +202,7 @@ public sealed class MetabolizerSystem : SharedMetabolizerSystem
 
                 var actualEntity = ent.Comp2?.Body ?? solutionEntityUid.Value;
                 // <Trauma> - Check group conditions before any effects
-                if (!CanMetabolizeEffect(actualEntity, ent, soln.Value, proto.Conditions))
+                if (!CanMetabolizeEffect(actualEntity, ent, soln.Value, entry.Conditions))
                     continue;
                 // </Trauma>
 
@@ -243,8 +243,11 @@ public sealed class MetabolizerSystem : SharedMetabolizerSystem
             {
                 solution.RemoveReagent(reagent, mostToRemove);
 
-                // We have processed a reagant, so count it towards the cap
-                reagents += 1;
+                // <Shitmed> limit poisons instead of reagents
+                // We have processed a poison, so count it towards the cap
+                if (proto.Metabolisms.ContainsKey("Poison"))
+                    poisons++;
+                // </Shitmed>
             }
         }
 

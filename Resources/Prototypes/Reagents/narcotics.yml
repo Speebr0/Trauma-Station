@@ -125,9 +125,10 @@
         key: Adrenaline
         component: IgnoreSlowOnDamage
         time: 5
-      - !type:RemoveComponentEffect # goob edit
-        component: DelayedKnockdown
-        locale: reagent-effect-guidebook-remove-delayed-knockdown
+      - !type:RemoveComponents # Goob
+        components:
+        - type: DelayedKnockdown
+        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
     Medicine:
       effects:
       - !type:ResetNarcolepsy
@@ -199,9 +200,10 @@
         key: Adrenaline
         component: IgnoreSlowOnDamage
         time: 5
-      - !type:RemoveComponentEffect # goob edit
-        component: DelayedKnockdown
-        locale: reagent-effect-guidebook-remove-delayed-knockdown
+      - !type:RemoveComponents # Goob
+        components:
+        - type: DelayedKnockdown
+        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
       - !type:SuppressPain # Shitmed Change
         amount: 1.2
         time: 10 # it accumulated 1.2*quantity and then exists for 30 seconds.
@@ -245,9 +247,9 @@
         sprintSpeedModifier: 1.3
       - !type:HealthChange
         conditions:
-        - !type:MetabolizerTypeCondition # Goob - Yowie
-          type: [ Yowie ]
-          inverted: true
+          - !type:MetabolizerTypeCondition # Goob - Yowie
+            type: [ Yowie ]
+            inverted: true
           - !type:ReagentCondition
             reagent: Stimulants
             min: 20 # Goob - was 80
@@ -284,19 +286,22 @@
         effectProto: StatusEffectDrowsiness
         time: 10
         type: Remove
-      - !type:GenericStatusEffect # goob edit
+      # <Goob>
+      - !type:GenericStatusEffect
         key: Adrenaline
         component: IgnoreSlowOnDamage
         time: 5
-      - !type:RemoveComponentEffect # goob edit
-        component: DelayedKnockdown
-        locale: reagent-effect-guidebook-remove-delayed-knockdown
-      - !type:TakeStaminaDamage # goob edit
+      - !type:RemoveComponents
+        components:
+        - type: DelayedKnockdown
+        guidebookText: entity-effect-guidebook-remove-delayed-knockdown
+      - !type:TakeStaminaDamage
         amount: -10
         immediate: true
       - !type:SuppressPain
           amount: 1.2
           time: 30 # it accumulated 1.2*quantity and then exists for 30 seconds.
+      # </Goob>
     Medicine:
       metabolismRate: 0.25 # Goobstation edit
       effects:

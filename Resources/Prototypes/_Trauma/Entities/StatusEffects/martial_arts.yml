@@ -1,6 +1,6 @@
 # for dragon claw slowdown
 - type: entity
-  parent: StatusEffectSlodown
+  parent: StatusEffectSlowdown
   id: DragonClawSlowdownStatusEffect
   name: dragon claw slowdown
   components:

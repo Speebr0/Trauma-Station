@@ -1,21 +1,8 @@
-// SPDX-FileCopyrightText: 2023 AJCM <AJCM@tutanota.com>
-// SPDX-FileCopyrightText: 2023 AlexMorgan3817 <46600554+AlexMorgan3817@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Slava0135 <40753025+Slava0135@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 LordCarve <27449516+LordCarve@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
-// SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 John Willis <143434770+CerberusWolfie@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-//
-// SPDX-License-Identifier: MIT
-
+// <Trauma>
+using Content.Server._EinsteinEngines.Language;
+using Content.Shared.Chat;
+// </Trauma>
 using Content.Server.Chat.Systems;
-using Content.Server._EinsteinEngines.Language; // EE
 using Content.Shared.Inventory.Events;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
@@ -28,10 +15,12 @@ namespace Content.Server.Radio.EntitySystems;
 
 public sealed class HeadsetSystem : SharedHeadsetSystem
 {
+    // <Trauma>
+    [Dependency] private readonly LanguageSystem _language = default!;
+    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!;
+    // </Trauma>
     [Dependency] private readonly INetManager _netMan = default!;
     [Dependency] private readonly RadioSystem _radio = default!;
-    [Dependency] private readonly LanguageSystem _language = default!;
-    [Dependency] private readonly EntityWhitelistSystem _whitelist = default!; // Goobstation
 
     public override void Initialize()
     {

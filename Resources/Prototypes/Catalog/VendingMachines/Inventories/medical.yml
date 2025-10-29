@@ -136,7 +136,7 @@
     Brutepack: 5
     Ointment: 5
     Bloodpack: 5
-    Tourniquet: 2
+    Tourniquet: 6 # Goob - was 2
     ChemistryBottleEpinephrine: 3
     ChemistryBottleBicaridine: 1
     Syringe: 5
@@ -148,7 +148,7 @@
     SyringeIpecac: 1
     ClothingEyesHudMedical: 2
     ClothingEyesEyepatchHudMedical: 2
-    Tourniquet: 6 # Goobstation - start
+    # <Goob>
     MedicalPatchPrefilledBicaridine: 3
     MedicalPatchPrefilledDermaline: 3
     ParamedHypo: 2
@@ -162,7 +162,8 @@
     NitrousOxideTankFilled: 2
   emaggedInventory:
     FoodSnackLollypopWrappedLexorin: 3
-    FoodSnackLollypopWrappedMysteryEvil: 5 # Goobstation - end
+    FoodSnackLollypopWrappedMysteryEvil: 5
+    # </Goob>
   contrabandInventory:
     PillCanisterRandom: 3
     PillSpaceDrugs: 3

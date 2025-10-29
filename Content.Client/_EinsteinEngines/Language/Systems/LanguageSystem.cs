@@ -7,6 +7,7 @@
 
 using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._EinsteinEngines.Language.Components;
+using Content.Shared._EinsteinEngines.Language.Events;
 using Content.Shared._EinsteinEngines.Language.Systems;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
@@ -49,7 +50,7 @@ public sealed class LanguageSystem : SharedLanguageSystem
 
     public void RequestSetLanguage(ProtoId<LanguagePrototype> language)
     {
-        if (GetLocalSpeaker()?.CurrentLanguage?.Equals(language) == true)
+        if (GetLocalSpeaker()?.CurrentLanguage.Equals(language) == true)
             return;
 
         RaisePredictiveEvent(new LanguagesSetMessage(language));

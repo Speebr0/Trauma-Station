@@ -1,16 +1,17 @@
 using Content.Goobstation.Shared.EntityConditions;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared._Lavaland.Procedural.Components;
+using Content.Shared.EntityConditions;
 
 namespace Content.Goobstation.Server.EntityConditions;
 
 public sealed class PressureConditionSystem : EntityConditionSystem<TransformComponent, PressureCondition>
 {
-    [Dependency] private readonly AtmosphereSystem _atmosphere;
+    [Dependency] private readonly AtmosphereSystem _atmos = default!;
 
-    protected override bool Condition(Entity<TransformComponent> ent, ref EntityConditionEvent<PressureCondition> args)
+    protected override void Condition(Entity<TransformComponent> ent, ref EntityConditionEvent<PressureCondition> args)
     {
-        if (WorksOnLavaland && HasComp<LavalandMapComponent>(ent.Comp.MapUid))
+        if (args.Condition.WorksOnLavaland && HasComp<LavalandMapComponent>(ent.Comp.MapUid))
         {
             args.Result = true;
             return;
@@ -18,6 +19,8 @@ public sealed class PressureConditionSystem : EntityConditionSystem<TransformCom
 
         var mix = _atmos.GetTileMixture(ent);
         var pressure = mix?.Pressure ?? 0f;
-        args.Result = pressure >= Min && pressure <= Max;
+        var min = args.Condition.Min;
+        var max = args.Condition.Max;
+        args.Result = pressure >= min && pressure <= max;
     }
 }

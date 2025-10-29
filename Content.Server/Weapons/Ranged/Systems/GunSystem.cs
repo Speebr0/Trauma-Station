@@ -1,11 +1,11 @@
 // <Trauma>
+using Content.Server.Atmos.EntitySystems;
 using Content.Goobstation.Common.Weapons.Ranged;
 using Content.Shared._Lavaland.Weapons.Ranged.Events;
+using Content.Shared.Atmos.Components;
 // </Trauma>
 using System.Linq;
 using System.Numerics;
-using Content.Server.Atmos.Components;
-using Content.Server.Atmos.EntitySystems;
 using Content.Server.Cargo.Systems;
 using Content.Server.Weapons.Ranged.Components;
 using Content.Shared.Cargo;
@@ -38,7 +38,6 @@ public sealed partial class GunSystem : SharedGunSystem
     [Dependency] private readonly SharedColorFlashEffectSystem _color = default!;
     [Dependency] private readonly SharedStaminaSystem _stamina = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
-    [Dependency] private readonly PowerCellSystem _powerCell = default!;
     [Dependency] private readonly FlammableSystem _flammable = default!; // Goobstation
     [Dependency] private readonly SharedMapSystem _map = default!;
 
@@ -86,7 +85,7 @@ public sealed partial class GunSystem : SharedGunSystem
         var toMap = TransformSystem.ToMapCoordinates(toCoordinates).Position;
         var mapDirection = toMap - fromMap.Position;
         var mapAngle = mapDirection.ToAngle();
-        var angle = GetRecoilAngle(Timing.CurTime, gun, mapDirection.ToAngle(), user);  // Goobstation user
+        var angle = GetRecoilAngle(Timing.CurTime, gun, mapDirection.ToAngle(), user); // Goobstation - added user
 
         // If applicable, this ensures the projectile is parented to grid on spawn, instead of the map.
         var fromEnt = MapManager.TryFindGridAt(fromMap, out var gridUid, out _)
@@ -123,7 +122,7 @@ public sealed partial class GunSystem : SharedGunSystem
 
                         RaiseLocalEvent(ent!.Value, new AmmoShotEvent()
                         {
-                            FiredProjectiles = shotProjectiles
+                            FiredProjectiles = shotProjectiles,
                         });
 
                         SetCartridgeSpent(ent.Value, cartridge, true);
@@ -213,10 +212,12 @@ public sealed partial class GunSystem : SharedGunSystem
                     {
                         var hitEntity = lastHit.Value;
                         if (hitscan.StaminaDamage > 0f)
-                            _stamina.TakeStaminaDamage(hitEntity, hitscan.StaminaDamage, source: user, applyResistances: true); // Goob edit
+                            _stamina.TakeStaminaDamage(hitEntity, hitscan.StaminaDamage, source: user);
 
-                        if (hitscan.FireStacks > 0f && TryComp(hitEntity, out FlammableComponent? flammable)) // Goobstation
+                        // <Goob>
+                        if (hitscan.FireStacks > 0f && TryComp(hitEntity, out FlammableComponent? flammable))
                             _flammable.AdjustFireStacks(hitEntity, hitscan.FireStacks, flammable, true);
+                        // </Goob>
 
                         var dmg = hitscan.Damage;
 

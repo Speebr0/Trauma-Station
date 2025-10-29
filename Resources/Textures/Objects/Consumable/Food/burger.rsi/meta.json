@@ -77,12 +77,6 @@
             "name": "bun"
         },
         {
-            "name": "bun_bottom"
-        },
-        {
-            "name": "bun_top"
-        },
-        {
             "name": "bun-inhand-left",
             "directions": 4
         },

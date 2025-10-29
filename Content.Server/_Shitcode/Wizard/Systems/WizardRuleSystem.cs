@@ -35,6 +35,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Parallax;
+using Content.Shared.Roles.Components;
 using Content.Shared.Station.Components;
 using Robust.Server.Audio;
 using Robust.Shared.Player;
@@ -101,23 +102,14 @@ public sealed class WizardRuleSystem : GameRuleSystem<WizardRuleComponent>
 
     public EntityUid? GetTargetMap()
     {
-        var rule = GameTicker.GetActiveGameRules().Where(HasComp<WizardRuleComponent>).FirstOrNull();
-        EntityUid? map;
-        if (rule != null)
+        var query = EntityQueryEnumerator<WizardRuleComponent, ActiveGameRuleComponent>();
+        while (query.MoveNext(out _, out var rule, out _))
         {
-            var ruleComp = Comp<WizardRuleComponent>(rule.Value);
-            if (ruleComp.TargetStation == null)
-                map = GetRandomTargetMap();
-            else
-            {
-                var stationGrid = _station.GetLargestGrid(Comp<StationDataComponent>(ruleComp.TargetStation.Value));
-                map = stationGrid == null ? GetRandomTargetMap() : Transform(stationGrid.Value).MapUid;
-            }
+            if (rule.TargetStation is {} station && _station.GetLargestGrid(station) is {} grid)
+                return Transform(grid).MapUid;
         }
-        else
-            map = GetRandomTargetMap();
 
-        return map;
+        return GetRandomTargetMap();
     }
 
     private EntityUid? GetRandomTargetMap()
@@ -139,6 +131,7 @@ public sealed class WizardRuleSystem : GameRuleSystem<WizardRuleComponent>
             Dirty(map.Value, parallax);
         }
 
+        // TODO: JUST FUCKING STORE THE GAXMIXTURE IN THE EVENT
         var moles = new float[Atmospherics.AdjustedNumberOfGases];
         moles[(int) Gas.Oxygen] = ev.OxygenMoles;
         moles[(int) Gas.Nitrogen] = ev.NitrogenMoles;
@@ -243,9 +236,7 @@ public sealed class WizardRuleSystem : GameRuleSystem<WizardRuleComponent>
     }
 
     public IEnumerable<EntityUid?> GetWizardTargetStationGrids()
-    {
-        return GetWizardTargetStations().Select(station => _station.GetLargestGrid(station.Comp));
-    }
+        => GetWizardTargetStations().Select(_station.GetLargestGrid);
 
     public EntityUid? GetWizardTargetRandomStationGrid()
     {

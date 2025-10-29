@@ -506,30 +506,35 @@ namespace Content.Server.Lathe
         // Goobstation - Lathe Queue Reset
         private void OnLatheQueueResetMessage(EntityUid uid, LatheComponent component, LatheQueueResetMessage args)
         {
-            if (component.Queue.Count > 0)
+            if (component.Queue.Count == 0)
+                return;
+            var totalMaterials = new Dictionary<string, int>();
+
+            // refund remaining items in the batch
+            // there is no test to make sure this doesn't give infinite mats... goida
+            foreach (var batch in component.Queue)
             {
-                var allMaterials = component.Queue.SelectMany(q => _proto.Index(q).Materials);
-                var totalMaterials = new Dictionary<string, int>();
-
-                foreach (var (mat, amount) in allMaterials)
+                var recipe = _proto.Index(batch.Recipe);
+                var count = batch.ItemsRequested - batch.ItemsPrinted;
+                foreach (var (mat, amount) in recipe.Materials)
                 {
-                    if(!totalMaterials.ContainsKey(mat))
+                    if (!totalMaterials.ContainsKey(mat))
                         totalMaterials[mat] = 0;
-                    totalMaterials[mat] += amount;
-                }
-
-                if(_materialStorage.CanChangeMaterialAmount(uid, totalMaterials))
-                {
-                    foreach (var (mat, amount) in totalMaterials)
-                    {
-                        _materialStorage.TryChangeMaterialAmount(uid, mat, amount);
-                    }
-                    component.Queue.Clear();
-                } else {
-                    _popup.PopupEntity(Loc.GetString("lathe-queue-reset-material-overflow"), uid);
+                    totalMaterials[mat] += amount * count;
                 }
             }
-            UpdateUserInterfaceState(uid, component);
+
+            if (_materialStorage.CanChangeMaterialAmount(uid, totalMaterials))
+            {
+                foreach (var (mat, amount) in totalMaterials)
+                {
+                    _materialStorage.TryChangeMaterialAmount(uid, mat, amount);
+                }
+                component.Queue.Clear();
+                UpdateUserInterfaceState(uid, component);
+            } else {
+                _popup.PopupEntity(Loc.GetString("lathe-queue-reset-material-overflow"), uid);
+            }
         }
         // Goobstation - Lathe Queue Reset
 

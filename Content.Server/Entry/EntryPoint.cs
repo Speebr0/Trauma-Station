@@ -294,8 +294,8 @@ namespace Content.Server.Entry
             _admin.Initialize();
             _afk.Initialize();
             _rules.Initialize();
-            _discordLink.Initialize();
-            _discordChatLink.Initialize();
+            //_discordLink.Initialize(); // Trauma - wasn't cherry picked
+            //_discordChatLink.Initialize(); // Trauma
             _euiManager.Initialize();
             _gameMap.Initialize();
             _entSys.GetEntitySystem<GameTicker>().PostInitialize();
@@ -339,8 +339,8 @@ namespace Content.Server.Entry
             _serverApi.Shutdown();
 
             // TODO Should this be awaited?
-            _discordLink.Shutdown();
-            _discordChatLink.Shutdown();
+            //_discordLink.Shutdown(); // Trauma - wasn't cherry picked
+            //_discordChatLink.Shutdown(); // Trauma
         }
 
         private static void LoadConfigPresets(IConfigurationManager cfg, IResourceManager res, ISawmill sawmill)

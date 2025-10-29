@@ -75,12 +75,12 @@ public sealed class SharpSystem : EntitySystem
         // this intentionally uses the same message so you have to use 1% brainpower to deduce if the non-hollow body is a ling or not
         if (HasComp<ChangelingComponent>(target))
         {
-            _popupSystem.PopupEntity(Loc.GetString("comp-kitchen-spike-deny-absorbed", ("victim", Identity.Entity(target, EntityManager))), target, userUid);
+            _popupSystem.PopupEntity(Loc.GetString("comp-kitchen-spike-deny-absorbed", ("victim", Identity.Entity(target, EntityManager))), target, user);
             return false;
         }
         if (HasComp<AbsorbedComponent>(target))
         {
-            _popupSystem.PopupEntity(Loc.GetString("comp-kitchen-spike-deny-absorbed", ("victim", Identity.Entity(target, EntityManager))), target, userUid);
+            _popupSystem.PopupEntity(Loc.GetString("comp-kitchen-spike-deny-absorbed", ("victim", Identity.Entity(target, EntityManager))), target, user);
             return false;
         }
         // </Goob>

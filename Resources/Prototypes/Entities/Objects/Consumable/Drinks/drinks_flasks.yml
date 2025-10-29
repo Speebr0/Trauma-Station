@@ -198,7 +198,7 @@
   components:
   - type: Sprite
     sprite: Objects/Consumable/Drinks/vacuumflask.rsi
-  - type: Tool
+  - type: Tool # Goob
     qualities:
     - Rolling # Perfectly cylindrical flask
     speedModifier: 0.75

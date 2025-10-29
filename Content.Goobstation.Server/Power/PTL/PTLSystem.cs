@@ -11,7 +11,6 @@
 using Content.Goobstation.Shared.Power.PTL;
 using Content.Server.Flash;
 using Content.Server.Popups;
-using Content.Server.Power.Components;
 using Content.Server.Power.SMES;
 using Content.Server.Stack;
 using Content.Server.Weapons.Ranged.Systems;
@@ -19,6 +18,7 @@ using Content.Shared.Emag.Components;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
+using Content.Shared.Power.Components;
 using Content.Shared.Radiation.Components;
 using Content.Shared.Stacks;
 using Content.Shared.Tag;

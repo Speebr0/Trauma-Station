@@ -240,7 +240,7 @@ public sealed class RogueAscendedSystem : EntitySystem
     //     _antag.SendBriefing(target, Loc.GetString("rogue-ascended-infection-briefing"), Color.FromHex("#4cabb3"), null);
     //     _damageable.TryChangeDamage(target, uid.Comp.InfectionHeal * -1);
     //
-    //     _stun.TryStun(target, uid.Comp.StunTime, false);
+    //     _stun.TryAddParalyzeDuration(target, uid.Comp.StunTime);
     //     _audio.PlayPvs(uid.Comp.InfectionSfx, target);
     //
     //     if (_mind.TryGetObjectiveComp<RogueInfectionConditionComponent>(uid, out var obj))

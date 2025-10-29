@@ -33,25 +33,6 @@
   name: jar
   description: The hipster's cup.
   components:
-    - type: Sprite
-      sprite: Objects/Consumable/Drinks/glass_coupe_shape.rsi
-      layers:
-        - state: icon
-          map: [ "enum.SolutionContainerLayers.Base" ]
-        - state: fill1
-          map: [ "enum.SolutionContainerLayers.Fill" ]
-          visible: false
-        - state: icon-front
-          map: [ "enum.SolutionContainerLayers.Overlay" ]
-    - type: Appearance
-    - type: SolutionContainerManager
-      solutions:
-        drink:
-          maxVol: 30
-    - type: SolutionContainerVisuals
-      maxFillLevels: 5
-      fillBaseName: fill
-=======
   - type: Sprite
     sprite: Objects/Consumable/Drinks/jar.rsi
   - type: SolutionContainerManager
@@ -66,7 +47,6 @@
 ## Filled
 # TODO entities without IconComponent need a metamorphic sprite on the reagent
 # TODO IconComponent doesn't seem to work in spawn panel
->>>>>>> ff3f0c6997 (Reorganize and refactor drinks yml (#39221)):Resources/Prototypes/Entities/Objects/Consumable/Drinks/drinks_metamorphic.yml
 
 - type: entity
   parent: DrinkGlass

@@ -6,7 +6,7 @@
 
 using Content.Shared.Roles.Components;
 
-namespace Content.Goobstation.Shared.Shadowling;
+namespace Content.Goobstation.Shared.Roles;
 
 /// <summary>
 /// Added to mind role entities to tag that they are a shadowling.

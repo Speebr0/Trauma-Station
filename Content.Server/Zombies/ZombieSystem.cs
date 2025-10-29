@@ -254,12 +254,20 @@ namespace Content.Server.Zombies
                 || TerminatingOrDeleted(uid)) // Goob Change
                 return;
 
-            // Goobstation Change Start
+            // <Goob>
             var comp = EnsureComp<LanguageSpeakerComponent>(uid); // Ensure they can speak language before adding language.
+            var spoken = comp.UnderstoodLanguages;
+            var understood = comp.UnderstoodLanguages;
+            spoken.Clear();
+            understood.Clear();
             if (!string.IsNullOrEmpty(component.ForcedLanguage)) // Should never be false, but security either way.
-                comp.CurrentLanguage = component.ForcedLanguage;
-            _language.UpdateEntityLanguages(uid);
-            // Goobstation Change End
+            {
+                spoken.Add(component.ForcedLanguage);
+                understood.Add(component.ForcedLanguage);
+            }
+            _language.EnsureValidLanguage((uid, comp));
+            _language.UpdateEntityLanguages((uid, comp));
+            // </Goob>
         }
 
         private void OnEmote(EntityUid uid, ZombieComponent component, ref EmoteEvent args)

@@ -1,4 +1,3 @@
-using Content.Goobstation.Shared.Lube; // Goobstation
 using Content.Shared.Hands;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
@@ -47,14 +46,6 @@ public sealed class LubedSystem : EntitySystem
     {
         if (args.Cancelled)
             return;
-
-        // <Goobstation>
-        var ev = new CanLubedInsertEvent(args.Container);
-        RaiseLocalEvent(uid, ref ev);
-
-        if (ev.CanInsert)
-            return;
-        // </Goobstation>
 
         if (ent.Comp.SlipsLeft <= 0)
         {

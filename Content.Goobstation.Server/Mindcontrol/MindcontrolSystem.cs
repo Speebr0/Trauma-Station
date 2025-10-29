@@ -11,6 +11,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Mindcontrol;
+using Content.Goobstation.Shared.Roles;
 using Content.Server.Administration.Logs;
 using Content.Server.Antag;
 using Content.Server.Mind;
@@ -21,6 +22,7 @@ using Content.Shared.Database;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mindshield.Components;
+using Content.Shared.Roles.Components;
 using Content.Shared.Popups;
 using Robust.Server.Player;
 using Robust.Shared.Prototypes;

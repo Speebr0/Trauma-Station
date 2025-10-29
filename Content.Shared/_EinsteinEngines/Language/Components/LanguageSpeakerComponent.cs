@@ -17,8 +17,8 @@ namespace Content.Shared._EinsteinEngines.Language.Components;
 ///     All fields of this component are populated during a DetermineEntityLanguagesEvent.
 ///     They are not to be modified externally.
 /// </remarks>
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedLanguageSystem))]
-[AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, Access(typeof(SharedLanguageSystem), typeof(SharedTranslatorSystem))]
+[AutoGenerateComponentState(true)]
 public sealed partial class LanguageSpeakerComponent : Component
 {
     public override bool SendOnlyToOwner => true;

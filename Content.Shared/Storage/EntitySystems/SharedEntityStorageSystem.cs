@@ -81,6 +81,15 @@ public abstract class SharedEntityStorageSystem : EntitySystem
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly ActionBlockerSystem _actionBlocker = default!;
 
+    // <Trauma> - lmao chud copy pasted subs into each system when the handlers are in shared
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<EntityStorageComponent, GotReclaimedEvent>(OnReclaimed);
+    }
+    // </Trauma>
+
     public const string ContainerName = "entity_storage";
 
     protected void OnEntityUnpausedEvent(EntityUid uid, EntityStorageComponent component, EntityUnpausedEvent args)

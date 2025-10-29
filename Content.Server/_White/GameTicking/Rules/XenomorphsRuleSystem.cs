@@ -8,7 +8,6 @@ using Content.Server.Nuke;
 using Content.Server.Popups;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
-using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared._White.Xenomorphs;
 using Content.Shared._White.Xenomorphs.Caste;
@@ -17,6 +16,7 @@ using Content.Shared.GameTicking.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Station.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -358,7 +358,7 @@ public sealed class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRuleComponen
         var stationGrids = new HashSet<EntityUid>();
         foreach (var station in _gameTicker.GetSpawnableStations())
         {
-            if (TryComp<StationDataComponent>(station, out var data) && _station.GetLargestGrid(data) is { } grid)
+            if (_station.GetLargestGrid(station) is { } grid)
                 stationGrids.Add(grid);
         }
 

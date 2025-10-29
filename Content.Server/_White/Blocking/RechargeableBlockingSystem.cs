@@ -7,13 +7,15 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Popups;
+using Content.Server.Power.Components;
 using Content.Server.PowerCell;
 using Content.Shared._White.Blocking;
 using Content.Shared.Damage;
 using Content.Shared.Examine;
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Popups;
+using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.PowerCell.Components;
 
@@ -22,9 +24,9 @@ namespace Content.Server._White.Blocking;
 public sealed class RechargeableBlockingSystem : EntitySystem
 {
     [Dependency] private readonly ItemToggleSystem _itemToggle = default!;
-    [Dependency] private readonly PopupSystem _popup = default!;
     [Dependency] private readonly PowerCellSystem _powerCell = default!;
     [Dependency] private readonly SharedBatterySystem _battery = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -97,7 +99,7 @@ public sealed class RechargeableBlockingSystem : EntitySystem
             return;
 
         BatterySelfRechargerComponent? recharger;
-        if (battery.CurrentCharge < 1)
+        if (battery.Comp.CurrentCharge < 1)
         {
             if (TryComp(uid, out recharger))
                 recharger.AutoRechargeRate = component.DischargedRechargeRate;
@@ -107,7 +109,7 @@ public sealed class RechargeableBlockingSystem : EntitySystem
             return;
         }
 
-        if (MathF.Round(battery.CurrentCharge / battery.MaxCharge, 2) < component.RechargePercentage)
+        if (MathF.Round(battery.Comp.CurrentCharge / battery.Comp.MaxCharge, 2) < component.RechargePercentage)
             return;
 
         component.Discharged = false;

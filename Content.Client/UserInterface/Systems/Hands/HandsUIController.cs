@@ -40,7 +40,6 @@ using Robust.Shared.Input;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
-using Content.Shared._NF.Interaction.Components;
 
 namespace Content.Client.UserInterface.Systems.Hands;
 

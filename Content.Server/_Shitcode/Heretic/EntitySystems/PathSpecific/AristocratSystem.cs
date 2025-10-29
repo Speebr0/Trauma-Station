@@ -14,11 +14,11 @@
 
 using Content.Server._Goobstation.Heretic.EntitySystems.PathSpecific;
 using Content.Server.Atmos.EntitySystems;
-using Content.Server.Atmos.Components;
 using Content.Server.Audio;
 using Content.Server.Ghost;
 using Content.Server.Heretic.Components.PathSpecific;
 using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
 using Content.Shared.Audio;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;

@@ -47,9 +47,10 @@ namespace Content.Server.Antag;
 public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelectionComponent>
 {
     // <Trauma>
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly LastRolledAntagManager _lastRolled = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
+    [Dependency] private readonly PlayTimeTrackingManager _playTimeMan = default!;
     // </Trauma>
     [Dependency] private readonly AudioSystem _audio = default!;
     [Dependency] private readonly IBanManager _ban = default!;
@@ -274,7 +275,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
 
         // weight by playtime since last rolled
         foreach (var se in pool)
-            weights[se] = (float)(_playTime.GetOverallPlaytime(se) - _lastRolled.GetLastRolled(se.UserId)).TotalSeconds;
+            weights[se] = (float)(_playTimeMan.GetOverallPlaytime(se) - _lastRolled.GetLastRolled(se.UserId)).TotalSeconds;
 
         return weights;
     }
@@ -395,7 +396,7 @@ public sealed partial class AntagSelectionSystem : GameRuleSystem<AntagSelection
         {
             try // tests die without this
             {
-                _lastRolled.SetLastRolled(session.UserId, _playTime.GetOverallPlaytime(session));
+                _lastRolled.SetLastRolled(session.UserId, _playTimeMan.GetOverallPlaytime(session));
             }
             catch { }
         }

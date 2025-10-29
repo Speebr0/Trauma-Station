@@ -466,7 +466,7 @@
   id: MagazineBoxAntiMateriel
   result: MagazineBoxAntiMateriel
   materials:
-    Steel: 200
+    Steel: 1500 # Goob - was 200
 
 # Encampment ammo
 - type: latheRecipe

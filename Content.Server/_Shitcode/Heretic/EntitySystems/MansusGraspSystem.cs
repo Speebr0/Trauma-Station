@@ -82,18 +82,20 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
         SubscribeLocalEvent<TagComponent, AfterInteractEvent>(OnAfterInteract);
         SubscribeLocalEvent<RustGraspComponent, AfterInteractEvent>(OnRustInteract);
         SubscribeLocalEvent<HereticComponent, DrawRitualRuneDoAfterEvent>(OnRitualRuneDoAfter);
-        SubscribeLocalEvent<MansusGraspBlockTriggerComponent, TriggerAttemptEvent>(OnAttemptTrigger);
+        SubscribeLocalEvent<MansusGraspBlockTriggerComponent, AttemptTriggerEvent>(OnAttemptTrigger);
     }
 
     private void OnAttemptTrigger(Entity<MansusGraspBlockTriggerComponent> ent, ref AttemptTriggerEvent args)
     {
         if (HasComp<MansusGraspAffectedComponent>(args.User))
         {
-            args.Cancel();
+            args.Cancelled = true;
             _popup.PopupEntity(Loc.GetString("mansus-grasp-trigger-fail"), args.User.Value, args.User.Value);
         }
         else if (HasComp<MansusGraspAffectedComponent>(Transform(ent).ParentUid))
-            args.Cancel();
+        {
+            args.Cancelled = true;
+        }
     }
 
     private void OnRustInteract(EntityUid uid, RustGraspComponent comp, AfterInteractEvent args)
@@ -217,7 +219,7 @@ public sealed class MansusGraspSystem : SharedMansusGraspSystem
 
         if (TryComp(target, out StatusEffectsComponent? status))
         {
-            _stun.KnockdownOrStun(target, comp.KnockdownTime, true, status);
+            _stun.KnockdownOrStun(target, comp.KnockdownTime);
             _stamina.TakeStaminaDamage(target, comp.StaminaDamage);
             _language.DoRatvarian(target, comp.SpeechTime, true, status);
             _statusEffect.TryAddStatusEffect<MansusGraspAffectedComponent>(target,
