@@ -96,6 +96,7 @@
   - type: NukeopsRule
   - type: RuleGrids
   - type: AntagSelection
+    agentName: nukeops-roundend-name # Goobstation
   - type: AntagLoadProfileRule
     speciesOverride: Human
     speciesOverrideBlacklist:
@@ -105,6 +106,10 @@
     #- Vox
     - Yowie # Goobstation
     - Plasmaman # EE
+  - type: AntagObjectives # Goobstation
+    objectives:
+    - NukeopsDetonateObjective
+
 
 - type: entity
   parent: BaseNukeopsRule
