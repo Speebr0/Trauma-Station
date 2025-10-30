@@ -1,4 +1,5 @@
 #nullable enable
+using System.Collections.Generic; // Trauma
 using System.Linq;
 using System.Reflection;
 using Content.IntegrationTests.Pair;
@@ -97,13 +98,13 @@ public sealed class ContentPoolManager : PoolManager<TestPair>
         DefaultCvars.AddRange(PoolManager.TestCvars);
 
         // <Goob> - used discovered modules
-        var shared = new List<Assembly>(extraAssemblies);
-        shared.AddRange(Shared);
-        shared.Add(CurrentAssembly);
+        var all = new List<Assembly>(extraAssemblies);
+        all.AddRange(PoolManager.Shared);
+        all.AddRange(PoolManager.Client);
+        all.AddRange(PoolManager.Server);
+        all.Add(PoolManager.CurrentAssembly);
 
-        Startup(Client,
-            Server,
-            shared.ToArray());
+        Startup(all.ToArray());
         // </Goob>
     }
 }
