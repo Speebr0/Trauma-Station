@@ -55,7 +55,8 @@ public sealed class BrainSystem : EntitySystem
         if (!HasBrain(args.OldBody))
         {
             // Prevents revival, should kill the user within a given timespan too.
-            EnsureComp<DebrainedComponent>(args.OldBody);
+            if (!TerminatingOrDeleted(args.OldBody))
+                EnsureComp<DebrainedComponent>(args.OldBody);
             HandleMind(uid, args.OldBody);
         }
     }

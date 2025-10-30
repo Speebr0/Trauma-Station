@@ -222,7 +222,7 @@ public abstract partial class EntityEffect
     /// Whether this effect should be logged in admin logs.
     /// </summary>
     [ViewVariables]
-    public virtual bool ShouldLog => true;
+    public virtual bool ShouldLog => false; // Trauma - no FUCK YOU breathing does not need to be logged tell your $20k slave robot to smother you with a pillow
 
     /// <summary>
     /// If this effect is logged, how important is the log?
