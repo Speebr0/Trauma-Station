@@ -226,7 +226,7 @@ public sealed class WizardRuleSystem : GameRuleSystem<WizardRuleComponent>
         }
     }
 
-    public IEnumerable<Entity<StationDataComponent>> GetWizardTargetStations()
+    public IEnumerable<Entity<StationDataComponent?>> GetWizardTargetStations()
     {
         var query = EntityQueryEnumerator<StationWizardTargetComponent, StationDataComponent>();
         while (query.MoveNext(out var station, out _, out var data))

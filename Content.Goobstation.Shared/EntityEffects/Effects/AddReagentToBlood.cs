@@ -38,6 +38,6 @@ public sealed class AddReagentToBloodEffectSystem : EntityEffectSystem<Bloodstre
     {
         var solution = new Solution();
         solution.AddReagent(args.Effect.Reagent, args.Effect.Amount);
-        _bloodstream.TryAddToChemicals(ent, solution);
+        _bloodstream.TryAddToChemicals((ent, ent.Comp), solution);
     }
 }

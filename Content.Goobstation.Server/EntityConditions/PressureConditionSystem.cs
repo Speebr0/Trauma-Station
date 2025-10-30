@@ -17,7 +17,7 @@ public sealed class PressureConditionSystem : EntityConditionSystem<TransformCom
             return;
         }
 
-        var mix = _atmos.GetTileMixture(ent);
+        var mix = _atmos.GetTileMixture((ent, ent.Comp));
         var pressure = mix?.Pressure ?? 0f;
         var min = args.Condition.Min;
         var max = args.Condition.Max;

@@ -10,7 +10,7 @@ public sealed class DrunknessLimitSystem : EntitySystem
 {
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly StatusEffectsSystem _status;
+    [Dependency] private readonly StatusEffectsSystem _status = default!;
 
     private TimeSpan _maxDrunkLimit;
 

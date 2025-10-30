@@ -16,7 +16,7 @@ public sealed partial class RelayPuller : EntityEffectBase<RelayPuller>
     public EntityEffect Effect = default!;
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString("entity-effect-guidebook-relay-puller", ("chance", Probability), ("effect", Effect.EntityEffectGuidebookText(prototype, entSys)));
+        => Loc.GetString("entity-effect-guidebook-relay-puller", ("chance", Probability), ("effect", Effect.EntityEffectGuidebookText(prototype, entSys) ?? string.Empty));
 }
 
 public sealed class RelayPullerEffectSystem : EntityEffectSystem<PullableComponent, RelayPuller>

@@ -14,7 +14,7 @@ public sealed partial class NestedCondition : EntityConditionBase<NestedConditio
     [DataField(required: true)]
     public ProtoId<EntityConditionPrototype> Proto;
 
-    public override string? EntityConditionGuidebookText(IPrototypeManager prototype)
+    public override string EntityConditionGuidebookText(IPrototypeManager prototype)
         => prototype.Index(Proto).Condition.EntityConditionGuidebookText(prototype);
 }
 
