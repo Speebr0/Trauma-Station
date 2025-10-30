@@ -41,7 +41,7 @@
   - type: Strap
     position: Stand
     buckleOffset: "0,0.25"
-  - type: TriggerOnBuckle
+  - type: TriggerOnBuckled
   - type: EffectsOnTrigger
     targetUser: true
     effects:

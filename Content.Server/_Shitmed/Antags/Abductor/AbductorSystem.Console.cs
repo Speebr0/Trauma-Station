@@ -36,7 +36,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
             subs.Event<AbductorAttractBuiMsg>(OnAttractBuiMsg);
             subs.Event<AbductorCompleteExperimentBuiMsg>(OnCompleteExperimentBuiMsg);
             subs.Event<AbductorVestModeChangeBuiMsg>(OnVestModeChangeBuiMsg);
-            subs.Event<AbductorVestModeChangeBuiMsg>(OnVestModeChangeBuiMsg);
+            subs.Event<AbductorLockBuiMsg>(OnVestLockBuiMsg);
         });
         SubscribeLocalEvent<AbductorConsoleComponent, AbductorAttractDoAfterEvent>(OnDoAfterAttract);
     }

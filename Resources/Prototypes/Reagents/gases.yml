@@ -485,7 +485,7 @@
       - !type:PopupMessage
         minScale: 1
         conditions:
-        - !type:BloodReagentThreshold # Goob
+        - !type:ReagentCondition # Goob
           reagent: NitrosylPlasmide
           max: 0.1
         - !type:MetabolizerTypeCondition
@@ -498,7 +498,7 @@
       - !type:MovementSpeedModifier
         minScale: 2
         conditions:
-        - !type:BloodReagentThreshold # Goob
+        - !type:ReagentCondition # Goob
           reagent: NitrosylPlasmide
           max: 0.1
         - !type:MetabolizerTypeCondition
@@ -509,7 +509,7 @@
       - !type:ModifyStatusEffect
         minScale: 3.6
         conditions:
-        - !type:BloodReagentThreshold # Goob
+        - !type:ReagentCondition # Goob
           reagent: NitrosylPlasmide
           max: 0.1
         - !type:MetabolizerTypeCondition

@@ -948,7 +948,7 @@
   components:
   - type: VendingMachine
     pack: NanoMedCivilianInventory
-    offState: off-civilian
+    offState: off # Goob - no civilian sprites
     brokenState: broken
     normalState: normal-unshaded
     ejectState: eject-unshaded
@@ -959,11 +959,11 @@
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
   - type: Sprite
-    sprite: Structures/Machines/VendingMachines/medivend.rsi
+    sprite: Structures/Machines/VendingMachines/medivend.rsi # Goob - EE sprites
     layers:
-    - state: "off-civilian"
+    - state: "off" # Goob - no civilian sprites
       map: ["enum.VendingMachineVisualLayers.Base"]
-    - state: "off-civilian"
+    - state: "off" # Goob - no civilian sprites
       map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
       shader: unshaded
     - state: panel

@@ -419,7 +419,8 @@ namespace Content.Shared.Chemistry.Reagent
 
         public ReagentEffectsGuideEntry MakeGuideEntry(IPrototypeManager prototype, IEntitySystemManager entSys, ReagentPrototype proto)
         {
-            return new ReagentEffectsGuideEntry(MetabolismRate, proto.GuidebookReagentEffectsDescription(prototype, entSys, Effects, MetabolismRate).ToArray());
+            return new ReagentEffectsGuideEntry(MetabolismRate, proto.GuidebookReagentEffectsDescription(prototype, entSys, Effects, MetabolismRate).ToArray(),
+                Conditions.Select(x => x.EntityConditionGuidebookText(prototype)).ToArray()); // Trauma
         }
     }
 
@@ -430,10 +431,17 @@ namespace Content.Shared.Chemistry.Reagent
 
         public string[] EffectDescriptions;
 
-        public ReagentEffectsGuideEntry(FixedPoint2 metabolismRate, string[] effectDescriptions)
+        /// <summary>
+        /// Trauma - Description of metabolism group conditions, if it has any
+        /// </summary>
+        public string[] GroupConditions;
+
+        // Trauma - added groupConditions
+        public ReagentEffectsGuideEntry(FixedPoint2 metabolismRate, string[] effectDescriptions, string[] groupConditions)
         {
             MetabolismRate = metabolismRate;
             EffectDescriptions = effectDescriptions;
+            GroupConditions = groupConditions; // Trauma
         }
     }
 

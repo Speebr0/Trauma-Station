@@ -13,8 +13,8 @@ public sealed partial class EntityEffectPrototype: IPrototype
     public string ID { get; private set; } = string.Empty;
 
     /// <summary>
-    /// The effect of this prototype.
+    /// The effects of this prototype.
     /// </summary>
     [DataField(required: true)]
-    public EntityEffect Effect = default!;
+    public EntityEffect[] Effects = default!;
 }

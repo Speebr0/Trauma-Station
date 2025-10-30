@@ -26,9 +26,9 @@
         messages:
         - generic-reagent-effect-burning-insides
         - generic-reagent-effect-tearing-up
-      - !type:Paralyze
+      - !type:ModifyParalysis
         probability: 0.2
-        paralyzeTime: 2
+        time: 2
       - !type:Emote
         emote: Gasp
         probability: 0.1

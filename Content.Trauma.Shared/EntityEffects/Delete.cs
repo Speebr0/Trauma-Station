@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.EntityEffects;
 public sealed partial class Delete : EntityEffectBase<Delete>
 {
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString("entity-effect-guidebook-delete-entity");
+        => Loc.GetString("entity-effect-guidebook-delete-entity", ("chance", Probability));
 }
 
 public sealed class DeleteEffectSystem : EntityEffectSystem<MetaDataComponent, Delete>

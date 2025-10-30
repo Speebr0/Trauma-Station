@@ -290,7 +290,7 @@
   id: ProjectileWabbajack
   name: bolt of change
   description: Wabbajack, Wabbajack!
-  parent: BaseBullet
+  parent: BaseBulletTrigger
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -308,7 +308,6 @@
     userWhitelist:
       components:
       - Body
-  - type: TriggerOnProjectileHit
   - type: Reflective
     reflective: Magic
   - type: Ammo
@@ -558,7 +557,7 @@
   id: ProjectileEmpBolt
   name: electromagnetic bolt
   description: Energy low!!!
-  parent: BaseBullet
+  parent: BaseBulletTrigger
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -574,7 +573,6 @@
     reflective: Magic
   - type: Ammo
     muzzleFlash: null
-  - type: TriggerOnProjectileHit
   - type: EmpOnTrigger
     range: 3
     energyConsumption: 50000

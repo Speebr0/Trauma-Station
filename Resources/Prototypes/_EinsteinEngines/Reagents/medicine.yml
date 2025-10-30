@@ -14,7 +14,7 @@
   metabolisms:
     Medicine:
       effects:
-      - !type:ModifyBleedAmount
+      - !type:ModifyBleed
         conditions:
         - !type:ReagentCondition
           reagent: Artiplates

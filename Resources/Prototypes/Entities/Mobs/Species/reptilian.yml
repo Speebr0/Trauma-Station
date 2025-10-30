@@ -141,7 +141,7 @@
 #    - HeadTop # WWDP - Because visible horns its cool
     - HeadSide
     - Tail
-    undergarmentBottom: UndergarmentBottomBoxersReptilian
+    #undergarmentBottom: UndergarmentBottomBoxersReptilian # Trauma - undergarments weren't cherry picked
   - type: Hunger
   - type: Puller
     needsHands: false

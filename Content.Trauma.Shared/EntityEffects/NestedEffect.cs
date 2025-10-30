@@ -1,4 +1,5 @@
 using Content.Shared.EntityEffects;
+using Content.Shared.Localizations;
 using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
@@ -15,7 +16,17 @@ public sealed partial class NestedEffect : EntityEffectBase<NestedEffect>
     public ProtoId<EntityEffectPrototype> Proto;
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => prototype.Index(Proto).Effect.EntityEffectGuidebookText(prototype, entSys);
+    {
+        var proto = prototype.Index(Proto);
+        var effects = new List<string>();
+        foreach (var effect in proto.Effects)
+        {
+            if (effect.EntityEffectGuidebookText(prototype, entSys) is {} text)
+                effects.Add(text);
+        }
+
+        return effects.Count == 0 ? null : ContentLocalizationManager.FormatList(effects);
+    }
 }
 
 /// <summary>
@@ -33,7 +44,7 @@ public sealed class NestedEffectSystem : EntityEffectSystem<TransformComponent, 
 
     public void ApplyNestedEffect(EntityUid target, ProtoId<EntityEffectPrototype> id, float scale = 1f)
     {
-        var effect = _proto.Index(id).Effect;
-        _effects.TryApplyEffect(target, effect, scale);
+        var proto = _proto.Index(id);
+        _effects.ApplyEffects(target, proto.Effects, scale);
     }
 }

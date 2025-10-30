@@ -18,11 +18,11 @@ namespace Content.Goobstation.Shared.EntityConditions;
 
 public sealed partial class StaminaDamageCondition : EntityConditionBase<StaminaDamageCondition>
 {
-    [DataField(required: true)]
+    [DataField]
     public float Min;
 
-    [DataField(required: true)]
-    public float Max;
+    [DataField]
+    public float Max = float.PositiveInfinity;
 
     public override string EntityConditionGuidebookText(IPrototypeManager prototype)
         => Loc.GetString("reagent-effect-condition-guidebook-stamina-damage-threshold",

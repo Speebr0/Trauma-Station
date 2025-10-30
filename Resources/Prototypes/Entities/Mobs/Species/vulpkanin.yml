@@ -77,8 +77,8 @@
     - map: [ "enum.HumanoidVisualLayers.LArm" ]
     - map: [ "enum.HumanoidVisualLayers.RLeg" ]
     - map: [ "enum.HumanoidVisualLayers.LLeg" ]
-    - map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ]
-    - map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
+    #- map: [ "enum.HumanoidVisualLayers.UndergarmentBottom" ] # Trauma - undergarments weren't cherry picked
+    #- map: [ "enum.HumanoidVisualLayers.UndergarmentTop" ]
     - map: [ "jumpsuit" ]
     - map: [ "enum.HumanoidVisualLayers.LHand" ]
     - map: [ "enum.HumanoidVisualLayers.RHand" ]
@@ -109,12 +109,12 @@
     - map: [ "pocket1" ]
     - map: [ "pocket2" ]
     - map: [ "clownedon" ]
-      sprite: "Effects/creampie.rsi"
+      sprite: "_DV/Effects/creampie.rsi" # Trauma - vulp not fully cherry picked goida
       state: "creampie_vulpkanin"
       visible: false
   - type: HumanoidAppearance
     species: Vulpkanin
-    #undergarmentTop: UndergarmentTopTanktopVulpkanin # Trauma - wasn't cherry picked
+    #undergarmentTop: UndergarmentTopTanktopVulpkanin # Trauma - undergarments weren't cherry picked
     #undergarmentBottom: UndergarmentBottomBoxersVulpkanin
     hideLayersOnEquip:
     - Snout

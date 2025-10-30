@@ -31,7 +31,7 @@
   - type: Sprite
     sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-trick
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
     sound:
       path: /Audio/Effects/Emotes/parp1.ogg
 
@@ -44,7 +44,7 @@
   - type: Sprite
     sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-whitehole
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
     sound:
       path: /Audio/Effects/Grenades/Supermatter/whitehole_start.ogg
       volume: 5
@@ -72,7 +72,7 @@
         radius: 6
         softness: 1
         offset: "0, 0"
-      - type: SoundOnTrigger
+      - type: EmitSoundOnTrigger
         sound:
           path: /Audio/Effects/Grenades/Supermatter/supermatter_end.ogg
           params:
@@ -148,7 +148,7 @@
         radius: 6
         softness: 1
         offset: "0, 0"
-      - type: SoundOnTrigger
+      - type: EmitSoundOnTrigger
         sound:
           path: /Audio/Effects/Grenades/Supermatter/supermatter_end.ogg
           params:
@@ -195,7 +195,7 @@
       reagents:
       - ReagentId: TearGas
         Quantity: 20
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
     sound: /Audio/Items/smoke_grenade_smoke.ogg
 
 - type: entity
@@ -211,7 +211,7 @@
   - type: SmokeOnTrigger
     duration: 30
     spreadAmount: 50
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
     sound: /Audio/Items/smoke_grenade_smoke.ogg
 
 - type: entity
@@ -231,7 +231,7 @@
       reagents:
       - ReagentId: Sarin
         Quantity: 50
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
     sound: /Audio/Items/smoke_grenade_smoke.ogg
 
 - type: entity
@@ -567,4 +567,3 @@
           Quantity: 30
         - ReagentId: FoamingAgent
           Quantity: 30
-

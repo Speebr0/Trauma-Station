@@ -12,7 +12,7 @@ namespace Content.Trauma.Shared.EntityEffects.Effects;
 public sealed partial class RemoveSnares : EntityEffectBase<RemoveSnares>
 {
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString("entity-effect-guidebook-remove-snares");
+        => Loc.GetString("entity-effect-guidebook-remove-snares", ("chance", Probability));
 }
 
 public sealed class RemoveSnaresEffectSystem : EntityEffectSystem<EnsnareableComponent, RemoveSnares>

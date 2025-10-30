@@ -129,6 +129,7 @@
 - type: latheRecipe
   parent: BaseMechPartRecipe
   id: VimHarness
+  categories: [ Vim ] # Goob
   result: VimHarness
   completetime: 5
   materials:

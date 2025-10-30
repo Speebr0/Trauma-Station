@@ -429,7 +429,6 @@
     - WeaponEnergyGunLawbringer
   - type: StealTarget
     stealGroup: WeaponEnergyGunLawbringer
-  - type: AccessTrigger
   - type: RestrictById
     restrictMelee: true
     restrictRanged: true

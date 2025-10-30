@@ -239,14 +239,13 @@
   - type: TriggerOnActivateImplant
   - type: UncuffOnTrigger
     targetUser: true
-  - type: EffectOnTrigger # Trauma - entity effect version of goob shitcode
+  - type: EffectsOnTrigger # Trauma - entity effect version of goob shitcode
     targetUser: true
-    effect: !type:ComplexEffect
-      effects:
-      - !type:PullerEffect # stun whoever is pulling you
-        effect: !type:Paralyze
-          paralyzeTime: 5
-      - !type:RemoveSnares # remove any snares
+    effects:
+    - !type:RelayPuller # stun whoever is pulling you
+      effect: !type:ModifyParalysis
+        time: 5
+    - !type:RemoveSnares # remove any snares
 
 - type: entity
   parent: BaseSubdermalImplant

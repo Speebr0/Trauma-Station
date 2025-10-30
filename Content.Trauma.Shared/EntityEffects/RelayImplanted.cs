@@ -16,7 +16,7 @@ public sealed partial class RelayImplanted : EntityEffectBase<RelayImplanted>
     public EntityEffect Effect = default!;
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString("entity-effect-guidebook-relay-implanted", ("effect", Effect.EntityEffectGuidebookText(prototype, entSys)));
+        => Loc.GetString("entity-effect-guidebook-relay-implanted", ("chance", Probability), ("effect", Effect.EntityEffectGuidebookText(prototype, entSys)));
 }
 
 public sealed class RelayImplantedEffectSystem : EntityEffectSystem<SubdermalImplantComponent, RelayImplanted>

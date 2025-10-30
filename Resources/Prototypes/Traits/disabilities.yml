@@ -114,7 +114,6 @@
   category: Disabilities
   components:
   - type: PainNumbness
-  - type: PainNumbness
 
 - type: trait
   id: Hemophilia

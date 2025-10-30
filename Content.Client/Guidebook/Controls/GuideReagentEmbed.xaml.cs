@@ -169,6 +169,27 @@ public sealed partial class GuideReagentEmbed : BoxContainer, IDocumentTag, ISea
                 descriptionLabel.SetMessage(descMsg);
 
                 EffectsDescriptionContainer.AddChild(groupLabel);
+                // <Trauma>
+                var conditions = effect.GroupConditions;
+                if (conditions.Length > 0)
+                {
+                    var conditionsBox = new BoxContainer();
+                    var conditionsMsg = new FormattedMessage();
+                    conditionsMsg.PushMarkup(Loc.GetString("guidebook-reagent-effects-group-conditions"));
+                    for (int c = 0; c < conditions.Length;)
+                    {
+                        var condition = conditions[c];
+                        conditionsMsg.AddMarkupOrThrow(condition);
+                        if (++c < conditions.Length)
+                            conditionsMsg.PushNewline();
+                    }
+                    var conditionsLabel = new RichTextLabel();
+                    conditionsLabel.SetMessage(conditionsMsg);
+                    conditionsBox.AddChild(conditionsLabel);
+                    EffectsDescriptionContainer.AddChild(conditionsBox);
+                }
+                // </Trauma>
+
                 EffectsDescriptionContainer.AddChild(descriptionLabel);
             }
         }

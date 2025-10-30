@@ -45,10 +45,10 @@
           max: 1
         reagent: Triclor
         amount: -0.5
-      - !type:ChemVomit
+      - !type:Vomit
       - !type:ModifyBloodLevel
         amount: -5
-      - !type:ModifyBleedAmount
+      - !type:ModifyBleed
         amount: 0.5
       - !type:MovespeedModifier # primairly to decrease speed for a while longer after finishing vomiting
         walkSpeedModifier: 0.8
@@ -80,13 +80,13 @@
         - !type:MetabolizerTypeCondition
           type: [ Yowie ]
           inverted: true
-      - !type:Paralyze
+      - !type:ModifyParalysis
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Yowie ]
           inverted: true
         probability: 0.05
-        paralyzeTime: 2
+        time: 2
       - !type:Emote
         emote: Gasp
         probability: 0.1
@@ -107,20 +107,20 @@
     Poison:
       metabolismRate: 0.05
       effects:
-      - !type:AdjustReagent
+      - !type:AdjustReagentsByGroup
         group: Medicine
         amount: -4.5
         conditions: # higher quality anti-poisons, save for calomel which is low effort but high risk
-        - !type:BloodReagentThreshold
+        - !type:ReagentCondition
           reagent: PentenicAcid
           max: 0.1
-        - !type:BloodReagentThreshold
+        - !type:ReagentCondition
           reagent: Calomel
           max: 0.1
-        - !type:BloodReagentThreshold
+        - !type:ReagentCondition
           reagent: Diphenhydramine
           max: 0.1
-      - !type:AdjustReagent
+      - !type:AdjustReagentsByGroup
         group: Medicine
         amount: -0.5
       - !type:HealthChange
@@ -143,7 +143,7 @@
   metabolisms:
     Poison:
       effects:
-      - !type:AdjustReagent
+      - !type:AdjustReagentsByGroup
         group: Medicine
         amount: -5
       - !type:HealthChange
@@ -215,9 +215,9 @@
         key: Stutter
         component: StutteringAccent
       - !type:Jitter
-      - !type:Paralyze
+      - !type:ModifyParalysis
         probability: 0.5
-        paralyzeTime: 4
+        time: 4
         conditions:
         - !type:ReagentCondition
           reagent: Sarin
@@ -302,7 +302,7 @@
     Poison:
       metabolismRate: 0.05
       effects:
-      - !type:ChemVomit
+      - !type:Vomit
         conditions:
         - !type:ReagentCondition
           reagent: NevcottaPowder
@@ -326,10 +326,10 @@
         type: Add
         time: 20
         refresh: false
-      - !type:Paralyze
+      - !type:ModifyParalysis
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Yowie ]
           inverted: true
         probability: 0.05
-        paralyzeTime: 2
+        time: 2

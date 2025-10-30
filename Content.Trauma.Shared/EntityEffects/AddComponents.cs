@@ -21,7 +21,7 @@ public sealed partial class AddComponents : EntityEffectBase<AddComponents>
     public LocId GuidebookText;
 
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString(GuidebookText);
+        => Loc.GetString(GuidebookText, ("chance", Probability));
 }
 
 public sealed class AddComponentsEffectSystem : EntityEffectSystem<MetaDataComponent, AddComponents>

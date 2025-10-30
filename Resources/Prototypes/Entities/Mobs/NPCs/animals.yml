@@ -2266,7 +2266,7 @@
     staminaRatio: 1 # mice are small so can probably evade without much stamina drain
   - type: Stamina
     critThreshold: 20
-  - type: Crawling
+  - type: Crawler
   - type: NPCRetaliation
     attackMemoryLength: 5 # stop caring fast if you don't keep hitting
   - type: GroupRetaliation

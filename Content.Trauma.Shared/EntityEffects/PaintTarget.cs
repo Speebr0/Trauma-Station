@@ -12,7 +12,7 @@ namespace Content.Trauma.Shared.EntityEffects;
 public sealed partial class PaintTarget : EntityEffectBase<PaintTarget>
 {
     public override string? EntityEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString("entity-effect-paint-target-guidebook-text");
+        => Loc.GetString("entity-effect-paint-target-guidebook-text", ("chance", Probability));
 }
 
 public sealed class PaintTargetEffectSystem : EntityEffectSystem<TransformComponent, PaintTarget>

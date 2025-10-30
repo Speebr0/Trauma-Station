@@ -607,7 +607,7 @@
         - state: redws
     - type: GasCanister
       gasMixture:
-        volume: 1t00
+        volume: 1500
         moles:
           NitrousOxide: 2769.36 # N2O
         temperature: 293.15
