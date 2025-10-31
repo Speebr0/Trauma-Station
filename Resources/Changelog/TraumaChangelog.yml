@@ -510,3 +510,17 @@ Entries:
       message: Changed default rat servant behavior from "Loose" to "Follow"
   id: 55
   time: '2025-10-27T20:13:14.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Killdozer
+    - type: Add
+      message: Plasma Foundry
+    - type: Add
+      message: Flame armor
+    - type: Add
+      message: bunch more stuff I forgot
+    - type: Add
+      message: Insurgents for real this time?
+  id: 56
+  time: '2025-10-31T22:33:49.0000000+00:00'
