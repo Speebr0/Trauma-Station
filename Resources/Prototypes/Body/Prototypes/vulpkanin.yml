@@ -1,28 +1,36 @@
-﻿- type: body
+- type: body
   id: Vulpkanin
   name: vulpkanin
-  root: torso
+  root: chest # Trauma
   slots:
     head:
       part: HeadVulpkanin
       connections:
-      - torso
+      - chest # Trauma
       organs:
         brain: OrganHumanBrain
         eyes: OrganHumanEyes
-    torso:
-      part: TorsoVulpkanin
+    # <Trauma> - torso -> chest + groin
+    chest:
+      part: ChestVulpkanin
       connections:
+      - groin
       - right arm
       - left arm
-      - right leg
-      - left leg
+      - head
       organs:
         heart: OrganAnimalHeart
         lungs: OrganHumanLungs
+    groin:
+      part: GroinVulpkanin
+      connections:
+      - right leg
+      - left leg
+      organs:
         stomach: OrganAnimalStomach
         liver: OrganAnimalLiver
         kidneys: OrganHumanKidneys
+    # </Trauma>
     right arm:
       part: RightArmVulpkanin
       connections:

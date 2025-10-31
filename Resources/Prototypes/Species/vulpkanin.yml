@@ -20,9 +20,10 @@
     FacialHair: MobHumanoidAnyMarking
     Snout: MobHumanoidAnyMarking
     SnoutCover: MobHumanoidAnyMarking
-    UndergarmentTop: MobHumanoidAnyMarking
-    UndergarmentBottom: MobHumanoidAnyMarking
-    Chest: MobVulpkaninTorso
+    #UndergarmentTop: MobHumanoidAnyMarking # Trauma - wasn't cherry picked
+    #UndergarmentBottom: MobHumanoidAnyMarking # Trauma
+    Chest: MobVulpkaninChest
+    Groin: MobVulpkaninGroin # Trauma
     HeadTop: MobHumanoidAnyMarking
     HeadSide: MobHumanoidAnyMarking
     Tail: MobHumanoidAnyMarking
@@ -64,12 +65,12 @@
       points: 1
       required: true
       defaultMarkings: [ VulpEar ]
-    UndergarmentTop:
-      points: 1
-      required: false
-    UndergarmentBottom:
-      points: 1
-      required: false
+    #UndergarmentTop: # Trauma - wasn't cherry picked
+    #  points: 1
+    #  required: false
+    #UndergarmentBottom:
+    #  points: 1
+    #  required: false
     Arms:
       points: 6
       required: false
@@ -101,23 +102,43 @@
     sprite: Mobs/Species/Vulpkanin/parts.rsi
     state: head_f
 
+# <Trauma> - split torso into chest and groin
 - type: humanoidBaseSprite
-  id: MobVulpkaninTorso
+  id: MobVulpkaninChest
   baseSprite:
     sprite: Mobs/Species/Vulpkanin/parts.rsi
-    state: torso_m
+    state: chest_m
 
 - type: humanoidBaseSprite
-  id: MobVulpkaninTorsoMale
+  id: MobVulpkaninChestMale
   baseSprite:
     sprite: Mobs/Species/Vulpkanin/parts.rsi
-    state: torso_m
+    state: chest_m
 
 - type: humanoidBaseSprite
-  id: MobVulpkaninTorsoFemale
+  id: MobVulpkaninChestFemale
   baseSprite:
     sprite: Mobs/Species/Vulpkanin/parts.rsi
-    state: torso_f
+    state: chest_f
+
+- type: humanoidBaseSprite
+  id: MobVulpkaninGroin
+  baseSprite:
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: groin_m
+
+- type: humanoidBaseSprite
+  id: MobVulpkaninGroinMale
+  baseSprite:
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: groin_m
+
+- type: humanoidBaseSprite
+  id: MobVulpkaninGroinFemale
+  baseSprite:
+    sprite: Mobs/Species/Vulpkanin/parts.rsi
+    state: groin_f
+# </Trauma>
 
 - type: humanoidBaseSprite
   id: MobVulpkaninLLeg

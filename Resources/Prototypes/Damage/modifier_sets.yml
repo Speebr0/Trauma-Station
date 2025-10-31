@@ -412,3 +412,4 @@
   coefficients:
     Heat: 1.15
     Cold: 0.85
+  ignoreArmorPierceFlags: All # Trauma

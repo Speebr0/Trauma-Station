@@ -273,10 +273,12 @@
   id: Bark
   name: chat-emote-name-bark
   category: Vocal
+  icon: _Goobstation/Interface/Emotes/bark.png # Goob
   available: false
   whitelist:
-    components:
-    - Vocal
+    tags: # Goob - tags replacing components
+    - VulpEmotes
+    - HarpyEmotes
   blacklist:
     components:
     - BorgChassis
@@ -291,10 +293,12 @@
   id: Snarl
   name: chat-emote-name-snarl
   category: Vocal
+  icon: _Goobstation/Interface/Emotes/snarl.png # Goob
   available: false
   whitelist:
-    components:
-    - Vocal
+    tags: # Goob - tags replacing components
+    - VulpEmotes
+    - HarpyEmotes
   blacklist:
     components:
     - BorgChassis
@@ -309,10 +313,12 @@
   id: Whine
   name: chat-emote-name-whine
   category: Vocal
+  icon: _Goobstation/Interface/Emotes/whine.png # Goob
   available: false
   whitelist:
-    components:
-    - Vocal
+    tags: # Goob - tags replacing components
+    - VulpEmotes
+    - HarpyEmotes
   blacklist:
     components:
     - BorgChassis
@@ -327,10 +333,12 @@
   id: Howl
   name: chat-emote-name-howl
   category: Vocal
+  icon: _Goobstation/Interface/Emotes/howl.png # Goob
   available: false
   whitelist:
-    components:
-    - Vocal
+    tags: # Goob - tags replacing components
+    - VulpEmotes
+    - HarpyEmotes
   blacklist:
     components:
     - BorgChassis
@@ -345,10 +353,13 @@
   id: Growl
   name: chat-emote-name-growl
   category: Vocal
+  icon: _Goobstation/Interface/Emotes/growl.png # Goob
   available: false
   whitelist:
-    components:
-    - Vocal
+    tags: # Goob - tags replacing components
+    - FelinidEmotes
+    - VulpEmotes
+    - HarpyEmotes
   blacklist:
     components:
     - BorgChassis
