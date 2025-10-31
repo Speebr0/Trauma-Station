@@ -27,7 +27,7 @@
           components:
           - Heretic
           - Ghoul
-        guidebookText: entity-effect-condition-guidebook-heretic-or-ghoul
+        guidebookText: entity-condition-guidebook-heretic-or-ghoul
       effects:
       - !type:ModifyBloodLevel
         amount: 2

@@ -130,7 +130,6 @@
     inverted: true
     species:
     - Plasmaman
-    time: 5h
   guides: [ NuclearOperatives ]
 
 - type: antag

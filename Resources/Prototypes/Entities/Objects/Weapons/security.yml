@@ -238,6 +238,9 @@
     - Security
   - type: MartialArtBlocked # Goobstation - Martial Arts
     form: CorporateJudo # Goobstation - Martial Arts
+  - type: Tag # Goob
+    tags:
+    - StunBaton
 
 - type: entity
   name: truncheon
@@ -307,7 +310,7 @@
     - type: Flash
       meleeDuration: 7.0 # Goobstation Start - Total Flash Death
       aoeFlashDuration: 6.0
-      meleeStunDuration: 2.5 
+      meleeStunDuration: 2.5
       slowTo: 1.5 # Goobstation End - Total Flash Death
     - type: LimitedCharges
       maxCharges: 5

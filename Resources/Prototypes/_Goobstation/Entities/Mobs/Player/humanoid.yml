@@ -197,8 +197,8 @@
   - type: RandomHumanoidAppearance
   - type: RandomMetadata
     nameSegments:
-    - NamesVulpakinMale
-    - NamesVulpakinLast
+    - names_vulpkanin_male
+    - names_vulpkanin_last
     nameFormat: name-format-standard
 
 - type: entity

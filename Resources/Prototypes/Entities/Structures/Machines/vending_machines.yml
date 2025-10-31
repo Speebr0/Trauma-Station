@@ -19,9 +19,8 @@
     sound:
       path: /Audio/Ambience/Objects/vending_machine_hum.ogg
   - type: Sprite
-    noRot: true # Trauma
     sprite: Structures/Machines/VendingMachines/empty.rsi
-    snapCardinals: true
+    snapCardinals: false # Trauma
   - type: Physics
     bodyType: Static
   - type: Transform

@@ -233,7 +233,7 @@
   - EmptyDetonator
   # <Trauma>
   position: 3,2
-  technologyPrerequesites:
+  technologyPrerequisites:
   - NonlethalAmmunition
   # </Trauma>
 

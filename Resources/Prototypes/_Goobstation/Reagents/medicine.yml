@@ -709,7 +709,7 @@
             groups:
               Brute: 1
               Burn: 1
-          inverse: true
+          inverted: true
 
 # Low-effect meds
 - type: reagent
@@ -899,7 +899,7 @@
           damage:
             groups:
               Brute: 25
-          inverse: true
+          inverted: true
         - !type:ReagentCondition
           reagent: SalicylicAcid
           max: 25
@@ -953,7 +953,7 @@
           damage:
             groups:
               Burn: 25
-          inverse: true
+          inverted: true
         - !type:ReagentCondition
           reagent: Oxandrolone
           max: 25
