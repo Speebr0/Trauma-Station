@@ -120,7 +120,7 @@ public sealed partial class AbductConditionComponent : Component
     public int TotalAbducted => Abducted.Count;
 
     [DataField]
-    public HashSet<NetEntity> Abducted;
+    public HashSet<NetEntity> Abducted = new();
 }
 
 public sealed partial class ExitConsoleEvent : InstantActionEvent;

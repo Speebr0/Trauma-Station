@@ -8,12 +8,10 @@
   id: OrganicPotash
   minTemp: 354
   reactants:
-    Water:
-      amount: 1
-    Ash:
+    Lye:
       amount: 1
   products:
-    Potash: 2
+    Potash: 1
 
 - type: reaction
   id: Potash

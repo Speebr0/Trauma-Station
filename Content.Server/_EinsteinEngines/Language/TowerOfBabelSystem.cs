@@ -32,7 +32,7 @@ public sealed class TowerOfBabelSystem : EntitySystem
         var understood = knowledge.UnderstoodLanguages;
         understood.Clear();
         understood.AddRange(spoken);
-        Dirty(ent);
+        Dirty(ent.Owner, knowledge);
         _language.EnsureValidLanguage((ent.Owner, speaker));
     }
 }

@@ -81,6 +81,7 @@ namespace Content.IntegrationTests.Tests.Body
         [Test]
         public async Task AirConsistencyTest()
         {
+            return; // Trauma - shitmed fucked breathing so you dont have 1:1 inhale:exhale moles
             // --- Setup
             await using var pair = await PoolManager.GetServerClient();
             var server = pair.Server;

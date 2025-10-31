@@ -33,6 +33,7 @@
     containers:
       cluster-payload: !type:Container
   - type: ProjectileGrenade
+    triggerKey: timer # Trauma - component default changed to trigger, these use that for starting the timer for no reason
   - type: AnimationPlayer
   - type: GenericVisualizer
     visuals:

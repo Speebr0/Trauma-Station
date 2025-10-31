@@ -209,7 +209,8 @@ public sealed partial class BorgSystem
         if (!_mobState.IsAlive(uid))
             return 0;
 
-        if (!_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var threshold))
+        if (!_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Critical, out var threshold) &&
+            !_mobThresholdSystem.TryGetThresholdForState(uid, MobState.Dead, out threshold)) // Trauma - drones don't use a crit state
         {
             Log.Error($"Borg({ToPrettyString(uid)}), doesn't have critical threshold.");
             return 1;

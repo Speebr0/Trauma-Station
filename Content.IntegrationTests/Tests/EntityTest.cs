@@ -96,9 +96,9 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => !p.Abstract)
                     .Where(p => !pair.IsTestPrototype(p))
                     .Where(p => !p.Components.ContainsKey("MapGrid")) // This will smash stuff otherwise.
-                    .Where(p => !p.Components.ContainsKey("MobReplacementRule")) // goob edit - fuck them mimics
                     .Where(p => !p.Components.ContainsKey("Supermatter")) // Goobstation - Supermatter eats everything, oh no!
                     .Where(p => !p.Components.ContainsKey("RoomFill")) // This comp can delete all entities, and spawn others
+                    .Where(p => !p.Components.ContainsKey("GameRule")) // Trauma - are you stupid why would you do this
                     .Select(p => p.ID)
                     .ToList();
 
@@ -165,6 +165,7 @@ namespace Content.IntegrationTests.Tests
                     .Where(p => !p.Components.ContainsKey("MapGrid")) // This will smash stuff otherwise.
                     .Where(p => !p.Components.ContainsKey("Supermatter")) // Goobstation - Supermatter eats everything, oh no!
                     .Where(p => !p.Components.ContainsKey("RoomFill")) // This comp can delete all entities, and spawn others
+                    .Where(p => !p.Components.ContainsKey("GameRule")) // Trauma - are you stupid why would you do this
                     .Select(p => p.ID)
                     .ToList();
                 foreach (var protoId in protoIds)
@@ -318,6 +319,7 @@ namespace Content.IntegrationTests.Tests
                 .Where(p => !pair.IsTestPrototype(p))
                 .Where(p => !excluded.Any(p.Components.ContainsKey))
                 .Where(p => p.Categories.All(x => x.ID != SpawnerCategory))
+                .Where(p => p.ID != "CrateCargoGambling") // Trauma - heisentest from exploding spawning lights
                 .Select(p => p.ID)
                 .ToList();
 

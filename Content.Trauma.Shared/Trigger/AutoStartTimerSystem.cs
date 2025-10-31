@@ -1,3 +1,4 @@
+using Content.Shared.Trigger.Components;
 using Content.Shared.Trigger.Systems;
 
 namespace Content.Trauma.Shared.Trigger;
@@ -15,6 +16,9 @@ public sealed class AutoStartTimerSystem : EntitySystem
 
     private void OnMapInit(Entity<AutoStartTimerComponent> ent, ref MapInitEvent args)
     {
-        _trigger.ActivateTimerTrigger(ent.Owner);
+        if (!TryComp<TimerTriggerComponent>(ent, out var timer))
+            return;
+
+        _trigger.ActivateTimerTrigger((ent.Owner, timer));
     }
 }

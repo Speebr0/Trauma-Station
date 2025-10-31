@@ -29,7 +29,7 @@ public sealed class TriggerOnSolutionInsertSystem : EntitySystem
     private void OnEntInserted(Entity<TriggerOnSolutionInsertComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         var quantity = RecursiveCheckForSolution(args.Entity, ent.Comp.Reagent);
-        if ((ent.Comp.MinAmount is not {} min || quantity >= min) ||
+        if ((ent.Comp.MinAmount is not {} min || quantity >= min) &&
             (ent.Comp.MaxAmount is not {} max || quantity <= max))
         {
             _trigger.Trigger(ent, user: null, ent.Comp.KeyOut);

@@ -89,6 +89,7 @@ public abstract partial class SharedStationSystem : EntitySystem
     /// </remarks>
     public EntityUid? GetOwningStation(EntityUid entity, TransformComponent? xform = null)
     {
+        if (!entity.IsValid()) return null; // Trauma
         if (!Resolve(entity, ref xform))
             throw new ArgumentException("Tried to use an abstract entity!", nameof(entity));
 

@@ -50,7 +50,7 @@
         scaling: true
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Human, Animal, Rat, Plant ]
+          type: [ Human, Animal, Rat, Plant, Yowie, Cybernetic ] # Goob - Yowie-Cybernetic
       # Convert Oxygen into CO2.
       - !type:ModifyLungGas
         scaling: true
@@ -71,22 +71,19 @@
           types:
             Poison: 1.5
       - !type:AdjustAlert
-        alertType: Toxins
+        alertType: HighOxygen # Goob - was Toxins
         minScale: 1
         conditions:
           - !type:MetabolizerTypeCondition
             type: [ Vox ]
         clear: true
         time: 5
-      # <Shitmed>
-      - !type:Oxygenate
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Cybernetic ]
+      # <Shitmed> - cyberlungs and yowies need half as much oxygen
       - !type:ModifyLungGas
+        scaling: true
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Cybernetic ]
+          type: [ Yowie, Cybernetic ]
         ratios:
           CarbonDioxide: 0.5
           Oxygen: -0.5
@@ -97,7 +94,7 @@
         scaling: true
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Human, Animal, Rat, Plant ]
+          type: [ Human, Animal, Rat, Plant, Yowie, Cybernetic ] # Goob - add Yowie-Cybernetic
       # Convert Oxygen into CO2.
       - !type:ModifyLungGas
         scaling: true
@@ -125,11 +122,8 @@
             type: [ Vox ]
         clear: true
         time: 5
-      - !type:Oxygenate # Goob - Yowie/Cybernetic organs
-        conditions:
-        - !type:MetabolizerTypeCondition
-          type: [ Cybernetic, Yowie ]
       - !type:ModifyLungGas # Shitmed
+        scaling: true
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Cybernetic ]

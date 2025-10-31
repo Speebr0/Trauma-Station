@@ -16,14 +16,20 @@
 - type: body
   id: HugBot
   name: "hugBot"
-  root: box
+  root: chest
   slots:
-    box:
+    # <Trauma> use right connections
+    chest:
       part: TorsoBorg
       connections:
-      - right_arm
-      - left_arm
-    right_arm:
+      - right arm
+      - left arm
+    right arm:
+      connections:
+      - chest
       part: RightArmBorg
-    left_arm:
+    left arm:
+      connections:
+      - chest
       part: LeftArmBorg
+    # </Trauma>

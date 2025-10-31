@@ -20,11 +20,12 @@
       path: /Audio/Ambience/Objects/vending_machine_hum.ogg
   - type: Sprite
     sprite: Structures/Machines/VendingMachines/empty.rsi
-    snapCardinals: false # Trauma
+    snapCardinals: false # Trauma - it looks bad when rotating and it goes diagonal
+    noRot: true # Trauma
   - type: Physics
     bodyType: Static
   - type: Transform
-    noRot: true
+    noRot: false # Trauma - EE sprites have directions
   - type: Fixtures
     fixtures:
       fix1:
@@ -70,6 +71,7 @@
     boardName: wires-board-name-vendingmachine
     layoutId: Vending
   - type: Anchorable
+  - type: Rotatable # Trauma - why not
   - type: TypingIndicator
     proto: robot
   - type: Speech
@@ -225,8 +227,6 @@
     dataset: CondimentVendAds
   - type: SpeakOnUIClosed
     pack: GenericVendGoodbyes
-  - type: Transform
-    noRot: false
 
 - type: entity
   parent: VendingMachine

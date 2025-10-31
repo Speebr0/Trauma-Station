@@ -15,8 +15,6 @@
   # <Goob>
   - Gingerbread
   - Harpy
-  - Vox
-  - Vulpkanin
   - Rodentia
   - Yowie
   - IPC
@@ -61,16 +59,6 @@
   id: SlimePerson
   name: species-name-slime
   text: "/ServerInfo/Guidebook/Mobs/SlimePerson.xml"
-
-- type: guideEntry
-  id: Gingerbread
-  name: species-name-gingerbread
-  text: "/ServerInfo/Guidebook/Mobs/Gingerbread.xml"
-
-- type: guideEntry
-  id: Harpy
-  name: species-name-harpy
-  text: "/ServerInfo/Guidebook/Mobs/Harpy.xml"
 
 - type: guideEntry
   id: Vox

@@ -96,6 +96,7 @@ public sealed partial class TriggerSystem
             return;
 
         var target = ent.Comp.TargetUser ? args.User : ent.Owner;
+        Log.Debug($"Deleting {ToPrettyString(target)}");
 
         if (target == null)
             return;

@@ -13,7 +13,7 @@
     price: 40
   - type: PayloadTrigger
     components:
-    - type: OnUseTimerTrigger
+    - type: TimerTrigger
       delay: 5
       initialBeepDelay: 0
       delayOptions: [3, 5, 10, 15, 30]
@@ -41,7 +41,7 @@
     price: 40
   - type: PayloadTrigger
     components:
-    - type: OnUseTimerTrigger
+    - type: TimerTrigger
       delay: 3
       initialBeepDelay: 0
       delayOptions: [3, 5, 10, 15, 30]
@@ -70,7 +70,7 @@
     price: 40
   - type: PayloadTrigger
     components:
-    - type: OnUseTimerTrigger
+    - type: TimerTrigger
       delay: 3
       initialBeepDelay: 0
       delayOptions: [3, 5, 10, 15, 30]
@@ -99,7 +99,7 @@
     price: 40
   - type: PayloadTrigger
     components:
-    - type: OnUseTimerTrigger
+    - type: TimerTrigger
       delay: 3
       initialBeepDelay: 1
       delayOptions: [3]
@@ -126,7 +126,7 @@
     price: 40
   - type: PayloadTrigger
     components:
-    - type: OnUseTimerTrigger
+    - type: TimerTrigger
       delay: 5
       initialBeepDelay: 0
       beepInterval: 30

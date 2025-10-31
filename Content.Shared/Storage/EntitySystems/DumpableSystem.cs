@@ -140,7 +140,7 @@ public sealed class DumpableSystem : EntitySystem
     /// </summary>
     public void DumpContents(Entity<DumpableComponent?> ent, EntityUid target, EntityUid user)
     {
-        if (!Resolve(ent, ref ent.Comp))
+        if (!Resolve(ent, ref ent.Comp, false))
             return;
 
         if (!TryComp<StorageComponent>(ent, out var storage) || storage.Container.ContainedEntities.Count == 0)

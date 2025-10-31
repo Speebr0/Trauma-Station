@@ -509,10 +509,6 @@
   - type: Tag
     tags:
     - Dropper
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Glass: 50
-      Plastic: 25
 
 - type: entity
   parent: Dropper
