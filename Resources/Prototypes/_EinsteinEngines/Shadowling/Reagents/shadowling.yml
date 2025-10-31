@@ -41,5 +41,4 @@
           min: 5
         key: TemporaryBlindness
         component: TemporaryBlindness
-        refresh: true
         time: 3

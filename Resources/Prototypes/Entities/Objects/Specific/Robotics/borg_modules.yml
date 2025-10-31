@@ -1128,7 +1128,7 @@
     - item: Bucket
     - hand: # Trauma - make service borgs 1% useful
         emptyLabel: borg-slot-seeds-empty
-        emptyRepresenative: AppleSeeds
+        emptyRepresentative: AppleSeeds
         whitelist:
           components:
           - Seed

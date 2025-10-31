@@ -212,20 +212,20 @@
   - type: StealCondition
     stealGroup: HandTeleporter
 
-## warden
+## hos
 
 - type: entity
   parent: BaseCorporateStealObjective
-  id: CorporateEnergyShotgunStealObjective
+  id: CorporateEnergyMagnumStealObjective
   components:
   - type: Objective
-    # Warden will have this on them a lot of the time so..
+    # HoS will have this on them a lot of the time so..
     difficulty: 3
   - type: NotJobRequirement
-    job: Warden # Goob edit
+    job: HeadOfSecurity
   - type: StealCondition
-    stealGroup: WeaponEnergyShotgun
-    owner: job-name-warden # Goob edit
+    stealGroup: WeaponEnergyMagnum
+    owner: job-name-hos
 
 ## ce
 

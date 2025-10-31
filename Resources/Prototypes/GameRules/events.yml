@@ -185,7 +185,7 @@
     children:
     - id: ClosetSkeleton
     - id: KingRatMigration
-    - id: RevenantSpawn
+    #- id: RevenantSpawn  # GoobStation - removed till rework
     - !type:NestedSelector
       tableId: DerelictBorgEventTable
 

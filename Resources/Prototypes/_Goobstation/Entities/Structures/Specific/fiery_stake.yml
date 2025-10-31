@@ -46,7 +46,7 @@
     targetUser: true
     effects:
     - !type:Flammable
-      fireStacks: 15
+      multiplier: 15
     - !type:Ignite
   - type: IgnitionSource
     temperature: 400

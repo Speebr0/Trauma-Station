@@ -157,5 +157,7 @@
   - type: Icon
     state: pinpointer-station
   - type: Pinpointer
-    component: XenoborgMothership
+    whitelist: # Trauma - pinpointer whitelist
+      components:
+      - XenoborgMothership
     targetName: the Mothership

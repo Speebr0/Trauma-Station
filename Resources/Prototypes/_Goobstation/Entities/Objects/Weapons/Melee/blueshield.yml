@@ -113,8 +113,9 @@
         maxVol: 5
   - type: Injector
     delay: 1
-    maxTransferAmount: 5
-    minTransferAmount: 3
+    transferAmounts:
+    - 3
+    - 5
     injectOnly: false
   - type: MeleeChemicalInjector
     transferAmount: 5

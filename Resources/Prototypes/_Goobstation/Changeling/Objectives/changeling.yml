@@ -190,17 +190,17 @@
   - type: StealCondition
     stealGroup: HandTeleporter
 
-## warden
+## hos
 
 - type: entity
   parent: ChangelingStealObjective
-  id: LingEnergyShotgunStealObjective
+  id: LingEnergyMagnumStealObjective
   components:
   - type: NotJobRequirement
-    job: Warden # Goob edit
+    job: HeadOfSecurity
   - type: StealCondition
-    stealGroup: WeaponEnergyShotgun
-    owner: job-name-warden # Goob edit
+    stealGroup: WeaponEnergyMagnum
+    owner: job-name-hos
 
 ## ce
 

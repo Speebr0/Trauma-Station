@@ -261,7 +261,7 @@
       methods: [ Touch ]
       effects:
       - !type:HealthChange
-        scaleByQuantity: true
+        scaling: true
         ignoreResistances: false
         damage:
           types:
@@ -325,7 +325,6 @@
         component: SeeingRainbows
         type: Add
         time: 20
-        refresh: false
       - !type:ModifyParalysis
         conditions:
         - !type:MetabolizerTypeCondition

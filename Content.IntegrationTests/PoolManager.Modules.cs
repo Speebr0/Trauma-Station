@@ -56,7 +56,7 @@ public static partial class PoolManager
     },
     LazyThreadSafetyMode.ExecutionAndPublication);
 
-    private static void DiscoverModules()
+    public static void DiscoverModules()
     {
         _ = Discovered.Value;
     }

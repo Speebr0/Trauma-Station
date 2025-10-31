@@ -142,11 +142,15 @@
     channels:
     - Mothership
     - Xenoborg
-    - Binary
+    # - Binary # Trauma - replaced with collective mind
   - type: ActiveRadio
     channels:
     - Mothership
     - Xenoborg
+    # - Binary # Trauma - replaced with collective mind
+  - type: CollectiveMind # Trauma
+    defaultChannel: Binary
+    channels:
     - Binary
   - type: XenoborgMothership
   - type: Tag

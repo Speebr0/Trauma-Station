@@ -64,15 +64,6 @@
         - MindRoleGhostRoleSoloAntagonist
         raffle:
           settings: default
-        requirements:
-        - !type:OverallPlaytimeRequirement
-          time: 180000 #50 hours
-        - !type:DepartmentTimeRequirement
-          department: Medical
-          time: 7200 #2 hours
-        - !type:DepartmentTimeRequirement
-          department: Security
-          time: 7200 #2 hours
       - type: GhostTakeoverAvailable
       - type: NpcFactionMember
         factions:
@@ -164,12 +155,6 @@
         - MindRoleGhostRoleTeamAntagonist
         raffle:
           settings: default
-        requirements:
-        - !type:OverallPlaytimeRequirement
-          time: 180000 #50 hours
-        - !type:DepartmentTimeRequirement
-          department: Medical
-          time: 10800 #3 hours
       - type: GhostTakeoverAvailable
       - type: NpcFactionMember
         factions:
@@ -215,12 +200,6 @@
         - MindRoleGhostRoleTeamAntagonist
         raffle:
           settings: default
-        requirements:
-        - !type:OverallPlaytimeRequirement
-          time: 18000 #5 hours
-        - !type:DepartmentTimeRequirement
-          department: Security
-          time: 10800 #3 hours
       - type: GhostTakeoverAvailable
       - type: NpcFactionMember
         factions:

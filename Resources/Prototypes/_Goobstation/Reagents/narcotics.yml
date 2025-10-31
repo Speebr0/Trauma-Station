@@ -124,7 +124,6 @@
         component: SeeingRainbows
         type: Add
         time: 20
-        refresh: false
       - !type:Drunk
         boozePower: 10
       - !type:Emote # Now a bunch of emotes
@@ -158,7 +157,6 @@
         component: TemporaryBlindness
         type: Add
         time: 3
-        refresh: false
 
 - type: reagent
   id: Amnestizine
@@ -231,7 +229,6 @@
         component: TemporaryBlindness
         type: Add
         time: 2
-        refresh: false
       - !type:Jitter
         conditions:
         - !type:ReagentCondition
@@ -487,7 +484,6 @@
         component: SeeingRainbows
         type: Add
         time: 20
-        refresh: false
       - !type:Drunk
         boozePower: 10
         conditions:

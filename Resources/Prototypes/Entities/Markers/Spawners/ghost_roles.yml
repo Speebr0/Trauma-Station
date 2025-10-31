@@ -27,9 +27,6 @@
     - MindRoleGhostRoleSoloAntagonist
     raffle:
       settings: default
-    requirements: # Goobstation - ghost roles requirements
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
   - type: GhostRoleMobSpawner
     prototype: MobRatKing
   - type: Sprite
@@ -118,10 +115,6 @@
     rules: ghost-role-information-loneop-rules
     mindRoles:
     - MindRoleLoneops
-    requirements: # Goobstation - ghost roles requirements
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 18000 #5 hours
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -176,9 +169,6 @@
     rules: ghost-role-information-space-dragon-rules
     mindRoles:
     - MindRoleDragon
-    requirements: # Goobstation - ghost roles requirements
-    - !type:OverallPlaytimeRequirement
-      time: 5h
   - type: Sprite
     layers:
     - state: green
@@ -198,9 +188,6 @@
     - MindRoleNinja
     raffle:
       settings: default
-    requirements: # Goobstation - ghost roles requirements
-    - !type:OverallPlaytimeRequirement
-      time: 18000 #5 hours
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:
@@ -253,10 +240,6 @@
     - MindRoleSubvertedSilicon
     raffle:
       settings: default
-    requirements: # Goobstation - ghost roles requirements
-    - !type:RoleTimeRequirement
-      role: JobBorg
-      time: 3600 #1 hour
   - type: Sprite
     sprite: Markers/jobs.rsi
     layers:

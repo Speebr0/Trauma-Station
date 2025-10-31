@@ -423,8 +423,6 @@
       map: [ "enum.AmmoVisualLayers.Base" ]
     - state: lollypop-captain
       map: [ "enum.AmmoVisualLayers.Tip" ]
-  - type: Lollypop
-    deleteOnEmpty: false
 
 # CentComm
 

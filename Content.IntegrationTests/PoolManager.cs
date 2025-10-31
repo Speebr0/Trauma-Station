@@ -98,13 +98,14 @@ public sealed class ContentPoolManager : PoolManager<TestPair>
         DefaultCvars.AddRange(PoolManager.TestCvars);
 
         // <Goob> - used discovered modules
-        var all = new List<Assembly>(extraAssemblies);
-        all.AddRange(PoolManager.Shared);
-        all.AddRange(PoolManager.Client);
-        all.AddRange(PoolManager.Server);
-        all.Add(PoolManager.CurrentAssembly);
+        PoolManager.DiscoverModules();
+        var shared = new List<Assembly>(extraAssemblies);
+        shared.AddRange(PoolManager.Shared);
+        shared.Add(PoolManager.CurrentAssembly);
 
-        Startup(all.ToArray());
+        base.Startup(PoolManager.Client.ToArray(),
+            PoolManager.Server.ToArray(),
+            shared.ToArray());
         // </Goob>
     }
 }

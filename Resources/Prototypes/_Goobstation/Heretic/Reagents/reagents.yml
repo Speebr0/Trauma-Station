@@ -27,7 +27,7 @@
           components:
           - Heretic
           - Ghoul
-        guidebookText: entity-effect-condition-heretic-or-ghoul
+        guidebookText: entity-effect-condition-guidebook-heretic-or-ghoul
       effects:
       - !type:ModifyBloodLevel
         amount: 2
@@ -58,7 +58,7 @@
           components:
           - Heretic
           - Ghoul
-        guidebookText: reagent-comp-condition-not-heretic-or-ghoul
+        guidebookText: entity-condition-guidebook-not-heretic-or-ghoul
       effects:
       - !type:Electrocute
         probability: 0.5

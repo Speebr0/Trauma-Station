@@ -140,7 +140,7 @@
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Plasmaman ]
-        scaleByQuantity: true
+        scaling: true
         ignoreResistances: true
         damage:
           types:
@@ -239,7 +239,7 @@
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Cybernetic ]
-        scaleByQuantity: true
+        scaling: true
         ignoreResistances: true
         damage:
           types:
@@ -326,7 +326,7 @@
         conditions:
         - !type:MetabolizerTypeCondition
           type: [ Cybernetic ]
-        scaled: true
+        scaling: true
         ignoreResistances: true
         damage:
           types:
@@ -605,7 +605,7 @@
           reagent: Frezon
           min: 0.5
         minScale: 1
-        scaleByQuantity: true
+        scaling: true
         ignoreResistances: true
         damage:
           types:

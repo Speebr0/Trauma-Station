@@ -28,7 +28,7 @@
           min: 0.5
         - !type:MetabolizerTypeCondition
           type: [ Slime, Cybernetic ]
-        scaleByQuantity: true
+        scaling: true
         ignoreResistances: true
         damage:
           types:
@@ -45,7 +45,6 @@
         component: SeeingRainbows
         type: Add
         time: 150
-        refresh: false
       - !type:Emote
         conditions:
         - !type:ReagentCondition
@@ -126,7 +125,7 @@
         - !type:MetabolizerTypeCondition
           type: [ Slime, Cybernetic ]
           inverted: true
-        scaleByQuantity: true
+        scaling: true
         ignoreResistances: true
         damage:
           types:
@@ -144,7 +143,6 @@
         component: SeeingRainbows
         type: Add
         time: 150
-        refresh: false
       - !type:Emote
         conditions:
         - !type:ReagentCondition
@@ -221,7 +219,7 @@
         - !type:ReagentCondition
           reagent: Healium
           max: 24
-        scaleByQuantity: true
+        scaling: true
         ignoreResistances: true
         damage:
           groups:
@@ -276,7 +274,7 @@
         - !type:ReagentCondition
           reagent: Healium
           max: 24
-        scaleByQuantity: true
+        scaling: true
         ignoreResistances: true
         damage:
           groups:

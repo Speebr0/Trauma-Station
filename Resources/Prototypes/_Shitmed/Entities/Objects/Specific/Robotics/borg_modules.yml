@@ -19,7 +19,7 @@
     - item: BoneGel
     #- item: Bonesetter # Trauma - unused currently
     - hand:
-        emptyRepresenative: OrganHumanBrain
+        emptyRepresentative: OrganHumanBrain
         emptyLabel: borg-slot-organ-empty
         whitelist:
           components:
@@ -44,7 +44,7 @@
     - item: AdvancedRetractor
     - item: AdvancedBoneGel
     - hand:
-        emptyRepresenative: OrganHumanBrain
+        emptyRepresentative: OrganHumanBrain
         emptyLabel: borg-slot-organ-empty
         whitelist:
           components:
