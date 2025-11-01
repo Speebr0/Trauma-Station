@@ -25,7 +25,8 @@ public sealed class HitscanReflectSystem : EntitySystem
         if (hitscan.Comp.CurrentReflections >= hitscan.Comp.MaxReflections)
             return;
 
-        var ev = new HitScanReflectAttemptEvent(data.Shooter ?? data.Gun, data.Gun, hitscan.Comp.ReflectiveType, data.ShotDirection, false);
+        var ev = new HitScanReflectAttemptEvent(data.Shooter ?? data.Gun, data.Gun, hitscan.Comp.ReflectiveType, data.ShotDirection, false,
+            CompOrNull<HitscanBasicDamageComponent>(hitscan)?.Damage); // Trauma - shitcode version of old goob thing from #1152, it needs rework for new system
         RaiseLocalEvent(data.HitEntity.Value, ref ev);
 
         if (!ev.Reflected)

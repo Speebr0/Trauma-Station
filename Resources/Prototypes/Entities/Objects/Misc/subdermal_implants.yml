@@ -239,7 +239,7 @@
   - type: TriggerOnActivateImplant
   - type: UncuffOnTrigger
     targetUser: true
-  - type: EffectsOnTrigger # Trauma - entity effect version of goob shitcode
+  - type: EntityEffectOnTrigger # Trauma - entity effect version of goob shitcode
     targetUser: true
     effects:
     - !type:RelayPuller # stun whoever is pulling you

@@ -445,7 +445,7 @@
     access: [['HeadOfSecurity']]
   - type: ActiveListener
   - type: ExplodeOnTrigger
-  - type: EffectsOnTrigger
+  - type: EntityEffectOnTrigger
     targetUser: true
     effects:
     - !type:DropItems

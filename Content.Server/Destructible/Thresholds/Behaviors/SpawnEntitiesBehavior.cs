@@ -1,5 +1,5 @@
 using System.Numerics;
-using Content.Server.Forensics;
+using Content.Shared.Forensics.Components; // Trauma - forensics was moved to shared
 using Content.Server.Stack;
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.Prototypes;

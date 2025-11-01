@@ -1,5 +1,5 @@
 using Content.Shared.EntityEffects;
-using Content.Shared.Weapons.Hitscan;
+using Content.Shared.Weapons.Hitscan.Events;
 
 namespace Content.Trauma.Shared.Weapons.Hitscan;
 
@@ -16,7 +16,7 @@ public sealed class HitscanEntityEffectsSystem : EntitySystem
 
     private void OnFired(Entity<HitscanEntityEffectsComponent> ent, ref HitscanRaycastFiredEvent args)
     {
-        if (args.HitEntity is not {} target)
+        if (args.Data.HitEntity is not {} target)
             return;
 
         _effects.ApplyEffects(target, ent.Comp.Effects);

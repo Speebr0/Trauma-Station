@@ -64,7 +64,7 @@ public sealed class WeightedRandomEffectSystem : EntityEffectSystem<MetaDataComp
     {
         var total = 0f;
         // TODO: PredictedRandom when it's real
-        var seed = SharedRandomExtensions.HashCodeCombine(new() { (int)_timing.CurTick.Value, GetNetEntity(ent, ent.Comp).Id });
+        var seed = SharedRandomExtensions.HashCodeCombine((int)_timing.CurTick.Value, GetNetEntity(ent, ent.Comp).Id);
         var rand = new Random(seed);
         var effect = args.Effect;
         var target = rand.NextFloat() * effect.GetTotalWeights();

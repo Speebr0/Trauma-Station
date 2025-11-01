@@ -31,7 +31,7 @@ using Content.Server._DV.Cargo.Components;
 using Content.Server.Destructible;
 using Content.Server.Destructible.Thresholds;
 using Content.Server.Destructible.Thresholds.Behaviors;
-using Content.Server.Destructible.Thresholds.Triggers;
+using Content.Shared.Destructible.Thresholds.Triggers;
 using Content.Server.Item;
 using Content.Server.Mail.Components;
 using Content.Server.Mind;

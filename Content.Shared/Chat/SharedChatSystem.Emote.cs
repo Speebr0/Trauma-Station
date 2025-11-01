@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Goobstation.Common.MisandryBox;
+using Content.Shared._EinsteinEngines.Language.Systems;
 using Content.Shared.Chat;
 // </Trauma>
 using System.Collections.Frozen;
@@ -12,6 +13,8 @@ namespace Content.Shared.Chat;
 
 public abstract partial class SharedChatSystem
 {
+    [Dependency] private readonly SharedLanguageSystem _language = default!; // Trauma
+
     private FrozenDictionary<string, EmotePrototype> _wordEmoteDict = FrozenDictionary<string, EmotePrototype>.Empty;
 
     private void CacheEmotes()

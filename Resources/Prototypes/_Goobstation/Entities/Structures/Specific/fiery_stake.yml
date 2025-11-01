@@ -42,7 +42,7 @@
     position: Stand
     buckleOffset: "0,0.25"
   - type: TriggerOnBuckled
-  - type: EffectsOnTrigger
+  - type: EntityEffectOnTrigger
     targetUser: true
     effects:
     - !type:Flammable

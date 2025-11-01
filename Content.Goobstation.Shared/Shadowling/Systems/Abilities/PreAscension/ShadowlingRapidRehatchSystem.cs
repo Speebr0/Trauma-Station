@@ -6,15 +6,15 @@
 
 using Content.Goobstation.Shared.Shadowling;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.PreAscension;
-using Content.Server.Administration.Systems;
 using Content.Shared.Actions;
+using Content.Shared.Administration.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
-namespace Content.Goobstation.Server.Shadowling.Systems.Abilities.PreAscension;
+namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.PreAscension;
 
 /// <summary>
 /// This handles Rapid Re-Hatch logic. An ability that heals all wounds and status effects.
@@ -77,13 +77,13 @@ public sealed class ShadowlingRapidRehatchSystem : EntitySystem
             || args.Handled)
             return;
 
-        _popup.PopupEntity(Loc.GetString("shadowling-rapid-rehatch-complete"), uid, uid, PopupType.Medium);
+        _popup.PopupPredicted(Loc.GetString("shadowling-rapid-rehatch-complete"), uid, uid, PopupType.Medium);
         _rejuvenate.PerformRejuvenate(uid);
 
         var effectEnt = Spawn(comp.RapidRehatchEffect, _transform.GetMapCoordinates(uid));
         _transform.SetParent(effectEnt, uid);
 
-        _audio.PlayPvs(comp.RapidRehatchSound, uid, AudioParams.Default.WithVolume(-2f));
+        _audio.PlayPredicted(comp.RapidRehatchSound, uid, uid, AudioParams.Default.WithVolume(-2f));
 
         _actions.StartUseDelay(comp.ActionRapidRehatchEntity);
         args.Handled = true;

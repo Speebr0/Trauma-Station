@@ -2241,6 +2241,8 @@
       Burger: RatBurger
       Skewer: RatSkewer
   # <Goobstation>
+  - type: AnimatedEmotes
+    tweakState: mouse-tweaking-0
   - type: NightVision
     color: "#808080"
     activateSound: null
@@ -2351,6 +2353,8 @@
   - type: Item
     size: Tiny
     heldPrefix: 1
+  - type: AnimatedEmotes # Goob
+    tweakState: mouse-tweaking-1
 
 - type: entity
   parent: MobMouse
@@ -2380,6 +2384,8 @@
   - type: Item
     size: Tiny
     heldPrefix: 2
+  - type: AnimatedEmotes # Goob
+    tweakState: mouse-tweaking-2
 
 - type: entity
   name: cancer mouse

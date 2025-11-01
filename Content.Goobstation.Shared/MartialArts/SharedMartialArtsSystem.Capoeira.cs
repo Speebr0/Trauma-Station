@@ -26,6 +26,7 @@ namespace Content.Goobstation.Shared.MartialArts;
 public abstract partial class SharedMartialArtsSystem
 {
     [Dependency] private readonly MovementModStatusSystem _movementMod = default!;
+    [Dependency] private readonly SharedAnimatedEmotesSystem _animatedEmotes = default!;
 
     public static readonly EntProtoId CircleKickEffect = "CircleKickSlowdownStatusEffect";
 
@@ -121,11 +122,8 @@ public abstract partial class SharedMartialArtsSystem
         DoDamage(ent, target, proto.DamageType, proto.ExtraDamage * power, out _);
         ApplyMultiplier(ent, args.AttackSpeedMultiplier, 0f, args.AttackSpeedMultiplierTime);
 
-        if (args.Emote != null && TryComp(ent, out AnimatedEmotesComponent? emotes))
-        {
-            emotes.Emote = args.Emote.Value;
-            Dirty(ent, emotes);
-        }
+        if (args.Emote is {} emote)
+            _animatedEmotes.PlayEmoteAnimation(ent.Owner, emote);
 
         ComboPopup(ent, target, proto.Name);
         ent.Comp.LastAttacks.Clear();

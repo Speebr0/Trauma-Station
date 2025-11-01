@@ -3,13 +3,14 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
-namespace Content.Shared.Chemistry.EntitySystems.Hypospray;
+namespace Content.Goobstation.Shared.Chemistry;
 
 public sealed class SolutionCartridgeSystem : EntitySystem
 {

@@ -5,10 +5,8 @@
   - !type:WeightedRandomEffect
     probability: 0.25 # 75% chance of nothing happening
     children:
-    - effect: !type:AddComponents
-        guidebookText: entity-effect-guidebook-add-killsign
-        components:
-        - type: KillSign
+    - effect: !type:NestedEffect
+        proto: KillSign
     - effect: !type:NestedEffect
         proto: GibExplode
     - effect: !type:Polymorph
@@ -37,6 +35,14 @@
         - type: RussianAccent
         - type: BackwardsAccent
         - type: OhioAccent
+
+- type: entityEffect
+  id: KillSign
+  effects:
+  - !type:AddComponents
+    guidebookText: entity-effect-guidebook-add-killsign
+    components:
+    - type: KillSign
 
 - type: entityEffect
   id: GibExplode

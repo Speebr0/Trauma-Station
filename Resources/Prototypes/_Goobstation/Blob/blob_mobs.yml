@@ -228,6 +228,11 @@
         - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
           state: nautdamage
           shader: unshaded
+    - type: AnimatedEmotes
+      flexState: blobbernaut_flex
+      flexDefaultState: blobbernaut
+      flexDamageState: blobbernaut_flex_damage
+      flexDefaultDamageState: nautdamage
     - type: NightVision
       color: "#808080"
       activateSound: null

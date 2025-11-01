@@ -64,12 +64,6 @@ public sealed partial class CriminalRecordsConsoleSystem : SharedCriminalRecords
             subs.Event<CriminalRecordDeleteHistory>(OnDeleteHistory);
             subs.Event<CriminalRecordSetStatusFilter>(OnStatusFilterPressed);
         });
-
-        Subs.BuiEvents<IdExaminableComponent>(SetWantedVerbMenu.Key, subs => // Goobstation-WantedMenu
-        {
-            subs.Event<BoundUIOpenedEvent>(UpdateUserInterface);
-            subs.Event<CriminalRecordChangeStatus>(OnChangeStatus);
-        });
     }
 
     private void UpdateUserInterface<T>(Entity<CriminalRecordsConsoleComponent> ent, ref T args)
@@ -198,12 +192,12 @@ public sealed partial class CriminalRecordsConsoleSystem : SharedCriminalRecords
             (SecurityStatus.Detained, SecurityStatus.None) => "released",
             // criminal is no longer on parole
             (SecurityStatus.Paroled, SecurityStatus.None) => "not-parole",
+            // <Goob>
             // criminal is no longer in perma
             (SecurityStatus.Perma, SecurityStatus.None) => "not-perma",
             // person no longer needs to be searched
             (SecurityStatus.Search, SecurityStatus.None) => "not-search",
-            // person is no longer dangerous
-            (SecurityStatus.Dangerous, SecurityStatus.None) => "not-dangerous",
+            // </Goob>
             // this is impossible
             _ => "not-wanted"
         };

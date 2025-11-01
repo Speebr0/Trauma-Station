@@ -421,7 +421,13 @@
     receivedPopup: christmas-tree-got-gift
     deniedPopup: christmas-tree-no-gift
     requiredHoliday: FestiveSeason
-  - type: Destructible # Goobstation
+  # <Goob>
+  - type: EntityEffectOnTrigger
+    targetUser: true
+    effects:
+    - !type:NestedEffect
+      proto: KillSign
+  - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
@@ -439,7 +445,7 @@
           params:
             volume: 5
             variation: 0.05
-      - !type:KillSignCauseBehavior
+      - !type:TriggerBehavior
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
       - !type:SpawnEntitiesBehavior
@@ -447,6 +453,7 @@
           Log:
             min: 2
             max: 8
+  # </Goob>
 
 - type: entity
   parent: FloraTreeChristmas02

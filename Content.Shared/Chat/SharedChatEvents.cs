@@ -59,8 +59,8 @@ public sealed class EntitySpokeEvent : EntityEventArgs
 {
     public readonly EntityUid Source;
     public readonly string Message;
-    public readonly string? ObfuscatedMessage; // not null if this was a whisper
-    public readonly LanguagePrototype Language; // Trauma
+    public readonly bool IsWhisper; // EE - replaces ObfuscatedMessage
+    public readonly LanguagePrototype Language; // EE
 
     /// <summary>
     /// If the entity was trying to speak into a radio, this was the channel they were trying to access. If a radio
@@ -68,13 +68,13 @@ public sealed class EntitySpokeEvent : EntityEventArgs
     /// </summary>
     public RadioChannelPrototype? Channel;
 
-    // Trauma - added Language
-    public EntitySpokeEvent(EntityUid source, string message, RadioChannelPrototype? channel, string? obfuscatedMessage, LanguagePrototype? language)
+    // EE - added isWhisper, Language
+    public EntitySpokeEvent(EntityUid source, string message, RadioChannelPrototype? channel, bool isWhisper, LanguagePrototype? language)
     {
         Source = source;
         Message = message;
         Channel = channel;
-        Language = language; // Trauma
-        ObfuscatedMessage = obfuscatedMessage;
+        IsWhisper = isWhisper; // EE
+        Language = language; // EE
     }
 }

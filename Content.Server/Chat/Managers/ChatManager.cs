@@ -47,7 +47,7 @@ internal sealed partial class ChatManager : IChatManager
     [Dependency] private readonly PlayerRateLimitManager _rateLimitManager = default!;
     [Dependency] private readonly ISharedPlayerManager _player = default!;
     [Dependency] private readonly LinkAccountManager _linkAccount = default!; // RMC - Patreon
-    [Dependency] private readonly DiscordChatLink _discordLink = default!;
+    //[Dependency] private readonly DiscordChatLink _discordLink = default!; // Trauma - wasn't cherry picked
 
     /// <summary>
     /// The maximum length a player-sent message can be sent

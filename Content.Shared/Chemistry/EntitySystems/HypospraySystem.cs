@@ -1,3 +1,4 @@
+using Content.Goobstation.Common.Chemistry; // Goob
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.Components;
@@ -197,8 +198,10 @@ public sealed class HypospraySystem : EntitySystem
         var ev = new TransferDnaEvent { Donor = target, Recipient = uid };
         RaiseLocalEvent(target, ref ev);
 
-        var afterinjectev = new AfterHyposprayInjectsEvent { User = user, Target = target }; //Goobedit
+        // <Goob>
+        var afterinjectev = new AfterHyposprayInjectsEvent(user, target);
         RaiseLocalEvent(uid, ref afterinjectev);
+        // </Goob>
 
         // same LogType as syringes...
         _adminLogger.Add(LogType.ForceFeed, $"{ToPrettyString(user):user} injected {ToPrettyString(target):target} with a solution {SharedSolutionContainerSystem.ToPrettyString(removedSolution):removedSolution} using a {ToPrettyString(uid):using}");

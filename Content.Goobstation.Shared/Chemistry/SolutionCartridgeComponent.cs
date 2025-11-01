@@ -8,14 +8,14 @@
 
 using Content.Shared.Chemistry.Components;
 
-namespace Content.Shared.Chemistry.EntitySystems.Hypospray;
+namespace Content.Goobstation.Shared.Chemistry;
 
 [RegisterComponent]
 public sealed partial class SolutionCartridgeComponent : Component
 {
-    [DataField, ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public string TargetSolution = "default";
 
     [DataField(required: true)]
-    public Solution Solution;
+    public Solution Solution = default!;
 }

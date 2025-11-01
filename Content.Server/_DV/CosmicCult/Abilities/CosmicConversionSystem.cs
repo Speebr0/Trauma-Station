@@ -12,13 +12,13 @@ using Content.Server._DV.CosmicCult.Components;
 using Content.Server.Popups;
 using Content.Shared._DV.CosmicCult.Components;
 using Content.Shared._DV.CosmicCult;
+using Content.Shared.Administration.Systems;
 using Content.Shared.Damage;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
 using Content.Server.Atmos.Rotting;
-using Content.Server.Administration.Systems;
 
 namespace Content.Server._DV.CosmicCult.Abilities;
 

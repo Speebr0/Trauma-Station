@@ -1,32 +1,5 @@
-// SPDX-FileCopyrightText: 2022 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Alex Evgrashin <aevgrashin@yandex.ru>
-// SPDX-FileCopyrightText: 2023 HerCoyote23 <131214189+HerCoyote23@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Interrobang01 <113810873+Interrobang01@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Kara <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Vordenburg <114301317+Vordenburg@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 gus <august.eymann@gmail.ccom>
-// SPDX-FileCopyrightText: 2023 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2023 router <messagebus@vk.com>
-// SPDX-FileCopyrightText: 2024 Kot <1192090+koteq@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Pieter-Jan Briers <pieterjan.briers+git@gmail.com>
-// SPDX-FileCopyrightText: 2024 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Thomas <87614336+Aeshus@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Vasilis <vasilis@pikachu.systems>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 CerberusWolfie <wb.johnb.willis@gmail.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 John Willis <143434770+CerberusWolfie@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Piras314 <p1r4s@proton.me>
-// SPDX-FileCopyrightText: 2025 Rinary <72972221+Rinary1@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 // <Trauma>
+using Content.Shared._EinsteinEngines.Language;
 using Content.Shared._Starlight.CollectiveMind;
 using Robust.Shared.Console;
 using Robust.Shared.Player;
@@ -69,14 +42,12 @@ public abstract partial class SharedChatSystem : EntitySystem
     public const char CollectiveMindPrefix = '+'; // Goobstation - Starlight collective mind port
     public const char DefaultChannelKey = 'h';
 
-    // <Trauma>
     public const int VoiceRange = 10; // how far voice goes in world units
     public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units
     public const int WhisperMuffledRange = 5; // how far whisper goes at all, in world units
     public static readonly SoundSpecifier DefaultAnnouncementSound
         = new SoundPathSpecifier("/Audio/Announcements/announce.ogg");
-    public const float DefaultObfuscationFactor = 0.2f; // Percentage of symbols in a whispered message that can be seen even by "far" listeners
-    // </Trauma>
+    public const float DefaultObfuscationFactor = 0.2f; // Goob - Percentage of symbols in a whispered message that can be seen even by "far" listeners
 
     public static readonly ProtoId<RadioChannelPrototype> CommonChannel = "Common";
 
@@ -308,18 +279,6 @@ public abstract partial class SharedChatSystem : EntitySystem
         return false;
     }
 
-    public virtual void TrySendInGameICMessage(
-        EntityUid source,
-        string message,
-        InGameICChatType desiredType,
-        bool hideChat, bool hideLog = false,
-        IConsoleShell? shell = null,
-        ICommonSession? player = null, string? nameOverride = null,
-        bool checkRadioPrefix = true,
-        bool ignoreActionBlocker = false,
-        Color? colorOverride = null // Goobstation
-    ) { }
-
     public string SanitizeMessageCapital(string message)
     {
         if (string.IsNullOrEmpty(message))
@@ -438,6 +397,7 @@ public abstract partial class SharedChatSystem : EntitySystem
         string action,
         ChatTransmitRange range,
         string? nameOverride,
+        LanguagePrototype language, // EE
         bool hideLog = false,
         bool checkEmote = true,
         bool ignoreActionBlocker = false,
@@ -468,7 +428,9 @@ public abstract partial class SharedChatSystem : EntitySystem
         ICommonSession? player = null,
         string? nameOverride = null,
         bool checkRadioPrefix = true,
-        bool ignoreActionBlocker = false)
+        bool ignoreActionBlocker = false,
+        Color? colorOverride = null, // Goobstation
+        LanguagePrototype? languageOverride = null) // EE
     { }
 
     /// <summary>
@@ -493,8 +455,9 @@ public abstract partial class SharedChatSystem : EntitySystem
         ICommonSession? player = null,
         string? nameOverride = null,
         bool checkRadioPrefix = true,
-        bool ignoreActionBlocker = false
-        )
+        bool ignoreActionBlocker = false,
+        Color? colorOverride = null, // Goobstation
+        LanguagePrototype? languageOverride = null) // EE
     { }
 
     /// <summary>

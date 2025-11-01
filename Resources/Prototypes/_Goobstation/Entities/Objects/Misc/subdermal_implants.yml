@@ -35,7 +35,7 @@
     mobState:
     - Dead
   - type: TriggerImplantAction
-  - type: EffectsOnTrigger
+  - type: EntityEffectOnTrigger
     effects:
     - !type:RelayImplanted
       effect: !type:Delete # bye bye!
