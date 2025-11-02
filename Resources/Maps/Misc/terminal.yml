@@ -60,6 +60,7 @@ entities:
     - type: MetaData
       name: NT-EM Terminal
     - type: Transform
+      parent: 638
     - type: MapGrid
       chunks:
         -1,-1:

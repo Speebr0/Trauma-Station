@@ -48,6 +48,7 @@
   - type: ContainerContainer
     containers:
       mech-assembly-container: !type:Container
+      battery-container: !type:Container
   - type: PartAssembly
     parts:
       RipleyMkIIChassis:
@@ -129,6 +130,7 @@
   - type: ContainerContainer
     containers:
       mech-assembly-container: !type:Container
+      battery-container: !type:Container
   - type: PartAssembly
     parts:
       ClarkeChassis:
@@ -261,6 +263,7 @@
   - type: ContainerContainer
     containers:
       mech-assembly-container: !type:Container
+      battery-container: !type:Container
   - type: PartAssembly
     parts:
       DurandChassis:
@@ -406,6 +409,7 @@
   - type: ContainerContainer
     containers:
       mech-assembly-container: !type:Container
+      battery-container: !type:Container
   - type: PartAssembly
     parts:
       GygaxChassis:

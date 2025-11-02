@@ -69,7 +69,7 @@ public sealed class EntitySpokeEvent : EntityEventArgs
     public RadioChannelPrototype? Channel;
 
     // EE - added isWhisper, Language
-    public EntitySpokeEvent(EntityUid source, string message, RadioChannelPrototype? channel, bool isWhisper, LanguagePrototype? language)
+    public EntitySpokeEvent(EntityUid source, string message, RadioChannelPrototype? channel, bool isWhisper, LanguagePrototype language)
     {
         Source = source;
         Message = message;

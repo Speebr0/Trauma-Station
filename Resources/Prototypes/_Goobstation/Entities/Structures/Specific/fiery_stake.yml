@@ -41,12 +41,10 @@
   - type: Strap
     position: Stand
     buckleOffset: "0,0.25"
-  - type: TriggerOnBuckled
-  - type: EntityEffectOnTrigger
-    targetUser: true
+  - type: StrapEntityEffects
     effects:
     - !type:Flammable
-      multiplier: 15
+      multiplier: 3
     - !type:Ignite
   - type: IgnitionSource
     temperature: 400

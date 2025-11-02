@@ -24,6 +24,7 @@
   - type: Item
     sprite: _Goobstation/Objects/Consumable/Food/lollypop.rsi
     size: Tiny
+  - type: SolutionContainerManager
   - type: SpawnItemsOnUse
     items:
     - id: FoodSnackLollypopTrash

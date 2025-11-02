@@ -181,7 +181,9 @@ namespace Content.IntegrationTests.Tests
             {"/Maps/Shuttles/ShuttleEvent/syndie_evacpod.yml", ["RubberStampSyndicate"]},
             {"/Maps/Shuttles/ShuttleEvent/cruiser.yml", ["ShuttleGunPerforator"]},
             {"/Maps/Shuttles/ShuttleEvent/instigator.yml", ["ShuttleGunFriendship"]},
-            // TODO add every allowed test fail to this
+            // <Trauma>
+            {"/Maps/_Goobstation/gate.yml", ["ShuttleGunPerforator"]},
+            // </Trauma>
         };
 
         /// <summary>

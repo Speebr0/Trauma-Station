@@ -13,7 +13,7 @@ public sealed partial class EntityEffectOnTriggerComponent : BaseXOnTriggerCompo
     /// <summary>
     /// The effects to apply.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField] // Trauma - unnetworked because EntityEffect isnt serializable, chud major
     public EntityEffect[] Effects;
 
     /// <summary>

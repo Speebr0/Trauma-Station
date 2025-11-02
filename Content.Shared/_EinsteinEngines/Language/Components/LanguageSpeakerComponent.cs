@@ -28,7 +28,7 @@ public sealed partial class LanguageSpeakerComponent : Component
     ///     Other listeners will hear the entity speak in this language.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public ProtoId<LanguagePrototype> CurrentLanguage; // The Language system will override it on mapinit
+    public ProtoId<LanguagePrototype> CurrentLanguage = SharedLanguageSystem.FallbackLanguagePrototype; // The Language system will override it on mapinit
 
     /// <summary>
     ///     List of languages this entity can speak at the current moment.

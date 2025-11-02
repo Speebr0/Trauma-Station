@@ -6,7 +6,7 @@
 
 - type: reaction
   id: OrganicPotash
-  minTemp: 354
+  minTemp: 400 # hotter than 373 so soap can still be made
   reactants:
     Lye:
       amount: 1

@@ -41,7 +41,7 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AnimatedEmotesComponent, AfterAutoHandleStateEvent>(OnHandleState);
+        SubscribeLocalEvent<AnimatedEmotesComponent, AfterAutoHandleStateEvent>(OnAutoHandleState);
 
         SubscribeLocalEvent<AnimatedEmotesComponent, AnimationFlipEmoteEvent>(OnFlip);
         SubscribeLocalEvent<AnimatedEmotesComponent, AnimationSpinEmoteEvent>(OnSpin);
@@ -82,7 +82,7 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
         _anim.Play(uid, anim, animationKey);
     }
 
-    private void OnAfterHandleState(Entity<AnimatedEmotesComponent> ent, ref AfterAutoHandleStateEvent args)
+    private void OnAutoHandleState(Entity<AnimatedEmotesComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         if (_proto.TryIndex(ent.Comp.Emote, out var emote) && emote.Event is {} ev)
             RaiseLocalEvent(ent, ev);
@@ -189,7 +189,7 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
     private void OnFlex(Entity<AnimatedEmotesComponent> ent, ref AnimationFlexEmoteEvent args)
     {
         if (ent.Comp.FlexState is not {} flex ||
-            ent.Comp.FlexDefaultState is not defaultState ||
+            ent.Comp.FlexDefaultState is not {} defaultState ||
             ent.Comp.FlexDamageState is not {} damage ||
             ent.Comp.FlexDefaultDamageState is not {} defaultDamage)
         {

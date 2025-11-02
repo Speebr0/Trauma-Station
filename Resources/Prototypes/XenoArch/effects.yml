@@ -954,7 +954,7 @@
         - id: MobAdultSlimesYellowAngry
         - id: MobAngryBee
         - id: MobBearSpace
-        - id: MobXenoRavager
+        - id: CMMobXenoRavager # Trauma - was MobXenoRavager
         - id: MobTick
         - id: MobSpiderSpace
         - id: MobPurpleSnake

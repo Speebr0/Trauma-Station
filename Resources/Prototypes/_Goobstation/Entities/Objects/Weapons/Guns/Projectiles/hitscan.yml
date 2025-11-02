@@ -72,7 +72,7 @@
   - type: HitscanEntityEffects
     effects:
     - !type:Flammable
-      modifier: 0.4
+      multiplier: 0.4
     - !type:Ignite
   - type: HitscanBasicVisuals
     muzzleFlash:
@@ -178,7 +178,7 @@
   - type: HitscanEntityEffects
     effects:
     - !type:Flammable
-      modifier: 0.7
+      multiplier: 0.7
     - !type:Ignite
   - type: HitscanBasicVisuals
     muzzleFlash:

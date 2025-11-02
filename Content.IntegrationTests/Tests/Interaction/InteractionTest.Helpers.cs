@@ -765,8 +765,9 @@ public abstract partial class InteractionTest
 
         Assert.Multiple(() =>
         {
-            Assert.That(SEntMan.Deleted(SEntMan.GetEntity(target)));
-            Assert.That(CEntMan.Deleted(CEntMan.GetEntity(target)));
+            // Trauma - added actual useful messages
+            Assert.That(SEntMan.Deleted(SEntMan.GetEntity(target)), $"Server entity of {SEntMan.ToPrettyString(target)} was not deleted!");
+            Assert.That(CEntMan.Deleted(CEntMan.GetEntity(target)), $"Client entity of {CEntMan.ToPrettyString(target)} was not deleted!");
         });
     }
 
