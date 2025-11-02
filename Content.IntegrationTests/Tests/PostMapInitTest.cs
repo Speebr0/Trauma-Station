@@ -391,17 +391,22 @@ namespace Content.IntegrationTests.Tests
                 var yamlEntities = root["entities"];
                 if (!protoManager.TryIndex<EntityCategoryPrototype>("DoNotMap", out var dnmCategory))
                     return;
-                foreach (var yamlEntity in (YamlSequenceNode) yamlEntities)
+                // <Trauma> - wrap in Assert.Multiple
+                Assert.Multiple(() =>
                 {
-                    var protoId = yamlEntity["proto"].AsString();
-                    protoManager.TryIndex(protoId, out var proto, false);
-                    if (proto is null || proto.EditorSuffix is null)
-                        continue;
-                    if (proto.Categories.Contains(dnmCategory) && !DoNotMapWhitelist.Contains(map.ToString()))
+                    foreach (var yamlEntity in (YamlSequenceNode) yamlEntities)
                     {
-                        Assert.Fail($"\nMap {map} has the DO NOT MAP category in prototype {proto.Name}");
+                        var protoId = yamlEntity["proto"].AsString();
+                        protoManager.TryIndex(protoId, out var proto, false);
+                        if (proto is null || proto.EditorSuffix is null)
+                            continue;
+                        // Trauma - IsWhitelistedForMap too
+                        if (proto.Categories.Contains(dnmCategory) && !(DoNotMapWhitelist.Contains(map.ToString()) || IsWhitelistedForMap(protoId, map)))
+                        {
+                            Assert.Fail($"\nMap {map} has the DO NOT MAP category in prototype {proto.Name} ({protoId})"); // Trauma - add protoId
+                        }
                     }
-                }
+                });
             }
 
             var deps = server.ResolveDependency<IEntitySystemManager>().DependencyCollection;

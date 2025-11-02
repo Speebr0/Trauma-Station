@@ -223,12 +223,14 @@
   cost: 10000
   recipeUnlocks:
   - SignallerAdvanced
-  #- SignalTrigger # Trauma - these are roundstart
+  # <Trauma>
+  #- SignalTrigger # These are roundstart
   #- VoiceTrigger
   #- TimerTrigger
-  - FlashPayload
-  - ExplosivePayload
-  #- ChemicalPayload # Trauma - roundstart
+  #- FlashPayload
+  - ShrapnelPayload # was ExplosivePayload
+  #- ChemicalPayload # roundstart
+  # </Trauma>
   - CableDetStack1
   - EmptyDetonator
   # <Trauma>

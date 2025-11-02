@@ -50,6 +50,7 @@
       mech-assembly-container: !type:Container
       battery-container: !type:Container
   - type: PartAssembly
+    containerId: mech-assembly-container
     parts:
       RipleyMkIIChassis:
       - RipleyMKIIUpgradeKit
@@ -132,6 +133,7 @@
       mech-assembly-container: !type:Container
       battery-container: !type:Container
   - type: PartAssembly
+    containerId: mech-assembly-container
     parts:
       ClarkeChassis:
       - ClarkeHead
@@ -265,6 +267,7 @@
       mech-assembly-container: !type:Container
       battery-container: !type:Container
   - type: PartAssembly
+    containerId: mech-assembly-container
     parts:
       DurandChassis:
       - DurandHead
@@ -411,6 +414,7 @@
       mech-assembly-container: !type:Container
       battery-container: !type:Container
   - type: PartAssembly
+    containerId: mech-assembly-container
     parts:
       GygaxChassis:
       - GygaxHead

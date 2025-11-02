@@ -51,7 +51,6 @@
   - MagazineRifleEmpty
   - SpeedLoaderMagnum
   - SpeedLoaderMagnumEmpty
-  - ShrapnelPayload
 
 - type: latheRecipePack
   id: SecurityWeaponsStatic
@@ -68,8 +67,8 @@
   recipes:
   - ClothingBackpackElectropack
   - HoloprojectorSecurity
-  - HoloprojectorSecurityAdvanced
-  - AntiMindControlDevice
+  - HoloprojectorSecurityAdvanced # Goob
+  - AntiMindControlDevice # Goob
   - PortableRecharger
   - PowerCageHigh
   - PowerCageMedium
@@ -90,7 +89,7 @@
   recipes:
   - CableDetStack1
   - EmptyDetonator
-  - ExplosivePayload
+  - ShrapnelPayload # Trauma - was ExplosivePayload
   - GrenadeBlast
   - GrenadeEMP
   - GrenadeFlash
