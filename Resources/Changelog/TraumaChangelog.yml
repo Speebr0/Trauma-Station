@@ -524,3 +524,9 @@ Entries:
       message: Insurgents for real this time?
   id: 56
   time: '2025-10-31T22:33:49.0000000+00:00'
+- author: ParadoxumOfficial
+  changes:
+    - type: Tweak
+      message: Updated some Job Sprites.
+  id: 57
+  time: '2025-11-02T09:42:01.0000000+00:00'
