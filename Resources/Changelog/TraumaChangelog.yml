@@ -550,3 +550,11 @@ Entries:
       message: Updated Pyrotton Sprites
   id: 59
   time: '2025-11-03T07:02:01.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: Added bugs, please report them on traumastation github.
+    - type: Remove
+      message: Removed anything burgers pending rework due to shitcode.
+  id: 60
+  time: '2025-11-03T10:46:20.0000000+00:00'
