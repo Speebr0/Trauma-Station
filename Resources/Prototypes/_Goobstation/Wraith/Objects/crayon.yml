@@ -1,17 +1,24 @@
 - type: entity
-  parent: Crayon
+  parent: BaseItem # don't want to inherit LimitedCharges
   id: CrayonBlood
   categories: [ HideSpawnMenu ]
   name: bloody crayon
   description: A bloody crayon. Looks scary. Oooo...
   components:
   - type: Sprite
+    sprite: Objects/Fun/crayons.rsi
     state: red
   - type: Item
+    sprite: Objects/Fun/crayons.rsi
+    size: Tiny
     heldPrefix: bloody
   - type: Crayon
     color: '#a70000'
-    infinite: true
+    selectedState: like
+  - type: UserInterface
+    interfaces:
+      enum.CrayonUiKey.Key:
+        type: CrayonBoundUserInterface
   - type: BloodCrayon
     wpConsume: -5
   - type: Tag

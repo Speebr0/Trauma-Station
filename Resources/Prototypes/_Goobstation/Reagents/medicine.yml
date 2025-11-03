@@ -1348,7 +1348,7 @@
           mobstate: Dead
       - !type:AdjustReagent
         conditions:
-        - !type:ReagentThreshold
+        - !type:ReagentCondition
           reagent: Formaldehyde
           min: 30
         reagent: Histamine

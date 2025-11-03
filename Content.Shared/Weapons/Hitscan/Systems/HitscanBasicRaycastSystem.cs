@@ -20,10 +20,7 @@ namespace Content.Shared.Weapons.Hitscan.Systems;
 
 public sealed class HitscanBasicRaycastSystem : EntitySystem
 {
-    // <Trauma>
-    [Dependency] private readonly SharedTransformSystem _transform = default!;
-    [Dependency] private readonly IConfigurationManager _cfg = default!;
-    // </Trauma>
+    [Dependency] private readonly IConfigurationManager _cfg = default!; // Trauma
     [Dependency] private readonly SharedPhysicsSystem _physics = default!;
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly ISharedAdminLogManager _log = default!;
@@ -54,11 +51,12 @@ public sealed class HitscanBasicRaycastSystem : EntitySystem
         // Otherwise:
         //  1.) Hit the first entity that you targeted.
         //  2.) Hit the first entity that doesn't require you to aim at it specifically to be hit.
+        var targetCoords = args.TargetCoordinates; // Goob
         var result = _container.IsEntityOrParentInContainer(shooter)
             ? rayCastResults.FirstOrNull()
             : rayCastResults.FirstOrNull(hit => hit.HitEntity == target
                                                 || CompOrNull<RequireProjectileTargetComponent>(hit.HitEntity)?.Active != true
-                                                || _transform.GetMapCoordinates(hit.HitEntity).Position - args.TargetCoordinates).LengthSquared() > _crawlHitzoneSquared); // Goob
+                                                || (_transform.GetMapCoordinates(hit.HitEntity).Position - targetCoords).LengthSquared() > _crawlHitzoneSquared); // Goob
 
         var distanceTried = result?.Distance ?? ent.Comp.MaxDistance;
 

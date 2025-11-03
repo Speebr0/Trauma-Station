@@ -54,5 +54,5 @@ public sealed partial class EldritchInfluenceComponent : Component
     };
 
     [DataField]
-    public List<List<EntityEffect>> PossibleExamineEffects = new();
+    public List<EntityEffect[]> PossibleExamineEffects = new();
 }

@@ -36,6 +36,7 @@ public sealed class EldritchInfluenceSystem : EntitySystem
     [Dependency] private readonly HereticSystem _heretic = default!;
     [Dependency] private readonly MindSystem _mind = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
+    [Dependency] private readonly SharedEntityEffectsSystem _effects = default!;
 
     [Dependency] private readonly IChatManager _chatMan = default!;
     [Dependency] private readonly IPlayerManager _playerMan = default!;
@@ -72,13 +73,8 @@ public sealed class EldritchInfluenceSystem : EntitySystem
         SharedChatSystem.UpdateFontSize(size, ref message, ref loc);
         _chatMan.ChatMessageToOne(ChatChannel.Server, message, loc, default, false, session.Channel, canCoalesce: false);
 
-        var effectArgs = new EntityEffectBaseArgs(args.Examiner, EntityManager);
         var effects = _random.Pick(ent.Comp.PossibleExamineEffects);
-        foreach (var effect in effects)
-        {
-            if (effect.ShouldApply(effectArgs, _random))
-                effect.Effect(effectArgs);
-        }
+        _effects.ApplyEffects(args.Examiner, effects);
     }
 
     public bool CollectInfluence(Entity<EldritchInfluenceComponent> influence, Entity<HereticComponent> user, EntityUid? used = null)

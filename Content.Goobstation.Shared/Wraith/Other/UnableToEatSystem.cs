@@ -17,6 +17,6 @@ public sealed class UnableToEatSystem : EntitySystem
     private void OnIngestionAttempt(Entity<UnableToEatComponent> ent, ref IngestionAttemptEvent args)
     {
         _popup.PopupEntity(Loc.GetString("curse-rot-cant-eat"), ent.Owner, ent.Owner);
-        args.Cancel();
+        args.Cancelled = true;
     }
 }
