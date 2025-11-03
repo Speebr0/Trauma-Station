@@ -54,7 +54,7 @@
             Brute: -0.7 # Trauma - 0.5 to 0.7 healing buff.
             Burn: -0.7 # Trauma - 0.5 to 0.7 healing buff.
       # Helps you stop bleeding to an extent.
-      - !type:ModifyBleedAmount
+      - !type:ModifyBleed
         amount: -0.35 # Trauma - was 0.25. 
       - !type:ModifyBloodLevel # Trauma - Moved here from nutriment.
         amount: 0.25
@@ -102,7 +102,7 @@
       effects:
       - !type:SatiateHunger
         conditions:
-        - !type:ReagentThreshold #Only satiates when eaten with nutriment
+        - !type:ReagentCondition #Only satiates when eaten with nutriment
           reagent: Nutriment
           min: 0.1
         factor: 1

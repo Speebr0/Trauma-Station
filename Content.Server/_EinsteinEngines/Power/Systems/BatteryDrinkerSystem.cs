@@ -6,7 +6,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Server.Power.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.DoAfter;
 using Content.Shared.PowerCell.Components;
@@ -19,6 +18,7 @@ using Content.Server.Power.EntitySystems;
 using Content.Server.Popups;
 using Content.Server.PowerCell;
 using Content.Shared.Popups;
+using Content.Shared.Power.Components;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 // Goobstation Start - Energycrit

@@ -4,12 +4,12 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Power.Components;
 using Content.Shared._EinsteinEngines.Silicon.Systems;
 using Content.Shared.Bed.Sleep;
 using Content.Server._EinsteinEngines.Silicon.Charge;
 using Content.Server.Humanoid;
 using Content.Shared.Humanoid;
+using Content.Shared.Power.Components;
 using Content.Shared.StatusEffectNew;
 // Goobstation Start - Energycrit
 using Content.Goobstation.Shared.Sprinting;

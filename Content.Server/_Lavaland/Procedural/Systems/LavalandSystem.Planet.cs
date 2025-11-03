@@ -6,6 +6,7 @@
 using System.Numerics;
 using Content.Server._Lavaland.Procedural.Components;
 using Content.Server.Atmos.Components;
+using Content.Shared._Lavaland.Procedural.Components;
 using Content.Shared._Lavaland.Procedural.Prototypes;
 using Content.Shared.Gravity;
 using Content.Shared.Parallax.Biomes;

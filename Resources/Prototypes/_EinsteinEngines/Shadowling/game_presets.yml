@@ -11,6 +11,5 @@
   rules:
   - Shadowling
   - BasicStationEventScheduler
-  - AntagStationEventScheduler
   - BasicRoundstartVariation
   - SubGamemodesRule

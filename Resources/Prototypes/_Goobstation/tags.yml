@@ -58,6 +58,9 @@
   id: AthiestsFedora
 
 - type: Tag
+  id: AtmosBackTank # Assmos - Extinguisher Nozzle
+
+- type: Tag
   id: AntagGateway
 
 - type: Tag
@@ -143,6 +146,9 @@
 
 - type: Tag
   id: CombatMech
+
+- type: Tag
+  id: ContravendUplink
 
 - type: Tag
   id: CorporateOverride
@@ -250,6 +256,9 @@
   id: GorillaFormAction
 
 - type: Tag
+  id: GrimoireGhost
+
+- type: Tag
   id: Gygax
 
 - type: Tag
@@ -304,6 +313,9 @@
   id: HereticBladeBlade
 
 - type: Tag
+  id: HereticCarving
+
+- type: Tag
   id: HereticItem
 
 - type: Tag
@@ -355,6 +367,9 @@
   id: LaserLMGBackpack
 
 - type: Tag
+  id: Lighter # for whitelisted cig pack strorage
+
+- type: Tag
   id: Liver
 
 # tag roundstart rules that should be run alone
@@ -377,10 +392,16 @@
   id: MagazineMagnumLeverRifle
 
 - type: Tag
+  id: MagazineMagnumSubMachineGun
+
+- type: Tag
   id: MagazineNailgun
 
 - type: Tag
   id: MagazineShotgunHeavy
+
+- type: Tag
+  id: MagazineShotgunLeverRifle
 
 - type: Tag
   id: MagazineSmart
@@ -458,6 +479,9 @@
   id: NonLethalGrenade
 
 - type: Tag
+  id: Nozzle # Assmos - Extinguisher Nozzle
+
+- type: Tag
   id: NukeOpsCommanderUplink
 
 - type: Tag
@@ -471,6 +495,9 @@
 
 - type: Tag
   id: NunHood
+
+- type: Tag
+  id: Oni # for oni shitcode
 
 - type: Tag
   id: Organ
@@ -518,6 +545,9 @@
   id: SnapPop
 
 - type: Tag
+  id: Softsuit # Used for Yowies outerslot whitelist
+
+- type: Tag
   id: SolarAssemblyFlatpack # stupid upstream thing used it in a construction graph
 
 - type: Tag
@@ -540,6 +570,9 @@
 
 - type: Tag
   id: Stomach
+
+- type: Tag
+  id: StunBaton # for heretic ritual
 
 - type: Tag
   id: SummonSimiansMaxLevelAction
@@ -609,7 +642,7 @@
 
 - type: Tag
   id: Vial
-  
+
 - type: Tag
   id: WallLight
 

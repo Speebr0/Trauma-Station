@@ -13181,7 +13181,7 @@ entities:
   - uid: 427
     components:
     - type: MetaData
-      name: 'security checkpoint '
+      name: security checkpoint
     - type: Transform
       pos: -9.5,-46.5
       parent: 2
@@ -15435,8 +15435,9 @@ entities:
   - uid: 786
     components:
     - type: Transform
-      pos: 22.652525,-11.2580805
+      pos: 22.652525,-11.4
       parent: 2
+    - type: StepTriggerActive
 - proto: BananaSeeds
   entities:
   - uid: 787
@@ -136457,6 +136458,8 @@ entities:
     - type: Transform
       pos: 22.5,-11.5
       parent: 2
+    - type: StepTriggerCleanup
+      stepTrigger: 786
   - uid: 20790
     components:
     - type: Transform

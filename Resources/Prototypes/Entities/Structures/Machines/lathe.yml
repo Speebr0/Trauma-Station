@@ -425,6 +425,8 @@
     - PartsStatic
     - AtmosStatic
     - CablesStatic
+    - PaperworkStatic
+    - TowelsStatic
     #- CargoStatic Goob edit - Moved to Cargo fab
     - MaterialsStatic
     - BasicChemistryStatic
@@ -444,6 +446,7 @@
     emagStaticPacks:
     - SecurityWeaponsStatic
     - SecurityAmmoStatic
+    - SyndicateAmmoStatic
     # Goobstation
     - SecurityAmmoStaticGoob
     - SyndicateAmmoLightStatic
@@ -521,7 +524,6 @@
     - Janitor
     - Instruments
     - Equipment # Goobstation note: handheld mass scanner is removed
-    - FauxTiles
     # Goobstation Packs
     # - ServiceWeapons
     - SpecOpsGoogles
@@ -583,7 +585,6 @@
     - CargoBoardsStatic
     #- MedicalBoardsStatic - Goobstation - Moved to Scifab and Medfab
     #- EngineeringBoardsStatic - Goobstation - Moved to Scifab and Engifab
-    - CircuitFloorsStatic
     # Goobstation Packs
     - SharedBoardsStatic
     - MedicalBoardsStaticGoob
@@ -775,7 +776,7 @@
     - SecurityAmmo
     - SecurityWeapons
     - SecurityDisablers
-    # Goobstation
+    # <Goob>
     - SecurityWeaponsGoob
     - RestraintTechnology
     - MechBoardsSecurity
@@ -786,10 +787,14 @@
     # - ServiceWeapons
     - SpecOpsGoogles
     - PowerCells
-  - type: EmagLatheRecipes # Goobstation
+    # </Goob>
+  - type: EmagLatheRecipes
     emagStaticPacks:
+    - SyndicateAmmoStatic
+    # <Goob>
     - SyndicateAmmoLightStatic
     - SyndicateAmmoHeavyStatic
+    # </Goob>
   - type: MaterialStorage
     whitelist:
       tags:
@@ -823,12 +828,14 @@
       runningState: icon
       staticPacks:
       - SecurityAmmoStatic
-      # Goobstation Packs
-      - SecurityAmmoStaticGoob
-    - type: EmagLatheRecipes # Goobstation Packs
+      - SecurityAmmoStaticGoob # Goob
+    - type: EmagLatheRecipes
       emagStaticPacks:
+      - SyndicateAmmoStatic
+      # <Goob>
       - SyndicateAmmoLightStatic
       - SyndicateAmmoHeavyStatic
+      # </Goob>
     - type: MaterialStorage
       whitelist:
         tags:
@@ -921,6 +928,7 @@
     idleState: icon
     runningState: building
     staticPacks:
+    - TowelsStatic
     - ClothingCivilian
     - ClothingCargo
     - ClothingCommand
@@ -993,6 +1001,10 @@
     staticPacks:
     - BioGenIngredientsStatic
     - BioGenMaterialsStatic
+  - type: EmagLatheRecipes
+    emagStaticPacks:
+    - BioGenEmagStatic
+    - HostileCubesStatic
 
 - type: entity
   parent: [BaseLathe, BaseSiloUtilizer] # Goob edit
@@ -1113,7 +1125,16 @@
     idleState: icon
     runningState: building
     staticPacks:
-    - FloorTilesStatic
+    - FloorDarkTilesStatic
+    - FloorSteelTilesStatic
+    - FloorWhiteTilesStatic
+    - FloorMaintsTilesStatic
+    - FloorWoodTilesStatic
+    - FloorConcreteTilesStatic
+    - CircuitFloorsStatic
+    - FloorMarbleTilesStatic
+    dynamicPacks:
+    - FauxTiles
   - type: MaterialStorage
     whitelist:
       tags:

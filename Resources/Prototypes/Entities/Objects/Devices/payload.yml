@@ -133,11 +133,9 @@
     - type: EmitSoundOnTrigger
       sound:
         path: "/Audio/Effects/flash_bang.ogg"
+      positional: true
     - type: PhysicalComposition #Goobstation - Recycle update
       materialComposition:
         Steel: 12
         Plastic: 25
         Glass: 12
-    - type: SoundOnTrigger # Trauma
-      sound:
-        path: "/Audio/Effects/flash_bang.ogg"

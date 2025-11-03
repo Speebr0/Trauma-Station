@@ -43,14 +43,16 @@
   parent: BaseItem
   id: Molotov
   name: molotov
-  description: Throwable firely explosive
+  description: Throwable fiery explosive
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Bombs/Molotov.rsi
     layers:
     - state: lit
-  - type: ActiveTimerTrigger
-    timeRemaining: 10
+  - type: AutoStartTimer
+  - type: TimerTrigger
+    examinable: false
+    delay: 10
   - type: Item
     sprite: _Goobstation/Objects/Weapons/Bombs/Molotov.rsi
   - type: Explosive
@@ -121,7 +123,7 @@
         - Lava
   - type: TileEntityEffect
     effects:
-    - !type:FlammableReaction
+    - !type:Flammable
       multiplier: 3.75
       multiplierOnExisting: 0.75
     - !type:Ignite

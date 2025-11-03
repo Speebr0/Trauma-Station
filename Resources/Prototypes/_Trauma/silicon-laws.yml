@@ -26,6 +26,7 @@
 
 - type: siliconLawset
   id: RevLawset
+  name: law-rev-name
   laws:
   - Rev1
   - Rev2

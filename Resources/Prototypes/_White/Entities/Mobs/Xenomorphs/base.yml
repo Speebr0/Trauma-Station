@@ -112,7 +112,6 @@
   - type: StatusEffects
     allowed:
     - Stun
-    - KnockedDown
   - type: NoSlip
   - type: Perishable
     molsPerSecondPerUnitMass: 0.0005

@@ -104,6 +104,8 @@
   id: FillLockerWarden
   table: !type:AllSelector
     children:
+    - !type:NestedSelector # Trauma
+      tableId: FillLockerWardenTrauma
     - id: FlashlightSeclite
     #- id: WeaponDisabler # Goobstation (Disablers in belts)
     - id: ClothingBeltSecurityFilled
@@ -121,15 +123,9 @@
       amount: 2
     - id: RemoteSignaller
       amount: 2
+    - id: NetworkConfigurator
     - id: Binoculars
-    - id: WeaponEnergyShotgun # Goobstation
-    - id: ClothingHandsGlovesKravMaga # Goobstation - Martial Arts
-    - id: BoxLethalInjection # Goobstation
-    - id: ClothingHeadsetAltWarden # Goobstation
-    - id: Multitool # Goobstation
-    - id: Wrench # Goobstation
-    - id: ContrabandDetectorFlatpack # Goobstation
-    - id: SecurityMegaphone # goob - loudspeakers
+    - id: WeaponEnergyShotgun
 
 - type: entityTable
   id: FillLockerWardenHarduit
@@ -196,12 +192,18 @@
         tableId: FillLockerBrigmedic
 
 - type: entityTable
-  id: FillLockerBrigmedic # heavily good edited
+  id: FillLockerBrigmedic # heavily goob edited
   table: !type:AllSelector
     children:
+    # <Goob>
     - id: BoxAutoinjectorCartidges
     - id: ClothingBackpackDuffelSurgeryFilled
     - id: ClothingHandsGlovesLatex
+    #- id: ClothingEyesGlassesSecurity
+    #- id: WeaponDisabler
+    #- id: TrackingImplanter
+    #  amount: 2
+    # </Goob>
     - id: ClothingOuterHardsuitBrigmedic
     - id: OxygenTankFilled
     - id: NitrogenTankFilled

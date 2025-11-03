@@ -31,7 +31,7 @@
   - type: Sprite
     sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-trick
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
     sound:
       path: /Audio/Effects/Emotes/parp1.ogg
 
@@ -44,40 +44,41 @@
   - type: Sprite
     sprite: _Trauma/Objects/Devices/bombcomponents.rsi
     state: payload-whitehole
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
     sound:
       path: /Audio/Effects/Grenades/Supermatter/whitehole_start.ogg
-      volume: 5
+      params:
+        volume: 5
   - type: TwoStageTrigger
     triggerDelay: 11.14
     components:
-      - type: AmbientSound
-        enabled: true
-        volume: -5
-        range: 14
-        sound:
-          path: /Audio/Effects/Grenades/Supermatter/whitehole_loop.ogg
-      - type: GravityWell
-        maxRange: 10
-        baseRadialAcceleration: -180
-        baseTangentialAcceleration: -5
-        gravPulsePeriod: 0.01
-      - type: SingularityDistortion
-        intensity: -200
-        falloffPower: 1.5
-      - type: PointLight
-        enabled: true
-        color: "#ffffff"
-        energy: 8
-        radius: 6
-        softness: 1
-        offset: "0, 0"
-      - type: SoundOnTrigger
-        sound:
-          path: /Audio/Effects/Grenades/Supermatter/supermatter_end.ogg
-          params:
-            volume: 15
-      - type: DeleteOnTrigger
+    - type: AmbientSound
+      enabled: true
+      volume: -5
+      range: 14
+      sound:
+        path: /Audio/Effects/Grenades/Supermatter/whitehole_loop.ogg
+    - type: GravityWell
+      maxRange: 10
+      baseRadialAcceleration: -180
+      baseTangentialAcceleration: -5
+      gravPulsePeriod: 0.01
+    - type: SingularityDistortion
+      intensity: -200
+      falloffPower: 1.5
+    - type: PointLight
+      enabled: true
+      color: "#ffffff"
+      energy: 8
+      radius: 6
+      softness: 1
+      offset: "0, 0"
+    - type: EmitSoundOnTrigger
+      sound:
+        path: /Audio/Effects/Grenades/Supermatter/supermatter_end.ogg
+        params:
+          volume: 15
+    - type: DeleteOnTrigger
 
 - type: entity
   name: nuclear option payload
@@ -127,33 +128,33 @@
   - type: TwoStageTrigger
     triggerDelay: 10.45
     components:
-      - type: AmbientSound
-        enabled: true
-        volume: -5
-        range: 14
-        sound:
-          path: /Audio/Effects/Grenades/Supermatter/supermatter_loop.ogg
-      - type: GravityWell
-        maxRange: 8
-        baseRadialAcceleration: 8
-        baseTangentialAcceleration: .5
-        gravPulsePeriod: 0.02
-      - type: SingularityDistortion
-        intensity: 150
-        falloffPower: 1.5
-      - type: PointLight
-        enabled: true
-        color: "#ffaa44"
-        energy: 8
-        radius: 6
-        softness: 1
-        offset: "0, 0"
-      - type: SoundOnTrigger
-        sound:
-          path: /Audio/Effects/Grenades/Supermatter/supermatter_end.ogg
-          params:
-            volume: 5
-      - type: ExplodeOnTrigger
+    - type: AmbientSound
+      enabled: true
+      volume: -5
+      range: 14
+      sound:
+        path: /Audio/Effects/Grenades/Supermatter/supermatter_loop.ogg
+    - type: GravityWell
+      maxRange: 8
+      baseRadialAcceleration: 8
+      baseTangentialAcceleration: .5
+      gravPulsePeriod: 0.02
+    - type: SingularityDistortion
+      intensity: 150
+      falloffPower: 1.5
+    - type: PointLight
+      enabled: true
+      color: "#ffaa44"
+      energy: 8
+      radius: 6
+      softness: 1
+      offset: "0, 0"
+    - type: EmitSoundOnTrigger
+      sound:
+        path: /Audio/Effects/Grenades/Supermatter/supermatter_end.ogg
+        params:
+          volume: 5
+    - type: ExplodeOnTrigger
 
 - type: entity
   name: stinger payload
@@ -195,7 +196,7 @@
       reagents:
       - ReagentId: TearGas
         Quantity: 20
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
     sound: /Audio/Items/smoke_grenade_smoke.ogg
 
 - type: entity
@@ -211,7 +212,7 @@
   - type: SmokeOnTrigger
     duration: 30
     spreadAmount: 50
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
     sound: /Audio/Items/smoke_grenade_smoke.ogg
 
 - type: entity
@@ -231,7 +232,7 @@
       reagents:
       - ReagentId: Sarin
         Quantity: 50
-  - type: SoundOnTrigger
+  - type: EmitSoundOnTrigger
     sound: /Audio/Items/smoke_grenade_smoke.ogg
 
 - type: entity
@@ -567,4 +568,3 @@
           Quantity: 30
         - ReagentId: FoamingAgent
           Quantity: 30
-
