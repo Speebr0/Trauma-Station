@@ -536,3 +536,17 @@ Entries:
       message: Updated Material Sprites!
   id: 58
   time: '2025-11-03T00:58:54.0000000+00:00'
+- author: ParadoxumOfficial
+  changes:
+    - type: Tweak
+      message: Updated Wood Sprites
+    - type: Tweak
+      message: Updated Durathread Sprites
+    - type: Tweak
+      message: Updated Cloth Sprites
+    - type: Tweak
+      message: Updated Cotton Sprites
+    - type: Tweak
+      message: Updated Pyrotton Sprites
+  id: 59
+  time: '2025-11-03T07:02:01.0000000+00:00'
