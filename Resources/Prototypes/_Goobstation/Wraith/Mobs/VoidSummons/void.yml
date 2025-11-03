@@ -161,7 +161,6 @@
   - type: SpikerShuffle
     statusEffectsToRemove:
     - Stun
-    - KnockedDown
     - Electrocution
     - SlowedDown
     - Stutter
