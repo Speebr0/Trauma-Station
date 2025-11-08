@@ -570,3 +570,11 @@ Entries:
       message: Hardgrab and choking now pulls your victim in closer.
   id: 62
   time: '2025-11-08T16:29:10.0000000+00:00'
+- author: deltanedas
+  changes:
+    - type: Add
+      message: >-
+        CQC now has the Chokehold move to put someone to sleep, like Neck Snap
+        but disarm instead of punching.
+  id: 63
+  time: '2025-11-08T16:48:42.0000000+00:00'
