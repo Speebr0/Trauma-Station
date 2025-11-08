@@ -578,3 +578,13 @@ Entries:
         but disarm instead of punching.
   id: 63
   time: '2025-11-08T16:48:42.0000000+00:00'
+- author: Armok
+  changes:
+    - type: Add
+      message: Hos and Hop reinforcement callers
+    - type: Add
+      message: D-Class Personnel
+    - type: Remove
+      message: Lobby Guilt trip
+  id: 64
+  time: '2025-11-08T21:25:15.0000000+00:00'
